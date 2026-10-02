@@ -62,6 +62,14 @@ dialog::backdrop{backdrop-filter:blur(3px);animation:fd .25s}@keyframes fd{from{
 .stSel{color:#fff;border:0;border-radius:10px;padding:3px 6px;font-size:12px;font-weight:500;cursor:pointer;max-width:150px}.stSel option{color:#1c2530;background:#fff}
 details.colm{position:relative;display:inline-block}details.colm summary{list-style:none;cursor:pointer;border:1px solid var(--az);color:var(--az);background:#fff;border-radius:8px;padding:8px 14px}details.colm summary::-webkit-details-marker{display:none}
 .cr{display:flex;gap:6px;align-items:center}.cr .cn{flex:1;min-width:130px;padding:3px 6px}.cr button{width:26px;height:24px;border:1px solid var(--bd);background:#fff;border-radius:6px;cursor:pointer;padding:0}.cr button:disabled{opacity:.35;cursor:default}
+.cnbox{position:fixed;z-index:60;width:min(620px,94vw);max-height:76vh;background:#fff;border:1px solid var(--bd);border-radius:12px;box-shadow:0 14px 40px #0004;padding:10px 12px;display:flex;flex-direction:column;gap:8px}.cnbox[hidden]{display:none}
+.cnh{display:flex;justify-content:space-between;align-items:center}.cnbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px}.cnbar span{color:var(--cz);margin-left:auto}
+#cnList{overflow:auto;flex:1;min-height:120px;border:1px solid var(--bd);border-radius:8px}
+#cnList label{display:flex;gap:10px;align-items:flex-start;padding:7px 10px;border-bottom:1px solid #eef1f4;cursor:pointer;font-size:13px}#cnList label:hover{background:var(--az2)}#cnList label.on{background:#e6f2ff}
+#cnList .cd{font-weight:600;white-space:nowrap;color:var(--az)}#cnList .ct{flex:1}#cnList .n{color:var(--cz);white-space:nowrap}
+.cnft{display:flex;justify-content:flex-end}
+@media(pointer:coarse){#cnList label{padding:12px 12px;font-size:15px}#cnList input[type=checkbox]{width:22px;height:22px}}
+@media(max-width:900px){.cnbox{left:3vw!important;right:3vw;top:6vh!important;width:auto;max-height:78vh}}
 .colbox{min-width:320px;position:absolute;z-index:30;background:#fff;border:1px solid var(--bd);border-radius:10px;padding:8px 10px;box-shadow:0 10px 28px #0003;display:grid;gap:4px;max-height:55vh;overflow:auto;margin-top:4px}.colbox label{display:flex;gap:8px;align-items:center;cursor:pointer}
 .trow{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:5px 0;border-bottom:1px solid #eef1f4}.tk{display:flex;gap:4px}.tk button{padding:3px 8px;font-size:12px}
 #rota,#tpl{width:min(720px,96vw);border-radius:16px}
@@ -152,14 +160,18 @@ button.b,button.g{border-radius:8px;padding:8px 14px}
 </head><body>
 <nav><h1><b class="lg">L</b><span>Lucas Prospecção</span></h1><button data-p="dash" class="on" title="Dashboard"><svg viewBox="0 0 24 24"><rect x=3 y=3 width=7 height=7 /><rect x=14 y=3 width=7 height=7 /><rect x=14 y=14 width=7 height=7 /><rect x=3 y=14 width=7 height=7 /></svg><span>Dashboard</span></button><button data-p="leads" title="Leads"><svg viewBox="0 0 24 24"><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx=9 cy=7 r=4 /><path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/></svg><span>Leads</span></button><button data-p="mapa" title="Mapa"><svg viewBox="0 0 24 24"><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx=12 cy=10 r=3 /></svg><span>Mapa</span></button><button data-p="tarefas" title="Minhas tarefas"><svg viewBox="0 0 24 24"><polyline points='9 11 12 14 22 4'/><path d='M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11'/></svg><span>Minhas tarefas</span></button><button data-p="dados" title="Dados e sincronização"><svg viewBox="0 0 24 24"><ellipse cx=12 cy=5 rx=9 ry=3 /><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg><span>Dados e sync</span></button><button id="navT" class="nt" title="Recolher menu"><svg viewBox="0 0 24 24"><polyline points='15 18 9 12 15 6'/></svg><span>Recolher</span></button></nav>
 <main>
-<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="b" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" style="font-size:15px;padding:10px 18px">⚙ Personalizar painel</button><span class="net"></span><em class="ver">v4.0</em></header><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
+<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="b" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" style="font-size:15px;padding:10px 18px">⚙ Personalizar painel</button><span class="net"></span><em class="ver">v4.1</em></header><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
 
-<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">▦ Cartões</button><button id="vTab" class="on">▤ Tabela</button><button id="vKan">▥ Kanban</button></div><span class="net"></span><em class="ver">v4.0</em></header>
+<div id="cnBox" class="cnbox" hidden><div class="cnh"><b>Filtrar por CNAE</b><button class="g" id="cnX" type="button" aria-label="Fechar">✕</button></div>
+<input id="cnQ" placeholder="Buscar código ou atividade (ex.: 1052 ou queijo)" autocomplete="off">
+<div class="cnbar"><button class="g" id="cnAll" type="button">Marcar os listados</button><button class="g" id="cnNone" type="button">Limpar seleção</button><label><input type="checkbox" id="cnOnlySel"> só marcados</label><span id="cnInfo"></span></div>
+<div id="cnList"></div><div class="cnft"><button class="b" id="cnOk" type="button">Concluir</button></div></div>
+<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">▦ Cartões</button><button id="vTab" class="on">▤ Tabela</button><button id="vKan">▥ Kanban</button></div><span class="net"></span><em class="ver">v4.1</em></header>
 <div class="card fl" id="fcard">
 <input id="q" placeholder="Buscar empresa, cidade, CNPJ… ( / )" style="flex:1;min-width:160px"><button class="g keep" id="bFilt" type="button" title="Mostrar ou esconder os filtros">Filtros <span id="fCount" class="bd" style="background:var(--az);display:none"></span></button>
 <select id="fUF"><option value="">UF</option></select><select id="fCid"><option value="">Cidade</option></select>
 <select id="fPorte"><option value="">Porte</option></select><select id="fSt"><option value="">Status</option></select>
-<input id="fCnae" placeholder="CNAE/atividade" size="14"><input id="fMin" placeholder="Capital mín." size="9"><input id="fMax" placeholder="Capital máx." size="9">
+<input id="fCnae" placeholder="CNAE/atividade" size="14"><button class="g" id="bCnae" type="button" title="Escolher vários CNAEs">CNAEs ▾ <span id="cnCount" class="bd" style="background:var(--az);display:none"></span></button><input type="hidden" id="fCnaeSel"><input id="fMin" placeholder="Capital mín." size="9"><input id="fMax" placeholder="Capital máx." size="9">
 <select id="fRange"><option value="">Faixa de capital</option><option value="0|100000">Até R$ 100 mil</option><option value="100000|500000">100 a 500 mil</option><option value="500000|1000000">500 mil a 1 mi</option><option value="1000000|10000000">1 a 10 mi</option><option value="10000000|">Acima de 10 mi</option></select>
 <select id="fSetor"><option value="">Setor</option></select><select id="fPri"><option value="">Prioridade</option><option>Alta</option><option>Média</option><option>Baixa</option></select>
 <select id="fSit"><option value="">Situação cadastral</option></select><select id="fSim"><option value="">Simples</option><option value="S">Optante do Simples</option><option value="N">Não optante</option></select>
@@ -178,9 +190,9 @@ button.b,button.g{border-radius:8px;padding:8px 14px}
 <div class="fl" id="pgr" style="margin-top:8px"><button class="g" id="pv">‹</button><span id="pn"></span><button class="g" id="nx">›</button></div>
 </section>
 
-<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v4.0</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div id="map"></div></section>
-<section id="tarefas" class="pg"><header class="ph"><div><h2>Minhas tarefas</h2><p>O que precisa da sua atenção hoje</p></div><span class="net"></span><em class="ver">v4.0</em></header><div id="tasks"></div></section>
-<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v4.0</em></header>
+<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v4.1</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div id="map"></div></section>
+<section id="tarefas" class="pg"><header class="ph"><div><h2>Minhas tarefas</h2><p>O que precisa da sua atenção hoje</p></div><span class="net"></span><em class="ver">v4.1</em></header><div id="tasks"></div></section>
+<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v4.1</em></header>
 <div class="card" id="syncCard"><h3 style="margin-top:0">Sincronizar tablet e computador</h3>
 <p>Trabalhe offline nos dois aparelhos. Quando quiser juntar o que cada um anotou: gere o arquivo de sincronização em um aparelho, leve ao outro (WhatsApp, e-mail, Drive, cabo USB ou Bluetooth) e aplique lá. Repita no sentido contrário para os dois ficarem iguais. Nada é apagado: se o mesmo campo foi editado nos dois, vale a edição mais recente.</p>
 <div class="fl"><label>Nome deste aparelho <input id="devName" placeholder="Ex.: Tablet" size="14"></label><label><input type="checkbox" id="syFull"> incluir toda a base de empresas (arquivo grande)</label></div>
@@ -261,7 +273,7 @@ async function importFiles(files){await window.LIBS_READY;if(typeof XLSX=="undef
  $("#rep").innerHTML=`<h4>Conferência: ${total} registros em ${rep.length} arquivo(s); ${dup} duplicados ignorados; base: ${S.rows.length}</h4>`+rep.map(r=>`<div class="card"><b>${esc(r.n)}</b>: ${r.c} registros<br>Colunas identificadas: ${esc((r.found||[]).join(", "))}<br>Não reconhecidas: ${esc((r.un||[]).join(", ")||"nenhuma")}<br>Duplicados: ${r.d||0} | Sem cidade: ${r.semC||0} | Sem e-mail: ${r.semE||0} | Sem telefone: ${r.semT||0}${r.req&&r.req.length?`<br><b class="late">Coluna obrigatória não encontrada: ${r.req.join(", ")}</b>`:""}</div>`).join("");
  toast("Importação concluída")}
 /* ============ Filtros ============ */
-function readF(){const g=i=>$(i).value;return{q:norm(g("#q")),uf:g("#fUF"),cid:g("#fCid"),porte:g("#fPorte"),st:g("#fSt"),cnae:norm(g("#fCnae")),min:num(g("#fMin")),max:g("#fMax")||null,mail:$("#fMail").checked,tel:$("#fTel").checked,setor:g("#fSetor"),pri:g("#fPri"),sit:g("#fSit"),sim:g("#fSim"),mei:g("#fMei"),prox:g("#fProx"),t:today(),w:addDays(today(),7)}}
+function readF(){const g=i=>$(i).value;return{q:norm(g("#q")),uf:g("#fUF"),cid:g("#fCid"),porte:g("#fPorte"),st:g("#fSt"),cnae:norm(g("#fCnae")),cnaeSel:cnSel(),min:num(g("#fMin")),max:g("#fMax")||null,mail:$("#fMail").checked,tel:$("#fTel").checked,setor:g("#fSetor"),pri:g("#fPri"),sit:g("#fSit"),sim:g("#fSim"),mei:g("#fMei"),prox:g("#fProx"),t:today(),w:addDays(today(),7)}}
 function fillSelects(){const uf=[...new Set(S.rows.map(r=>r.UF).filter(Boolean))].sort(),porte=[...new Set(S.rows.map(r=>r.PORTE_DESCRICAO))].sort();
  const keep=(id,arr,first)=>{const e=$(id),v=e.value;e.innerHTML=`<option value="">${first}</option>`+arr.map(x=>`<option>${esc(x)}</option>`).join("");e.value=v};
  keep("#fUF",uf,"UF");keep("#fPorte",porte,"Porte");keep("#fSt",STATUS,"Status");keep("#fSetor",[...new Set(S.rows.map(r=>r.SETOR).filter(Boolean))].sort(),"Setor");keep("#fSit",[...new Set(S.rows.map(r=>r.SITUACAO_CADASTRAL).filter(Boolean))].sort(),"Situação cadastral");$("#bulk").innerHTML='<option value="">Status em massa…</option>'+STATUS.map(s=>`<option>${s}</option>`).join("");fillCities();
@@ -269,7 +281,7 @@ function fillSelects(){const uf=[...new Set(S.rows.map(r=>r.UF).filter(Boolean))
 function fillCities(){const uf=$("#fUF").value,c=new Map();S.rows.forEach(r=>{if(r.MUNICIPIO&&(!uf||r.UF==uf))c.set(r.MUNICIPIO,(c.get(r.MUNICIPIO)||0)+1)});const e=$("#fCid"),v=e.value;
  e.innerHTML='<option value="">Cidade</option>'+[...c].sort((a,b)=>a[0].localeCompare(b[0])).map(([k,n])=>`<option value="${esc(k)}">${esc(k)} (${n})</option>`).join("");e.value=v}
 function baseMatch(r,F){return(!F.q||r._k.includes(F.q))&&(!F.uf||r.UF==F.uf)&&(!F.cid||r.MUNICIPIO==F.cid)&&(!F.porte||r.PORTE_DESCRICAO==F.porte)&&(!F.st||r.STATUS==F.st)
- &&(!F.cnae||norm(r.CNAE_FISCAL_PRINCIPAL+" "+r.ATIVIDADE_PRINCIPAL_TEXTO).includes(F.cnae))&&r.CAPITAL_SOCIAL>=F.min&&(!F.max||r.CAPITAL_SOCIAL<=num(F.max))&&(!F.mail||r.CORREIO_ELETRONICO)&&(!F.tel||r.TELEFONE_1)&&(!F.setor||r.SETOR==F.setor)&&(!F.pri||priOf(r.SCORE)==F.pri)&&(!F.sit||r.SITUACAO_CADASTRAL==F.sit)&&(!F.sim||(SN(r.OPTANTE_SIMPLES)?"S":"N")==F.sim)&&(!F.mei||(SN(r.OPTANTE_MEI)?"S":"N")==F.mei)&&(!F.prox||proxMatch(r,F.prox,F.t,F.w))}
+ &&(!F.cnae||norm(r.CNAE_FISCAL_PRINCIPAL+" "+r.ATIVIDADE_PRINCIPAL_TEXTO).includes(F.cnae))&&(!F.cnaeSel.length||F.cnaeSel.includes(cnKey(r)))&&r.CAPITAL_SOCIAL>=F.min&&(!F.max||r.CAPITAL_SOCIAL<=num(F.max))&&(!F.mail||r.CORREIO_ELETRONICO)&&(!F.tel||r.TELEFONE_1)&&(!F.setor||r.SETOR==F.setor)&&(!F.pri||priOf(r.SCORE)==F.pri)&&(!F.sit||r.SITUACAO_CADASTRAL==F.sit)&&(!F.sim||(SN(r.OPTANTE_SIMPLES)?"S":"N")==F.sim)&&(!F.mei||(SN(r.OPTANTE_MEI)?"S":"N")==F.mei)&&(!F.prox||proxMatch(r,F.prox,F.t,F.w))}
 const hasT=(r,l)=>(S.iv.get(r.id)||[]).some(i=>l.includes(i.tipo));
 const TABS=[["all","Todos os leads",r=>1],["novo","Novos leads",r=>r.STATUS=="Novo"],["cont","Contactadas",r=>hasT(r,CONTATO)],["vis","Visitadas",r=>hasT(r,["Visita presencial"])],["aten","Atendidas",r=>hasT(r,ATEND)],
  ["nint","Não interessadas",r=>r.STATUS=="Não interessada"],["neg","Em negociação",r=>r.STATUS=="Em negociação"],["fup","Follow-up pendente",r=>r.STATUS=="Follow-up pendente"],["prox","Próximas ações",r=>r.proxData&&!r.proxFeita],["sc","Sem contato cadastrado",r=>!r.contato&&!r.telPers&&!r.emailPers]];
@@ -451,9 +463,9 @@ function bind(){
  const rf=deb(()=>{S.page=0;refresh()});$$("#leads .card input,#leads .card select").forEach(e=>{if(e.id=="fSaved")return;e.addEventListener("input",rf)});
  $("#fUF").addEventListener("change",()=>{fillCities();$("#fCid").value=""});
  $("#fRange").onchange=e=>{const[a,b]=e.target.value.split("|");$("#fMin").value=a||"";$("#fMax").value=b||"";rf()};
- $("#bClr").onclick=()=>{$$("#leads .card input[type=text],#leads .card input:not([type])").forEach(e=>e.value="");$$("#leads .card select").forEach(e=>e.value="");$$("#leads .card input[type=checkbox]").forEach(e=>e.checked=false);fillCities();refresh()};
+ $("#bClr").onclick=()=>{$$("#leads .card input[type=text],#leads .card input:not([type])").forEach(e=>e.value="");$$("#leads .card select").forEach(e=>e.value="");$$("#leads .card input[type=checkbox]").forEach(e=>e.checked=false);$("#fCnaeSel").value="";cnSync();fillCities();refresh()};
  $("#bSave").onclick=async()=>{const n=prompt("Nome do filtro:");if(n){await DB.put("filtrosSalvos",{nome:n,f:Object.fromEntries($$("#leads .card input,#leads .card select").map(e=>[e.id,e.type=="checkbox"?e.checked:e.value]))});fillSelects();toast("Filtro salvo")}};
- $("#fSaved").onchange=async e=>{const a=(await DB.all("filtrosSalvos")).find(x=>x.nome==e.target.value);if(!a)return;for(const[id,v]of Object.entries(a.f)){if(id=="fSaved")continue;const el=document.getElementById(id);if(el.type=="checkbox")el.checked=v;else el.value=v;if(id=="fUF")fillCities()}$("#fCid").value=a.f.fCid;refresh()};
+ $("#fSaved").onchange=async e=>{const a=(await DB.all("filtrosSalvos")).find(x=>x.nome==e.target.value);if(!a)return;for(const[id,v]of Object.entries(a.f)){if(id=="fSaved")continue;const el=document.getElementById(id);if(el.type=="checkbox")el.checked=v;else el.value=v;if(id=="fUF")fillCities()}$("#fCid").value=a.f.fCid;cnSync();refresh()};
  document.body.addEventListener("click",e=>{const t=e.target;
   if(t.dataset.t){S.tab=t.dataset.t;S.page=0;refresh()}
   if(t.dataset.s){S.sort=S.sort.k==t.dataset.s?{k:t.dataset.s,d:-S.sort.d}:{k:t.dataset.s,d:1};refresh()}
@@ -608,7 +620,7 @@ function bindSync(){
 }
 /* ============ v4.0: visão em cartões (toque) e filtros recolhíveis ============ */
 const rerender=()=>{renderTable();if(S.view=="cards")renderCards()};
-function fcnt(F){const n=[F.q,F.uf,F.cid,F.porte,F.st,F.cnae,F.min>0,F.max,F.mail,F.tel,F.setor,F.pri,F.sit,F.sim,F.mei,F.prox].filter(Boolean).length,e=$("#fCount");if(e){e.textContent=n;e.style.display=n?"inline-block":"none"}}
+function fcnt(F){const n=[F.q,F.uf,F.cid,F.porte,F.st,F.cnae,F.cnaeSel&&F.cnaeSel.length,F.min>0,F.max,F.mail,F.tel,F.setor,F.pri,F.sit,F.sim,F.mei,F.prox].filter(Boolean).length,e=$("#fCount");if(e){e.textContent=n;e.style.display=n?"inline-block":"none"}}
 const telOf=r=>r.whats||r.telPers||((r.DDD_1||"")+(r.TELEFONE_1||""));
 function renderCards(){const c=$("#cards");if(!c)return;const pg=S.filtered.slice(S.page*S.per,(S.page+1)*S.per);
  if(!pg.length){c.innerHTML=`<div class="card" style="text-align:center;color:var(--cz)">${S.rows.length?"Nenhum lead com esses filtros.":"Nenhum dado. Importe uma planilha em “Dados e sync”."}</div>`;updCnt();return}
@@ -765,5 +777,30 @@ function bindZ(){
   if(t.id=="tSav"){S.tpl=tplRead();try{localStorage.setItem("minhaEmpresa",$("#tEmp").value.trim()||"Hygiena do Brasil")}catch(x){}await DB.put("configuracoes",{k:"tpl",v:S.tpl});T.close();toast("Modelos salvos");if($("#dlg").open&&S.cur)openLead(S.cur)}});
  $("#tasks").addEventListener("click",e=>{const b=e.target.closest("[data-tk]");if(b)tkDo(b.dataset.tk,b.dataset.tid)});
 }
-(async()=>{await DB.open();await loadGeo();await loadTpl();bind();setView(lsGet("lpView")||(innerWidth<1100?"cards":"tab"));if(innerWidth<1100)$("#fcard").classList.add("closed");await load()})();
+/* ============ Filtro multiseleção de CNAE ============ */
+const cnKey=r=>{const d=dig(r.CNAE_FISCAL_PRINCIPAL);return d?d.padStart(7,"0"):"sem"};
+const cnFmt=k=>k=="sem"?"Sem CNAE":k.slice(0,4)+"-"+k[4]+"/"+k.slice(5);
+function cnSel(){const v=($("#fCnaeSel")||{}).value;return v?v.split(","):[]}
+function cnSync(){const n=cnSel().length,b=$("#cnCount");b.textContent=n;b.style.display=n?"inline-block":"none";$("#bCnae").classList.toggle("on",!!n)}
+function cnItems(){const m=new Map();for(const r of S.rows){const k=cnKey(r),o=m.get(k);if(o)o.n++;else m.set(k,{k,t:r.ATIVIDADE_PRINCIPAL_TEXTO||"",n:1})}return[...m.values()].sort((a,b)=>b.n-a.n||a.k.localeCompare(b.k))}
+let cnData=[];
+function cnRender(){const q=norm($("#cnQ").value),sel=new Set(cnSel()),only=$("#cnOnlySel").checked,qd=dig(q);
+ const list=cnData.filter(x=>(!only||sel.has(x.k))&&(!q||norm(x.t).includes(q)||(qd&&x.k.includes(qd))||norm(cnFmt(x.k)).includes(q)));
+ cnRender.list=list;
+ $("#cnList").innerHTML=list.length?list.slice(0,400).map(x=>`<label class="${sel.has(x.k)?"on":""}"><input type="checkbox" data-k="${x.k}" ${sel.has(x.k)?"checked":""}><span class="cd">${cnFmt(x.k)}</span><span class="ct">${esc(x.t||"—")}</span><span class="n">${x.n.toLocaleString("pt-BR")}</span></label>`).join("")+(list.length>400?`<div style="padding:8px;color:var(--cz);font-size:12px">Mostrando 400 de ${list.length}. Refine a busca.</div>`:""):'<div style="padding:14px;color:var(--cz)">Nenhum CNAE encontrado. Importe uma planilha ou mude a busca.</div>';
+ $("#cnInfo").textContent=`${sel.size} marcado(s) · ${list.length} listado(s)`}
+function cnSet(arr){$("#fCnaeSel").value=[...new Set(arr)].join(",");cnSync();S.page=0;refresh();cnRender()}
+function cnPlace(){const b=$("#bCnae").getBoundingClientRect(),w=Math.min(620,innerWidth*.94),bx=$("#cnBox");bx.style.left=Math.max(8,Math.min(b.left,innerWidth-w-8))+"px";bx.style.top=Math.min(b.bottom+6,innerHeight*.3)+"px"}
+function cnOpen(){cnData=cnItems();cnPlace();$("#cnBox").hidden=false;cnRender();if(!matchMedia("(pointer:coarse)").matches)$("#cnQ").focus()}
+function cnClose(){$("#cnBox").hidden=true}
+function cnInit(){
+ $("#bCnae").onclick=()=>$("#cnBox").hidden?cnOpen():cnClose();$("#cnX").onclick=$("#cnOk").onclick=cnClose;
+ $("#cnQ").addEventListener("input",deb(cnRender,150));$("#cnOnlySel").addEventListener("change",cnRender);
+ $("#cnList").addEventListener("change",e=>{const t=e.target;if(!t.dataset.k)return;const s=new Set(cnSel());t.checked?s.add(t.dataset.k):s.delete(t.dataset.k);$("#fCnaeSel").value=[...s].join(",");t.closest("label").classList.toggle("on",t.checked);cnSync();S.page=0;refresh();$("#cnInfo").textContent=`${s.size} marcado(s) · ${(cnRender.list||[]).length} listado(s)`});
+ $("#cnAll").onclick=()=>cnSet([...cnSel(),...(cnRender.list||[]).map(x=>x.k)]);
+ $("#cnNone").onclick=()=>{$("#cnOnlySel").checked=false;cnSet([])};
+ document.addEventListener("keydown",e=>{if(e.key=="Escape"&&!$("#cnBox").hidden)cnClose()});
+ document.addEventListener("pointerdown",e=>{const bx=$("#cnBox");if(!bx.hidden&&!bx.contains(e.target)&&!e.target.closest("#bCnae"))cnClose()});
+ addEventListener("resize",()=>{if(!$("#cnBox").hidden)cnPlace()});cnSync()}
+(async()=>{await DB.open();await loadGeo();await loadTpl();bind();cnInit();setView(lsGet("lpView")||(innerWidth<1100?"cards":"tab"));if(innerWidth<1100)$("#fcard").classList.add("closed");await load()})();
 </script></body></html>
