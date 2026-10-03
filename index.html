@@ -203,6 +203,34 @@ td{padding:10px 12px;border-bottom:1px solid #f0f1f4}
 .lc-a a.g{display:inline-flex;align-items:center;text-decoration:none;background:#fff;color:var(--tx);border:1px solid var(--ln);border-radius:8px;padding:7px 12px;font-weight:500;cursor:pointer;font-size:14px}.lc-a a.g:hover{background:#f3f4f6}
 @media(pointer:coarse){.lc-a a.g{min-height:44px}}
 #scDlg{width:min(760px,96vw);border-radius:14px;max-height:92vh}#scDlg h4{margin:16px 0 6px;font-size:14px}#scDlg .gr{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}#scDlg .gr label{font-size:12px;color:var(--cz)}
+#pz{width:min(1180px,98vw);height:min(860px,96dvh);max-height:96dvh;padding:0;border-radius:16px;overflow:hidden}
+#pz[open]{display:flex;flex-direction:column}
+.pzh{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--bd);position:relative;flex-wrap:wrap}
+.pzh>div{flex:1;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}.pzh span{color:var(--cz);font-size:13px}
+.pzbar{position:absolute;left:0;right:0;bottom:-1px;height:3px}.pzbar u{display:block;height:100%;background:var(--az);transition:width .35s cubic-bezier(.2,.8,.2,1)}
+.pzb{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,1fr)}
+.pzl{padding:22px 26px;border-right:1px solid var(--bd);overflow:auto}.pzr{padding:22px 24px;background:#fafbfc;display:flex;flex-direction:column;gap:12px;overflow:auto}
+.pzt{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.pzt h2{margin:0;font-size:24px;font-weight:600;letter-spacing:-.015em}
+.pzm{color:var(--cz);margin-top:4px}
+.pzc{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin:20px 0}.pzc small{display:block;color:var(--cz);font-size:12px;margin-bottom:2px}.pzc b{font-weight:500;word-break:break-word}
+.pzk{display:flex;flex-wrap:wrap;gap:8px}.pzk a.g{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#fff;color:var(--tx);border:1px solid var(--ln);border-radius:8px;padding:8px 12px;font-weight:500}.pzk a.g:hover{background:#f3f4f6}
+kbd{font:600 11px/1 ui-monospace,Menlo,monospace;border:1px solid var(--ln);border-bottom-width:2px;border-radius:4px;padding:2px 5px;background:#fff;color:var(--cz)}
+.pzhist{margin-top:22px;font-size:13px}.pzhist small{color:var(--cz)}.pzhist div{padding:7px 0;border-bottom:1px solid #f0f1f4}
+.pzo{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pzbtn{display:flex;flex-direction:column;align-items:flex-start;gap:5px;text-align:left;background:#fff;border:1px solid var(--ln);border-radius:10px;padding:12px;cursor:pointer;font:inherit;font-weight:500;color:var(--tx);min-height:76px}
+.pzbtn:hover{border-color:var(--az);background:var(--az2)}.pzbtn small{color:var(--cz);font-weight:400;font-size:12px}.pzbtn.neg:hover{border-color:#c0392b;background:#fdf2f1}
+.pzr label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--cz)}
+.pzn{display:flex;justify-content:space-between;gap:8px;margin-top:auto;padding-top:6px}
+.pzu{display:flex;align-items:center;gap:12px;justify-content:center;padding:10px 16px;background:var(--tx);color:#fff;font-size:13px}.pzu button.g{padding:5px 12px}
+.pzend{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;gap:6px}.pzend ul{list-style:none;padding:0;margin:8px 0 18px;color:var(--cz)}
+#cmdk{width:min(640px,94vw);padding:0;border-radius:14px;margin-top:11vh;overflow:hidden}
+#cmdk input{width:100%;border:0;border-bottom:1px solid var(--bd);border-radius:0;padding:16px 18px;font-size:16px;box-shadow:none}
+#cmdL{max-height:56vh;overflow:auto;padding:6px}.cmdg{font-size:12px;color:var(--cz);padding:10px 10px 4px}
+.cmdi{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:none;border:0;border-radius:8px;padding:10px;cursor:pointer;font:inherit;color:var(--tx)}
+.cmdi.on{background:var(--az2)}.cmdi small{color:var(--cz);margin-left:auto;white-space:nowrap;padding-left:10px}.cmdi span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cmdf{display:flex;gap:16px;padding:8px 14px;border-top:1px solid var(--bd);font-size:12px;color:var(--cz)}
+@media(pointer:coarse){kbd,.cmdf{display:none}.pzbtn{min-height:84px}}
+@media(max-width:900px){.pzb{grid-template-columns:1fr;overflow:auto}.pzl{border-right:0;border-bottom:1px solid var(--bd);overflow:visible}.pzr{overflow:visible}#pz{width:100vw;height:100dvh;max-height:100dvh;border-radius:0}#cmdk{margin-top:4vh}}
 @media(max-width:900px){
  nav,nav.min{background:rgba(255,255,255,.94);-webkit-backdrop-filter:saturate(180%) blur(16px);backdrop-filter:saturate(180%) blur(16px);border-top:1px solid var(--bd);border-right:0;box-shadow:none}
  nav button{color:#8a9099}nav button.on{background:none;color:var(--az)}nav button:hover{background:none}
@@ -234,15 +262,15 @@ td{padding:10px 12px;border-bottom:1px solid #f0f1f4}
 })();
 </script>
 </head><body>
-<nav><h1><b class="lg">L</b><span>Lucas Prospecção</span></h1><button data-p="dash" class="on" title="Dashboard"><svg viewBox="0 0 24 24"><rect x=3 y=3 width=7 height=7 /><rect x=14 y=3 width=7 height=7 /><rect x=14 y=14 width=7 height=7 /><rect x=3 y=14 width=7 height=7 /></svg><span>Dashboard</span></button><button data-p="leads" title="Leads"><svg viewBox="0 0 24 24"><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx=9 cy=7 r=4 /><path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/></svg><span>Leads</span></button><button data-p="mapa" title="Mapa"><svg viewBox="0 0 24 24"><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx=12 cy=10 r=3 /></svg><span>Mapa</span></button><button data-p="tarefas" title="Minhas tarefas"><svg viewBox="0 0 24 24"><polyline points='9 11 12 14 22 4'/><path d='M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11'/></svg><span>Minhas tarefas</span></button><button data-p="dados" title="Dados e sincronização"><svg viewBox="0 0 24 24"><ellipse cx=12 cy=5 rx=9 ry=3 /><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg><span>Dados e sync</span></button><button id="navT" class="nt" title="Recolher menu"><svg viewBox="0 0 24 24"><polyline points='15 18 9 12 15 6'/></svg><span>Recolher</span></button></nav>
+<nav><h1><b class="lg">L</b><span>Lucas Prospecção</span></h1><button id="navK" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar</span></button><button data-p="dash" class="on" title="Dashboard"><svg viewBox="0 0 24 24"><rect x=3 y=3 width=7 height=7 /><rect x=14 y=3 width=7 height=7 /><rect x=14 y=14 width=7 height=7 /><rect x=3 y=14 width=7 height=7 /></svg><span>Dashboard</span></button><button data-p="leads" title="Leads"><svg viewBox="0 0 24 24"><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx=9 cy=7 r=4 /><path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/></svg><span>Leads</span></button><button data-p="mapa" title="Mapa"><svg viewBox="0 0 24 24"><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx=12 cy=10 r=3 /></svg><span>Mapa</span></button><button data-p="tarefas" title="Minhas tarefas"><svg viewBox="0 0 24 24"><polyline points='9 11 12 14 22 4'/><path d='M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11'/></svg><span>Minhas tarefas</span></button><button data-p="dados" title="Dados e sincronização"><svg viewBox="0 0 24 24"><ellipse cx=12 cy=5 rx=9 ry=3 /><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg><span>Dados e sync</span></button><button id="navT" class="nt" title="Recolher menu"><svg viewBox="0 0 24 24"><polyline points='15 18 9 12 15 6'/></svg><span>Recolher</span></button></nav>
 <main>
-<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="b" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" style="font-size:15px;padding:10px 18px">⚙ Personalizar painel</button><span class="net"></span><em class="ver">v4.7</em></header><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
+<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="b" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" style="font-size:15px;padding:10px 18px">⚙ Personalizar painel</button><span class="net"></span><em class="ver">v5.0</em></header><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
 
 <div id="cnBox" class="cnbox" hidden><div class="cnh"><b>Filtrar por CNAE</b><button class="g" id="cnX" type="button" aria-label="Fechar">✕</button></div>
 <input id="cnQ" placeholder="Buscar código ou atividade (ex.: 1052 ou queijo)" autocomplete="off">
 <div class="cnbar"><button class="g" id="cnAll" type="button">Marcar os listados</button><button class="g" id="cnNone" type="button">Limpar seleção</button><label><input type="checkbox" id="cnOnlySel"> só marcados</label><span id="cnInfo"></span></div>
 <div id="cnList"></div><div class="cnft"><button class="b" id="cnOk" type="button">Concluir</button></div></div>
-<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">▦ Cartões</button><button id="vTab" class="on">▤ Tabela</button><button id="vKan">▥ Kanban</button></div><span class="net"></span><em class="ver">v4.7</em></header>
+<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><button class="b" id="bPz" type="button" title="Passa pelos leads filtrados um a um, do mais prioritário ao menos">▶ Modo prospecção</button><div class="seg"><button id="vCards">▦ Cartões</button><button id="vTab" class="on">▤ Tabela</button><button id="vKan">▥ Kanban</button></div><span class="net"></span><em class="ver">v5.0</em></header>
 <div class="card fl" id="fcard">
 <input id="q" placeholder="Buscar empresa, cidade, CNPJ… ( / )" style="flex:1;min-width:160px"><button class="g keep" id="bFilt" type="button" title="Mostrar ou esconder os demais filtros">Mais filtros <span id="fCount" class="bd" style="background:var(--az);display:none"></span></button>
 <select class="pri" id="fUF"><option value="">UF</option></select><select class="pri" id="fCid"><option value="">Cidade</option></select>
@@ -266,13 +294,13 @@ td{padding:10px 12px;border-bottom:1px solid #f0f1f4}
 <div class="fl" id="pgr" style="margin-top:8px"><button class="g" id="pv">‹</button><span id="pn"></span><button class="g" id="nx">›</button></div>
 </section>
 
-<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v4.7</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
+<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v5.0</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
 <div class="fl" id="carOpts" hidden><span style="color:var(--cz);font-size:13px">Considerar:</span><span id="carChips" class="fl" style="gap:6px"></span>
 <label class="chip"><input type="checkbox" id="carInt"> quem tem contato/visita registrado</label>
 <select id="carMet"><option value="n">Tamanho = nº de clientes</option><option value="p">Tamanho = % dos leads da cidade</option></select></div></div>
 <div id="map"></div><div class="card" id="carPanel" hidden></div></section>
-<section id="tarefas" class="pg"><header class="ph"><div><h2>Minhas tarefas</h2><p>O que precisa da sua atenção hoje</p></div><span class="net"></span><em class="ver">v4.7</em></header><div id="tasks"></div></section>
-<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v4.7</em></header>
+<section id="tarefas" class="pg"><header class="ph"><div><h2>Minhas tarefas</h2><p>O que precisa da sua atenção hoje</p></div><div class="fl"><button class="b" id="bPzSug" type="button">▶ Prospectar sugeridos</button><button class="g" id="bPzHoje" type="button">▶ Ações de hoje e atrasadas</button></div><span class="net"></span><em class="ver">v5.0</em></header><div id="tasks"></div></section>
+<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v5.0</em></header>
 <div class="card" id="syncCard"><h3 style="margin-top:0">Sincronizar tablet e computador</h3>
 <p>Trabalhe offline nos dois aparelhos. Quando quiser juntar o que cada um anotou: gere o arquivo de sincronização em um aparelho, leve ao outro (WhatsApp, e-mail, Drive, cabo USB ou Bluetooth) e aplique lá. Repita no sentido contrário para os dois ficarem iguais. Nada é apagado: se o mesmo campo foi editado nos dois, vale a edição mais recente.</p>
 <div class="fl"><label>Nome deste aparelho <input id="devName" placeholder="Ex.: Tablet" size="14"></label><label><input type="checkbox" id="syFull"> incluir toda a base de empresas (arquivo grande)</label></div>
@@ -285,7 +313,7 @@ td{padding:10px 12px;border-bottom:1px solid #f0f1f4}
 <button class="g" id="bInt">Exportar interações</button><button class="g" id="bAll">Exportar toda a base</button><button class="g" id="bWipe" style="color:#c0392b">Limpar dados personalizados</button></div>
 </section>
 </main>
-<dialog id="dlg"></dialog><dialog id="dcfg"></dialog><dialog id="rota"></dialog><dialog id="scDlg"></dialog><dialog id="tpl"></dialog><div id="toast"></div>
+<dialog id="dlg"></dialog><dialog id="dcfg"></dialog><dialog id="rota"></dialog><dialog id="scDlg"></dialog><dialog id="pz"></dialog><dialog id="cmdk"><input id="cmdQ" placeholder="Buscar empresa, cidade, CNPJ… ou digite um comando" autocomplete="off"><div id="cmdL"></div><div class="cmdf"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span></div></dialog><dialog id="tpl"></dialog><div id="toast"></div>
 <script>
 "use strict";
 /* ============ Constantes ============ */
@@ -518,7 +546,7 @@ function openLead(id,tipo){const r=S.byId.get(id);if(!r)return;S.cur=id;const h=
  $("#lExp").onclick=()=>download(`ficha_${r.id}.json`,JSON.stringify({empresa:{...r,_orig:undefined,_k:undefined},historico:h},null,1),"application/json")}
 async function addInter(r,i,noStatus){const o={id:r.id,data:new Date().toISOString(),usuario:r.resp||"Vendedor",resultado:"",obs:"",passo:"",proxData:"",...i};await DB.put("interacoes",o);
  if(!noStatus&&TIPOS[o.tipo]){const ord=["Novo","Contactada","Visitada","Atendida"];const n=TIPOS[o.tipo];if(!["Em negociação","Cliente ativo","Follow-up pendente"].includes(r.STATUS)||["Proposta enviada","Follow-up"].includes(o.tipo)){if(!(ord.includes(r.STATUS)&&ord.indexOf(r.STATUS)>ord.indexOf(n)))r.STATUS=n}}
- r.ultimaInteracao=today();if(!r.primeiroContato)r.primeiroContato=today();await DB.put("empresas",r)}
+ r.ultimaInteracao=today();if(!r.primeiroContato)r.primeiroContato=today();await DB.put("empresas",r);return o}
 /* ============ Tarefas ============ */
 function renderTasks(){const t=today(),w=addDays(t,7),R=S.rows,P=R.filter(r=>r.proxData&&!r.proxFeita);
  const act=r=>`<span class="tk"><button class="g" data-tk="done" data-tid="${esc(r.id)}" title="Marcar como concluída">✓ Concluir</button><button class="g" data-tk="1" data-tid="${esc(r.id)}" title="Adiar para amanhã">+1 dia</button><button class="g" data-tk="7" data-tid="${esc(r.id)}" title="Adiar uma semana">+7 dias</button></span>`;
@@ -883,6 +911,93 @@ function bindZ(){
   if(t.id=="tSav"){S.tpl=tplRead();try{localStorage.setItem("minhaEmpresa",$("#tEmp").value.trim()||"Hygiena do Brasil")}catch(x){}await DB.put("configuracoes",{k:"tpl",v:S.tpl});T.close();toast("Modelos salvos");if($("#dlg").open&&S.cur)openLead(S.cur)}});
  $("#tasks").addEventListener("click",e=>{const b=e.target.closest("[data-tk]");if(b)tkDo(b.dataset.tk,b.dataset.tid)});
 }
+/* ============ Modo prospecção: fila de leads com registro em um toque ============ */
+const PZ_OUT=[
+ {k:"1",lab:"Falei com a empresa",tipo:"Ligação",res:"Contato feito",dias:3,prox:"Follow-up"},
+ {k:"2",lab:"Não atendeu",tipo:"Ligação",res:"Não atendeu",st:"Sem resposta",soDe:["Novo","Sem resposta"],dias:1,prox:"Ligação"},
+ {k:"3",lab:"Mandei WhatsApp ou e-mail",tipo:"WhatsApp",res:"Mensagem enviada",dias:2,prox:"Follow-up"},
+ {k:"4",lab:"Agendei uma visita",tipo:"Ligação",res:"Visita agendada",dias:7,prox:"Visita presencial"},
+ {k:"5",lab:"Não tem interesse",tipo:"Ligação",res:"Sem interesse",st:"Não interessada",neg:1},
+ {k:"6",lab:"Telefone errado / não achei",tipo:"Outro",res:"Contato não localizado",st:"Não localizada",neg:1}];
+const PZ={q:[],i:0,log:[],undo:null,busy:0,t:""};
+function pzStart(rows,titulo){const ids=[...new Set(rows.map(r=>r.id))];if(!ids.length)return toast("Nenhum lead para prospectar com esses filtros.",1);
+ Object.assign(PZ,{q:ids,i:0,log:[],undo:null,t:titulo||"Modo prospecção"});const d=$("#pz");if(!d.open)d.showModal();pzRender()}
+const bySc=a=>[...a].sort((x,y)=>(y.SCORE||0)-(x.SCORE||0));
+function pzFromLeads(){const sel=S.sel.size?S.rows.filter(r=>S.sel.has(r.id)):S.filtered;pzStart(bySc(sel),`Prospecção · ${sel.length} lead(s) ${S.sel.size?"selecionados":"filtrados"}`)}
+function pzSug(){const a=bySc((S.base||S.rows).filter(r=>(r.STATUS||"Novo")=="Novo"));pzStart(a,"Sugeridos · maiores prioridades ainda não abordadas")}
+function pzHoje(){const t=today(),a=S.rows.filter(r=>r.proxData&&!r.proxFeita&&r.proxData<=t).sort((x,y)=>x.proxData.localeCompare(y.proxData));pzStart(a,"Ações de hoje e atrasadas")}
+function pzUndoBar(){return`<div class="pzu" ${PZ.undo?"":"hidden"}>${PZ.undo?esc(PZ.undo.msg):""}<button class="g" type="button" id="pzUndo">Desfazer</button></div>`}
+function pzRender(){const d=$("#pz");if(PZ.i>=PZ.q.length)return pzEnd();const r=S.byId.get(PZ.q[PZ.i]);if(!r){PZ.q.splice(PZ.i,1);return pzRender()}
+ const tel=telOf(r),td=dig(tel),wa=waPhone(r),n=PZ.q.length,pr=priOf(r.SCORE),late=r.proxData&&!r.proxFeita&&r.proxData<today();
+ const hist=(S.iv.get(r.id)||[]).filter(i=>i.tipo!="Mudança de status").sort((a,b)=>String(b.data).localeCompare(String(a.data))).slice(0,3);
+ d.innerHTML=`<div class="pzh"><div><b>${esc(PZ.t)}</b><span>${PZ.i+1} de ${n} · ${PZ.log.length} registro(s) nesta sessão</span></div><button class="g" id="pzX" type="button">Encerrar</button><i class="pzbar"><u style="width:${(PZ.i/n*100).toFixed(1)}%"></u></i></div>
+ <div class="pzb"><div class="pzl">
+  <div class="pzt"><h2>${esc(nmL(r))}</h2><span class="bd" style="background:${PRC[pr]}1f;color:${PRC[pr]}" title="${esc(scoreTip(r))}">${r.SCORE} ${pr}</span></div>
+  ${r.NOME_FANTASIA&&r.NOME_FANTASIA!=r.RAZAO_SOCIAL?`<div class="pzm">${esc(r.RAZAO_SOCIAL)}</div>`:""}
+  <div class="pzm">${esc(r.MUNICIPIO)}/${esc(r.UF)} · ${esc(r.SETOR||"")}${r.PORTE_DESCRICAO?" · "+esc(r.PORTE_DESCRICAO):""} · Capital ${brl(r.CAPITAL_SOCIAL||0)}</div>
+  ${r.ATIVIDADE_PRINCIPAL_TEXTO?`<div class="pzm">${esc(r.ATIVIDADE_PRINCIPAL_TEXTO)}</div>`:""}
+  <div class="pzc"><div><small>Telefone</small><b>${td.length>=8?esc(tel):"não informado"}</b></div><div><small>E-mail</small><b>${esc(r.emailPers||r.CORREIO_ELETRONICO||"não informado")}</b></div>
+   <div><small>Contato</small><b>${esc(r.contato||"—")}${r.cargo?" · "+esc(r.cargo):""}</b></div><div><small>Status</small><b>${esc(r.STATUS||"Novo")}</b></div>
+   <div><small>Próxima ação</small><b class="${late?"late":""}">${r.proxData&&!r.proxFeita?brd(r.proxData)+" "+esc(r.proxTipo||""):"nenhuma"}</b></div></div>
+  <div class="pzk">${td.length>=8?`<a class="g" href="tel:${td.length<=11?"+55"+td:"+"+td}">Ligar</a>`:""}${wa?`<a class="g" href="https://wa.me/${wa}" target="_blank" rel="noopener noreferrer">WhatsApp</a>`:""}
+   <a class="g" id="pzG" href="${gUrl(gQuery(r))}" target="_blank" rel="noopener noreferrer">Pesquisar contato no Google <kbd>G</kbd></a><button class="g" type="button" id="pzOpen">Abrir ficha completa</button></div>
+  <div class="pzhist"><small>Últimas interações</small>${hist.length?hist.map(i=>`<div>${esc(fmtDT(i.data))} · ${esc(i.tipo)}${i.resultado?" · "+esc(i.resultado):""}${i.obs?" — "+esc(i.obs):""}</div>`).join(""):"<div>Nenhuma ainda.</div>"}</div>
+ </div><div class="pzr"><b>Como foi?</b>
+  <div class="pzo">${PZ_OUT.map(o=>`<button type="button" class="pzbtn ${o.neg?"neg":""}" data-pz="${o.k}"><span><kbd>${o.k}</kbd> ${esc(o.lab)}</span><small>${o.dias?"retorno em "+o.dias+" dia"+(o.dias>1?"s":""):"marca como "+esc(o.st)}</small></button>`).join("")}</div>
+  <label>Retorno em (opcional, troca a data automática)<input type="date" id="pzD"></label>
+  <label>Observação<textarea id="pzO" rows="3" placeholder="Com quem falou, o que ficou combinado…"></textarea></label>
+  <div class="pzn"><button class="g" type="button" id="pzPrev" ${PZ.i?"":"disabled"}><kbd>←</kbd> Anterior</button><button class="g" type="button" id="pzSkip">Pular <kbd>→</kbd></button></div>
+ </div></div>${pzUndoBar()}`}
+function pzEnd(){const c={};PZ.log.forEach(x=>c[x.k]=(c[x.k]||0)+1);
+ $("#pz").innerHTML=`<div class="pzh"><div><b>${esc(PZ.t)}</b><span>Fila concluída</span></div><button class="g" id="pzX" type="button">Fechar</button><i class="pzbar"><u style="width:100%"></u></i></div>
+ <div class="pzend"><h2 style="margin:0">Fila concluída</h2><p style="margin:0;color:var(--cz)">${PZ.log.length} registro(s) em ${PZ.q.length} lead(s).</p><ul>${PZ_OUT.filter(o=>c[o.k]).map(o=>`<li>${esc(o.lab)}: <b>${c[o.k]}</b></li>`).join("")||"<li>Nenhum resultado registrado.</li>"}</ul>
+ <div class="fl" style="justify-content:center">${PZ.q.length?'<button class="g" id="pzPrev" type="button">← Voltar ao último</button>':""}<button class="b" id="pzX2" type="button">Fechar</button></div></div>${pzUndoBar()}`}
+async function pzOutcome(k){const o=PZ_OUT.find(x=>x.k==k),r=S.byId.get(PZ.q[PZ.i]);if(!o||!r||PZ.busy)return;PZ.busy=1;
+ try{const snap=JSON.parse(JSON.stringify(r)),obs=($("#pzO")||{}).value||"",dt=($("#pzD")||{}).value||"",st0=r.STATUS||"Novo";
+  const it=await addInter(r,{tipo:o.tipo,resultado:o.res,obs:obs.trim(),passo:"Modo prospecção"},!!o.st);
+  if(o.st&&(!o.soDe||o.soDe.includes(st0)))r.STATUS=o.st;
+  const pd=dt||(o.dias?addDays(today(),o.dias):"");
+  if(pd){r.proxData=pd;r.proxTipo=o.prox||"Follow-up";r.proxFeita=false}else if(o.neg&&r.proxData&&!r.proxFeita){r.proxFeita=true;r.proxConcluidaEm=today()}
+  await DB.put("empresas",r);S.inter.push(it);(S.iv.get(r.id)||S.iv.set(r.id,[]).get(r.id)).push(it);r.SCORE=scoreOf(r);
+  PZ.log.push({id:r.id,k});PZ.undo={snap,uid:it.uid,id:r.id,idx:PZ.i,msg:`${nmL(r)}: ${o.lab}${pd?" · retorno "+brd(pd):""}`};PZ.i++;pzRender()}
+ catch(e){console.error(e);alert("Não foi possível registrar: "+e.message)}finally{PZ.busy=0}}
+async function pzUndo(){const u=PZ.undo;if(!u||PZ.busy)return;PZ.busy=1;
+ try{const hit=(await DB.all("interacoes")).find(i=>i.uid==u.uid);if(hit)await DB.del("interacoes",hit.iid);
+  const r=S.byId.get(u.id);if(r){for(const k of Object.keys(r))if(!(k in u.snap))delete r[k];Object.assign(r,u.snap);await DB.putMany("empresas",[r],true)}
+  S.inter=S.inter.filter(i=>i.uid!=u.uid);const l=S.iv.get(u.id);if(l)S.iv.set(u.id,l.filter(i=>i.uid!=u.uid));
+  PZ.log.pop();PZ.i=u.idx;PZ.undo=null;pzRender()}finally{PZ.busy=0}}
+function pzInit(){const d=$("#pz");
+ d.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)return;if(t.dataset.pz)return pzOutcome(t.dataset.pz);
+  switch(t.id){case"pzX":case"pzX2":d.close();break;case"pzPrev":if(PZ.i>0){PZ.i=Math.min(PZ.i,PZ.q.length)-1;pzRender()}break;case"pzSkip":PZ.i++;pzRender();break;case"pzUndo":pzUndo();break;case"pzOpen":openLead(PZ.q[PZ.i]);break}});
+ d.addEventListener("close",()=>{refresh();if($("#tarefas").classList.contains("on"))renderTasks()});
+ $("#dlg").addEventListener("close",()=>{if(d.open)pzRender()});
+ document.addEventListener("keydown",e=>{if(!d.open||$("#dlg").open)return;const tg=e.target.tagName;
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()=="z"&&PZ.undo&&!/INPUT|TEXTAREA/.test(tg)){e.preventDefault();return pzUndo()}
+  if(/INPUT|TEXTAREA|SELECT/.test(tg)||e.ctrlKey||e.metaKey||e.altKey)return;
+  if(/^[1-6]$/.test(e.key)&&PZ.i<PZ.q.length){e.preventDefault();pzOutcome(e.key)}
+  else if(e.key=="ArrowRight"&&PZ.i<PZ.q.length){PZ.i++;pzRender()}else if(e.key=="ArrowLeft"&&PZ.i>0){PZ.i--;pzRender()}
+  else if(e.key.toLowerCase()=="g"){const a=$("#pzG");if(a)a.click()}});
+ $("#bPz").onclick=pzFromLeads;$("#bPzSug").onclick=pzSug;$("#bPzHoje").onclick=pzHoje}
+/* ============ Busca rápida e comandos (Ctrl+K) ============ */
+const CMDS=[["Ir para o painel",()=>go("dash")],["Ir para leads",()=>go("leads")],["Ir para o mapa",()=>go("mapa")],["Ver o mapa da minha carteira",()=>{const c=carCfg();c.m="car";carSave(c);carUI();go("mapa")}],["Ir para minhas tarefas",()=>go("tarefas")],["Ir para dados e sincronização",()=>go("dados")],
+ ["Modo prospecção com os leads filtrados",()=>pzFromLeads()],["Prospectar sugeridos (prioridades ainda não abordadas)",()=>pzSug()],["Prospectar ações de hoje e atrasadas",()=>pzHoje()],["Critérios de prioridade",()=>scOpen()],["Escolher vários CNAEs",()=>{go("leads");setTimeout(cnOpen,50)}],["Exportar backup",()=>backup()]];
+let cmdItems=[],cmdIx=0;
+function cmdOpen(){const d=$("#cmdk");if(!d.open)d.showModal();$("#cmdQ").value="";cmdRender();$("#cmdQ").focus()}
+function cmdRender(){const q=norm($("#cmdQ").value),tk=q.split(/\s+/).filter(Boolean);cmdItems=[];let html="";
+ const leads=tk.length?bySc(S.rows.filter(r=>tk.every(t=>r._k.includes(t)))).slice(0,8):[...S.rows].filter(r=>r.ultimaInteracao).sort((a,b)=>String(b.ultimaInteracao).localeCompare(String(a.ultimaInteracao))).slice(0,5);
+ const cm=CMDS.filter(([l])=>!tk.length||tk.every(t=>norm(l).includes(t)));
+ const item=(lab,sub,fn)=>{const i=cmdItems.length;cmdItems.push(fn);return`<button type="button" class="cmdi" data-ix="${i}"><span>${lab}</span>${sub?`<small>${sub}</small>`:""}</button>`};
+ if(leads.length)html+=`<div class="cmdg">${tk.length?"Empresas":"Mexeu recentemente"}</div>`+leads.map(r=>item(`<b style="font-weight:500">${esc(nmL(r))}</b> <span style="color:var(--cz)">· ${esc(r.MUNICIPIO)}/${esc(r.UF)}</span>`,`${esc(r.STATUS||"Novo")} · ${r.SCORE}`,()=>openLead(r.id))).join("");
+ if(cm.length)html+=`<div class="cmdg">Ações</div>`+cm.map(([l,f])=>item(esc(l),"",f)).join("");
+ if(!html)html=`<div class="cmdg" style="padding:16px">Nada encontrado para “${esc($("#cmdQ").value)}”.</div>`;
+ $("#cmdL").innerHTML=html;cmdIx=0;cmdHi()}
+function cmdHi(){$$("#cmdL .cmdi").forEach((b,i)=>b.classList.toggle("on",i==cmdIx));const a=$("#cmdL .cmdi.on");if(a)a.scrollIntoView({block:"nearest"})}
+function cmdRun(i){const f=cmdItems[i];if(!f)return;$("#cmdk").close();f()}
+function cmdInit(){$("#navK").onclick=cmdOpen;$("#cmdQ").addEventListener("input",deb(cmdRender,80));
+ $("#cmdQ").addEventListener("keydown",e=>{if(e.key=="ArrowDown"){e.preventDefault();cmdIx=Math.min(cmdIx+1,cmdItems.length-1);cmdHi()}else if(e.key=="ArrowUp"){e.preventDefault();cmdIx=Math.max(cmdIx-1,0);cmdHi()}else if(e.key=="Enter"){e.preventDefault();cmdRun(cmdIx)}});
+ $("#cmdL").addEventListener("click",e=>{const b=e.target.closest(".cmdi");if(b)cmdRun(+b.dataset.ix)});
+ $("#cmdk").addEventListener("click",e=>{if(e.target.id=="cmdk")$("#cmdk").close()});
+ document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()=="k"){e.preventDefault();if($("#pz").open||$("#dlg").open)return;cmdOpen()}})}
 /* ============ Critérios de prioridade (editáveis) ============ */
 function scOpen(){const C=scoreCfg(),d=$("#scDlg");
  const N=(lab,g,k,v,tip)=>`<label${tip?` title="${esc(tip)}"`:""}>${lab}<input type="number" step="1" data-g="${g}" data-k="${k}" value="${v}"></label>`;
@@ -980,5 +1095,5 @@ function cnInit(){
  document.addEventListener("keydown",e=>{if(e.key=="Escape"&&!$("#cnBox").hidden)cnClose()});
  document.addEventListener("pointerdown",e=>{const bx=$("#cnBox");if(!bx.hidden&&!bx.contains(e.target)&&!e.target.closest("#bCnae"))cnClose()});
  addEventListener("resize",()=>{if(!$("#cnBox").hidden)cnPlace()});cnSync()}
-(async()=>{await DB.open();await loadGeo();await loadTpl();bind();cnInit();carInit();scInit();setView(lsGet("lpView")||(innerWidth<1100?"cards":"tab"));$("#fcard").classList.add("closed");await load()})();
+(async()=>{await DB.open();await loadGeo();await loadTpl();bind();cnInit();carInit();scInit();pzInit();cmdInit();setView(lsGet("lpView")||(innerWidth<1100?"cards":"tab"));$("#fcard").classList.add("closed");await load()})();
 </script></body></html>
