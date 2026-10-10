@@ -453,6 +453,12 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 .nw label.chk{flex-direction:row;align-items:center;gap:8px;font-size:14px;color:var(--tx)}.nw label.chk input{width:auto}
 .nw-err{margin-top:10px;background:#fdecea;color:#b3261e;border-radius:8px;padding:8px 12px;font-size:13px}.nw-err[hidden]{display:none}
 @media(max-width:900px){.ld-hl{grid-template-columns:1fr 1fr}#tbNew span{display:none}.nw{grid-template-columns:1fr}.dl2{grid-template-columns:1fr}}
+.hleg{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:var(--cz)}.hgrad{display:inline-block;width:120px;height:10px;border-radius:5px;background:linear-gradient(90deg,#2563eb,#06b6d4,#22c55e,#facc15,#f97316,#dc2626);order:1}.hleg small:first-of-type{order:0}.hleg small:last-of-type{order:2}
+.gleg{display:inline-flex;align-items:center;gap:6px;order:3;margin-left:10px}.gleg i{width:16px;height:16px;border-radius:50%;border:2px dashed #ea580c;background:#f973161a}
+.leaflet-tooltip.gapn{color:#9a3412;text-shadow:0 0 3px #fff,0 0 3px #fff}
+.rk.low u{background:#dc2626}.rk.gap u{background:#ea580c}
+.gapc.on{border-color:#ea580c;color:#c2410c;background:#fff4ec}
+#carVis button{padding:6px 14px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style><script>
 /* ===== Carregador de bibliotecas com cache local =====
@@ -480,14 +486,14 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 </script>
 </head><body>
 <nav><h1><b class="lg">L</b><span>Lucas Prospecção</span></h1><button id="navK" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar</span></button><button data-p="dash" class="on" title="Dashboard"><svg viewBox="0 0 24 24"><rect x=3 y=3 width=7 height=7 /><rect x=14 y=3 width=7 height=7 /><rect x=14 y=14 width=7 height=7 /><rect x=3 y=14 width=7 height=7 /></svg><span>Painel</span></button><button data-p="leads" title="Leads"><svg viewBox="0 0 24 24"><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx=9 cy=7 r=4 /><path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/></svg><span>Leads</span></button><button data-p="sugestoes" title="Sugestões por região"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><polygon points='16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8'/></svg><span>Sugestões</span></button><button data-p="agenda" title="Agenda de retornos"><svg viewBox="0 0 24 24"><rect x=3 y=4 width=18 height=18 rx=2 /><path d='M16 2v4M8 2v4M3 10h18'/></svg><span>Agenda</span><b class="nbd" id="agBd" hidden></b></button><button data-p="mapa" title="Mapa"><svg viewBox="0 0 24 24"><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx=12 cy=10 r=3 /></svg><span>Mapa</span></button><button data-p="dados" title="Dados e sincronização"><svg viewBox="0 0 24 24"><ellipse cx=12 cy=5 rx=9 ry=3 /><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg><span>Dados</span></button><button id="navT" class="nt" title="Recolher menu"><svg viewBox="0 0 24 24"><polyline points='15 18 9 12 15 6'/></svg><span>Recolher</span></button></nav>
-<main><div id="topbar"><b id="tbTitle">Painel</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><span class="net"></span><em class="ver">v7.0</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha">＋ <span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">▶ Prospectar</button></div>
-<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="b" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" style="font-size:15px;padding:10px 18px">⚙ Personalizar painel</button><span class="net"></span><em class="ver">v7.0</em></header><div id="goals"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
+<main><div id="topbar"><b id="tbTitle">Painel</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><span class="net"></span><em class="ver">v7.1</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha">＋ <span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">▶ Prospectar</button></div>
+<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="b" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" style="font-size:15px;padding:10px 18px">⚙ Personalizar painel</button><span class="net"></span><em class="ver">v7.1</em></header><div id="goals"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
 
 <div id="cnBox" class="cnbox" hidden><div class="cnh"><b>Filtrar por CNAE</b><button class="g" id="cnX" type="button" aria-label="Fechar">✕</button></div>
 <input id="cnQ" placeholder="Buscar código ou atividade (ex.: 1052 ou queijo)" autocomplete="off">
 <div class="cnbar"><button class="g" id="cnAll" type="button">Marcar os listados</button><button class="g" id="cnNone" type="button">Limpar seleção</button><label><input type="checkbox" id="cnOnlySel"> só marcados</label><span id="cnInfo"></span></div>
 <div id="cnList"></div><div class="cnft"><button class="b" id="cnOk" type="button">Concluir</button></div></div>
-<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">▦ Cartões</button><button id="vTab" class="on">▤ Tabela</button><button id="vKan">▥ Kanban</button></div><span class="net"></span><em class="ver">v7.0</em></header>
+<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">▦ Cartões</button><button id="vTab" class="on">▤ Tabela</button><button id="vKan">▥ Kanban</button></div><span class="net"></span><em class="ver">v7.1</em></header>
 <div class="card fl" id="fcard">
 <input id="q" placeholder="Buscar empresa, cidade, CNPJ… ( / )" style="flex:1;min-width:160px"><button class="g keep" id="bFilt" type="button" title="Mostrar ou esconder os demais filtros">Mais filtros <span id="fCount" class="bd" style="background:var(--az);display:none"></span></button>
 <select class="pri" id="fUF"><option value="">UF</option></select><select class="pri" id="fCid"><option value="">Cidade</option></select>
@@ -511,14 +517,14 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 <div class="fl" id="pgr" style="margin-top:8px"><button class="g" id="pv">‹</button><span id="pn"></span><button class="g" id="nx">›</button></div>
 </section>
 
-<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v7.0</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
-<div class="fl" id="carOpts" hidden><span style="color:var(--cz);font-size:13px">Considerar:</span><span id="carChips" class="fl" style="gap:6px"></span>
+<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v7.1</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
+<div class="fl" id="carOpts" hidden><div class="seg" id="carVis" style="margin:0"><button type="button" data-cvis="heat">Mapa de calor</button><button type="button" data-cvis="circ">Círculos</button></div><label class="chip gapc"><input type="checkbox" id="carGap"> mostrar áreas sem atendimento</label><span style="color:var(--cz);font-size:13px">Considerar:</span><span id="carChips" class="fl" style="gap:6px"></span>
 <label class="chip"><input type="checkbox" id="carInt"> quem tem contato/visita registrado</label>
 <select id="carMet"><option value="n">Tamanho = nº de clientes</option><option value="p">Tamanho = % dos leads da cidade</option></select></div></div>
 <div id="map"></div><div class="card" id="carPanel" hidden></div></section>
-<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><span class="net"></span><em class="ver">v7.0</em></header><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section>
-<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bSeq" type="button">⟳ Sequências</button><button class="b" id="bPzHoje" type="button">▶ Fazer os retornos de hoje</button><span class="net"></span><em class="ver">v7.0</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
-<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v7.0</em></header>
+<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><span class="net"></span><em class="ver">v7.1</em></header><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section>
+<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bSeq" type="button">⟳ Sequências</button><button class="b" id="bPzHoje" type="button">▶ Fazer os retornos de hoje</button><span class="net"></span><em class="ver">v7.1</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
+<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v7.1</em></header>
 <div class="card" id="syncCard"><h3 style="margin-top:0">Sincronizar tablet e computador</h3>
 <p>Trabalhe offline nos dois aparelhos. Quando quiser juntar o que cada um anotou: gere o arquivo de sincronização em um aparelho, leve ao outro (WhatsApp, e-mail, Drive, cabo USB ou Bluetooth) e aplique lá. Repita no sentido contrário para os dois ficarem iguais. Nada é apagado: se o mesmo campo foi editado nos dois, vale a edição mais recente.</p>
 <div class="fl"><label>Nome deste aparelho <input id="devName" placeholder="Ex.: Tablet" size="14"></label><label><input type="checkbox" id="syFull"> incluir toda a base de empresas (arquivo grande)</label></div>
@@ -1659,38 +1665,85 @@ function scInit(){
   if(t.id=="scX")d.close();
   if(t.id=="scDef"){if(confirm("Voltar todos os critérios ao padrão?")){const x=SC_DEF();scSet(x);d.close();scOpen()}}
   if(t.id=="scSave"){const o=scRead();scSet(o);try{localStorage.setItem("lpScore",JSON.stringify(o))}catch(x){}await DB.put("configuracoes",{k:"score",v:o});S.rows.forEach(r=>r.SCORE=scoreOf(r));d.close();refresh();toast("Critérios de prioridade salvos")}})}
+/* ============ v7.1: mapa de calor da carteira e áreas sem atendimento ============ */
+let HeatCls=null,_hpal=null,gapMk=new Map;
+function heatPal(){if(_hpal)return _hpal;const c=document.createElement("canvas");c.width=1;c.height=256;const x=c.getContext("2d"),g=x.createLinearGradient(0,0,0,256);
+ [[0,"#2563eb"],[.3,"#06b6d4"],[.5,"#22c55e"],[.72,"#facc15"],[.88,"#f97316"],[1,"#dc2626"]].forEach(([k,v])=>g.addColorStop(k,v));x.fillStyle=g;x.fillRect(0,0,1,256);return _hpal=x.getImageData(0,0,1,256).data}
+function heatDraw(cv,pts,o){const ctx=cv.getContext("2d");ctx.clearRect(0,0,cv.width,cv.height);if(!pts.length||!cv.width||!cv.height)return;
+ const r=o.r,blur=o.blur,R=r+blur,br=document.createElement("canvas");br.width=br.height=Math.ceil(R*2);const b=br.getContext("2d");
+ b.shadowOffsetX=b.shadowOffsetY=R*2;b.shadowBlur=blur;b.shadowColor="black";b.beginPath();b.arc(-R,-R,r,0,Math.PI*2,true);b.closePath();b.fill();
+ for(const[x,y,w]of pts){ctx.globalAlpha=Math.min(1,Math.max(.12,w/o.max));ctx.drawImage(br,x-R,y-R)}
+ ctx.globalAlpha=1;const img=ctx.getImageData(0,0,cv.width,cv.height),d=img.data,P=heatPal();
+ for(let i=3;i<d.length;i+=4){const a=d[i];if(!a)continue;const j=a*4;d[i-3]=P[j];d[i-2]=P[j+1];d[i-1]=P[j+2];d[i]=Math.min(235,a*1.4)}
+ ctx.putImageData(img,0,0)}
+function heatLayer(pts,o){if(!HeatCls)HeatCls=L.Layer.extend({
+  initialize(p,o){this._p=p;this._o=o||{}},
+  onAdd(m){this._m=m;const c=this._c=L.DomUtil.create("canvas","heatc");c.style.position="absolute";c.style.pointerEvents="none";c.style.zIndex=250;m.getPanes().overlayPane.appendChild(c);
+   m.on("moveend zoomend resize viewreset",this._draw,this);m.on("zoomstart movestart",this._hide,this);this._draw()},
+  onRemove(m){m.off("moveend zoomend resize viewreset",this._draw,this);m.off("zoomstart movestart",this._hide,this);if(this._c)this._c.remove()},
+  _hide(){if(this._c)this._c.style.opacity=0},
+  _draw(){const m=this._m,c=this._c;if(!m||!c)return;const s=m.getSize();L.DomUtil.setPosition(c,m.containerPointToLayerPoint([0,0]));c.width=s.x;c.height=s.y;c.style.opacity=.8;
+   const z=m.getZoom(),r=Math.max(12,Math.min(50,(z-2)*6.5)),P=[];
+   for(const[la,lo,w]of this._p){const q=m.latLngToContainerPoint([la,lo]);if(q.x>-r*3&&q.y>-r*3&&q.x<s.x+r*3&&q.y<s.y+r*3)P.push([q.x,q.y,w])}
+   heatDraw(c,P,{r,blur:r*.9,max:this._o.max||1})}});
+ return new HeatCls(pts,o)}
+const quant=(a,q)=>{if(!a.length)return 1;const s=[...a].sort((x,y)=>x-y);return s[Math.min(s.length-1,Math.floor(q*(s.length-1)))]};
+function cityLeadsKey(k){const[c,u]=k.split("|");return(S.base||S.rows).filter(r=>r.MUNICIPIO==c&&r.UF==u)}
+function gapPopup(o){const bx=document.createElement("div");bx.innerHTML=`<b>${esc(o.c)}/${esc(o.u)}</b><br>${o.t} empresa(s) na base · <b style="color:#c2410c">nenhuma na sua carteira</b>${o.rg?`<br><small>${esc(o.rg)}</small>`:""}<br>`;
+ const b1=document.createElement("button");b1.textContent="▶ Prospectar esta cidade";b1.onclick=()=>{const L=bySc(cityLeadsKey(gk(o.c,o.u)));pzStart(L,`Prospecção · ${o.c}/${o.u}`)};
+ const b2=document.createElement("button");b2.textContent="Ver leads";b2.style.marginLeft="6px";b2.onclick=()=>pickCity(o.c,o.u);bx.append(b1,b2);return bx}
 /* ============ Mapa da carteira (clientes em contato/atendidos) ============ */
 const CAR_ST=["Contactada","Visitada","Atendida","Em negociação","Follow-up pendente","Cliente ativo"];
 const CAR_T=[...CONTATO,"Visita presencial",...ATEND,"Proposta enviada"],CAR_NO=["Não interessada","Não localizada","Sem resposta"];
 let carL=null,carMk=new Map;
-function carCfg(){const c={m:"all",st:["Atendida","Em negociação","Cliente ativo","Visitada","Contactada"],int:true,met:"n"};try{Object.assign(c,JSON.parse(localStorage.getItem("lpCar")||"{}"))}catch(x){}return c}
+function carCfg(){const c={m:"all",st:["Atendida","Em negociação","Cliente ativo","Visitada","Contactada"],int:true,met:"n",vis:"heat",gap:true};try{Object.assign(c,JSON.parse(localStorage.getItem("lpCar")||"{}"))}catch(x){}return c}
 function carSave(c){try{localStorage.setItem("lpCar",JSON.stringify(c))}catch(x){}}
 const carIn=(r,c)=>c.st.includes(r.STATUS)||(c.int&&!CAR_NO.includes(r.STATUS)&&hasT(r,CAR_T));
 function carUI(){const c=carCfg();$("#mmAll").classList.toggle("on",c.m!="car");$("#mmCar").classList.toggle("on",c.m=="car");$("#carOpts").hidden=c.m!="car";
  $("#carChips").innerHTML=CAR_ST.map(s=>`<label class="chip ${c.st.includes(s)?"on":""}"><input type="checkbox" data-cs="${esc(s)}" ${c.st.includes(s)?"checked":""} hidden>${esc(s)}</label>`).join("");
- $("#carInt").checked=!!c.int;$("#carInt").parentNode.classList.toggle("on",!!c.int);$("#carMet").value=c.met}
+ $("#carInt").checked=!!c.int;$("#carInt").parentNode.classList.toggle("on",!!c.int);$("#carMet").value=c.met;
+ $$("#carVis [data-cvis]").forEach(b=>b.classList.toggle("on",b.dataset.cvis==(c.vis||"heat")));$("#carGap").checked=!!c.gap;$("#carGap").parentNode.classList.toggle("on",!!c.gap);$("#carMet").hidden=c.vis!="circ"}
 const carCol=t=>{const a=[170,222,190],b=[6,90,45],m=a.map((x,i)=>Math.round(x+(b[i]-x)*t));return`rgb(${m})`};
+function carPopup(o,p){const bx=document.createElement("div");bx.innerHTML=`<b>${esc(o.c)}/${esc(o.u)}</b><br>${o.n} na carteira de ${o.t} leads (${Math.round(o.n/o.t*100)}%)<br><small>${Object.entries(o.st).sort((a,b)=>b[1]-a[1]).map(([s,n])=>esc(s)+": "+n).join(" · ")}</small>${p.ap?"<br><i>localização aproximada</i>":""}<br>`;
+ const b=document.createElement("button");b.textContent="Ver leads da cidade";b.onclick=()=>pickCity(o.c,o.u);bx.appendChild(b);return bx}
+const worked=r=>(r.STATUS&&r.STATUS!="Novo")||(S.iv.get(r.id)||[]).some(i=>i.tipo!="Mudança de status");
 function renderCar(){
  if(!carL)carL=L.layerGroup().addTo(map);else if(!map.hasLayer(carL))carL.addTo(map);
- carL.clearLayers();carMk=new Map;const c=carCfg(),base=S.base||S.rows,pn=$("#carPanel");
- const g=new Map,sets={},ufs={};let tot=0;
- for(const r of base){if(!r.MUNICIPIO)continue;const k=gk(r.MUNICIPIO,r.UF);let o=g.get(k);if(!o){o={c:r.MUNICIPIO,u:r.UF,n:0,t:0,st:{},ll:r.LATITUDE&&r.LONGITUDE?[num(r.LATITUDE),num(r.LONGITUDE)]:null};g.set(k,o)}
-  o.t++;if(carIn(r,c)){o.n++;tot++;o.st[r.STATUS]=(o.st[r.STATUS]||0)+1;const s=r.SETOR||"Outros";sets[s]=(sets[s]||0)+1;ufs[r.UF]=(ufs[r.UF]||0)+1}}
+ carL.clearLayers();carMk=new Map;gapMk=new Map;const c=carCfg(),base=S.base||S.rows,pn=$("#carPanel"),heat=c.vis!="circ";
+ const g=new Map,sets={},ufs={},rgs=new Map;let tot=0;
+ for(const r of base){if(!r.MUNICIPIO)continue;const k=gk(r.MUNICIPIO,r.UF),rk=regKey(r);let o=g.get(k);if(!o){o={c:r.MUNICIPIO,u:r.UF,n:0,t:0,w:0,st:{},rg:rk.split("|")[1]||"",ll:r.LATITUDE&&r.LONGITUDE?[num(r.LATITUDE),num(r.LONGITUDE)]:null};g.set(k,o)}
+  let q=rgs.get(rk);if(!q){q={k:rk,n:0,t:0,w:0};rgs.set(rk,q)}o.t++;q.t++;const wk=worked(r);if(wk){o.w++;q.w++}
+  if(carIn(r,c)){o.n++;q.n++;tot++;o.st[r.STATUS]=(o.st[r.STATUS]||0)+1;const s=r.SETOR||"Outros";sets[s]=(sets[s]||0)+1;ufs[r.UF]=(ufs[r.UF]||0)+1}}
  const cities=[...g.values()].filter(o=>o.n>0),val=o=>c.met=="p"?o.n/o.t:o.n,mx=Math.max(1e-9,...cities.map(val));
  pn.hidden=false;
  if(!cities.length){pn.innerHTML='<b>Minha carteira</b><p style="color:var(--cz);margin:6px 0 0">Nenhum lead se encaixa ainda. Registre contatos, visitas e atendimentos nos leads, ou marque mais status acima.</p>';setInfo("Carteira vazia com os critérios atuais.");return}
- const pts=[];let aprox=0;
- cities.sort((a,b)=>val(b)-val(a)).forEach((o,i)=>{const p=coordOf(o);if(!p)return;if(p.ap)aprox++;const t=val(o)/mx;
+ const pts=[];let aprox=0,heatOut=0,gapOut=0;
+ if(heat){const hp=[];
+  cities.forEach(o=>{const p=coordOf(o);if(!p)return;if(p.ap){heatOut++;return}hp.push([p.ll[0],p.ll[1],val(o)]);pts.push(p.ll);
+   const m=L.circleMarker(p.ll,{radius:11,stroke:false,fillColor:"#000",fillOpacity:.001});m.bindTooltip(`${o.c}: ${o.n} na carteira`,{direction:"top"});m.bindPopup(carPopup(o,p));carL.addLayer(m);carMk.set(gk(o.c,o.u),m)});
+  if(hp.length)carL.addLayer(heatLayer(hp,{max:Math.max(c.met=="p"?.05:1,quant(hp.map(x=>x[2]),.9))}))}
+ else cities.sort((a,b)=>val(b)-val(a)).forEach((o,i)=>{const p=coordOf(o);if(!p)return;if(p.ap)aprox++;const t=val(o)/mx;
   const m=L.circleMarker(p.ll,{radius:9+24*Math.sqrt(t),color:"#08306b",weight:1,fillColor:carCol(t),fillOpacity:.72});
   if(i<20)m.bindTooltip(c.met=="p"?Math.round(o.n/o.t*100)+"%":String(o.n),{permanent:true,direction:"center",className:"cnum"});
-  const bx=document.createElement("div");bx.innerHTML=`<b>${esc(o.c)}/${esc(o.u)}</b><br>${o.n} na carteira de ${o.t} leads (${Math.round(o.n/o.t*100)}%)<br><small>${Object.entries(o.st).sort((a,b)=>b[1]-a[1]).map(([s,n])=>esc(s)+": "+n).join(" · ")}</small>${p.ap?"<br><i>localização aproximada</i>":""}<br>`;
-  const b=document.createElement("button");b.textContent="Ver leads da cidade";b.onclick=()=>pickCity(o.c,o.u);bx.appendChild(b);m.bindPopup(bx);carL.addLayer(m);carMk.set(gk(o.c,o.u),m);pts.push(p.ll)});
+  m.bindPopup(carPopup(o,p));carL.addLayer(m);carMk.set(gk(o.c,o.u),m);pts.push(p.ll)});
+ const gaps=[...g.values()].filter(o=>o.w==0&&o.t>=2).sort((a,b)=>b.t-a.t);
+ if(c.gap){const mxT=Math.max(1,...gaps.map(o=>o.t));gaps.forEach((o,i)=>{const p=coordOf(o);if(!p||p.ap){gapOut++;return}
+  const m=L.circleMarker(p.ll,{radius:6+16*Math.sqrt(o.t/mxT),color:"#ea580c",weight:2,dashArray:"4 4",fillColor:"#f97316",fillOpacity:.1});
+  if(i<15)m.bindTooltip(String(o.t),{permanent:true,direction:"center",className:"cnum gapn"});else m.bindTooltip(`${o.c}: ${o.t} empresa(s), nenhuma abordada`,{direction:"top"});
+  m.bindPopup(gapPopup(o));carL.addLayer(m);gapMk.set(gk(o.c,o.u),m);pts.push(p.ll)})}
  const top=(obj,n)=>Object.entries(obj).sort((a,b)=>b[1]-a[1]).slice(0,n),rk=(arr,mxv,key)=>arr.map(([k,n,x])=>`<button class="rk" ${key?`data-cc="${esc(x||k)}"`:""}><span>${esc(k)}</span><b>${n}</b><i><u style="width:${Math.max(3,n/mxv*100)}%"></u></i></button>`).join("");
  const byCity=[...cities].sort((a,b)=>b.n-a.n).slice(0,10).map(o=>[o.c+"/"+o.u+(o.t?` · ${Math.round(o.n/o.t*100)}%`:""),o.n,gk(o.c,o.u)]),ufR=top(ufs,8),seR=top(sets,8);
- pn.innerHTML=`<b>Predominância da sua carteira</b><div class="ckp" style="margin-top:8px"><div><b>${tot.toLocaleString("pt-BR")}</b><small>leads na carteira</small></div><div><b>${pct(tot,base.length)}</b><small>dos leads filtrados</small></div><div><b>${cities.length}</b><small>cidades</small></div><div><b>${Object.keys(ufs).length}</b><small>estados</small></div></div>
- <p style="color:var(--cz);font-size:12px;margin:8px 0 0">Círculo maior e mais escuro = maior ${c.met=="p"?"percentual de leads da cidade que já estão na sua carteira":"número de clientes da carteira"}. Os filtros da aba Leads (estado, setor, CNAE…) também valem aqui. Toque em uma cidade da lista para ir até ela.</p>
- <div class="cpg"><div><b style="font-size:13px">Cidades (nº · % da cidade)</b>${rk(byCity,byCity[0][1],1)}</div><div><b style="font-size:13px">Estados</b>${rk(ufR.map(([k,n])=>[k,n]),ufR[0][1],0)}</div><div><b style="font-size:13px">Setores</b>${rk(seR.map(([k,n])=>[k,n]),seR[0][1],0)}</div></div>`;
- setInfo(`Carteira: ${tot} leads em ${cities.length} cidades${aprox?`; ${aprox} com localização aproximada`:""}.`);
+ const RG=[...rgs.values()].filter(q=>q.t>=5).sort((a,b)=>a.w/a.t-b.w/b.t||b.t-a.t).slice(0,8);
+ const rgH=RG.map(q=>{const p=Math.round(q.w/q.t*100),[u]=q.k.split("|");return`<button class="rk ${p<10?"low":""}" data-sgo="${esc(q.k)}" title="Abrir as sugestões desta região"><span>${esc(regNameK(q.k))} (${esc(u)}) · ${q.w} de ${q.t}</span><b>${p}%</b><i><u style="width:${Math.max(3,p)}%"></u></i></button>`}).join("")||'<p class="mut" style="font-size:12px">Sem regiões com 5 ou mais empresas nos filtros atuais.</p>';
+ const gTop=gaps.slice(0,10),gmx=gTop.length?gTop[0].t:1;
+ const gH=gTop.map(o=>`<button class="rk gap" data-gc="${esc(gk(o.c,o.u))}"><span>${esc(o.c)}/${esc(o.u)}${o.rg?" · "+esc(o.rg):""}</span><b>${o.t}</b><i><u style="width:${Math.max(3,o.t/gmx*100)}%"></u></i></button>`).join("")||'<p class="mut" style="font-size:12px">Nenhuma cidade com 2 ou mais empresas sem abordagem. Ótima cobertura!</p>';
+ const out=(heat?heatOut:aprox)+(c.gap?gapOut:0);
+ pn.innerHTML=`<b>Predominância da sua carteira</b><div class="ckp" style="margin-top:8px"><div><b>${tot.toLocaleString("pt-BR")}</b><small>leads na carteira</small></div><div><b>${pct(tot,base.length)}</b><small>dos leads filtrados</small></div><div><b>${cities.length}</b><small>cidades atendidas</small></div><div><b>${gaps.length}</b><small>cidades sem abordagem</small></div></div>
+ ${heat?`<div class="hleg"><span>Concentração da carteira:</span><i class="hgrad"></i><small>menos</small><small>mais</small>${c.gap?'<span class="gleg"><i></i>cidade com empresas e nenhuma abordada (o número é a quantidade de empresas)</span>':""}</div>`:""}
+ <p style="color:var(--cz);font-size:12px;margin:8px 0 0">${heat?"O calor mostra onde estão os clientes da sua carteira: quanto mais quente (amarelo e vermelho), mais concentrado.":`Círculo maior e mais escuro = maior ${c.met=="p"?"percentual de leads da cidade que já estão na sua carteira":"número de clientes da carteira"}.`} Os filtros da aba Leads (estado, setor, CNAE…) também valem aqui.${out?` <b>${out} cidade(s) sem localização exata ficaram fora do mapa</b>: use “Localizar cidades com precisão” com internet.`:""}</p>
+ <div class="cpg"><div><b style="font-size:13px">Regiões com menor cobertura</b><small class="mut" style="display:block;margin-bottom:4px">empresas já abordadas / total · toque para ver as sugestões</small>${rgH}</div><div><b style="font-size:13px">Maiores áreas sem atendimento</b><small class="mut" style="display:block;margin-bottom:4px">cidades com empresas e nenhuma abordada</small>${gH}</div><div><b style="font-size:13px">Onde a carteira está (nº · % da cidade)</b>${rk(byCity,byCity[0][1],1)}</div></div>
+ <div class="cpg"><div><b style="font-size:13px">Estados</b>${rk(ufR.map(([k,n])=>[k,n]),ufR[0][1],0)}</div><div><b style="font-size:13px">Setores</b>${rk(seR.map(([k,n])=>[k,n]),seR[0][1],0)}</div></div>`;
+ setInfo(`Carteira: ${tot} leads em ${cities.length} cidades${c.gap?` · ${gaps.length} cidades sem abordagem`:""}.`);
  if(pts.length)map.fitBounds(pts,{padding:[40,40],maxZoom:9})}
 document.addEventListener("pointerdown",e=>{$$("details.colm[open]").forEach(d=>{if(!d.contains(e.target))d.open=false})});
 document.addEventListener("click",e=>{const b=e.target.closest(".menubox button");if(b){const d=b.closest("details");if(d)d.open=false}});
@@ -1699,7 +1752,10 @@ function carInit(){
  $("#mmAll").onclick=()=>upd(c=>c.m="all");$("#mmCar").onclick=()=>upd(c=>c.m="car");
  $("#carChips").addEventListener("change",e=>{const s=e.target.dataset.cs;if(s)upd(c=>{c.st=e.target.checked?[...new Set([...c.st,s])]:c.st.filter(x=>x!=s)})});
  $("#carInt").addEventListener("change",e=>upd(c=>c.int=e.target.checked));$("#carMet").addEventListener("change",e=>upd(c=>c.met=e.target.value));
- $("#carPanel").addEventListener("click",e=>{const b=e.target.closest("[data-cc]");if(!b||!map)return;const m=carMk.get(b.dataset.cc);if(m){map.flyTo(m.getLatLng(),9);m.openPopup();$("#map").scrollIntoView({behavior:"smooth",block:"center"})}});
+ $("#carVis").addEventListener("click",e=>{const b=e.target.closest("[data-cvis]");if(b)upd(c=>c.vis=b.dataset.cvis)});$("#carGap").addEventListener("change",e=>upd(c=>c.gap=e.target.checked));
+ $("#carPanel").addEventListener("click",e=>{const so=e.target.closest("[data-sgo]");if(so){sgSel=so.dataset.sgo;sgCity="";go("sugestoes");return}
+  const gc=e.target.closest("[data-gc]");if(gc){const m=gapMk.get(gc.dataset.gc);if(m&&map){map.flyTo(m.getLatLng(),10);m.openPopup();$("#map").scrollIntoView({behavior:"smooth",block:"center"})}else{const[c0,u0]=gc.dataset.gc.split("|");pickCity(c0,u0)}return}
+  const b=e.target.closest("[data-cc]");if(!b||!map)return;const m=carMk.get(b.dataset.cc);if(m){map.flyTo(m.getLatLng(),9);m.openPopup();$("#map").scrollIntoView({behavior:"smooth",block:"center"})}});
  carUI()}
 /* ============ Filtro multiseleção de CNAE ============ */
 const cnKey=r=>{const d=dig(r.CNAE_FISCAL_PRINCIPAL);return d?d.padStart(7,"0"):"sem"};
