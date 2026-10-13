@@ -474,6 +474,19 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 }
 @media(max-width:420px){#tbNew{display:none}#tbPz{padding:8px 10px}}
 @media(max-width:600px){#tbSearch span{display:none}#tbSearch{flex:0 0 auto}#tbNew span{display:none}#tbBk{padding:6px 8px;font-size:12px}#updBar{bottom:calc(80px + env(safe-area-inset-bottom))}}
+/* ===== v8.1: perda, proposta, relatório, fotos ===== */
+.mut{color:var(--cz)}
+#lossDlg,#propDlg,#fotoDlg{width:min(640px,96vw);border-radius:14px}#propDlg{width:min(860px,98vw)}
+.lsr{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.pi{display:grid;grid-template-columns:minmax(0,1fr) 80px 120px 110px 32px;gap:6px;align-items:center;margin-bottom:6px}.pi input{width:100%}.pi b{text-align:right;font-weight:500}.pih{font-size:12px;color:var(--cz)}
+@media(max-width:640px){.pi{grid-template-columns:minmax(0,1fr) 56px 90px 32px}.pi b{display:none}}
+.ptot{text-align:right;font-size:18px;margin:8px 0}
+.tl-ph{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.tl-ph img{width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid var(--bd);cursor:pointer}
+#fotoDlg img{max-width:100%;max-height:75vh;display:block;margin:0 auto;border-radius:8px}
+.rl-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.rl-h h3{margin:0;font-size:15px}
+.rl-k{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:12px 0}.rl-k div{background:#fafbfc;border:1px solid var(--bd);border-radius:10px;padding:10px 12px}.rl-k b{display:block;font-size:20px}.rl-k small{color:var(--cz);font-size:12px}
+.rl-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}.rl-g h4{margin:6px 0;font-size:13px}
+.wk{display:flex;align-items:flex-end;gap:4px;height:110px;padding-top:6px}.wk div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:10px;color:var(--cz)}.wk i{display:block;width:100%;background:var(--az);border-radius:4px 4px 0 0;min-height:2px}.wk span{margin-top:3px;white-space:nowrap}
 </style><script>
 /* ===== Carregador de bibliotecas com cache local =====
    Na primeira abertura COM internet, baixa SheetJS (Excel), Leaflet (mapa) e MarkerCluster e guarda no aparelho (IndexedDB).
@@ -503,14 +516,14 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 </script>
 </head><body>
 <nav><h1><b class="lg">L</b><span>Lucas Prospecção</span></h1><button id="navK" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar</span></button><button data-p="dash" class="on" title="Dashboard"><svg viewBox="0 0 24 24"><rect x=3 y=3 width=7 height=7 /><rect x=14 y=3 width=7 height=7 /><rect x=14 y=14 width=7 height=7 /><rect x=3 y=14 width=7 height=7 /></svg><span>Painel</span></button><button data-p="leads" title="Leads"><svg viewBox="0 0 24 24"><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx=9 cy=7 r=4 /><path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/></svg><span>Leads</span></button><button data-p="sugestoes" title="Sugestões por região"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><polygon points='16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8'/></svg><span>Sugestões</span></button><button data-p="agenda" title="Agenda de retornos"><svg viewBox="0 0 24 24"><rect x=3 y=4 width=18 height=18 rx=2 /><path d='M16 2v4M8 2v4M3 10h18'/></svg><span>Agenda</span><b class="nbd" id="agBd" hidden></b></button><button data-p="mapa" title="Mapa"><svg viewBox="0 0 24 24"><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx=12 cy=10 r=3 /></svg><span>Mapa</span></button><button data-p="dados" title="Dados e sincronização"><svg viewBox="0 0 24 24"><ellipse cx=12 cy=5 rx=9 ry=3 /><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg><span>Dados</span></button><button id="navT" class="nt" title="Recolher menu"><svg viewBox="0 0 24 24"><polyline points='15 18 9 12 15 6'/></svg><span>Recolher</span></button></nav>
-<main><div id="topbar"><b id="tbTitle">Painel</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.0</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha">＋ <span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">▶ Prospectar</button></div>
-<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >⚙ Personalizar</button><span class="net"></span><em class="ver">v8.0</em></header><div id="goals"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
+<main><div id="topbar"><b id="tbTitle">Painel</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.1</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha">＋ <span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">▶ Prospectar</button></div>
+<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >⚙ Personalizar</button><span class="net"></span><em class="ver">v8.1</em></header><div id="goals"></div><div id="relat"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
 
 <div id="cnBox" class="cnbox" hidden><div class="cnh"><b>Filtrar por CNAE</b><button class="g" id="cnX" type="button" aria-label="Fechar">✕</button></div>
 <input id="cnQ" placeholder="Buscar código ou atividade (ex.: 1052 ou queijo)" autocomplete="off">
 <div class="cnbar"><button class="g" id="cnAll" type="button">Marcar os listados</button><button class="g" id="cnNone" type="button">Limpar seleção</button><label><input type="checkbox" id="cnOnlySel"> só marcados</label><span id="cnInfo"></span></div>
 <div id="cnList"></div><div class="cnft"><button class="b" id="cnOk" type="button">Concluir</button></div></div>
-<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">▦ Cartões</button><button id="vTab" class="on">▤ Tabela</button><button id="vKan">▥ Kanban</button></div><span class="net"></span><em class="ver">v8.0</em></header>
+<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">▦ Cartões</button><button id="vTab" class="on">▤ Tabela</button><button id="vKan">▥ Kanban</button></div><span class="net"></span><em class="ver">v8.1</em></header>
 <div class="card fl" id="fcard">
 <input id="q" placeholder="Buscar empresa, cidade, CNPJ… ( / )" style="flex:1;min-width:160px"><button class="g keep" id="bFilt" type="button" title="Mostrar ou esconder os demais filtros">Mais filtros <span id="fCount" class="bd" style="background:var(--az);display:none"></span></button>
 <select class="pri" id="fUF"><option value="">UF</option></select><select class="pri" id="fCid"><option value="">Cidade</option></select>
@@ -521,7 +534,7 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 <select id="fReg"><option value="">Região</option></select><select id="fCert"><option value="">Certificação</option><option value="any">Qualquer certificação</option><option value="fssc">FSSC 22000</option><option value="brc">BRCGS</option><option value="ifs">IFS Food</option><option value="sqf">SQF</option><option value="unk">Ainda não verificadas</option></select><select id="fSeq"><option value="">Sequência</option></select><select id="fSit"><option value="">Situação cadastral</option></select><select id="fSim"><option value="">Simples</option><option value="S">Optante do Simples</option><option value="N">Não optante</option></select>
 <select id="fMei"><option value="">MEI</option><option value="S">É MEI</option><option value="N">Não é MEI</option></select>
 <select id="fProx"><option value="">Próxima ação</option><option value="atrasada">Atrasada</option><option value="hoje">Hoje</option><option value="7d">Próximos 7 dias</option><option value="sem">Sem ação agendada</option></select>
-<label><input type="checkbox" id="fMail"> com e-mail</label><label><input type="checkbox" id="fTel"> com telefone</label>
+<label title="Mostra só as empresas arquivadas, para consultar ou desarquivar"><input type="checkbox" id="fArq"> ver arquivadas</label><label><input type="checkbox" id="fMail"> com e-mail</label><label><input type="checkbox" id="fTel"> com telefone</label>
 <button class="g pri" id="bClr">Limpar</button><button class="g" id="bSave">Salvar filtro</button><select id="fSaved"><option value="">Filtros salvos</option></select>
 </div>
 <div id="mapTag" class="fl" style="margin-bottom:6px"></div>
@@ -534,14 +547,14 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 <div class="fl" id="pgr" style="margin-top:8px"><button class="g" id="pv">‹</button><span id="pn"></span><button class="g" id="nx">›</button></div>
 </section>
 
-<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.0</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
+<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.1</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
 <div class="fl" id="carOpts" hidden><div class="seg" id="carVis" style="margin:0"><button type="button" data-cvis="heat">Mapa de calor</button><button type="button" data-cvis="circ">Círculos</button></div><label class="chip gapc"><input type="checkbox" id="carGap"> mostrar áreas sem atendimento</label><span style="color:var(--cz);font-size:13px">Considerar:</span><span id="carChips" class="fl" style="gap:6px"></span>
 <label class="chip"><input type="checkbox" id="carInt"> quem tem contato/visita registrado</label>
 <select id="carMet"><option value="n">Tamanho = nº de clientes</option><option value="p">Tamanho = % dos leads da cidade</option></select></div></div>
 <div id="map"></div><div class="card" id="carPanel" hidden></div></section>
-<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><span class="net"></span><em class="ver">v8.0</em></header><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section>
-<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bSeq" type="button">⟳ Sequências</button><button class="b" id="bPzHoje" type="button">▶ Fazer os retornos de hoje</button><span class="net"></span><em class="ver">v8.0</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
-<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.0</em></header>
+<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><span class="net"></span><em class="ver">v8.1</em></header><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section>
+<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bIcs" type="button" title="Baixa os retornos agendados para importar no Google Agenda ou Outlook">📅 Exportar para o calendário</button><button class="g" id="bNotif" type="button">🔔 Lembretes</button><button class="g" id="bSeq" type="button">⟳ Sequências</button><button class="b" id="bPzHoje" type="button">▶ Fazer os retornos de hoje</button><span class="net"></span><em class="ver">v8.1</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
+<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.1</em></header>
 <div class="card" id="syncCard"><h3 style="margin-top:0">Sincronizar tablet e computador</h3>
 <p>Trabalhe offline nos dois aparelhos. Quando quiser juntar o que cada um anotou: gere o arquivo de sincronização em um aparelho, leve ao outro (WhatsApp, e-mail, Drive, cabo USB ou Bluetooth) e aplique lá. Repita no sentido contrário para os dois ficarem iguais. Nada é apagado: se o mesmo campo foi editado nos dois, vale a edição mais recente.</p>
 <div class="fl"><label>Nome deste aparelho <input id="devName" placeholder="Ex.: Tablet" size="14"></label><label><input type="checkbox" id="syFull"> incluir toda a base de empresas (arquivo grande)</label></div>
@@ -556,7 +569,7 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 <button class="g" id="bInt">Exportar interações</button><button class="g" id="bAll">Exportar toda a base</button><button class="g" id="bWipe" style="color:#c0392b">Limpar dados personalizados</button></div></div>
 </section>
 </main>
-<dialog id="dlg"></dialog><dialog id="agDlg"></dialog><dialog id="seqDlg"></dialog><dialog id="goalDlg"></dialog><dialog id="newDlg"></dialog><div id="tagPop" hidden></div><div id="agMenu" hidden></div><dialog id="dcfg"></dialog><dialog id="rota"></dialog><dialog id="scDlg"></dialog><dialog id="pz"></dialog><dialog id="cmdk"><input id="cmdQ" placeholder="Buscar empresa, cidade, CNPJ… ou digite um comando" autocomplete="off"><div id="cmdL"></div><div class="cmdf"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span></div></dialog><dialog id="tpl"></dialog><div id="toast"></div>
+<dialog id="dlg"></dialog><dialog id="agDlg"></dialog><dialog id="seqDlg"></dialog><dialog id="goalDlg"></dialog><dialog id="newDlg"></dialog><div id="tagPop" hidden></div><div id="agMenu" hidden></div><dialog id="dcfg"></dialog><dialog id="rota"></dialog><dialog id="scDlg"></dialog><dialog id="pz"></dialog><dialog id="cmdk"><input id="cmdQ" placeholder="Buscar empresa, cidade, CNPJ… ou digite um comando" autocomplete="off"><div id="cmdL"></div><div class="cmdf"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span></div></dialog><dialog id="tpl"></dialog><dialog id="lossDlg"></dialog><dialog id="propDlg"></dialog><dialog id="fotoDlg"></dialog><div id="toast"></div>
 <script>
 "use strict";
 /* ============ Constantes ============ */
@@ -593,24 +606,25 @@ const maskCnpj=c=>{const d=dig(c);return d.length==14?d.replace(/(\d{2})(\d{3})(
 function toast(m,err){const t=$("#toast");t.textContent=m;t.style.background=err?"#c0392b":"#1c2530";t.style.display="block";clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display="none",3500)}
 const deb=(f,ms=250)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>f(...a),ms)}};
 /* ============ IndexedDB: empresas, interacoes, filtrosSalvos, configuracoes, importacoes ============ */
-let db;const STORES={empresas:{keyPath:"id"},interacoes:{keyPath:"iid",autoIncrement:true},filtrosSalvos:{keyPath:"nome"},configuracoes:{keyPath:"k"},importacoes:{autoIncrement:true}};
-const DB={open:()=>new Promise((ok,ko)=>{const r=indexedDB.open("hygiena_crm",1);r.onupgradeneeded=()=>{for(const[n,o]of Object.entries(STORES))r.result.createObjectStore(n,o)};r.onsuccess=()=>{db=r.result;ok()};r.onerror=()=>ko(r.error)}),
+let db;const STORES={empresas:{keyPath:"id"},interacoes:{keyPath:"iid",autoIncrement:true},filtrosSalvos:{keyPath:"nome"},configuracoes:{keyPath:"k"},importacoes:{autoIncrement:true},anexos:{keyPath:"aid",autoIncrement:true}};
+const DB={open:()=>new Promise((ok,ko)=>{const r=indexedDB.open("hygiena_crm",2);r.onupgradeneeded=()=>{for(const[n,o]of Object.entries(STORES))if(!r.result.objectStoreNames.contains(n))r.result.createObjectStore(n,o)};r.onsuccess=()=>{db=r.result;ok()};r.onerror=()=>ko(r.error)}),
  tx:(s,m="readonly")=>db.transaction(s,m).objectStore(s),
  all:s=>new Promise(r=>{const q=DB.tx(s).getAll();q.onsuccess=()=>r(q.result)}),
  putMany:(s,arr,raw)=>new Promise(r=>{const t=db.transaction(s,"readwrite"),o=t.objectStore(s);arr.forEach(x=>{if(!raw){if(s=="empresas")stamp(x);else if(s=="interacoes"&&!x.uid)x.uid=iuid(x)}o.put(x)});t.oncomplete=r}),
  put:(s,x)=>DB.putMany(s,[x]),del:(s,k)=>new Promise(r=>{const t=db.transaction(s,"readwrite");t.objectStore(s).delete(k);t.oncomplete=r}),
  clear:s=>new Promise(r=>{const t=db.transaction(s,"readwrite");t.objectStore(s).clear();t.oncomplete=r})};
 /* ============ Estado ============ */
-const S={rows:[],inter:[],byId:new Map(),F:{},tab:"all",page:0,per:50,sort:{k:"RAZAO_SOCIAL",d:1},sel:new Set(),filtered:[],cityTag:null};
-const CUSTOM=["contato","cargo","depto","telPers","whats","emailPers","linkedin","site","decisor","interesse","potencial","produtos","concorrente","necessidade","obs","resp","origem","primeiroContato","ultimaInteracao","proxData","proxTipo","STATUS","proxFeita","proxConcluidaEm","kb","tags","cert","contatos","valor","prevFech","seq"];
+const S={rows:[],all:[],inter:[],byId:new Map(),F:{},tab:"all",page:0,per:50,sort:{k:"RAZAO_SOCIAL",d:1},sel:new Set(),filtered:[],cityTag:null};
+const CUSTOM=["contato","cargo","depto","telPers","whats","emailPers","linkedin","site","decisor","interesse","potencial","produtos","concorrente","necessidade","obs","resp","origem","primeiroContato","ultimaInteracao","proxData","proxTipo","STATUS","proxFeita","proxConcluidaEm","kb","tags","cert","contatos","valor","prevFech","seq","arq","motivoPerda","proposta"];
 async function loadScoreCfg(){try{const c=(await DB.all("configuracoes")).find(x=>x.k=="score");if(c&&c.v){scSet(c.v);try{localStorage.setItem("lpScore",JSON.stringify(c.v))}catch(x){}}else _sc=null}catch(x){}}
+function pickRows(){S.rows=S.showArq?S.all.filter(r=>r.arq):S.all.filter(r=>!r.arq)}
 function derive(r){r._k=norm([r.RAZAO_SOCIAL,r.NOME_FANTASIA,r.CNPJ_COMPLETO,r.MUNICIPIO,r.ATIVIDADE_PRINCIPAL_TEXTO,r.contato,...(r.contatos||[]).map(c=>c.nome)].join(" "));r.SETOR=setorOf(r);r.SCORE=scoreOf(r)}
 function indexInter(){const iv=new Map();S.inter.forEach(i=>{(iv.get(i.id)||iv.set(i.id,[]).get(i.id)).push(i)});S.iv=iv}
-async function load(){await loadScoreCfg();await loadTags();await loadV7Cfg();S.rows=await DB.all("empresas");S.inter=await DB.all("interacoes");S.byId=new Map(S.rows.map(r=>[r.id,r]));S.rows.forEach(r=>{derive(r);if(!r._b){r._b=snap(r);if(!r._ts)r._ts={}}});await seqSweep();
+async function load(){await loadScoreCfg();await loadTags();await loadV7Cfg();S.all=await DB.all("empresas");S.inter=await DB.all("interacoes");S.byId=new Map(S.all.map(r=>[r.id,r]));pickRows();S.all.forEach(r=>{derive(r);if(!r._b){r._b=snap(r);if(!r._ts)r._ts={}}});await seqSweep();
  indexInter();fillSelects();refresh();bkCheck()}
 /* v8: depois de mudar poucos leads, atualiza só eles em memória (antes relia a base inteira a cada clique) */
 async function soft(rows){S.inter=await DB.all("interacoes");indexInter();
- for(const r of rows||[]){if(!r)continue;if(!S.byId.has(r.id)){S.rows.push(r);S.byId.set(r.id,r)}derive(r)}
+ for(const r of rows||[]){if(!r)continue;if(!S.byId.has(r.id)){S.all.push(r);S.byId.set(r.id,r)}derive(r)}pickRows();
  fillV6Selects();refresh();bkCheck()}
 /* ============ Importação ============ */
 function mapHeaders(hs){const m={},un=[];hs.forEach(h=>{const k=key(h);let f=null;for(const[c,al]of Object.entries(ALIAS))if(al.includes(k)){f=c;break}f?m[h]=f:un.push(h)});return{m,un}}
@@ -677,7 +691,7 @@ const KPI_DEF=[
 ["txc","Taxa de contato",R=>pct(R.filter(r=>hasT(r,CONTATO)).length,R.length)],["txv","Conversão em cliente",R=>pct(R.filter(r=>r.STATUS=="Cliente ativo").length,R.filter(r=>hasT(r,CONTATO)).length)]];
 const fxCap=r=>r.CAPITAL_SOCIAL<1e5?"Até 100 mil":r.CAPITAL_SOCIAL<5e5?"100–500 mil":r.CAPITAL_SOCIAL<1e6?"500 mil–1 mi":r.CAPITAL_SOCIAL<1e7?"1–10 mi":"Acima de 10 mi";
 const CHART_DEF=[["uf","Por estado",r=>r.UF,"uf"],["cid","Por cidade",r=>r.MUNICIPIO,""],["cnae","Por CNAE",r=>r.CNAE_FISCAL_PRINCIPAL,"cnae"],["porte","Por porte",r=>r.PORTE_DESCRICAO,"porte"],
-["st","Por status comercial",r=>r.STATUS,"st"],["fx","Faixa de capital social",fxCap,""],["sit","Por situação cadastral",r=>r.SITUACAO_CADASTRAL,""],["tipo","Matriz x Filial",r=>r.TIPO,""],["resp","Por responsável",r=>r.resp,""],["setor","Por setor",r=>r.SETOR,"setor"],["pri","Por prioridade",r=>priOf(r.SCORE),"pri"],["funil","Funil comercial",R=>funnel(R),"",true]];
+["st","Por status comercial",r=>r.STATUS,"st"],["fx","Faixa de capital social",fxCap,""],["sit","Por situação cadastral",r=>r.SITUACAO_CADASTRAL,""],["tipo","Matriz x Filial",r=>r.TIPO,""],["resp","Por responsável",r=>r.resp,""],["setor","Por setor",r=>r.SETOR,"setor"],["pri","Por prioridade",r=>priOf(r.SCORE),"pri"],["funil","Funil comercial",R=>funnel(R),"",true],["perda","Motivos de perda",R=>{const m=new Map;R.forEach(r=>{if(r.STATUS=="Não interessada"){const k=String(r.motivoPerda||"Não informado").split(":")[0];m.set(k,(m.get(k)||0)+1)}});return new Map([...m].sort((a,b)=>b[1]-a[1]))},"",true]];
 const DEF_KH=["neg","fup","cli","semr","semc","capF","mat","filial","simp"],DEF_CH=["sit","tipo","resp"];
 function dashCfg(){let c=null;try{c=JSON.parse(localStorage.getItem("dashCfg")||"null")}catch(e){}c=c||{};
  const fix=(o,all)=>{o=(o||all).filter(x=>all.includes(x));all.forEach(x=>{if(!o.includes(x))o.push(x)});return o},dk=KPI_DEF.map(x=>x[0]),dc=CHART_DEF.map(x=>x[0]);
@@ -775,9 +789,9 @@ async function geocode(){if(geoBusy)return;if(navigator.onLine===false)return to
  await DB.put("configuracoes",{k:"geo",v:geo});geoBusy=false;renderMap();toast(`${ok} cidades localizadas e guardadas no aparelho`)}
 document.addEventListener("click",e=>{if(e.target.id=="bGeo")geocode()});
 /* ============ Lead modal / histórico ============ */
-const F_FIELDS=[["contato","Nome do contato"],["cargo","Cargo"],["depto","Departamento"],["telPers","Telefone pers."],["whats","WhatsApp"],["emailPers","E-mail pers."],["linkedin","LinkedIn"],["site","Site"],["decisor","Perfil do decisor"],["interesse","Nível de interesse"],["potencial","Potencial de compra"],["produtos","Produtos de interesse"],["concorrente","Concorrente atual"],["necessidade","Necessidade"],["resp","Responsável"],["origem","Origem"],["primeiroContato","1º contato","date"],["proxData","Próxima ação","date"],["proxTipo","Tipo próx. ação"]];
+const F_FIELDS=[["contato","Nome do contato"],["cargo","Cargo"],["depto","Departamento"],["telPers","Telefone pers."],["whats","WhatsApp"],["emailPers","E-mail pers."],["linkedin","LinkedIn"],["site","Site"],["decisor","Perfil do decisor"],["interesse","Nível de interesse"],["potencial","Potencial de compra"],["produtos","Produtos de interesse"],["concorrente","Concorrente atual"],["necessidade","Necessidade"],["resp","Responsável"],["origem","Origem"],["primeiroContato","1º contato","date"],["proxData","Próxima ação","date"],["proxTipo","Tipo próx. ação"],["motivoPerda","Motivo da perda"]];
 async function addInter(r,i,noStatus){const o={id:r.id,data:new Date().toISOString(),usuario:r.resp||"Vendedor",resultado:"",obs:"",passo:"",proxData:"",...i};await DB.put("interacoes",o);
- if(!noStatus&&TIPOS[o.tipo]){const ord=["Novo","Contactada","Visitada","Atendida"];const n=TIPOS[o.tipo];if(!["Em negociação","Cliente ativo","Follow-up pendente"].includes(r.STATUS)||["Proposta enviada","Follow-up"].includes(o.tipo)){if(!(ord.includes(r.STATUS)&&ord.indexOf(r.STATUS)>ord.indexOf(n)))r.STATUS=n}}
+ if(!noStatus&&TIPOS[o.tipo]){const ord=["Novo","Contactada","Visitada","Atendida"];const n=TIPOS[o.tipo];if(!["Em negociação","Cliente ativo","Follow-up pendente"].includes(r.STATUS)||["Proposta enviada","Follow-up"].includes(o.tipo)){if(!(ord.includes(n)&&ord.includes(r.STATUS)&&ord.indexOf(r.STATUS)>ord.indexOf(n)))r.STATUS=n}}
  r.ultimaInteracao=today();if(!r.primeiroContato)r.primeiroContato=today();await DB.put("empresas",r);return o}
 /* ============ Tarefas ============ */
 function renderTasks(){const t=today(),w=addDays(t,7),R=S.rows,P=R.filter(r=>r.proxData&&!r.proxFeita);
@@ -800,14 +814,15 @@ async function exportRows(rows,fmt,name){if(!rows.length)return toast("Nada para
  if(fmt=="xlsx"){await window.LIBS_READY;if(typeof XLSX=="undefined")return toast("A exportação para Excel ainda não foi baixada. Conecte-se uma vez à internet ou exporte em CSV.",1);const ws=XLSX.utils.json_to_sheet(R),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Leads");XLSX.writeFile(wb,name+".xlsx")}
  else download(name+".csv","﻿"+toCSV(R),"text/csv")}
 /* v8: backup completo (inclui as preferências das telas) e restauração com conferência */
-const PREF_KEYS=["dashCfg","colsCfg","colsHide","lpView","navMin","lpKb","lpSgReg","lpCar","lpScore","lpTags","lpSeqs","lpGoals","minhaEmpresa","meuNome","lpDevName","aiModel"];
+const PREF_KEYS=["dashCfg","colsCfg","colsHide","lpView","navMin","lpKb","lpSgReg","lpCar","lpScore","lpTags","lpSeqs","lpGoals","minhaEmpresa","meuNome","lpDevName","aiModel","lpRelP"];
 async function backupData(){const d={tipo:"lucas-prospeccao-backup",versao:2,data:new Date().toISOString(),prefs:{}};for(const s of["empresas","interacoes","filtrosSalvos","configuracoes","importacoes"])d[s]=await DB.all(s);
+ d.anexos=await Promise.all((await DB.all("anexos")).map(async a=>({...a,blob:await blobToUrl(a.blob)})));
  for(const k of PREF_KEYS){const v=lsGet(k);if(v)d.prefs[k]=v}return d}
 async function backup(prefix){const d=await backupData(),p=n=>String(n).padStart(2,"0"),x=new Date();
  download(`${prefix||"backup_crm"}_${today()}_${p(x.getHours())}${p(x.getMinutes())}.json`,JSON.stringify(d,(k,v)=>k=="_orig"||k=="_k"||k=="SETOR"||k=="SCORE"?undefined:v),"application/json");
  if(!prefix){try{localStorage.setItem("lpLastBk",d.data)}catch(e){}try{await DB.put("configuracoes",{k:"lastBackup",v:d.data})}catch(e){}bkCheck();toast("Backup gerado. Guarde o arquivo fora do aparelho (Drive, e-mail…).")}}
 const lastBk=()=>lsGet("lpLastBk")||((S.cfgLastBk)||"");
-function bkPending(since){let n=0;for(const r of S.rows){if(r._ts){for(const t of Object.values(r._ts))if(!since||t>since){n++;break}}}return n+S.inter.filter(i=>!since||String(i.data)>since).length}
+function bkPending(since){let n=0;for(const r of S.all){if(r._ts){for(const t of Object.values(r._ts))if(!since||t>since){n++;break}}}return n+S.inter.filter(i=>!since||String(i.data)>since).length}
 function bkCheck(){const b=$("#tbBk");if(!b)return;const lb=lastBk(),days=lb?dd(fmtLocal(new Date(lb)),today()):null,pend=bkPending(lb);
  const warn=pend>0&&(!lb||days>=7||pend>=200);b.classList.toggle("on",warn);b.classList.toggle("bad",warn&&(!lb||days>=14));
  if(warn)b.textContent=lb?`⚠ Backup há ${days} dia${days==1?"":"s"}`:"⚠ Sem backup";b.title=lb?`Último backup em ${fmtDT(lb)} · ${pend} alteração(ões) depois dele. Toque para fazer agora.`:`Você ainda não fez backup · ${pend} alteração(ões). Toque para fazer agora.`;
@@ -820,7 +835,8 @@ async function restore(file){let d;try{d=JSON.parse(await file.text())}catch(e){
  if(!confirm(`Restaurar backup de ${d.data?fmtDT(d.data):"data desconhecida"}?\n\n• ${d.empresas.length} empresa(s) no arquivo; ${ex} já existem aqui e serão SUBSTITUÍDAS pela versão do arquivo.\n• ${(d.interacoes||[]).length} interação(ões).\n\nAntes, vou baixar uma cópia de segurança dos dados atuais. Para juntar dados de dois aparelhos sem perder nada, use “Sincronizar”.`))return;
  try{if(S.rows.length)await backup("antes_de_restaurar");
   if(d.prefs&&typeof d.prefs=="object")for(const[k,v]of Object.entries(d.prefs))if(PREF_KEYS.includes(k)&&typeof v=="string"){try{localStorage.setItem(k,v)}catch(e){}}
-  for(const s of["empresas","interacoes","filtrosSalvos","configuracoes"])if(Array.isArray(d[s])){if(s=="empresas")d[s].forEach(x=>{if(!x._b)x._b=snap(x);if(!x._ts)x._ts={}});if(s=="interacoes")d[s].forEach(x=>{if(!x.uid)x.uid=iuid(x)});await DB.putMany(s,d[s],true)}_sc=null;TAGS=null;SEQS=null;GOALS=null;await loadGeo();await loadTpl();await load();toast("Backup restaurado")}catch(e){console.error(e);toast("Não foi possível restaurar: "+e.message,1)}}
+  for(const s of["empresas","interacoes","filtrosSalvos","configuracoes"])if(Array.isArray(d[s])){if(s=="empresas")d[s].forEach(x=>{if(!x._b)x._b=snap(x);if(!x._ts)x._ts={}});if(s=="interacoes")d[s].forEach(x=>{if(!x.uid)x.uid=iuid(x)});await DB.putMany(s,d[s],true)}
+  if(Array.isArray(d.anexos)&&d.anexos.length){const A=[];for(const a of d.anexos){try{A.push({...a,blob:await (await fetch(a.blob)).blob()})}catch(e){}}await DB.putMany("anexos",A,true)}_sc=null;TAGS=null;SEQS=null;GOALS=null;await loadGeo();await loadTpl();await load();toast("Backup restaurado")}catch(e){console.error(e);toast("Não foi possível restaurar: "+e.message,1)}}
 /* ============ Eventos ============ */
 function go(p){$$(".pg").forEach(e=>e.classList.toggle("on",e.id==p));$$("nav button").forEach(b=>b.classList.toggle("on",b.dataset.p==p));if(p=="dash")renderDash();if(p=="mapa")renderMap();if(p=="dados"){syInfo();bkCheck()}}
 function bind(){
@@ -839,13 +855,13 @@ function bind(){
   if(t.id=="bUnmap"){$("#fCid").value="";refresh()}
   if(t.id=="selAll"){S.filtered.slice(S.page*S.per,(S.page+1)*S.per).forEach(r=>t.checked?S.sel.add(r.id):S.sel.delete(r.id));renderTable()}
   if(t.classList.contains("sel"))t.checked?S.sel.add(t.dataset.i):S.sel.delete(t.dataset.i)});
- $("#bulk").onchange=async e=>{const s=e.target.value;if(!s||!S.sel.size)return;if(!confirm(`Alterar ${S.sel.size} leads para "${s}"?`)){e.target.value="";return}const R=[],I=[],now=new Date().toISOString();for(const id of S.sel){const r=S.byId.get(id);if(!r||r.STATUS===s)continue;const o=r.STATUS;r.STATUS=s;R.push(r);I.push({id,data:now,tipo:"Mudança de status",obs:`${o} → ${s}`,usuario:r.resp||"Vendedor",resultado:"",passo:"",proxData:""})}await DB.putMany("empresas",R);await DB.putMany("interacoes",I);S.sel.clear();e.target.value="";await soft(R);toast(`${R.length} lead(s) agora em “${s}”`)};
+ $("#bulk").onchange=async e=>{const s=e.target.value;if(!s||!S.sel.size)return;if(!confirm(`Alterar ${S.sel.size} leads para "${s}"?`)){e.target.value="";return}let mot=null;if(s=="Não interessada"){mot=await askLoss(S.sel.size);if(mot===null){e.target.value="";return}}const R=[],I=[],now=new Date().toISOString();for(const id of S.sel){const r=S.byId.get(id);if(!r||r.STATUS===s)continue;const o=r.STATUS;r.STATUS=s;if(mot)r.motivoPerda=mot;R.push(r);I.push({id,data:now,tipo:"Mudança de status",obs:`${o} → ${s}`,usuario:r.resp||"Vendedor",resultado:"",passo:"",proxData:"",...(mot?{motivo:mot}:{})})}await DB.putMany("empresas",R);await DB.putMany("interacoes",I);S.sel.clear();e.target.value="";await soft(R);toast(`${R.length} lead(s) agora em “${s}”`)};
  $("#pv").onclick=()=>{S.page=Math.max(0,S.page-1);rerender()};$("#nx").onclick=()=>{if((S.page+1)*S.per<S.filtered.length){S.page++;rerender()}};
  $("#bExpSel").onclick=()=>exportRows(S.rows.filter(r=>S.sel.has(r.id)),"csv","selecionados");$("#bExpF").onclick=()=>exportRows(S.filtered,"csv","filtrados");$("#bExpX").onclick=()=>exportRows(S.filtered,"xlsx","filtrados");
  $("#bAll").onclick=()=>exportRows(S.rows,"csv","base_completa");$("#bInt").onclick=()=>exportRows(S.inter,"csv","interacoes");
  $("#file").onchange=e=>importFiles([...e.target.files]);$("#bBk").onclick=backup;$("#bkIn").onchange=e=>restore(e.target.files[0]);
  const dr=$("#drop");dr.ondragover=e=>e.preventDefault();dr.ondrop=e=>{e.preventDefault();importFiles([...e.dataTransfer.files])};
- $("#bWipe").onclick=async()=>{if(!confirm("Apagar contatos, status e histórico? As empresas importadas serão mantidas."))return;await DB.clear("interacoes");for(const r of S.rows){CUSTOM.forEach(k=>delete r[k]);r.STATUS="Novo";r._ts={};r._b={STATUS:"Novo"}}await DB.putMany("empresas",S.rows,true);await load();toast("Dados personalizados apagados")};
+ $("#bWipe").onclick=async()=>{if(!confirm("Apagar contatos, status e histórico? As empresas importadas serão mantidas."))return;await DB.clear("interacoes");for(const r of S.all){CUSTOM.forEach(k=>delete r[k]);r.STATUS="Novo";r._ts={};r._b={STATUS:"Novo"}}await DB.putMany("empresas",S.all,true);await load();toast("Dados personalizados apagados")};
  document.addEventListener("keydown",e=>{if(e.key=="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();go("leads");$("#q").focus()}});
 }
 /* ============ v2: Kanban, gráficos clicáveis, menu, painel ============ */
@@ -859,7 +875,7 @@ function bindX(){bindY();bindZ();bindSync();bindNet();
  k.addEventListener("dragstart",e=>{const c=e.target.closest(".kd");if(!c)return;dragId=c.dataset.i;c.classList.add("drag");e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain","x")});
  k.addEventListener("dragend",e=>{dragId=null;$$(".kd.drag,.kc.ov").forEach(x=>x.classList.remove("drag","ov"))});
  k.addEventListener("dragover",e=>{const c=e.target.closest(".kc");if(!c)return;e.preventDefault();$$(".kc.ov").forEach(x=>x!==c&&x.classList.remove("ov"));c.classList.add("ov")});
- k.addEventListener("drop",async e=>{e.preventDefault();const c=e.target.closest(".kc");if(!c||!dragId)return;const r=S.byId.get(dragId),st=c.dataset.st;if(r&&r.STATUS!==st){const o=r.STATUS;r.STATUS=st;await DB.put("empresas",r);await DB.put("interacoes",{id:r.id,data:new Date().toISOString(),tipo:"Mudança de status",obs:`${o} → ${st}`,usuario:r.resp||"Vendedor",resultado:"",passo:"",proxData:""});await soft([r]);toast(`${r.NOME_FANTASIA||r.RAZAO_SOCIAL}: ${st}`)}});
+ k.addEventListener("drop",async e=>{e.preventDefault();const c=e.target.closest(".kc");if(!c||!dragId)return;const r=S.byId.get(dragId),st=c.dataset.st;if(r&&r.STATUS!==st){let mot=null;if(st=="Não interessada"){mot=await askLoss(1);if(mot===null)return;r.motivoPerda=mot}const o=r.STATUS;r.STATUS=st;await DB.put("empresas",r);await DB.put("interacoes",{id:r.id,data:new Date().toISOString(),tipo:"Mudança de status",obs:`${o} → ${st}`,usuario:r.resp||"Vendedor",resultado:"",passo:"",proxData:"",...(mot?{motivo:mot}:{})});await soft([r]);toast(`${r.NOME_FANTASIA||r.RAZAO_SOCIAL}: ${st}`)}});
  k.addEventListener("click",e=>{if(e.target.closest("select"))return;const c=e.target.closest(".kd");if(c)openLead(c.dataset.i)});
  $("#charts").addEventListener("click",e=>{const b=e.target.closest("[data-fk]");if(!b)return;const m={uf:"#fUF",cnae:"#fCnae",porte:"#fPorte",st:"#fSt",setor:"#fSetor",pri:"#fPri"},el=$(m[b.dataset.fk]);el.value=b.dataset.fv;if(b.dataset.fk=="uf"){fillCities();$("#fCid").value=""}S.tab="all";S.page=0;refresh();go("leads");toast("Filtro: "+b.dataset.fv)});
  $("#dlg").addEventListener("click",e=>{if(e.target===$("#dlg"))$("#dlg").close()});
@@ -959,18 +975,18 @@ function syncApply(rows,inters,pkg){if(!pkg||pkg.tipo!="lucas-prospeccao-sync")t
 const devId=()=>{try{let d=localStorage.getItem("lpDev");if(!d){d="D"+Math.random().toString(36).slice(2,10);localStorage.setItem("lpDev",d)}return d}catch(e){return"D0"}};
 const devName=()=>{try{return localStorage.getItem("lpDevName")||""}catch(e){return""}};
 const lsGet=k=>{try{return localStorage.getItem(k)||""}catch(e){return""}};
-function syInfo(){if(!$("#syInfo"))return;const out=lsGet("lpSyncOut"),inn=lsGet("lpSyncIn"),pend=S.rows.filter(r=>r._ts&&Object.values(r._ts).some(t=>!out||t>out)).length,pi=S.inter.filter(i=>!out||i.data>out).length;
+function syInfo(){if(!$("#syInfo"))return;const out=lsGet("lpSyncOut"),inn=lsGet("lpSyncIn"),pend=S.all.filter(r=>r._ts&&Object.values(r._ts).some(t=>!out||t>out)).length,pi=S.inter.filter(i=>!out||i.data>out).length;
  $("#devName").value=devName();
  $("#syInfo").textContent=`Este aparelho: ${devName()||"sem nome"} (${devId()}). Último arquivo gerado: ${out?fmtDT(out):"nunca"}. Último arquivo aplicado: ${inn?fmtDT(inn):"nunca"}. Pendente de envio: ${pend} lead(s) e ${pi} interação(ões).`;
  $("#syShare").style.display=(navigator.canShare&&navigator.canShare({files:[new File(["{}"],"a.json",{type:"application/json"})]}))?"":"none"}
-function syFile(){const dev={id:devId(),nome:devName()||"aparelho"},pkg=syncBuild(S.rows,S.inter,geo,$("#syFull").checked,dev),d=new Date(),p=n=>String(n).padStart(2,"0");
+function syFile(){const dev={id:devId(),nome:devName()||"aparelho"},pkg=syncBuild(S.all,S.inter,geo,$("#syFull").checked,dev),d=new Date(),p=n=>String(n).padStart(2,"0");
  const nome=`sync_${dev.nome.toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g,"-")}_${fmtLocal(d)}_${p(d.getHours())}${p(d.getMinutes())}.json`;
  return{pkg,nome,txt:JSON.stringify(pkg)}}
 async function aplicarSync(files){const T={novos:0,alt:0,cf:0,inter:0,arqs:0},clk=[];
  for(const f of files){let pkg;try{pkg=JSON.parse(await f.text())}catch(e){toast(`“${f.name}” não é um arquivo válido`,1);continue}
   const ger=Date.parse(pkg&&pkg.geradoEm||"");if(ger&&ger-Date.now()>10*60e3&&!confirm(`O arquivo “${f.name}” diz que foi gerado em ${fmtDT(pkg.geradoEm)}, que está no futuro para este aparelho. O relógio de um dos aparelhos parece errado, e isso pode fazer uma edição antiga vencer uma nova.\n\nAcerte a data e hora dos dois aparelhos antes. Aplicar mesmo assim?`))continue;
   if(ger&&ger-Date.now()>10*60e3)clk.push(pkg.nome||f.name);
-  try{const r=syncApply(S.rows,S.inter,pkg);await DB.putMany("empresas",r.put,true);await DB.putMany("interacoes",r.addI,true);
+  try{const r=syncApply(S.all,S.inter,pkg);await DB.putMany("empresas",r.put,true);await DB.putMany("interacoes",r.addI,true);
    let g=false;for(const[k,v]of Object.entries(r.geo))if(!geo[k]&&Array.isArray(v)){geo[k]=v;g=true}if(g)await DB.put("configuracoes",{k:"geo",v:geo});
    T.novos+=r.st.novos;T.alt+=r.st.alt;T.cf+=r.st.cf;T.inter+=r.st.inter;T.arqs++;await load()}catch(e){toast(e.message,1)}}
  if(T.arqs){try{localStorage.setItem("lpSyncIn",new Date().toISOString())}catch(e){}
@@ -1140,7 +1156,8 @@ function bindZ(){
  const rowChange=async e=>{const t=e.target;
   if(t.classList.contains("sel")){updCnt();return}
   if(!t.classList.contains("stSel"))return;const r=S.byId.get(t.dataset.i);if(!r)return;const o=r.STATUS,n=t.value;if(o===n)return;
-  r.STATUS=n;await DB.put("empresas",r);await DB.put("interacoes",{id:r.id,data:new Date().toISOString(),tipo:"Mudança de status",obs:`${o} → ${n}`,usuario:r.resp||"Vendedor",resultado:"",passo:"",proxData:""});await soft([r]);toast(`${nmL(r)}: ${n}`)};["#tb","#cards","#kan"].forEach(id=>$(id).addEventListener("change",rowChange));
+  let mot=null;if(n=="Não interessada"){mot=await askLoss(1);if(mot===null){t.value=o;return}r.motivoPerda=mot}
+  r.STATUS=n;await DB.put("empresas",r);await DB.put("interacoes",{id:r.id,data:new Date().toISOString(),tipo:"Mudança de status",obs:`${o} → ${n}`,usuario:r.resp||"Vendedor",resultado:"",passo:"",proxData:"",...(mot?{motivo:mot}:{})});await soft([r]);toast(`${nmL(r)}: ${n}`)};["#tb","#cards","#kan"].forEach(id=>$(id).addEventListener("change",rowChange));
  $("#bRota").onclick=openRota;
  $("#bMails").onclick=async()=>{const m=[...new Set(selOrFiltered().map(mailOf).filter(Boolean).map(x=>x.trim().toLowerCase()))];if(!m.length)return toast("Nenhum e-mail válido",1);await copyTxt(m.join("; "));toast(`${m.length} e-mails copiados`)};
  $("#bCont").onclick=()=>{const rows=selOrFiltered().filter(r=>r.contato||r.telPers||r.whats||r.emailPers).map(r=>({Empresa:r.RAZAO_SOCIAL,Fantasia:r.NOME_FANTASIA,Cidade:r.MUNICIPIO,UF:r.UF,Contato:r.contato||"",Cargo:r.cargo||"",Departamento:r.depto||"",Telefone:r.telPers||"",WhatsApp:r.whats||"",Email:r.emailPers||"",LinkedIn:r.linkedin||"",Site:r.site||"",Decisor:r.decisor||"",Interesse:r.interesse||"",Potencial:r.potencial||"",Status:r.STATUS,Prioridade:r.SCORE,ProximaAcao:brd(r.proxData)}));if(!rows.length)return toast("Nenhum lead com contato personalizado cadastrado",1);exportRows(rows,"csv","contatos")};
@@ -1249,8 +1266,8 @@ const CT=[["Anotação","Anotação"],["Ligação","Ligação"],["WhatsApp","Wha
 const RES_SUG=["Contato feito","Não atendeu","Mensagem enviada","Pediu mais informações","Pediu proposta","Visita agendada","Visita realizada","Sem interesse","Contato não localizado"];
 const NEXT_T=["Ligação","WhatsApp","E-mail","LinkedIn","Visita presencial","Reunião on-line","Follow-up"];
 const CT_DEF={"Ligação":["3","Ligação"],"WhatsApp":["2","WhatsApp"],"E-mail":["3","E-mail"],"LinkedIn":["5","LinkedIn"],"Visita presencial":["7","Follow-up"],"Reunião on-line":["7","Follow-up"],"Proposta enviada":["5","Follow-up"],"Anotação":["",""]};
-const tlItem=i=>{const k=icoK(i.tipo);return`<div class="tl-i"><span class="tl-ic t-${k}">${ICO[k]}</span><div style="flex:1;min-width:0"><div class="tl-h"><b>${esc(i.tipo)}</b>${i.resultado?`<span>· ${esc(i.resultado)}</span>`:""}<small>${esc(fmtDT(i.data))}</small></div>${i.obs?`<p>${esc(i.obs)}</p>`:""}${i.proxData?`<small class="tl-n">Próximo passo: ${esc(i.passo||"")} ${brd(i.proxData)}</small>`:""}</div></div>`};
-function openLead(id,tipo){const r=S.byId.get(id);if(!r)return;S.cur=id;tagPopClose();const h=(S.iv.get(id)||[]).slice().sort((a,b)=>String(b.data).localeCompare(String(a.data)));
+const tlItem=i=>{const k=icoK(i.tipo);return`<div class="tl-i"><span class="tl-ic t-${k}">${ICO[k]}</span><div style="flex:1;min-width:0"><div class="tl-h"><b>${esc(i.tipo)}</b>${i.resultado?`<span>· ${esc(i.resultado)}</span>`:""}<small>${esc(fmtDT(i.data))}</small></div>${i.obs?`<p>${esc(i.obs)}</p>`:""}${i.motivo?`<small class="tl-n">Motivo: ${esc(i.motivo)}</small>`:""}${i.geo?`<a class="tl-n" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=${+i.geo.lat},${+i.geo.lon}">📍 Local registrado (±${Math.round(+i.geo.acc||0)} m)</a>`:""}${i.fotos&&i.uid?`<div class="tl-ph" data-uid="${esc(i.uid)}"></div>`:""}${i.proxData?`<small class="tl-n">Próximo passo: ${esc(i.passo||"")} ${brd(i.proxData)}</small>`:""}</div></div>`};
+function openLead(id,tipo){const r=S.byId.get(id);if(!r)return;S.cur=id;S.pendFotos=[];tagPopClose();const h=(S.iv.get(id)||[]).slice().sort((a,b)=>String(b.data).localeCompare(String(a.data)));
  const pr=priOf(r.SCORE),st=r.STATUS||"Novo",un=r.CNPJ_BASICO?S.rows.filter(x=>x.CNPJ_BASICO==r.CNPJ_BASICO).length:1,tel=((r.DDD_1||"")+" "+(r.TELEFONE_1||"")).trim(),td=dig(tel),pend=r.proxData&&!r.proxFeita,late=pend&&r.proxData<today();
  const ct=CT.some(x=>x[0]==tipo)?tipo:(r.proxData&&!r.proxFeita&&CT.some(x=>x[0]==r.proxTipo)?r.proxTipo:"Ligação"),rgK=regKey(r).split("|")[1];
  $("#dlg").innerHTML=`<div class="lfx">
@@ -1268,7 +1285,7 @@ function openLead(id,tipo){const r=S.byId.get(id);if(!r)return;S.cur=id;tagPopCl
    <dt>Capital social</dt><dd>${brl(r.CAPITAL_SOCIAL||0)}</dd><dt>Situação</dt><dd>${esc(r.SITUACAO_CADASTRAL||"—")}</dd>
    <dt>Telefone</dt><dd>${td.length>=8?`<a href="tel:+55${td}">${esc(tel)}</a>`:"—"}</dd>
    <dt>E-mail</dt><dd>${r.CORREIO_ELETRONICO?esc(r.CORREIO_ELETRONICO)+(validMail(String(r.CORREIO_ELETRONICO))?"":' <b class="late">(inválido)</b>'):"—"}</dd></dl>
-   <a class="ld-lk" target="_blank" rel="noopener" href="https://www.google.com/maps/search/${encodeURIComponent([r.LOGRADOURO,r.NUMERO,r.MUNICIPIO,r.UF].filter(Boolean).join(" "))}">Abrir no mapa</a></section>
+   <a class="ld-lk" target="_blank" rel="noopener" href="https://www.google.com/maps/search/${encodeURIComponent([r.LOGRADOURO,r.NUMERO,r.MUNICIPIO,r.UF].filter(Boolean).join(" "))}">Abrir no mapa</a> <button type="button" class="g sm" id="lRf" style="margin-top:8px" title="Consulta a BrasilAPI (dados públicos da Receita Federal)">↻ Atualizar pela Receita</button>${r.receitaEm?`<small class="mut" style="display:block;margin-top:4px">Atualizado pela Receita em ${brd(r.receitaEm)}</small>`:""}</section>
   <section class="ld-c"><h4>Detalhes</h4><form id="lf" class="ld-f">${F_FIELDS.filter(([k])=>!CK.includes(k)).map(([k,n,t])=>`<label>${n}<input name="${k}" type="${t||"text"}" value="${esc(r[k]||"")}"></label>`).join("")}<label>Observações<textarea name="obs" rows="3">${esc(r.obs||"")}</textarea></label></form><div class="lfs" id="lfS">As alterações são salvas automaticamente.</div><button type="button" class="g" id="lSave">Salvar agora</button></section>
   ${aiBox(r)}
  </aside><div class="ld-main">
@@ -1277,10 +1294,11 @@ function openLead(id,tipo){const r=S.byId.get(id);if(!r)return;S.cur=id;tagPopCl
    <div class="ld-seqn" id="seqN" hidden></div><textarea id="iO" rows="3" placeholder="O que aconteceu? Com quem falou, o que ficou combinado…"></textarea>
    <div class="ld-row"><label>Resultado<input id="iR" list="resSug" placeholder="Ex.: Contato feito" autocomplete="off"></label><datalist id="resSug">${RES_SUG.map(x=>`<option value="${x}">`).join("")}</datalist></div>
    <div class="ld-row"><span class="ld-lb">Próximo passo</span><select id="iPT">${NEXT_T.map(x=>`<option>${x}</option>`).join("")}</select><input type="date" id="iD" aria-label="Data do próximo passo"><span class="ld-chips">${[["1","Amanhã"],["3","3 dias"],["7","1 semana"],["15","15 dias"],["30","30 dias"],["","Sem próximo passo"]].map(([d,l])=>`<button type="button" class="chip" data-nd="${d}">${l}</button>`).join("")}</span></div>
+   <div class="ld-row ld-ex"><label class="g sm" style="cursor:pointer">📷 Foto<input type="file" id="iFoto" accept="image/*" capture="environment" multiple hidden></label><span id="iFotoN" class="mut" style="font-size:12px"></span><label class="chip" style="font-size:12px"><input type="checkbox" id="iGeo" ${ct=="Visita presencial"?"checked":""}> 📍 Guardar minha localização</label></div>
    <div class="ld-row" style="justify-content:flex-end"><button type="button" class="b" id="iAdd">Registrar</button></div></div>
   <h4 class="ld-h4">Linha do tempo</h4><div class="ld-tl">${h.length?h.map(tlItem).join(""):'<div class="ld-empty">Nenhuma interação ainda.</div>'}</div>
  </div></div>
- <footer class="ld-f2"><button type="button" class="g" id="lExp">Exportar ficha</button><button type="button" class="g" id="lClose2">Fechar</button></footer></div>`;
+ <footer class="ld-f2"><button type="button" class="g" id="lArq">${r.arq?"Desarquivar":"Arquivar"}</button><button type="button" class="g" id="lDel" style="color:#b3261e">Excluir</button><span style="flex:1"></span><button type="button" class="g" id="lExp">Exportar ficha</button><button type="button" class="g" id="lClose2">Fechar</button></footer></div>`;
  const D=$("#dlg");if(!D.open)D.showModal();bindAI(r);let curT=ct;bindV7(r,D);
  const setNext=d=>{$("#iD").value=d?addDays(today(),+d):"";$$("#dlg [data-nd]").forEach(b=>b.classList.toggle("on",b.dataset.nd===d))};
  const selT=t=>{curT=t;$$("#dlg [data-ct]").forEach(b=>b.classList.toggle("on",b.dataset.ct==t));const sn=t!="Anotação"&&r.seq?seqNextStep(r):null,d=sn?[String(sn.d),sn.t]:(CT_DEF[t]||["3","Follow-up"]);setNext(d[0]);if(d[1])$("#iPT").value=d[1];seqNote(r,t)};selT(ct);
@@ -1294,12 +1312,14 @@ function openLead(id,tipo){const r=S.byId.get(id);if(!r)return;S.cur=id;tagPopCl
   const cf=D.querySelector(".ct-f");if(cf&&[...cf.querySelectorAll("[data-f]")].some(i=>i.value.trim())){const b=cf.querySelector("[data-cts]");if(b)b.click()}};
  $("#lSave").onclick=async()=>{await autosave();toast("Dados salvos")};
  $("#lClose").onclick=$("#lClose2").onclick=()=>D.close();
- $("#lSt").onchange=async e=>{const o=r.STATUS||"Novo",n=e.target.value;if(o==n)return;await save();r.STATUS=n;await DB.put("empresas",r);await addInter(r,{tipo:"Mudança de status",obs:`${o} → ${n}`},true);await soft([r]);openLead(id);toast(`${nmL(r)}: ${n}`)};
+ $("#lSt").onchange=async e=>{const o=r.STATUS||"Novo",n=e.target.value;if(o==n)return;let mot=null;if(n=="Não interessada"){mot=await askLoss(1);if(mot===null){e.target.value=o;return}r.motivoPerda=mot}await save();if(mot)r.motivoPerda=mot;r.STATUS=n;await DB.put("empresas",r);await addInter(r,{tipo:"Mudança de status",obs:`${o} → ${n}`,...(mot?{motivo:mot}:{})},true);await soft([r]);openLead(id);toast(`${nmL(r)}: ${n}`)};
  $("#iAdd").onclick=async()=>{const obs=$("#iO").value.trim(),res=$("#iR").value.trim(),pd=$("#iD").value,pt=$("#iPT").value;
   if(curT=="Anotação"&&!obs)return toast("Escreva a anotação antes de registrar",1);
-  await save();await addInter(r,{tipo:curT,resultado:res,obs,passo:pd?pt:"",proxData:pd},curT=="Anotação");
+  const b0=$("#iAdd");b0.disabled=true;let gp=null;if($("#iGeo")&&$("#iGeo").checked){b0.textContent="Pegando localização…";gp=await getGeo()}
+  await save();const it=await addInter(r,{tipo:curT,resultado:res,obs,passo:pd?pt:"",proxData:pd,...(gp?{geo:gp}:{}),...(S.pendFotos.length?{fotos:S.pendFotos.length}:{})},curT=="Anotação");await saveFotos(it,r);
   if(curT!="Anotação"&&r.seq)await seqStepDone(r);if(pd){r.proxData=pd;r.proxTipo=pt;r.proxFeita=false}await DB.put("empresas",r);await soft([r]);openLead(id);toast("Registrado"+(pd?` · próximo passo em ${brd(pd)}`:""))};
  const ld=$("#lDone");if(ld)ld.onclick=async()=>{r.proxFeita=true;r.proxConcluidaEm=today();if(r.seq){const nx=await seqStepDone(r);if(nx){r.proxData=addDays(today(),nx.d);r.proxTipo=nx.t;r.proxFeita=false}}await DB.put("empresas",r);await addInter(r,{tipo:"Outro",obs:"Próxima ação concluída: "+(r.proxTipo||"")},true);await soft([r]);openLead(id);toast("Ação marcada como feita. Agende o próximo passo.")};
+ fillThumbs(D);
  $("#lExp").onclick=()=>download(`ficha_${r.id}.json`,JSON.stringify({empresa:{...r,_orig:undefined,_k:undefined},historico:h},null,1),"application/json")}
 
 /* --- Sugestões por região --- */
@@ -1369,8 +1389,8 @@ function agDone(id){const r=S.byId.get(id);if(!r)return;const d=$("#agDlg"),tp=r
  d.onclick=async e=>{const b=e.target.closest("button");if(!b)return;
   if(b.dataset.agr!==undefined){ri=+b.dataset.agr;$$("#agDlg [data-agr]").forEach(x=>x.classList.toggle("on",x===b));if(AG_RES[ri].nd!==undefined)setN(AG_RES[ri].nd)}
   else if(b.dataset.agnd!==undefined)setN(b.dataset.agnd);else if(b.id=="agX")d.close();
-  else if(b.id=="agOk"){b.disabled=true;const o=AG_RES[ri],ti=o.tipo||(TIPOS[tp]!==undefined&&tp!="Follow-up"?tp:"Follow-up"),st0=r.STATUS||"Novo",nd=$("#agD").value,nt=$("#agPT").value;
-   const it=await addInter(r,{tipo:ti,resultado:o.res,obs:$("#agO").value.trim(),passo:nd?nt:"",proxData:nd},!!o.st||ti=="Follow-up");
+  else if(b.id=="agOk"){const o0=AG_RES[ri];let mot=null;if(o0.st=="Não interessada"){mot=await askLoss(1);if(mot===null)return;r.motivoPerda=mot}b.disabled=true;const o=AG_RES[ri],ti=o.tipo||(TIPOS[tp]!==undefined&&tp!="Follow-up"?tp:"Follow-up"),st0=r.STATUS||"Novo",nd=$("#agD").value,nt=$("#agPT").value;
+   const it=await addInter(r,{tipo:ti,resultado:o.res,obs:$("#agO").value.trim(),passo:nd?nt:"",proxData:nd,...(mot?{motivo:mot}:{})},!!o.st||ti=="Follow-up");
    if(r.seq){if(o.st&&SEQ_STOP.includes(o.st))await seqStop(r,"resultado: "+o.res);else await seqStepDone(r)}
    if(o.st&&(!o.soDe||o.soDe.includes(st0)))r.STATUS=o.st;r.proxFeita=true;r.proxConcluidaEm=today();if(nd){r.proxData=nd;r.proxTipo=nt;r.proxFeita=false}
    await DB.put("empresas",r);S.inter.push(it);(S.iv.get(r.id)||S.iv.set(r.id,[]).get(r.id)).push(it);r.SCORE=scoreOf(r);d.close();renderAgenda();rerenderSoon();toast(`${nmL(r)}: concluído${nd?` · próximo passo em ${brd(nd)}`:""}`)}};
@@ -1486,7 +1506,7 @@ function dealSum(R,mode){const t=today(),m=t.slice(0,7);let s=0;for(const r of R
  if(mode=="open"&&OPEN_ST(r))s+=v;else if(mode=="pond")s+=v*(PROB[r.STATUS||"Novo"]??0);else if(mode=="mes"&&OPEN_ST(r)&&String(r.prevFech||"").slice(0,7)==m)s+=v;else if(mode=="won"&&r.STATUS=="Cliente ativo")s+=v}return s}
 function kSum(a,st){const t=a.reduce((s,r)=>s+(+r.valor||0),0);return t?`<div class="ksum">${brlC(t)}<small> · ponderado ${brlC(t*(PROB[st]??0))}</small></div>`:""}
 function dealInfo(r){const p=PROB[r.STATUS||"Novo"]??0;return r.valor?`Chance pela etapa (${esc(r.STATUS||"Novo")}): ${Math.round(p*100)}% · entra na previsão como ${brlC(r.valor*p)}`:"Informe o valor para este lead entrar na previsão do funil (Kanban e Painel)."}
-function dealBox(r){return`<h4>Negócio</h4><div class="dl2"><label>Valor estimado (R$)<input id="dV" inputmode="decimal" autocomplete="off" placeholder="Ex.: 25.000" value="${r.valor?esc((+r.valor).toLocaleString("pt-BR")):""}"></label><label>Previsão de fechamento<input type="date" id="dF" value="${esc(r.prevFech||"")}"></label></div><small class="dinfo" id="dInfo">${dealInfo(r)}</small>`}
+function dealBox(r){return`<h4>Negócio</h4><div class="dl2"><label>Valor estimado (R$)<input id="dV" inputmode="decimal" autocomplete="off" placeholder="Ex.: 25.000" value="${r.valor?esc((+r.valor).toLocaleString("pt-BR")):""}"></label><label>Previsão de fechamento<input type="date" id="dF" value="${esc(r.prevFech||"")}"></label></div><small class="dinfo" id="dInfo">${dealInfo(r)}</small><div style="margin-top:8px"><button type="button" class="g sm" id="lProp">📄 Proposta${r.proposta&&(r.proposta.itens||[]).length?` (${r.proposta.itens.length} ite${r.proposta.itens.length>1?"ns":"m"})`:""}</button></div>`}
 
 /* --- Vários contatos por empresa --- */
 const CK=["contato","cargo","depto","telPers","whats","emailPers","linkedin"];
@@ -1640,7 +1660,8 @@ function pzEnd(){const c={};PZ.log.forEach(x=>c[x.k]=(c[x.k]||0)+1);
  <div class="fl" style="justify-content:center">${PZ.q.length?'<button class="g" id="pzPrev" type="button">← Voltar ao último</button>':""}<button class="b" id="pzX2" type="button">Fechar</button></div></div>${pzUndoBar()}`}
 async function pzOutcome(k){const o=PZ_OUT.find(x=>x.k==k),r=S.byId.get(PZ.q[PZ.i]);if(!o||!r||PZ.busy)return;PZ.busy=1;
  try{const snap=JSON.parse(JSON.stringify(r)),obs=($("#pzO")||{}).value||"",dt=($("#pzD")||{}).value||"",st0=r.STATUS||"Novo";
-  const it=await addInter(r,{tipo:o.tipo,resultado:o.res,obs:obs.trim(),passo:"Modo prospecção"},!!o.st);
+  let mot=null;if(o.st=="Não interessada"){mot=await askLoss(1);if(mot===null)return;r.motivoPerda=mot}
+  const it=await addInter(r,{tipo:o.tipo,resultado:o.res,obs:obs.trim(),passo:"Modo prospecção",...(mot?{motivo:mot}:{})},!!o.st);
   if(o.st&&(!o.soDe||o.soDe.includes(st0)))r.STATUS=o.st;
   let pd=dt||(o.dias?addDays(today(),o.dias):""),ptp=o.prox||"Follow-up";
   if(r.seq){if(o.neg)await seqStop(r,"resultado: "+o.res);else{const nx=await seqStepDone(r);if(nx&&!dt){pd=addDays(today(),nx.d);ptp=nx.t}}}
@@ -1833,5 +1854,149 @@ function cnInit(){
  document.addEventListener("keydown",e=>{if(e.key=="Escape"&&!$("#cnBox").hidden)cnClose()});
  document.addEventListener("pointerdown",e=>{const bx=$("#cnBox");if(!bx.hidden&&!bx.contains(e.target)&&!e.target.closest("#bCnae"))cnClose()});
  addEventListener("resize",()=>{if(!$("#cnBox").hidden)cnPlace()});cnSync()}
-(async()=>{await DB.open();try{const c=(await DB.all("configuracoes")).find(x=>x.k=="lastBackup");if(c)S.cfgLastBk=c.v}catch(e){}askPersist();$("#tbBk").onclick=()=>{go("dados");backup()};setInterval(bkCheck,10*60e3);await loadGeo();await loadTpl();bind();cnInit();carInit();scInit();pzInit();cmdInit();v6Init();v7Init();setView(lsGet("lpView")||(innerWidth<1100?"cards":"tab"));$("#fcard").classList.add("closed");await load()})();
+
+/* ============ v8.1: motivo de perda, proposta, relatório, lembretes, fotos/GPS, Receita, arquivar ============ */
+const LOSS=["Preço","Já tem fornecedor","Sem verba agora","Não vê necessidade","Não é o perfil (não produz alimentos)","Não conseguimos falar com o decisor","Empresa fechada ou inativa","Outro"];
+function askLoss(n){return new Promise(ok=>{const d=$("#lossDlg");let v="";
+ d.innerHTML=`<h3 style="margin:0 0 4px">Por que não teve interesse?</h3><p class="mut" style="margin:0">${n>1?`Vale para os ${n} leads.`:"Ajuda a entender onde você perde negócios (aparece no Painel)."}</p><div class="lsr">${LOSS.map(x=>`<button type="button" class="chip" data-ls="${esc(x)}">${esc(x)}</button>`).join("")}</div><input id="lsO" placeholder="Detalhe (opcional)" style="width:100%"><div class="fl" style="justify-content:flex-end;margin-top:12px"><button type="button" class="g" id="lsX">Cancelar</button><button type="button" class="b" id="lsOk">Confirmar</button></div>`;
+ let done=false;const fin=x=>{if(done)return;done=true;d.close();ok(x)};
+ d.onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.ls){v=b.dataset.ls;$$("#lossDlg [data-ls]").forEach(x=>x.classList.toggle("on",x===b))}
+  if(b.id=="lsX")fin(null);if(b.id=="lsOk"){const o=$("#lsO").value.trim();if(!v&&!o)return toast("Escolha um motivo",1);fin([v||"Outro",o].filter(Boolean).join(": "))}};
+ d.oncancel=()=>fin(null);d.onclose=()=>fin(null);d.showModal()})}
+
+/* --- Fotos e localização nas interações --- */
+const blobToUrl=b=>new Promise(ok=>{if(!(b instanceof Blob))return ok(b);const f=new FileReader();f.onload=()=>ok(f.result);f.onerror=()=>ok(null);f.readAsDataURL(b)});
+function shrink(file){return new Promise(ok=>{const u=URL.createObjectURL(file),im=new Image();im.onload=()=>{const m=1280,k=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>ok(b||file),"image/jpeg",.72)};im.onerror=()=>{URL.revokeObjectURL(u);ok(file)};im.src=u})}
+function getGeo(){return new Promise(ok=>{if(!navigator.geolocation)return ok(null);navigator.geolocation.getCurrentPosition(p=>ok({lat:+p.coords.latitude.toFixed(6),lon:+p.coords.longitude.toFixed(6),acc:Math.round(p.coords.accuracy)}),()=>{toast("Não foi possível pegar a localização (permissão negada ou sem sinal)",1);ok(null)},{enableHighAccuracy:true,timeout:15000,maximumAge:60000})})}
+async function saveFotos(it,r){const F=S.pendFotos||[];S.pendFotos=[];if(!F.length||!it||!it.uid)return;const A=[];for(const f of F)A.push({uid:it.uid,id:r.id,data:new Date().toISOString(),blob:await shrink(f),nome:f.name||"foto.jpg"});await DB.putMany("anexos",A,true)}
+async function fillThumbs(D){const els=[...D.querySelectorAll(".tl-ph[data-uid]")];if(!els.length)return;const all=await DB.all("anexos");
+ for(const el of els){const L=all.filter(a=>a.uid==el.dataset.uid);el.innerHTML="";L.forEach(a=>{const im=document.createElement("img");im.src=URL.createObjectURL(a.blob);im.alt="Foto da visita";im.onclick=()=>{const d=$("#fotoDlg");d.innerHTML="";const big=document.createElement("img");big.src=im.src;const bt=document.createElement("div");bt.className="fl";bt.style.cssText="justify-content:flex-end;margin-top:10px";bt.innerHTML='<button type="button" class="g" style="color:#b3261e" data-fdel>Apagar foto</button><button type="button" class="b" data-fx>Fechar</button>';d.append(big,bt);d.onclick=async e=>{if(e.target.dataset.fx!==undefined||e.target===d)d.close();if(e.target.dataset.fdel!==undefined&&confirm("Apagar esta foto?")){await DB.del("anexos",a.aid);d.close();im.remove()}};d.showModal()};el.appendChild(im)})}}
+
+/* --- Receita Federal (BrasilAPI) --- */
+async function cnpjFetch(cnpj){const c=dig(cnpj);if(c.length!=14)throw new Error("Este lead não tem CNPJ completo");if(navigator.onLine===false)throw new Error("Sem internet");
+ const ct=new AbortController(),t=setTimeout(()=>ct.abort(),20000);try{const r=await fetch("https://brasilapi.com.br/api/cnpj/v1/"+c,{signal:ct.signal});if(r.status==404)throw new Error("CNPJ não encontrado na Receita");if(r.status==429)throw new Error("Muitas consultas seguidas. Espere um pouco.");if(!r.ok)throw new Error("Consulta indisponível agora (HTTP "+r.status+")");return await r.json()}finally{clearTimeout(t)}}
+function cnpjMap(j){const tel=dig(j.ddd_telefone_1),o={RAZAO_SOCIAL:norm(j.razao_social),NOME_FANTASIA:norm(j.nome_fantasia),SITUACAO_CADASTRAL:norm(j.descricao_situacao_cadastral),
+ LOGRADOURO:norm([j.descricao_tipo_de_logradouro,j.logradouro].filter(Boolean).join(" ")),NUMERO:String(j.numero||""),BAIRRO:norm(j.bairro),MUNICIPIO:norm(j.municipio),UF:norm(j.uf),CEP:dig(j.cep),
+ DDD_1:tel.length>=10?tel.slice(0,2):"",TELEFONE_1:tel.length>=10?tel.slice(2):tel,CORREIO_ELETRONICO:String(j.email||"").trim().toLowerCase(),CAPITAL_SOCIAL:+j.capital_social||0,PORTE_DESCRICAO:norm(j.porte||""),
+ CNAE_FISCAL_PRINCIPAL:String(j.cnae_fiscal||""),ATIVIDADE_PRINCIPAL_TEXTO:j.cnae_fiscal_descricao||"",OPTANTE_SIMPLES:j.opcao_pelo_simples===true?"S":j.opcao_pelo_simples===false?"N":"",OPTANTE_MEI:j.opcao_pelo_mei===true?"S":j.opcao_pelo_mei===false?"N":""};
+ for(const k in o)if(o[k]===""||o[k]===null||o[k]===undefined)delete o[k];return o}
+const CNPJ_LAB={RAZAO_SOCIAL:"Razão social",NOME_FANTASIA:"Fantasia",SITUACAO_CADASTRAL:"Situação",LOGRADOURO:"Endereço",NUMERO:"Número",BAIRRO:"Bairro",MUNICIPIO:"Cidade",UF:"UF",CEP:"CEP",DDD_1:"DDD",TELEFONE_1:"Telefone",CORREIO_ELETRONICO:"E-mail",CAPITAL_SOCIAL:"Capital social",PORTE_DESCRICAO:"Porte",CNAE_FISCAL_PRINCIPAL:"CNAE",ATIVIDADE_PRINCIPAL_TEXTO:"Atividade",OPTANTE_SIMPLES:"Simples",OPTANTE_MEI:"MEI"};
+function cnpjDiff(r,o){return Object.keys(o).filter(k=>String(r[k]??"")!==String(o[k]))}
+async function cnpjUpdate(r,ask){const o=cnpjMap(await cnpjFetch(r.CNPJ_COMPLETO)),df=cnpjDiff(r,o);
+ if(!df.length){r.receitaEm=today();await DB.put("empresas",r);return 0}
+ if(ask&&!confirm("Dados novos da Receita:\n\n"+df.map(k=>`• ${CNPJ_LAB[k]||k}: ${r[k]??"—"} → ${o[k]}`).join("\n").slice(0,1500)+"\n\nAplicar?"))return -1;
+ const old=df.map(k=>`${CNPJ_LAB[k]||k}: ${r[k]??"—"} → ${o[k]}`).join("; ");df.forEach(k=>r[k]=o[k]);r.receitaEm=today();await DB.put("empresas",r);await sysNote(r,"Dados atualizados pela Receita (BrasilAPI): "+old);return df.length}
+async function cnpjBulk(rows){rows=rows.filter(r=>dig(r.CNPJ_COMPLETO).length==14).slice(0,60);if(!rows.length)return toast("Nenhum lead marcado tem CNPJ completo",1);
+ if(!confirm(`Consultar ${rows.length} CNPJ(s) na BrasilAPI (dados públicos da Receita) e atualizar endereço, telefone, e-mail, situação e porte? Leva cerca de ${Math.ceil(rows.length*1.5)} segundos.`))return;
+ let ch=0,er=0;for(let i=0;i<rows.length;i++){toast(`Consultando ${i+1}/${rows.length}…`);try{if(await cnpjUpdate(rows[i],false)>0)ch++}catch(e){er++;if(/Muitas consultas/.test(e.message))await new Promise(r=>setTimeout(r,20000))}await new Promise(r=>setTimeout(r,1500))}
+ await soft(rows);toast(`Receita: ${ch} lead(s) atualizado(s)${er?`, ${er} sem resposta`:""}`)}
+
+/* --- Proposta com itens --- */
+const brl2=n=>(+n||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+function propCatalog(){const m=new Map();S.all.forEach(r=>((r.proposta&&r.proposta.itens)||[]).forEach(i=>{if(i.p)m.set(i.p,i.v)}));return m}
+function propTotal(P){const sub=(P.itens||[]).reduce((s,i)=>s+(+i.q||0)*(+i.v||0),0);return{sub,tot:Math.max(0,sub-(+P.desc||0))}}
+function propOpen(r){const d=$("#propDlg");const P=JSON.parse(JSON.stringify(r.proposta||{itens:[{p:"",q:1,v:0}],desc:0,validade:addDays(today(),15),cond:"",obs:""}));if(!P.itens.length)P.itens.push({p:"",q:1,v:0});const cat=propCatalog();
+ const draw=()=>{const T=propTotal(P);d.innerHTML=`<h3 style="margin:0 0 4px">Proposta · ${esc(nmL(r))}</h3><p class="mut" style="margin:0 0 10px">Monte os itens, gere o PDF e registre o envio.</p>
+  <div class="pi pih"><span>Produto / serviço</span><span>Qtd.</span><span>Preço unit. (R$)</span><span style="text-align:right">Total</span><span></span></div>
+  ${P.itens.map((i,ix)=>`<div class="pi"><input list="propCat" data-pi="${ix}" data-pk="p" value="${esc(i.p)}" placeholder="Ex.: Kit de monitoramento"><input data-pi="${ix}" data-pk="q" inputmode="decimal" value="${esc(String(i.q))}"><input data-pi="${ix}" data-pk="v" inputmode="decimal" value="${i.v?esc((+i.v).toLocaleString("pt-BR")):""}"><b>${brl2((+i.q||0)*(+i.v||0))}</b><button type="button" class="g sm" data-prm="${ix}" aria-label="Remover item">×</button></div>`).join("")}
+  <datalist id="propCat">${[...cat.keys()].map(k=>`<option value="${esc(k)}">`).join("")}</datalist>
+  <button type="button" class="g sm" id="pAdd">+ Item</button>
+  <div class="gr" style="margin-top:12px"><label>Desconto (R$)<input id="pDesc" inputmode="decimal" value="${P.desc?esc((+P.desc).toLocaleString("pt-BR")):""}"></label><label>Validade<input type="date" id="pVal" value="${esc(P.validade||"")}"></label><label>Condições de pagamento<input id="pCond" value="${esc(P.cond||"")}" placeholder="Ex.: 28 dias"></label></div>
+  <label style="display:block;margin-top:8px;font-size:12px;color:var(--cz)">Observações<textarea id="pObs" rows="2">${esc(P.obs||"")}</textarea></label>
+  <div class="ptot">Subtotal ${brl2(T.sub)}${P.desc?` · Desconto ${brl2(P.desc)}`:""} · <b>Total ${brl2(T.tot)}</b></div>
+  <label class="chip" style="font-size:12px"><input type="checkbox" id="pUse" checked> usar o total como valor estimado do negócio</label>
+  <div class="fl" style="justify-content:flex-end;margin-top:12px"><button type="button" class="g" id="pX">Fechar</button><button type="button" class="g" id="pSave">Salvar</button><button type="button" class="g" id="pPdf">Gerar PDF</button><button type="button" class="b" id="pSend">Salvar e registrar envio</button></div>`};
+ const read=()=>{d.querySelectorAll("[data-pi]").forEach(el=>{const i=P.itens[+el.dataset.pi],k=el.dataset.pk;i[k]=k=="p"?el.value.trim():brNum(el.value)});const g=x=>d.querySelector(x);if(g("#pDesc")){P.desc=brNum(g("#pDesc").value);P.validade=g("#pVal").value;P.cond=g("#pCond").value.trim();P.obs=g("#pObs").value.trim()}};
+ const store=async()=>{read();P.itens=P.itens.filter(i=>i.p||+i.v);P.data=today();const T=propTotal(P);r.proposta=P;if($("#pUse").checked&&T.tot>0)r.valor=T.tot;await DB.put("empresas",r);if(!P.itens.length)P.itens.push({p:"",q:1,v:0});return T};
+ d.oninput=e=>{const el=e.target;if(el.dataset.pi&&el.dataset.pk=="p"&&cat.has(el.value)){const row=el.closest(".pi").querySelector('[data-pk="v"]');if(!brNum(row.value))row.value=(+cat.get(el.value)).toLocaleString("pt-BR")}};
+ d.onchange=e=>{if(e.target.dataset.pi||e.target.id=="pDesc"){read();draw()}};
+ d.onclick=async e=>{const b=e.target.closest("button");if(!b)return;
+  if(b.id=="pAdd"){read();P.itens.push({p:"",q:1,v:0});draw();return}
+  if(b.dataset.prm){read();P.itens.splice(+b.dataset.prm,1);if(!P.itens.length)P.itens.push({p:"",q:1,v:0});draw();return}
+  if(b.id=="pX"){d.close();return}
+  if(b.id=="pSave"){await store();toast("Proposta salva");d.close();openLead(r.id);rerenderSoon();return}
+  if(b.id=="pPdf"){await store();propPdf(r);return}
+  if(b.id=="pSend"){const T=await store();await addInter(r,{tipo:"Proposta enviada",resultado:"Enviada",obs:`Proposta de ${brl2(T.tot)} (${r.proposta.itens.filter(i=>i.p).length} item/itens)`,passo:"Follow-up",proxData:addDays(today(),5)});r.proxData=addDays(today(),5);r.proxTipo="Follow-up";r.proxFeita=false;await DB.put("empresas",r);d.close();await soft([r]);openLead(r.id);toast("Proposta registrada · follow-up em 5 dias")}};
+ draw();d.showModal()}
+function propPdf(r){const P=r.proposta||{itens:[]},T=propTotal(P),me=meuNome()||"",emp=minhaEmpresa();
+ const html=`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Proposta ${esc(nmL(r))}</title><style>body{font-family:Arial,Helvetica,sans-serif;color:#1d1d1f;margin:32px;font-size:13px}h1{font-size:20px;margin:0}table{width:100%;border-collapse:collapse;margin:18px 0}th,td{border-bottom:1px solid #ddd;padding:8px;text-align:left}th{background:#f3f4f6}td.n,th.n{text-align:right}.tot{text-align:right;font-size:15px}.mut{color:#6b7280}.hd{display:flex;justify-content:space-between;border-bottom:3px solid #0b7d3e;padding-bottom:10px;margin-bottom:16px}@media print{button{display:none}}</style></head><body>
+ <div class="hd"><div><h1>Proposta comercial</h1><div class="mut">${esc(emp)}</div></div><div style="text-align:right">${brd(P.data||today())}${P.validade?`<br><span class="mut">Válida até ${brd(P.validade)}</span>`:""}</div></div>
+ <p><b>Para:</b> ${esc(titleCase(r.RAZAO_SOCIAL||nmL(r)))}${r.CNPJ_COMPLETO?` · CNPJ ${esc(maskCnpj(r.CNPJ_COMPLETO))}`:""}<br>${esc(titleCase(r.MUNICIPIO||""))}/${esc(r.UF||"")}${r.contato?`<br><b>A/C:</b> ${esc(r.contato)}${r.cargo?" – "+esc(r.cargo):""}`:""}</p>
+ <table><thead><tr><th>Item</th><th class="n">Qtd.</th><th class="n">Preço unit.</th><th class="n">Total</th></tr></thead><tbody>${(P.itens||[]).filter(i=>i.p).map(i=>`<tr><td>${esc(i.p)}</td><td class="n">${(+i.q||0).toLocaleString("pt-BR")}</td><td class="n">${brl2(i.v)}</td><td class="n">${brl2((+i.q||0)*(+i.v||0))}</td></tr>`).join("")}</tbody></table>
+ <div class="tot">Subtotal: ${brl2(T.sub)}${P.desc?`<br>Desconto: − ${brl2(P.desc)}`:""}<br><b>Total: ${brl2(T.tot)}</b></div>
+ ${P.cond?`<p><b>Condições de pagamento:</b> ${esc(P.cond)}</p>`:""}${P.obs?`<p style="white-space:pre-wrap">${esc(P.obs)}</p>`:""}
+ <p style="margin-top:40px">${esc(me)}${me?"<br>":""}${esc(emp)}</p><button onclick="print()">Imprimir / salvar em PDF</button><script>setTimeout(()=>print(),400)<\/script></body></html>`;
+ const w=window.open(URL.createObjectURL(new Blob([html],{type:"text/html"})),"_blank");if(!w)toast("Libere pop-ups para gerar o PDF",1)}
+
+/* --- Relatório do período --- */
+const RL_P=[["7","Últimos 7 dias"],["sem","Esta semana"],["mes","Este mês"],["30","Últimos 30 dias"],["90","Últimos 90 dias"],["ano","Este ano"]];
+function rlRange(k){const t=today(),d=new Date(t+"T12:00:00");if(k=="sem")return[addDays(t,-((d.getDay()+6)%7)),t];if(k=="mes")return[t.slice(0,8)+"01",t];if(k=="ano")return[t.slice(0,5)+"01-01",t];return[addDays(t,-(+k-1)),t]}
+function renderRelat(){const el=$("#relat");if(!el)return;const pk=lsGet("lpRelP")||"30",[a,b]=rlRange(pk),loc=i=>fmtLocal(new Date(i.data)),inP=i=>{const x=loc(i);return x>=a&&x<=b};
+ const T=[...CONTATO,"Visita presencial",...ATEND,"Proposta enviada"],I=S.inter.filter(i=>T.includes(i.tipo)),IP=I.filter(inP);
+ const first=new Map();I.forEach(i=>{const x=loc(i);if(!first.has(i.id)||x<first.get(i.id))first.set(i.id,x)});const novos=[...first.values()].filter(x=>x>=a&&x<=b).length;
+ const ST=S.inter.filter(i=>i.tipo=="Mudança de status"&&inP(i)),to=s=>new Set(ST.filter(i=>String(i.obs||"").endsWith("→ "+s)).map(i=>i.id)).size;
+ const cli=to("Cliente ativo"),neg=new Set([...ST.filter(i=>String(i.obs||"").endsWith("→ Em negociação")),...IP.filter(i=>i.tipo=="Proposta enviada")].map(i=>i.id)).size,perd=ST.filter(i=>String(i.obs||"").endsWith("→ Não interessada"));
+ const mot=new Map();perd.forEach(i=>{const k=String(i.motivo||(S.byId.get(i.id)||{}).motivoPerda||"Não informado").split(":")[0];mot.set(k,(mot.get(k)||0)+1)});
+ const byT=new Map();IP.forEach(i=>byT.set(i.tipo,(byT.get(i.tipo)||0)+1));
+ const ganhos=[];S.inter.filter(i=>i.tipo=="Mudança de status"&&String(i.obs||"").endsWith("→ Cliente ativo")&&inP(i)).forEach(i=>{const f=first.get(i.id);if(f){const d=dd(f,loc(i));if(d>=0)ganhos.push(d)}});
+ const won=S.all.filter(r=>r.STATUS=="Cliente ativo"&&ganhos.length).length;
+ const wks=[];const t=today(),mon=addDays(t,-((new Date(t+"T12:00:00").getDay()+6)%7));for(let w=11;w>=0;w--){const s0=addDays(mon,-7*w),s1=addDays(s0,6);wks.push([s0,I.filter(i=>{const x=loc(i);return x>=s0&&x<=s1}).length])}const mx=Math.max(1,...wks.map(w=>w[1]));
+ const bars=(m,emp)=>m.size?[...m].sort((x,y)=>y[1]-x[1]).map(([k,v])=>{const M=Math.max(...m.values());return`<div class="bar"><span>${esc(k)}</span><i style="width:${v/M*100}%"></i>${v}</div>`}).join(""):`<p class="mut" style="font-size:13px">${emp}</p>`;
+ el.innerHTML=`<div class="card"><div class="rl-h"><h3>Relatório do período</h3><select id="rlP">${RL_P.map(([k,l])=>`<option value="${k}" ${k==pk?"selected":""}>${l}</option>`).join("")}</select></div><small class="mut">${brd(a)} a ${brd(b)}</small>
+ <div class="rl-k"><div><b>${IP.length}</b><small>atividades (ligações, mensagens, visitas, reuniões, propostas)</small></div><div><b>${novos}</b><small>empresas abordadas pela 1ª vez</small></div><div><b>${neg}</b><small>entraram em negociação</small></div><div><b>${cli}</b><small>viraram clientes</small></div><div><b>${perd.length}</b><small>perdidas (sem interesse)</small></div><div><b>${novos?pct(cli,novos):"—"}</b><small>clientes ÷ abordadas no período</small></div><div><b>${ganhos.length?Math.round(ganhos.reduce((s,x)=>s+x,0)/ganhos.length)+" dias":"—"}</b><small>tempo médio do 1º contato até virar cliente</small></div></div>
+ <div class="rl-g"><div><h4>Atividades por tipo</h4>${bars(byT,"Nenhuma atividade no período.")}</div><div><h4>Motivos de perda no período</h4>${bars(mot,"Nenhuma perda no período.")}</div>
+ <div><h4>Atividades por semana (últimas 12)</h4><div class="wk">${wks.map(([d0,n])=>`<div title="Semana de ${brd(d0)}: ${n}"><small>${n||""}</small><i style="height:${n/mx*80}%"></i><span>${d0.slice(8,10)}/${d0.slice(5,7)}</span></div>`).join("")}</div></div></div></div>`}
+
+/* --- Lembretes e calendário --- */
+function icsExport(){const P=S.all.filter(r=>r.proxData&&!r.proxFeita);if(!P.length)return toast("Nenhum retorno agendado",1);
+ const e=s=>String(s||"").replace(/\\/g,"\\\\").replace(/[,;]/g,m=>"\\"+m).replace(/\r?\n/g,"\\n"),st=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"");
+ const L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Lucas Prospeccao//PT-BR","CALSCALE:GREGORIAN"];
+ P.forEach(r=>{const d=r.proxData.replace(/-/g,""),d2=addDays(r.proxData,1).replace(/-/g,""),tel=telOf(r);L.push("BEGIN:VEVENT","UID:"+e(r.id)+"-"+d+"@lucas-prospeccao","DTSTAMP:"+st,"DTSTART;VALUE=DATE:"+d,"DTEND;VALUE=DATE:"+d2,"SUMMARY:"+e((r.proxTipo||"Follow-up")+" · "+nmL(r)),"DESCRIPTION:"+e([titleCase(r.MUNICIPIO||"")+"/"+(r.UF||""),r.contato?"Contato: "+r.contato:"",dig(tel)?"Tel: "+tel:"",r.obs||""].filter(Boolean).join("\n")),"LOCATION:"+e(addrOf(r)),"BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+e(r.proxTipo||"Retorno"),"TRIGGER:PT8H","END:VALARM","END:VEVENT")});
+ L.push("END:VCALENDAR");download(`retornos_${today()}.ics`,L.join("\r\n"),"text/calendar");toast(`${P.length} retornos exportados. Abra o arquivo no Google Agenda ou Outlook.`)}
+const notifOn=()=>lsGet("lpNotif")=="1"&&"Notification" in window&&Notification.permission=="granted";
+function notifBtn(){const b=$("#bNotif");if(b)b.textContent=notifOn()?"🔔 Lembretes ligados":"🔔 Ligar lembretes"}
+async function notifToggle(){if(!("Notification" in window))return toast("Este navegador não mostra notificações",1);
+ if(notifOn()){try{localStorage.setItem("lpNotif","0")}catch(e){}notifBtn();return toast("Lembretes desligados")}
+ const p=await Notification.requestPermission();if(p!="granted")return toast("Permissão de notificação negada. Libere nas configurações do navegador.",1);
+ try{localStorage.setItem("lpNotif","1");localStorage.removeItem("lpNotifDia")}catch(e){}notifBtn();toast("Lembretes ligados: o app avisa os retornos do dia quando estiver aberto ou instalado.");notifCheck()}
+async function notifCheck(){if(!notifOn())return;const t=today();if(lsGet("lpNotifDia")==t)return;const P=S.all.filter(r=>r.proxData&&!r.proxFeita&&r.proxData<=t);if(!P.length)return;
+ const late=P.filter(r=>r.proxData<t).length,body=`${P.length} retorno(s) para hoje${late?`, ${late} atrasado(s)`:""}: `+P.slice(0,3).map(nmL).join(", ")+(P.length>3?"…":"");
+ try{const reg=navigator.serviceWorker&&await navigator.serviceWorker.getRegistration();if(reg&&reg.showNotification)await reg.showNotification("Agenda de hoje",{body,icon:"icon-192.png",tag:"agenda-"+t});else new Notification("Agenda de hoje",{body,icon:"icon-192.png"});localStorage.setItem("lpNotifDia",t)}catch(e){}}
+
+/* --- Arquivar e excluir --- */
+async function arqSet(rows,on){rows.forEach(r=>{if(on)r.arq=true;else delete r.arq});await DB.putMany("empresas",rows);await soft(rows);toast(`${rows.length} lead(s) ${on?"arquivado(s)":"desarquivado(s)"}`)}
+async function delLeads(rows){if(!rows.length)return;if(!confirm(`Excluir DEFINITIVAMENTE ${rows.length} lead(s), com histórico e fotos?\n\nIsso não pode ser desfeito e não é levado aos outros aparelhos pela sincronização. Para só tirar da frente, use Arquivar.`))return;
+ const ids=new Set(rows.map(r=>r.id)),ax=(await DB.all("anexos")).filter(a=>ids.has(a.id)),II=(await DB.all("interacoes")).filter(i=>ids.has(i.id)),t=db.transaction(["empresas","interacoes","anexos"],"readwrite");ids.forEach(id=>t.objectStore("empresas").delete(id));II.forEach(i=>t.objectStore("interacoes").delete(i.iid));
+ ax.forEach(a=>t.objectStore("anexos").delete(a.aid));await new Promise((ok,ko)=>{t.oncomplete=ok;t.onerror=()=>ko(t.error)});
+ S.all=S.all.filter(r=>!ids.has(r.id));ids.forEach(id=>{S.byId.delete(id);S.sel.delete(id)});await soft([]);fillSelects();toast(`${rows.length} lead(s) excluído(s)`)}
+
+/* --- Duplicados no cadastro manual --- */
+function dupFind(rz,ci,uf,cn){const n=norm(rz).replace(/\b(LTDA|ME|EPP|EIRELI|S\/?A|SA)\b/g,"").replace(/[^A-Z0-9]/g,""),c=norm(ci);if(n.length<4)return[];
+ return S.all.filter(r=>(cn&&dig(r.CNPJ_COMPLETO)==cn)||(r.UF==uf&&r.MUNICIPIO==c&&[r.RAZAO_SOCIAL,r.NOME_FANTASIA].some(x=>{const m=norm(x).replace(/\b(LTDA|ME|EPP|EIRELI|S\/?A|SA)\b/g,"").replace(/[^A-Z0-9]/g,"");return m.length>=4&&(m==n||m.includes(n)||n.includes(m))}))).slice(0,5)}
+
+function v81Init(){
+ const nb=$("#bulkAct");const addOpt=()=>{if(!nb.querySelector('option[value="x:arq"]'))nb.insertAdjacentHTML("beforeend",'<optgroup label="Organizar"><option value="x:arq">Arquivar</option><option value="x:desarq">Desarquivar</option><option value="x:rf">Atualizar pela Receita (BrasilAPI)</option><option value="x:del">Excluir definitivamente</option></optgroup>')};addOpt();
+ const f7=fillV6Selects;fillV6Selects=function(){f7();addOpt()};
+ const bk2=nb.onchange;nb.onchange=async e=>{const v=e.target.value;if(!v.startsWith("x:"))return bk2(e);e.target.value="";if(!S.sel.size)return toast("Marque os leads na tabela (caixinha à esquerda) e depois escolha a ação.",1);
+  const rows=S.all.filter(r=>S.sel.has(r.id));if(v=="x:del")return delLeads(rows);if(v=="x:rf"){S.sel.clear();return cnpjBulk(rows)}
+  if(!confirm(`${v=="x:arq"?"Arquivar":"Desarquivar"} ${rows.length} lead(s)?${v=="x:arq"?" Eles somem das listas, da agenda e do painel, mas continuam guardados (marque “ver arquivadas” nos filtros para vê-los).":""}`))return;S.sel.clear();arqSet(rows,v=="x:arq")};
+ $("#fArq").addEventListener("change",e=>{S.showArq=e.target.checked;pickRows();S.sel.clear();fillSelects();refresh();if(S.showArq)toast("Mostrando só as empresas arquivadas")});
+ $("#bIcs").onclick=icsExport;$("#bNotif").onclick=notifToggle;notifBtn();setInterval(notifCheck,30*60e3);setTimeout(notifCheck,4000);
+ $("#relat").addEventListener("change",e=>{if(e.target.id=="rlP"){try{localStorage.setItem("lpRelP",e.target.value)}catch(x){}renderRelat()}});
+ const D=$("#dlg");
+ D.addEventListener("change",e=>{if(e.target.id=="iFoto"){S.pendFotos=[...(S.pendFotos||[]),...e.target.files];e.target.value="";const n=$("#iFotoN");if(n)n.textContent=S.pendFotos.length?`${S.pendFotos.length} foto(s) para anexar ao registrar`:""}});
+ D.addEventListener("click",async e=>{const b=e.target.closest("button");if(!b)return;const r=S.byId.get(S.cur);if(!r)return;
+  if(b.id=="lArq"){if(!r.arq&&!confirm("Arquivar esta empresa? Ela some das listas, da agenda e do painel, mas continua guardada."))return;D.close();await arqSet([r],!r.arq);return}
+  if(b.id=="lDel"){D.close();await delLeads([r]);return}
+  if(b.id=="lProp")return propOpen(r);
+  if(b.id=="lRf"){b.disabled=true;b.textContent="Consultando…";try{const n=await cnpjUpdate(r,true);if(n>=0){await soft([r]);openLead(r.id);toast(n?`${n} campo(s) atualizado(s) pela Receita`:"Os dados já estavam iguais aos da Receita")}else{b.disabled=false;b.textContent="↻ Atualizar pela Receita"}}catch(x){toast(x.message,1);b.disabled=false;b.textContent="↻ Atualizar pela Receita"}}});
+ // cadastro manual: aviso de duplicado e busca pelo CNPJ
+ const ND=$("#newDlg");ND.addEventListener("click",async e=>{if(e.target.id=="nCnBusca"){const c=dig($("#nCn").value);if(c.length!=14)return toast("Digite o CNPJ com 14 dígitos",1);e.target.disabled=true;try{const o=cnpjMap(await cnpjFetch(c)),set=(i,v)=>{if(v&&$(i))$(i).value=v};set("#nRz",titleCase(o.RAZAO_SOCIAL));set("#nFa",titleCase(o.NOME_FANTASIA||""));set("#nCi",titleCase(o.MUNICIPIO));set("#nUf",o.UF);set("#nTe",(o.DDD_1||"")+(o.TELEFONE_1||""));set("#nEm",o.CORREIO_ELETRONICO);set("#nAt",o.ATIVIDADE_PRINCIPAL_TEXTO);set("#nCnae",o.CNAE_FISCAL_PRINCIPAL);if(o.CAPITAL_SOCIAL)set("#nCa",o.CAPITAL_SOCIAL.toLocaleString("pt-BR"));const po=$("#nPo");if(po&&o.PORTE_DESCRICAO){const m=[...po.options].find(x=>/MICRO/.test(o.PORTE_DESCRICAO)?/MICRO/.test(x.value):/PEQUENO/.test(o.PORTE_DESCRICAO)?/PEQUENO/.test(x.value):x.value=="DEMAIS");if(m)po.value=m.value}toast("Dados preenchidos pela Receita")}catch(x){toast(x.message,1)}e.target.disabled=false}},true);
+ const nO=newOpen;newOpen=function(){nO();const cn=$("#nCn");if(cn&&!$("#nCnBusca"))cn.insertAdjacentHTML("afterend",'<button type="button" class="g sm" id="nCnBusca" style="margin-top:4px">Buscar dados pelo CNPJ</button>')};
+ const nS=newSave;newSave=async function(){const v=i=>($(i).value||"").trim();if(!ND.dataset.dupOk){const L=dupFind(v("#nRz"),v("#nCi"),v("#nUf"),dig(v("#nCn")));
+  if(L.length&&!S.byId.has("C"+dig(v("#nCn")))){if(!confirm("Parece que essa empresa já está na base:\n\n"+L.map(r=>`• ${nmL(r)} – ${r.MUNICIPIO}/${r.UF}${r.arq?" (arquivada)":""}`).join("\n")+"\n\nCadastrar mesmo assim? (Cancelar abre a ficha da primeira)")){ND.close();openLead(L[0].id);return}}}return nS()};
+ $("#tbNew").onclick=()=>newOpen();
+ const rd=renderDash;renderDash=function(){rd();renderRelat()};
+}
+(async()=>{await DB.open();try{const c=(await DB.all("configuracoes")).find(x=>x.k=="lastBackup");if(c)S.cfgLastBk=c.v}catch(e){}askPersist();$("#tbBk").onclick=()=>{go("dados");backup()};setInterval(bkCheck,10*60e3);await loadGeo();await loadTpl();bind();cnInit();carInit();scInit();pzInit();cmdInit();v6Init();v7Init();v81Init();setView(lsGet("lpView")||(innerWidth<1100?"cards":"tab"));$("#fcard").classList.add("closed");await load()})();
 </script></body></html>
