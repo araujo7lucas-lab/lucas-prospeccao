@@ -460,40 +460,57 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 .gapc.on{border-color:#ea580c;color:#c2410c;background:#fff4ec}
 #carVis button{padding:6px 14px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ===== v8: backup, ficha no celular, topo enxuto ===== */
+#updBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:10000;background:var(--tx,#1d1d1f);color:#fff;border-radius:12px;padding:10px 12px 10px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 10px 30px #0005;font-size:14px;max-width:94vw}
+#tbBk{display:none;white-space:nowrap;border:1px solid #f3dc9a;background:#fff7e0;color:#8a6100;border-radius:8px;padding:6px 10px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}#tbBk.on{display:inline-flex}#tbBk.bad{border-color:#f6c1bb;background:#fdecea;color:#b3261e}
+.bkst{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:10px 0}.bkst div{background:#fafbfc;border:1px solid var(--bd);border-radius:10px;padding:10px 12px}.bkst small{display:block;color:var(--cz);font-size:12px}.bkst b{font-size:15px}.bkst .ok{color:#0b6b35}.bkst .bad{color:#b3261e}
+.lfs{font-size:12px;color:var(--cz);margin-top:6px;min-height:16px}
+#bDcfg{font-size:13px!important;padding:7px 12px!important}
+@media(max-width:900px){
+ #navK{display:none}
+ .ld-b{display:flex;flex-direction:column;overflow:auto}.ld-main{order:-1;overflow:visible}.ld-side{overflow:visible;border-right:0;border-top:1px solid var(--bd)}
+ #topbar{gap:8px;padding:8px 12px;margin:0 -12px 14px}#topbar .net,#topbar .ver,#topbar kbd{display:none}#tbTitle{min-width:0;font-size:16px}
+ #tbSearch{flex:1 1 auto}
+}
+@media(max-width:420px){#tbNew{display:none}#tbPz{padding:8px 10px}}
+@media(max-width:600px){#tbSearch span{display:none}#tbSearch{flex:0 0 auto}#tbNew span{display:none}#tbBk{padding:6px 8px;font-size:12px}#updBar{bottom:calc(80px + env(safe-area-inset-bottom))}}
 </style><script>
 /* ===== Carregador de bibliotecas com cache local =====
    Na primeira abertura COM internet, baixa SheetJS (Excel), Leaflet (mapa) e MarkerCluster e guarda no aparelho (IndexedDB).
    Nas aberturas seguintes lê do aparelho, sem precisar de internet. */
 (function(){
  const B="https://cdnjs.cloudflare.com/ajax/libs/";
- const LIBS=[{k:"lcss",t:"css",u:B+"leaflet/1.9.4/leaflet.min.css"},{k:"mcss",t:"css",u:B+"leaflet.markercluster/1.5.3/MarkerCluster.min.css"},{k:"mdcss",t:"css",u:B+"leaflet.markercluster/1.5.3/MarkerCluster.Default.min.css"},
-  {k:"xlsx",t:"js",u:B+"xlsx/0.18.5/xlsx.full.min.js"},{k:"leaflet",t:"js",u:B+"leaflet/1.9.4/leaflet.min.js"},{k:"mc",t:"js",u:B+"leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"}];
+ /* v8: as bibliotecas vêm junto do app (pasta vendor/, guardada pelo service worker). O CDN só é usado se o arquivo local faltar. */
+ const LIBS=[{k:"lcss",t:"css",u:"vendor/leaflet.css",f:B+"leaflet/1.9.4/leaflet.min.css"},{k:"mcss",t:"css",u:"vendor/MarkerCluster.css",f:B+"leaflet.markercluster/1.5.3/MarkerCluster.min.css"},{k:"mdcss",t:"css",u:"vendor/MarkerCluster.Default.css",f:B+"leaflet.markercluster/1.5.3/MarkerCluster.Default.min.css"},
+  {k:"xlsx",t:"js",u:"vendor/xlsx.full.min.js",f:B+"xlsx/0.18.5/xlsx.full.min.js"},{k:"leaflet",t:"js",u:"vendor/leaflet.js",f:B+"leaflet/1.9.4/leaflet.min.js"},{k:"mc",t:"js",u:"vendor/leaflet.markercluster.js",f:B+"leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"}];
  const st=window.LIBST={ok:{},cache:{}};
  const open=()=>new Promise((ok,ko)=>{try{const r=indexedDB.open("lp_libs",1);r.onupgradeneeded=()=>r.result.createObjectStore("l");r.onsuccess=()=>ok(r.result);r.onerror=()=>ko(r.error)}catch(e){ko(e)}});
  const get=(db,k)=>new Promise(r=>{try{const q=db.transaction("l").objectStore("l").get(k);q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)}catch(e){r(null)}});
  const put=(db,k,v)=>new Promise(r=>{try{const t=db.transaction("l","readwrite");t.objectStore("l").put(v,k);t.oncomplete=()=>r(true);t.onerror=()=>r(false)}catch(e){r(false)}});
  const inject=(l,txt)=>{if(l.t=="css"){const s=document.createElement("style");s.textContent=txt;document.head.appendChild(s)}else{const s=document.createElement("script");s.textContent=txt;document.head.appendChild(s)}};
  async function run(){let db=null;try{db=await open()}catch(e){}
-  for(const l of LIBS){if(st.ok[l.k])continue;let txt=db?await get(db,l.u):null;
-   if(typeof txt=="string"&&txt.length>500)st.cache[l.k]=true;
-   else{txt=null;if(navigator.onLine!==false){try{const c=new AbortController(),t=setTimeout(()=>c.abort(),25000);const r=await fetch(l.u,{signal:c.signal});clearTimeout(t);if(!r.ok)throw 0;txt=await r.text();if(txt.length<500)throw 0;if(db)await put(db,l.u,txt)}catch(e){txt=null}}}
+  const grab=async u=>{const c=new AbortController(),t=setTimeout(()=>c.abort(),25000);try{const r=await fetch(u,{signal:c.signal});if(!r.ok)throw 0;const x=await r.text();if(x.length<500)throw 0;return x}finally{clearTimeout(t)}};
+  for(const l of LIBS){if(st.ok[l.k])continue;let txt=null;
+   if(/^https?:/.test(location.protocol)){try{txt=await grab(l.u);st.cache[l.k]=true}catch(e){txt=null}}
+   if(!txt&&db){const c=await get(db,l.f);if(typeof c=="string"&&c.length>500){txt=c;st.cache[l.k]=true}}
+   if(!txt&&navigator.onLine!==false){try{txt=await grab(l.f);if(db)await put(db,l.f,txt)}catch(e){txt=null}}
    if(!txt)continue;try{inject(l,txt);st.ok[l.k]=true}catch(e){}}
   if(window.updNet)window.updNet()}
- if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)){const had=!!navigator.serviceWorker.controller;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!window.__lpRl){window.__lpRl=1;location.reload()}});navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(x){}}).catch(()=>{})}
+ if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)){const had=!!navigator.serviceWorker.controller;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!window.__lpRl){window.__lpRl=1;const b=document.createElement("div");b.id="updBar";b.innerHTML='Nova versão do app instalada. <button type="button" class="b">Atualizar agora</button>';b.querySelector("button").onclick=()=>location.reload();(document.body||document.documentElement).appendChild(b)}});navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{try{r.update()}catch(x){}}).catch(()=>{})}
  window.retryLibs=()=>{window.LIBS_READY=run();return window.LIBS_READY};
  window.LIBS_READY=run();
 })();
 </script>
 </head><body>
 <nav><h1><b class="lg">L</b><span>Lucas Prospecção</span></h1><button id="navK" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar</span></button><button data-p="dash" class="on" title="Dashboard"><svg viewBox="0 0 24 24"><rect x=3 y=3 width=7 height=7 /><rect x=14 y=3 width=7 height=7 /><rect x=14 y=14 width=7 height=7 /><rect x=3 y=14 width=7 height=7 /></svg><span>Painel</span></button><button data-p="leads" title="Leads"><svg viewBox="0 0 24 24"><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx=9 cy=7 r=4 /><path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/></svg><span>Leads</span></button><button data-p="sugestoes" title="Sugestões por região"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><polygon points='16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8'/></svg><span>Sugestões</span></button><button data-p="agenda" title="Agenda de retornos"><svg viewBox="0 0 24 24"><rect x=3 y=4 width=18 height=18 rx=2 /><path d='M16 2v4M8 2v4M3 10h18'/></svg><span>Agenda</span><b class="nbd" id="agBd" hidden></b></button><button data-p="mapa" title="Mapa"><svg viewBox="0 0 24 24"><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx=12 cy=10 r=3 /></svg><span>Mapa</span></button><button data-p="dados" title="Dados e sincronização"><svg viewBox="0 0 24 24"><ellipse cx=12 cy=5 rx=9 ry=3 /><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg><span>Dados</span></button><button id="navT" class="nt" title="Recolher menu"><svg viewBox="0 0 24 24"><polyline points='15 18 9 12 15 6'/></svg><span>Recolher</span></button></nav>
-<main><div id="topbar"><b id="tbTitle">Painel</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><span class="net"></span><em class="ver">v7.1</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha">＋ <span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">▶ Prospectar</button></div>
-<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="b" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" style="font-size:15px;padding:10px 18px">⚙ Personalizar painel</button><span class="net"></span><em class="ver">v7.1</em></header><div id="goals"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
+<main><div id="topbar"><b id="tbTitle">Painel</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.0</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha">＋ <span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">▶ Prospectar</button></div>
+<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >⚙ Personalizar</button><span class="net"></span><em class="ver">v8.0</em></header><div id="goals"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
 
 <div id="cnBox" class="cnbox" hidden><div class="cnh"><b>Filtrar por CNAE</b><button class="g" id="cnX" type="button" aria-label="Fechar">✕</button></div>
 <input id="cnQ" placeholder="Buscar código ou atividade (ex.: 1052 ou queijo)" autocomplete="off">
 <div class="cnbar"><button class="g" id="cnAll" type="button">Marcar os listados</button><button class="g" id="cnNone" type="button">Limpar seleção</button><label><input type="checkbox" id="cnOnlySel"> só marcados</label><span id="cnInfo"></span></div>
 <div id="cnList"></div><div class="cnft"><button class="b" id="cnOk" type="button">Concluir</button></div></div>
-<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">▦ Cartões</button><button id="vTab" class="on">▤ Tabela</button><button id="vKan">▥ Kanban</button></div><span class="net"></span><em class="ver">v7.1</em></header>
+<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">▦ Cartões</button><button id="vTab" class="on">▤ Tabela</button><button id="vKan">▥ Kanban</button></div><span class="net"></span><em class="ver">v8.0</em></header>
 <div class="card fl" id="fcard">
 <input id="q" placeholder="Buscar empresa, cidade, CNPJ… ( / )" style="flex:1;min-width:160px"><button class="g keep" id="bFilt" type="button" title="Mostrar ou esconder os demais filtros">Mais filtros <span id="fCount" class="bd" style="background:var(--az);display:none"></span></button>
 <select class="pri" id="fUF"><option value="">UF</option></select><select class="pri" id="fCid"><option value="">Cidade</option></select>
@@ -517,24 +534,26 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 <div class="fl" id="pgr" style="margin-top:8px"><button class="g" id="pv">‹</button><span id="pn"></span><button class="g" id="nx">›</button></div>
 </section>
 
-<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v7.1</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
+<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.0</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
 <div class="fl" id="carOpts" hidden><div class="seg" id="carVis" style="margin:0"><button type="button" data-cvis="heat">Mapa de calor</button><button type="button" data-cvis="circ">Círculos</button></div><label class="chip gapc"><input type="checkbox" id="carGap"> mostrar áreas sem atendimento</label><span style="color:var(--cz);font-size:13px">Considerar:</span><span id="carChips" class="fl" style="gap:6px"></span>
 <label class="chip"><input type="checkbox" id="carInt"> quem tem contato/visita registrado</label>
 <select id="carMet"><option value="n">Tamanho = nº de clientes</option><option value="p">Tamanho = % dos leads da cidade</option></select></div></div>
 <div id="map"></div><div class="card" id="carPanel" hidden></div></section>
-<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><span class="net"></span><em class="ver">v7.1</em></header><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section>
-<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bSeq" type="button">⟳ Sequências</button><button class="b" id="bPzHoje" type="button">▶ Fazer os retornos de hoje</button><span class="net"></span><em class="ver">v7.1</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
-<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v7.1</em></header>
+<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><span class="net"></span><em class="ver">v8.0</em></header><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section>
+<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bSeq" type="button">⟳ Sequências</button><button class="b" id="bPzHoje" type="button">▶ Fazer os retornos de hoje</button><span class="net"></span><em class="ver">v8.0</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
+<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.0</em></header>
 <div class="card" id="syncCard"><h3 style="margin-top:0">Sincronizar tablet e computador</h3>
 <p>Trabalhe offline nos dois aparelhos. Quando quiser juntar o que cada um anotou: gere o arquivo de sincronização em um aparelho, leve ao outro (WhatsApp, e-mail, Drive, cabo USB ou Bluetooth) e aplique lá. Repita no sentido contrário para os dois ficarem iguais. Nada é apagado: se o mesmo campo foi editado nos dois, vale a edição mais recente.</p>
 <div class="fl"><label>Nome deste aparelho <input id="devName" placeholder="Ex.: Tablet" size="14"></label><label><input type="checkbox" id="syFull"> incluir toda a base de empresas (arquivo grande)</label></div>
 <div class="fl" style="margin-top:8px"><button class="b" id="syOut">Gerar arquivo de sincronização</button><button class="g" id="syShare" style="display:none">Compartilhar…</button><label class="g" style="padding:8px 14px;border:1px solid var(--ln);border-radius:8px;cursor:pointer">Aplicar arquivo de outro aparelho<input type="file" id="syIn" accept=".json" multiple hidden></label></div>
 <p id="syInfo" style="color:var(--cz);font-size:12px;margin:8px 0 0"></p><div id="syRes"></div></div>
 <div class="card"><b>Antes de viajar</b><ol style="margin:6px 0 0;padding-left:20px"><li>Abra o programa com internet e confira que o aviso no topo diz “pronto para offline”.</li><li>Importe as planilhas e, na tela Mapa, use “Localizar cidades com precisão”.</li><li>Gere um backup e um arquivo de sincronização.</li></ol></div>
-<div class="card" id="drop"><h3>Importar planilhas (.xlsx, .xls, .csv)</h3><p>Dados oficiais vêm de base governamental e ficam somente neste navegador. O navegador pode apagar dados locais: faça backup com frequência.</p>
+<div class="card" id="drop"><h3>Importar planilhas (.xlsx, .xls, .csv)</h3><p>Dados oficiais vêm de base governamental e ficam somente neste aparelho.</p>
 <input type="file" id="file" multiple accept=".xlsx,.xls,.csv"> <progress id="prog" value="0" max="100" style="display:none"></progress><div id="rep"></div></div>
-<div class="card fl"><button class="b" id="bBk">Exportar backup JSON</button><label class="g" style="padding:6px 10px;border:1px solid var(--ln);border-radius:8px">Importar backup<input type="file" id="bkIn" accept=".json" hidden></label>
-<button class="g" id="bInt">Exportar interações</button><button class="g" id="bAll">Exportar toda a base</button><button class="g" id="bWipe" style="color:#c0392b">Limpar dados personalizados</button></div>
+<div class="card" id="bkCard"><h3 style="margin-top:0">Backup</h3><p style="margin:0;color:var(--cz)">Seus dados ficam só neste aparelho. Faça um backup pelo menos uma vez por semana e guarde o arquivo no Drive, OneDrive ou e-mail. O backup leva leads, histórico, filtros, modelos, sequências, metas e as configurações das telas.</p>
+<div class="bkst" id="bkSt"></div>
+<div class="fl"><button class="b" id="bBk">Fazer backup agora</button><label class="g" style="padding:6px 10px;border:1px solid var(--ln);border-radius:8px;cursor:pointer">Restaurar backup<input type="file" id="bkIn" accept=".json" hidden></label>
+<button class="g" id="bInt">Exportar interações</button><button class="g" id="bAll">Exportar toda a base</button><button class="g" id="bWipe" style="color:#c0392b">Limpar dados personalizados</button></div></div>
 </section>
 </main>
 <dialog id="dlg"></dialog><dialog id="agDlg"></dialog><dialog id="seqDlg"></dialog><dialog id="goalDlg"></dialog><dialog id="newDlg"></dialog><div id="tagPop" hidden></div><div id="agMenu" hidden></div><dialog id="dcfg"></dialog><dialog id="rota"></dialog><dialog id="scDlg"></dialog><dialog id="pz"></dialog><dialog id="cmdk"><input id="cmdQ" placeholder="Buscar empresa, cidade, CNPJ… ou digite um comando" autocomplete="off"><div id="cmdL"></div><div class="cmdf"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span></div></dialog><dialog id="tpl"></dialog><div id="toast"></div>
@@ -585,8 +604,14 @@ const DB={open:()=>new Promise((ok,ko)=>{const r=indexedDB.open("hygiena_crm",1)
 const S={rows:[],inter:[],byId:new Map(),F:{},tab:"all",page:0,per:50,sort:{k:"RAZAO_SOCIAL",d:1},sel:new Set(),filtered:[],cityTag:null};
 const CUSTOM=["contato","cargo","depto","telPers","whats","emailPers","linkedin","site","decisor","interesse","potencial","produtos","concorrente","necessidade","obs","resp","origem","primeiroContato","ultimaInteracao","proxData","proxTipo","STATUS","proxFeita","proxConcluidaEm","kb","tags","cert","contatos","valor","prevFech","seq"];
 async function loadScoreCfg(){try{const c=(await DB.all("configuracoes")).find(x=>x.k=="score");if(c&&c.v){scSet(c.v);try{localStorage.setItem("lpScore",JSON.stringify(c.v))}catch(x){}}else _sc=null}catch(x){}}
-async function load(){await loadScoreCfg();await loadTags();await loadV7Cfg();S.rows=await DB.all("empresas");S.inter=await DB.all("interacoes");S.byId=new Map(S.rows.map(r=>[r.id,r]));S.rows.forEach(r=>{r._k=norm([r.RAZAO_SOCIAL,r.NOME_FANTASIA,r.CNPJ_COMPLETO,r.MUNICIPIO,r.ATIVIDADE_PRINCIPAL_TEXTO,r.contato,...(r.contatos||[]).map(c=>c.nome)].join(" "));r.SETOR=setorOf(r);r.SCORE=scoreOf(r);if(!r._b){r._b=snap(r);if(!r._ts)r._ts={}}});await seqSweep();
- const iv=new Map();S.inter.forEach(i=>{(iv.get(i.id)||iv.set(i.id,[]).get(i.id)).push(i)});S.iv=iv;fillSelects();refresh()}
+function derive(r){r._k=norm([r.RAZAO_SOCIAL,r.NOME_FANTASIA,r.CNPJ_COMPLETO,r.MUNICIPIO,r.ATIVIDADE_PRINCIPAL_TEXTO,r.contato,...(r.contatos||[]).map(c=>c.nome)].join(" "));r.SETOR=setorOf(r);r.SCORE=scoreOf(r)}
+function indexInter(){const iv=new Map();S.inter.forEach(i=>{(iv.get(i.id)||iv.set(i.id,[]).get(i.id)).push(i)});S.iv=iv}
+async function load(){await loadScoreCfg();await loadTags();await loadV7Cfg();S.rows=await DB.all("empresas");S.inter=await DB.all("interacoes");S.byId=new Map(S.rows.map(r=>[r.id,r]));S.rows.forEach(r=>{derive(r);if(!r._b){r._b=snap(r);if(!r._ts)r._ts={}}});await seqSweep();
+ indexInter();fillSelects();refresh();bkCheck()}
+/* v8: depois de mudar poucos leads, atualiza só eles em memória (antes relia a base inteira a cada clique) */
+async function soft(rows){S.inter=await DB.all("interacoes");indexInter();
+ for(const r of rows||[]){if(!r)continue;if(!S.byId.has(r.id)){S.rows.push(r);S.byId.set(r.id,r)}derive(r)}
+ fillV6Selects();refresh();bkCheck()}
 /* ============ Importação ============ */
 function mapHeaders(hs){const m={},un=[];hs.forEach(h=>{const k=key(h);let f=null;for(const[c,al]of Object.entries(ALIAS))if(al.includes(k)){f=c;break}f?m[h]=f:un.push(h)});return{m,un}}
 function mkId(r){const c=dig(r.CNPJ_COMPLETO);if(c.length==14)return"C"+c;const b=dig(r.CNPJ_BASICO);if(b&&r.LOGRADOURO)return`B${b}|${norm(r.LOGRADOURO)}|${norm(r.NUMERO)}`;return`R${norm(r.RAZAO_SOCIAL)}|${norm(r.MUNICIPIO)}|${norm(r.LOGRADOURO)}`}
@@ -622,7 +647,7 @@ const TABS=[["all","Todos os leads",r=>1],["novo","Novos leads",r=>r.STATUS=="No
 function refresh(){queueMicrotask(navBadge);S.F=readF();fcnt(S.F);const base=S.rows.filter(r=>baseMatch(r,S.F));
  $("#tabs").innerHTML=TABS.map(([k,n,f])=>`<button data-t="${k}" class="${S.tab==k?"on":""}">${n} (${base.filter(f).length})</button>`).join("");
  const tf=TABS.find(t=>t[0]==S.tab)[2];const{k,d}=S.sort;S.filtered=base.filter(tf).sort((a,b)=>{const x=a[k]??"",y=b[k]??"";return(typeof x=="number"?x-y:String(x).localeCompare(String(y),"pt"))*d});
- const mx=Math.max(0,Math.ceil(S.filtered.length/S.per)-1);S.page=Math.min(S.page,mx);S.base=base;renderTable();if(S.view=="kan")renderKan();if(S.view=="cards")renderCards();renderDash();if($("#mapa").classList.contains("on"))renderMap();$("#mapTag").innerHTML=S.F.cid?`<span class="bd" style="background:var(--az)">Filtro: ${esc(S.F.cid)}/${esc(S.F.uf)}</span><button class="g" id="bUnmap">Limpar filtro do mapa</button>`:""}
+ const mx=Math.max(0,Math.ceil(S.filtered.length/S.per)-1);S.page=Math.min(S.page,mx);S.base=base;renderTable();if(S.view=="kan")renderKan();if(S.view=="cards")renderCards();if(curPage()=="dash")renderDash();if($("#mapa").classList.contains("on"))renderMap();$("#mapTag").innerHTML=S.F.cid?`<span class="bd" style="background:var(--az)">Filtro: ${esc(S.F.cid)}/${esc(S.F.uf)}</span><button class="g" id="bUnmap">Limpar filtro do mapa</button>`:""}
 const COLS=[["RAZAO_SOCIAL","Razão social"],["SCORE","Prioridade"],["TAGS","Etiquetas"],["CERT","Certificações"],["NOME_FANTASIA","Fantasia"],["CNPJ_COMPLETO","CNPJ"],["MUNICIPIO","Cidade"],["UF","UF"],["SETOR","Setor"],["CNAE_FISCAL_PRINCIPAL","CNAE"],["ATIVIDADE_PRINCIPAL_TEXTO","Atividade"],["CAPITAL_SOCIAL","Capital"],["PORTE_DESCRICAO","Porte"],["TELEFONE_1","Telefone"],["CORREIO_ELETRONICO","E-mail"],["STATUS","Status"],["ultimaInteracao","Últ. interação"],["valor","Valor estimado"],["prevFech","Prev. fechamento"],["proxData","Próx. ação"]];
 function renderTable(){$("#th").innerHTML=`<tr><th><input type="checkbox" id="selAll"></th>`+VC().map(([k,n])=>`<th data-s="${k}">${n}${S.sort.k==k?(S.sort.d>0?" ▲":" ▼"):""}</th>`).join("")+"<th>Ações</th></tr>";
  const pg=S.filtered.slice(S.page*S.per,(S.page+1)*S.per);
@@ -630,7 +655,7 @@ function renderTable(){$("#th").innerHTML=`<tr><th><input type="checkbox" id="se
   if(k=="TAGS")return`<td>${tagsHtml(r,false,3)}</td>`;if(k=="valor")return`<td>${v?brlC(+v):""}</td>`;if(k=="prevFech")return`<td>${brd(v)}</td>`;if(k=="CERT")return`<td>${certPills(r)}</td>`;if(k=="SCORE")return`<td title="${esc(scoreTip(r))}"><span class="bd" style="background:${PRC[priOf(v)]}1f;color:${PRC[priOf(v)]}">${v} ${priOf(v)}</span></td>`;if(k=="CAPITAL_SOCIAL")v=brl(v);else if(k=="CNPJ_COMPLETO")v=maskCnpj(v)+(r.TIPO?` <small>(${r.TIPO})</small>`:"");else if(k=="STATUS")return`<td><select class="stSel" data-i="${esc(r.id)}" style="${stSty(v)}">${STATUS.map(x=>`<option ${x==v?"selected":""}>${x}</option>`).join("")}</select></td>`;
   else if(k=="proxData"&&v&&!r.proxFeita&&v<today())return`<td class="late">${brd(v)}</td>`;else v=esc(k=="proxData"||k=="ultimaInteracao"?brd(v):v);return`<td title="${v}">${v}</td>`}).join("")+
   `<td><button class="g" data-a="v" data-i="${esc(r.id)}" title="Ver/editar">Abrir</button> <button class="g" data-a="g" data-i="${esc(r.id)}" title="Buscar contatos no Google">Google</button> ${r.TELEFONE_1?`<button class="g" data-a="w" data-i="${esc(r.id)}" title="WhatsApp">WA</button>`:""} ${r.CORREIO_ELETRONICO?`<button class="g" data-a="m" data-i="${esc(r.id)}" title="E-mail">@</button>`:""}</td></tr>`).join("")
-  :`<tr><td colspan="16" style="padding:30px;text-align:center;color:var(--cz)">${S.rows.length?"Nenhum lead com esses filtros.":"Nenhum dado. Importe uma planilha em “Importar / Backup”."}</td></tr>`;
+  :`<tr><td colspan="${VC().length+2}" style="padding:30px;text-align:center;color:var(--cz)">${S.rows.length?"Nenhum lead com esses filtros.":"Nenhum dado. Importe uma planilha na tela “Dados”."}</td></tr>`;
  updCnt();$("#pn").textContent=`${S.page+1} / ${Math.max(1,Math.ceil(S.filtered.length/S.per))}`}
 /* ============ Dashboard ============ */
 function bars(t,map,n=8,f="",keep=false){const a=(keep?[...map]:[...map].sort((x,y)=>y[1]-x[1])).slice(0,n),mx=a[0]?a[0][1]:1;return`<div class="card"><b>${t}</b>`+a.map(([k,v])=>`<div class="bar ${f&&k!="—"?"lk":""}" ${f&&k!="—"?`data-fk="${f}" data-fv="${esc(k)}" title="Clique para filtrar"`:""}><span style="width:110px;overflow:hidden;text-overflow:ellipsis">${esc(k)}</span><i style="width:0" data-w="${v/mx*100}"></i>${v}</div>`).join("")+"</div>"}
@@ -766,7 +791,7 @@ function renderTasks(){const t=today(),w=addDays(t,7),R=S.rows,P=R.filter(r=>r.p
 async function tkDo(k,id){const r=S.byId.get(id);if(!r)return;
  if(k=="done"){r.proxFeita=true;r.proxConcluidaEm=today();await DB.put("empresas",r);await addInter(r,{tipo:"Outro",obs:"Próxima ação concluída: "+(r.proxTipo||"")},true)}
  else{const base=r.proxData&&r.proxData>today()?r.proxData:today();r.proxData=addDays(base,+k);r.proxFeita=false;await DB.put("empresas",r);await addInter(r,{tipo:"Outro",obs:"Ação adiada para "+brd(r.proxData)},true)}
- await load();renderTasks();toast(k=="done"?"Ação concluída":"Ação adiada")}
+ await soft([r]);if($("#tasks"))renderTasks();toast(k=="done"?"Ação concluída":"Ação adiada")}
 /* ============ Exportação / backup ============ */
 function download(n,txt,type){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type}));a.download=n;a.click()}
 const flat=r=>{const o={};Object.keys(r).forEach(k=>{if(k[0]=="_")return;const v=r[k];if(k=="cert")o.certificacoes=certNames(r).join(", ");else if(k=="contatos")o.outrosContatos=(v||[]).map(c=>[c.nome,c.cargo,c.tel||c.whats,c.email].filter(Boolean).join(" / ")).join("; ");else if(k=="seq")o.sequencia=`${v.n} (passo ${v.i+1} de ${v.s.length})`;else o[k]=Array.isArray(v)?v.join(", "):v});return o};
@@ -774,10 +799,30 @@ function toCSV(rows){const keys=[...new Set(rows.flatMap(r=>Object.keys(r)))],q=
 async function exportRows(rows,fmt,name){if(!rows.length)return toast("Nada para exportar",1);const R=rows.map(flat);
  if(fmt=="xlsx"){await window.LIBS_READY;if(typeof XLSX=="undefined")return toast("A exportação para Excel ainda não foi baixada. Conecte-se uma vez à internet ou exporte em CSV.",1);const ws=XLSX.utils.json_to_sheet(R),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Leads");XLSX.writeFile(wb,name+".xlsx")}
  else download(name+".csv","﻿"+toCSV(R),"text/csv")}
-async function backup(){const d={versao:1,data:new Date().toISOString()};for(const s of["empresas","interacoes","filtrosSalvos","configuracoes","importacoes"])d[s]=await DB.all(s);download(`backup_crm_${today()}.json`,JSON.stringify(d,(k,v)=>k=="_orig"||k=="_k"?undefined:v),"application/json")}
-async function restore(file){try{const d=JSON.parse(await file.text());if(!confirm("Restaurar backup? Registros com o mesmo ID serão SUBSTITUÍDOS pelos do arquivo. Para juntar dados de dois aparelhos sem perder nada, use “Sincronizar”."))return;for(const s of["empresas","interacoes","filtrosSalvos","configuracoes"])if(d[s]){if(s=="empresas")d[s].forEach(x=>{if(!x._b)x._b=snap(x);if(!x._ts)x._ts={}});if(s=="interacoes")d[s].forEach(x=>{if(!x.uid)x.uid=iuid(x)});await DB.putMany(s,d[s],true)}await loadTpl();await load();toast("Backup restaurado")}catch(e){toast("Backup inválido",1)}}
+/* v8: backup completo (inclui as preferências das telas) e restauração com conferência */
+const PREF_KEYS=["dashCfg","colsCfg","colsHide","lpView","navMin","lpKb","lpSgReg","lpCar","lpScore","lpTags","lpSeqs","lpGoals","minhaEmpresa","meuNome","lpDevName","aiModel"];
+async function backupData(){const d={tipo:"lucas-prospeccao-backup",versao:2,data:new Date().toISOString(),prefs:{}};for(const s of["empresas","interacoes","filtrosSalvos","configuracoes","importacoes"])d[s]=await DB.all(s);
+ for(const k of PREF_KEYS){const v=lsGet(k);if(v)d.prefs[k]=v}return d}
+async function backup(prefix){const d=await backupData(),p=n=>String(n).padStart(2,"0"),x=new Date();
+ download(`${prefix||"backup_crm"}_${today()}_${p(x.getHours())}${p(x.getMinutes())}.json`,JSON.stringify(d,(k,v)=>k=="_orig"||k=="_k"||k=="SETOR"||k=="SCORE"?undefined:v),"application/json");
+ if(!prefix){try{localStorage.setItem("lpLastBk",d.data)}catch(e){}try{await DB.put("configuracoes",{k:"lastBackup",v:d.data})}catch(e){}bkCheck();toast("Backup gerado. Guarde o arquivo fora do aparelho (Drive, e-mail…).")}}
+const lastBk=()=>lsGet("lpLastBk")||((S.cfgLastBk)||"");
+function bkPending(since){let n=0;for(const r of S.rows){if(r._ts){for(const t of Object.values(r._ts))if(!since||t>since){n++;break}}}return n+S.inter.filter(i=>!since||String(i.data)>since).length}
+function bkCheck(){const b=$("#tbBk");if(!b)return;const lb=lastBk(),days=lb?dd(fmtLocal(new Date(lb)),today()):null,pend=bkPending(lb);
+ const warn=pend>0&&(!lb||days>=7||pend>=200);b.classList.toggle("on",warn);b.classList.toggle("bad",warn&&(!lb||days>=14));
+ if(warn)b.textContent=lb?`⚠ Backup há ${days} dia${days==1?"":"s"}`:"⚠ Sem backup";b.title=lb?`Último backup em ${fmtDT(lb)} · ${pend} alteração(ões) depois dele. Toque para fazer agora.`:`Você ainda não fez backup · ${pend} alteração(ões). Toque para fazer agora.`;
+ const st=$("#bkSt");if(st){const per=S.persist;st.innerHTML=`<div><small>Último backup</small><b class="${!lb||days>=7?"bad":"ok"}">${lb?esc(fmtDT(lb))+(days?` (há ${days} dia${days==1?"":"s"})`:" (hoje)"):"nunca"}</b></div><div><small>Alterações desde o último backup</small><b class="${pend?"bad":"ok"}">${pend}</b></div><div><small>Proteção contra limpeza do navegador</small><b class="${per?"ok":"bad"}">${per===undefined?"verificando…":per?"ativa":"não concedida"}</b>${per===false?'<small>Instale o app (Adicionar à tela inicial) para o navegador proteger os dados. Até lá, faça backups frequentes.</small>':""}</div>`}}
+async function askPersist(){try{if(!navigator.storage||!navigator.storage.persist){S.persist=false;return}let p=await navigator.storage.persisted();if(!p)p=await navigator.storage.persist();S.persist=!!p}catch(e){S.persist=false}bkCheck()}
+async function restore(file){let d;try{d=JSON.parse(await file.text())}catch(e){return toast("Este arquivo não é um backup válido",1)}
+ if(d&&d.tipo=="lucas-prospeccao-sync"){if(confirm("Este arquivo é de SINCRONIZAÇÃO, não de backup. Quer aplicá-lo como sincronização (junta os dados sem apagar nada)?"))await aplicarSync([file]);return}
+ if(!d||!Array.isArray(d.empresas)||(d.tipo&&d.tipo!="lucas-prospeccao-backup"))return toast("Este arquivo não é um backup do Lucas Prospecção",1);
+ const ex=d.empresas.filter(x=>x&&S.byId.has(x.id)).length;
+ if(!confirm(`Restaurar backup de ${d.data?fmtDT(d.data):"data desconhecida"}?\n\n• ${d.empresas.length} empresa(s) no arquivo; ${ex} já existem aqui e serão SUBSTITUÍDAS pela versão do arquivo.\n• ${(d.interacoes||[]).length} interação(ões).\n\nAntes, vou baixar uma cópia de segurança dos dados atuais. Para juntar dados de dois aparelhos sem perder nada, use “Sincronizar”.`))return;
+ try{if(S.rows.length)await backup("antes_de_restaurar");
+  if(d.prefs&&typeof d.prefs=="object")for(const[k,v]of Object.entries(d.prefs))if(PREF_KEYS.includes(k)&&typeof v=="string"){try{localStorage.setItem(k,v)}catch(e){}}
+  for(const s of["empresas","interacoes","filtrosSalvos","configuracoes"])if(Array.isArray(d[s])){if(s=="empresas")d[s].forEach(x=>{if(!x._b)x._b=snap(x);if(!x._ts)x._ts={}});if(s=="interacoes")d[s].forEach(x=>{if(!x.uid)x.uid=iuid(x)});await DB.putMany(s,d[s],true)}_sc=null;TAGS=null;SEQS=null;GOALS=null;await loadGeo();await loadTpl();await load();toast("Backup restaurado")}catch(e){console.error(e);toast("Não foi possível restaurar: "+e.message,1)}}
 /* ============ Eventos ============ */
-function go(p){$$(".pg").forEach(e=>e.classList.toggle("on",e.id==p));$$("nav button").forEach(b=>b.classList.toggle("on",b.dataset.p==p));if(p=="mapa")renderMap();if(p=="dados")syInfo()}
+function go(p){$$(".pg").forEach(e=>e.classList.toggle("on",e.id==p));$$("nav button").forEach(b=>b.classList.toggle("on",b.dataset.p==p));if(p=="dash")renderDash();if(p=="mapa")renderMap();if(p=="dados"){syInfo();bkCheck()}}
 function bind(){
  $$("nav button[data-p]").forEach(b=>b.onclick=()=>go(b.dataset.p));bindX();
  const rf=deb(()=>{S.page=0;refresh()});$$("#leads .card input,#leads .card select").forEach(e=>{if(e.id=="fSaved")return;e.addEventListener("input",rf)});
@@ -794,7 +839,7 @@ function bind(){
   if(t.id=="bUnmap"){$("#fCid").value="";refresh()}
   if(t.id=="selAll"){S.filtered.slice(S.page*S.per,(S.page+1)*S.per).forEach(r=>t.checked?S.sel.add(r.id):S.sel.delete(r.id));renderTable()}
   if(t.classList.contains("sel"))t.checked?S.sel.add(t.dataset.i):S.sel.delete(t.dataset.i)});
- $("#bulk").onchange=async e=>{const s=e.target.value;if(!s||!S.sel.size)return;if(!confirm(`Alterar ${S.sel.size} leads para "${s}"?`))return;for(const id of S.sel){const r=S.byId.get(id);const o=r.STATUS;r.STATUS=s;await DB.put("empresas",r);await DB.put("interacoes",{id,data:new Date().toISOString(),tipo:"Mudança de status",obs:`${o} → ${s}`,usuario:"Vendedor"})}S.sel.clear();e.target.value="";await load()};
+ $("#bulk").onchange=async e=>{const s=e.target.value;if(!s||!S.sel.size)return;if(!confirm(`Alterar ${S.sel.size} leads para "${s}"?`)){e.target.value="";return}const R=[],I=[],now=new Date().toISOString();for(const id of S.sel){const r=S.byId.get(id);if(!r||r.STATUS===s)continue;const o=r.STATUS;r.STATUS=s;R.push(r);I.push({id,data:now,tipo:"Mudança de status",obs:`${o} → ${s}`,usuario:r.resp||"Vendedor",resultado:"",passo:"",proxData:""})}await DB.putMany("empresas",R);await DB.putMany("interacoes",I);S.sel.clear();e.target.value="";await soft(R);toast(`${R.length} lead(s) agora em “${s}”`)};
  $("#pv").onclick=()=>{S.page=Math.max(0,S.page-1);rerender()};$("#nx").onclick=()=>{if((S.page+1)*S.per<S.filtered.length){S.page++;rerender()}};
  $("#bExpSel").onclick=()=>exportRows(S.rows.filter(r=>S.sel.has(r.id)),"csv","selecionados");$("#bExpF").onclick=()=>exportRows(S.filtered,"csv","filtrados");$("#bExpX").onclick=()=>exportRows(S.filtered,"xlsx","filtrados");
  $("#bAll").onclick=()=>exportRows(S.rows,"csv","base_completa");$("#bInt").onclick=()=>exportRows(S.inter,"csv","interacoes");
@@ -814,7 +859,7 @@ function bindX(){bindY();bindZ();bindSync();bindNet();
  k.addEventListener("dragstart",e=>{const c=e.target.closest(".kd");if(!c)return;dragId=c.dataset.i;c.classList.add("drag");e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain","x")});
  k.addEventListener("dragend",e=>{dragId=null;$$(".kd.drag,.kc.ov").forEach(x=>x.classList.remove("drag","ov"))});
  k.addEventListener("dragover",e=>{const c=e.target.closest(".kc");if(!c)return;e.preventDefault();$$(".kc.ov").forEach(x=>x!==c&&x.classList.remove("ov"));c.classList.add("ov")});
- k.addEventListener("drop",async e=>{e.preventDefault();const c=e.target.closest(".kc");if(!c||!dragId)return;const r=S.byId.get(dragId),st=c.dataset.st;if(r&&r.STATUS!==st){const o=r.STATUS;r.STATUS=st;await DB.put("empresas",r);await DB.put("interacoes",{id:r.id,data:new Date().toISOString(),tipo:"Mudança de status",obs:`${o} → ${st}`,usuario:r.resp||"Vendedor",resultado:"",passo:"",proxData:""});await load();toast(`${r.NOME_FANTASIA||r.RAZAO_SOCIAL}: ${st}`)}});
+ k.addEventListener("drop",async e=>{e.preventDefault();const c=e.target.closest(".kc");if(!c||!dragId)return;const r=S.byId.get(dragId),st=c.dataset.st;if(r&&r.STATUS!==st){const o=r.STATUS;r.STATUS=st;await DB.put("empresas",r);await DB.put("interacoes",{id:r.id,data:new Date().toISOString(),tipo:"Mudança de status",obs:`${o} → ${st}`,usuario:r.resp||"Vendedor",resultado:"",passo:"",proxData:""});await soft([r]);toast(`${r.NOME_FANTASIA||r.RAZAO_SOCIAL}: ${st}`)}});
  k.addEventListener("click",e=>{if(e.target.closest("select"))return;const c=e.target.closest(".kd");if(c)openLead(c.dataset.i)});
  $("#charts").addEventListener("click",e=>{const b=e.target.closest("[data-fk]");if(!b)return;const m={uf:"#fUF",cnae:"#fCnae",porte:"#fPorte",st:"#fSt",setor:"#fSetor",pri:"#fPri"},el=$(m[b.dataset.fk]);el.value=b.dataset.fv;if(b.dataset.fk=="uf"){fillCities();$("#fCid").value=""}S.tab="all";S.page=0;refresh();go("leads");toast("Filtro: "+b.dataset.fv)});
  $("#dlg").addEventListener("click",e=>{if(e.target===$("#dlg"))$("#dlg").close()});
@@ -921,13 +966,15 @@ function syInfo(){if(!$("#syInfo"))return;const out=lsGet("lpSyncOut"),inn=lsGet
 function syFile(){const dev={id:devId(),nome:devName()||"aparelho"},pkg=syncBuild(S.rows,S.inter,geo,$("#syFull").checked,dev),d=new Date(),p=n=>String(n).padStart(2,"0");
  const nome=`sync_${dev.nome.toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g,"-")}_${fmtLocal(d)}_${p(d.getHours())}${p(d.getMinutes())}.json`;
  return{pkg,nome,txt:JSON.stringify(pkg)}}
-async function aplicarSync(files){const T={novos:0,alt:0,cf:0,inter:0,arqs:0};
+async function aplicarSync(files){const T={novos:0,alt:0,cf:0,inter:0,arqs:0},clk=[];
  for(const f of files){let pkg;try{pkg=JSON.parse(await f.text())}catch(e){toast(`“${f.name}” não é um arquivo válido`,1);continue}
+  const ger=Date.parse(pkg&&pkg.geradoEm||"");if(ger&&ger-Date.now()>10*60e3&&!confirm(`O arquivo “${f.name}” diz que foi gerado em ${fmtDT(pkg.geradoEm)}, que está no futuro para este aparelho. O relógio de um dos aparelhos parece errado, e isso pode fazer uma edição antiga vencer uma nova.\n\nAcerte a data e hora dos dois aparelhos antes. Aplicar mesmo assim?`))continue;
+  if(ger&&ger-Date.now()>10*60e3)clk.push(pkg.nome||f.name);
   try{const r=syncApply(S.rows,S.inter,pkg);await DB.putMany("empresas",r.put,true);await DB.putMany("interacoes",r.addI,true);
    let g=false;for(const[k,v]of Object.entries(r.geo))if(!geo[k]&&Array.isArray(v)){geo[k]=v;g=true}if(g)await DB.put("configuracoes",{k:"geo",v:geo});
    T.novos+=r.st.novos;T.alt+=r.st.alt;T.cf+=r.st.cf;T.inter+=r.st.inter;T.arqs++;await load()}catch(e){toast(e.message,1)}}
  if(T.arqs){try{localStorage.setItem("lpSyncIn",new Date().toISOString())}catch(e){}
-  $("#syRes").innerHTML=`<div class="card" style="background:#eaf7ef;margin:8px 0 0"><b>Sincronização concluída (${T.arqs} arquivo${T.arqs>1?"s":""})</b><br>${T.novos} lead(s) novo(s) · ${T.alt} lead(s) atualizado(s) · ${T.inter} interação(ões) nova(s)${T.cf?` · ${T.cf} campo(s) editado(s) nos dois aparelhos (ficou a edição mais recente)`:""}.<br><small>Para o outro aparelho também receber o que está aqui, gere um arquivo neste aparelho e aplique lá.</small></div>`;
+  $("#syRes").innerHTML=`<div class="card" style="background:#eaf7ef;margin:8px 0 0"><b>Sincronização concluída (${T.arqs} arquivo${T.arqs>1?"s":""})</b><br>${T.novos} lead(s) novo(s) · ${T.alt} lead(s) atualizado(s) · ${T.inter} interação(ões) nova(s)${T.cf?` · ${T.cf} campo(s) editado(s) nos dois aparelhos (ficou a edição mais recente)`:""}.${clk.length?`<br><b class="late">Relógio adiantado em: ${esc(clk.join(", "))}. Confira data e hora dos aparelhos.</b>`:""}<br><small>Para o outro aparelho também receber o que está aqui, gere um arquivo neste aparelho e aplique lá.</small></div>`;
   syInfo();toast("Sincronização concluída")}}
 function bindSync(){
  $("#devName").addEventListener("input",e=>{try{localStorage.setItem("lpDevName",e.target.value.trim())}catch(x){}});
@@ -940,7 +987,7 @@ const rerender=()=>{renderTable();if(S.view=="cards")renderCards()};
 function fcnt(F){const n=[F.q,F.uf,F.cid,F.porte,F.st,F.cnae,F.cnaeSel&&F.cnaeSel.length,F.min>0,F.max,F.mail,F.tel,F.setor,F.pri,F.sit,F.sim,F.mei,F.prox,F.tag,F.reg,F.cert,F.seq].filter(Boolean).length,e=$("#fCount");if(e){e.textContent=n;e.style.display=n?"inline-block":"none"}}
 const telOf=r=>r.whats||r.telPers||((r.DDD_1||"")+(r.TELEFONE_1||""));
 function renderCards(){const c=$("#cards");if(!c)return;const pg=S.filtered.slice(S.page*S.per,(S.page+1)*S.per);
- if(!pg.length){c.innerHTML=`<div class="card" style="text-align:center;color:var(--cz)">${S.rows.length?"Nenhum lead com esses filtros.":"Nenhum dado. Importe uma planilha em “Dados e sync”."}</div>`;updCnt();return}
+ if(!pg.length){c.innerHTML=`<div class="card" style="text-align:center;color:var(--cz)">${S.rows.length?"Nenhum lead com esses filtros.":"Nenhum dado. Importe uma planilha na tela “Dados”."}</div>`;updCnt();return}
  c.innerHTML=pg.map(r=>{const tel=telOf(r),late=r.proxData&&!r.proxFeita&&r.proxData<today(),id=esc(r.id);
   return`<div class="lc" data-open="${id}"><label class="lc-c"><input type="checkbox" class="sel" data-i="${id}" ${S.sel.has(r.id)?"checked":""}></label><div class="lc-b">
  <div class="lc-h"><b>${esc(nmL(r))}</b><span class="bd" style="background:${PRC[priOf(r.SCORE)]}1f;color:${PRC[priOf(r.SCORE)]}" title="${esc(scoreTip(r))}">${r.SCORE}</span></div>${(r.tags||[]).length||certNames(r).length?`<div class="lc-t">${certPills(r)}${tagsHtml(r,false,4)}</div>`:""}
@@ -1049,7 +1096,7 @@ function msgBox(r){return`<div class="card" id="msgBox"><b>Enviar mensagem</b>
 function bindMsg(r){if(!$("#mT"))return;
  const fill=()=>{const t=S.tpl[+$("#mT").value];if(!t)return;const v=tplVars(r,$("#mMe").value.trim());$("#mSub").value=tplRender(t.assunto||"",v);$("#mTxt").value=tplRender(t.texto||"",v)};
  $("#mT").onchange=fill;$("#mMe").oninput=deb(()=>{try{localStorage.setItem("meuNome",$("#mMe").value.trim())}catch(e){}fill()},400);fill();
- const reg=async tipo=>{if(!$("#mReg").checked)return;const t=S.tpl[+$("#mT").value];await addInter(r,{tipo,resultado:"Enviado",obs:"Mensagem enviada (modelo: "+(t?t.nome:"manual")+")"});await load();openLead(r.id)};
+ const reg=async tipo=>{if(!$("#mReg").checked)return;const t=S.tpl[+$("#mT").value];await addInter(r,{tipo,resultado:"Enviado",obs:"Mensagem enviada (modelo: "+(t?t.nome:"manual")+")"});await soft([r]);openLead(r.id)};
  $("#mWa").onclick=()=>{const ph=waPhone(r);if(!ph){toast("Sem número válido com DDD para WhatsApp. Preencha o campo WhatsApp da ficha.",1);return}openW("https://wa.me/"+ph+"?text="+encodeURIComponent($("#mTxt").value));reg("WhatsApp")};
  $("#mMail").onclick=()=>{const m=mailOf(r);if(!m){toast("Nenhum e-mail válido neste lead",1);return}location.href="mailto:"+m+"?subject="+encodeURIComponent($("#mSub").value)+"&body="+encodeURIComponent($("#mTxt").value);reg("E-mail")};
  $("#mCopy").onclick=async()=>{await copyTxt($("#mTxt").value);toast("Texto copiado")};
@@ -1093,7 +1140,7 @@ function bindZ(){
  const rowChange=async e=>{const t=e.target;
   if(t.classList.contains("sel")){updCnt();return}
   if(!t.classList.contains("stSel"))return;const r=S.byId.get(t.dataset.i);if(!r)return;const o=r.STATUS,n=t.value;if(o===n)return;
-  r.STATUS=n;await DB.put("empresas",r);await DB.put("interacoes",{id:r.id,data:new Date().toISOString(),tipo:"Mudança de status",obs:`${o} → ${n}`,usuario:r.resp||"Vendedor",resultado:"",passo:"",proxData:""});await load();toast(`${nmL(r)}: ${n}`)};["#tb","#cards","#kan"].forEach(id=>$(id).addEventListener("change",rowChange));
+  r.STATUS=n;await DB.put("empresas",r);await DB.put("interacoes",{id:r.id,data:new Date().toISOString(),tipo:"Mudança de status",obs:`${o} → ${n}`,usuario:r.resp||"Vendedor",resultado:"",passo:"",proxData:""});await soft([r]);toast(`${nmL(r)}: ${n}`)};["#tb","#cards","#kan"].forEach(id=>$(id).addEventListener("change",rowChange));
  $("#bRota").onclick=openRota;
  $("#bMails").onclick=async()=>{const m=[...new Set(selOrFiltered().map(mailOf).filter(Boolean).map(x=>x.trim().toLowerCase()))];if(!m.length)return toast("Nenhum e-mail válido",1);await copyTxt(m.join("; "));toast(`${m.length} e-mails copiados`)};
  $("#bCont").onclick=()=>{const rows=selOrFiltered().filter(r=>r.contato||r.telPers||r.whats||r.emailPers).map(r=>({Empresa:r.RAZAO_SOCIAL,Fantasia:r.NOME_FANTASIA,Cidade:r.MUNICIPIO,UF:r.UF,Contato:r.contato||"",Cargo:r.cargo||"",Departamento:r.depto||"",Telefone:r.telPers||"",WhatsApp:r.whats||"",Email:r.emailPers||"",LinkedIn:r.linkedin||"",Site:r.site||"",Decisor:r.decisor||"",Interesse:r.interesse||"",Potencial:r.potencial||"",Status:r.STATUS,Prioridade:r.SCORE,ProximaAcao:brd(r.proxData)}));if(!rows.length)return toast("Nenhum lead com contato personalizado cadastrado",1);exportRows(rows,"csv","contatos")};
@@ -1104,7 +1151,7 @@ function bindZ(){
   const L=S.route.map(i=>S.byId.get(i)).filter(Boolean);
   if(t.id=="rGo")openW(routeUrl(L));
   if(t.id=="rCopy"){await copyTxt(L.map((r,i)=>`${i+1}. ${nmL(r)} – ${addrOf(r)}`).join("\n"));toast("Endereços copiados")}
-  if(t.id=="rSched"){const d=$("#rDate").value;if(!d||!L.length)return toast("Escolha a data",1);for(const r of L){r.proxData=d;r.proxTipo="Visita presencial";r.proxFeita=false;await DB.put("empresas",r);await addInter(r,{tipo:"Outro",obs:"Visita agendada para "+brd(d)},true)}await load();toast(`${L.length} visitas agendadas para ${brd(d)}`)}});
+  if(t.id=="rSched"){const d=$("#rDate").value;if(!d||!L.length)return toast("Escolha a data",1);const now=new Date().toISOString();for(const r of L){r.proxData=d;r.proxTipo="Visita presencial";r.proxFeita=false}await DB.putMany("empresas",L);await DB.putMany("interacoes",L.map(r=>({id:r.id,data:now,tipo:"Outro",obs:"Visita agendada para "+brd(d),usuario:r.resp||"Vendedor",resultado:"",passo:"",proxData:""})));await soft(L);toast(`${L.length} visitas agendadas para ${brd(d)}`)}});
  const T=$("#tpl");
  T.addEventListener("close",loadTpl);
  T.addEventListener("click",async e=>{const t=e.target;
@@ -1222,7 +1269,7 @@ function openLead(id,tipo){const r=S.byId.get(id);if(!r)return;S.cur=id;tagPopCl
    <dt>Telefone</dt><dd>${td.length>=8?`<a href="tel:+55${td}">${esc(tel)}</a>`:"—"}</dd>
    <dt>E-mail</dt><dd>${r.CORREIO_ELETRONICO?esc(r.CORREIO_ELETRONICO)+(validMail(String(r.CORREIO_ELETRONICO))?"":' <b class="late">(inválido)</b>'):"—"}</dd></dl>
    <a class="ld-lk" target="_blank" rel="noopener" href="https://www.google.com/maps/search/${encodeURIComponent([r.LOGRADOURO,r.NUMERO,r.MUNICIPIO,r.UF].filter(Boolean).join(" "))}">Abrir no mapa</a></section>
-  <section class="ld-c"><h4>Detalhes</h4><form id="lf" class="ld-f">${F_FIELDS.filter(([k])=>!CK.includes(k)).map(([k,n,t])=>`<label>${n}<input name="${k}" type="${t||"text"}" value="${esc(r[k]||"")}"></label>`).join("")}<label>Observações<textarea name="obs" rows="3">${esc(r.obs||"")}</textarea></label></form><button type="button" class="b" id="lSave">Salvar dados</button></section>
+  <section class="ld-c"><h4>Detalhes</h4><form id="lf" class="ld-f">${F_FIELDS.filter(([k])=>!CK.includes(k)).map(([k,n,t])=>`<label>${n}<input name="${k}" type="${t||"text"}" value="${esc(r[k]||"")}"></label>`).join("")}<label>Observações<textarea name="obs" rows="3">${esc(r.obs||"")}</textarea></label></form><div class="lfs" id="lfS">As alterações são salvas automaticamente.</div><button type="button" class="g" id="lSave">Salvar agora</button></section>
   ${aiBox(r)}
  </aside><div class="ld-main">
   ${hlBox(r)}<div class="ld-next ${pend?(late?"late":"ok"):"warn"}">${pend?`${ICO.clock}<div><b>${late?"Atrasada":"Próxima ação"}: ${esc(r.proxTipo||"Follow-up")}</b><span>${brd(r.proxData)}${late?` · há ${dd(r.proxData,today())} dia(s)`:r.proxData==today()?" · hoje":""}</span></div><button type="button" class="g" id="lDone">Marcar como feita</button>`:`${ICO.warn}<div><b>Sem próxima ação</b><span>Registre uma interação e agende o próximo passo logo abaixo.</span></div>`}</div>
@@ -1240,15 +1287,19 @@ function openLead(id,tipo){const r=S.byId.get(id);if(!r)return;S.cur=id;tagPopCl
  D.querySelector(".ld-tabs").onclick=e=>{const b=e.target.closest("[data-ct]");if(b){selT(b.dataset.ct);$("#iO").focus()}};
  D.querySelector(".ld-chips").onclick=e=>{const b=e.target.closest("[data-nd]");if(b)setNext(b.dataset.nd)};
  $("#iD").oninput=()=>$$("#dlg [data-nd]").forEach(b=>b.classList.remove("on"));
- const save=async()=>{const fd=new FormData($("#lf"));fd.forEach((v,k)=>r[k]=v);await DB.put("empresas",r)};
- $("#lSave").onclick=async()=>{await save();toast("Dados salvos");rerenderSoon()};
+ const save=async()=>{const f=D.querySelector("#lf");if(!f)return;const fd=new FormData(f);fd.forEach((v,k)=>r[k]=v);await DB.put("empresas",r)};
+ const autosave=async()=>{await save();derive(r);const m=$("#lfS");if(m)m.textContent="Salvo às "+new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});rerenderSoon()};
+ $("#lf").addEventListener("change",autosave);$("#lf").addEventListener("input",deb(autosave,1200));
+ D.onclose=async()=>{if(S.cur!==id)return;const f=D.querySelector("#lf");if(f&&[...new FormData(f)].some(([k,v])=>String(r[k]??"")!==String(v)))await autosave();
+  const cf=D.querySelector(".ct-f");if(cf&&[...cf.querySelectorAll("[data-f]")].some(i=>i.value.trim())){const b=cf.querySelector("[data-cts]");if(b)b.click()}};
+ $("#lSave").onclick=async()=>{await autosave();toast("Dados salvos")};
  $("#lClose").onclick=$("#lClose2").onclick=()=>D.close();
- $("#lSt").onchange=async e=>{const o=r.STATUS||"Novo",n=e.target.value;if(o==n)return;await save();r.STATUS=n;await DB.put("empresas",r);await addInter(r,{tipo:"Mudança de status",obs:`${o} → ${n}`},true);await load();openLead(id);toast(`${nmL(r)}: ${n}`)};
+ $("#lSt").onchange=async e=>{const o=r.STATUS||"Novo",n=e.target.value;if(o==n)return;await save();r.STATUS=n;await DB.put("empresas",r);await addInter(r,{tipo:"Mudança de status",obs:`${o} → ${n}`},true);await soft([r]);openLead(id);toast(`${nmL(r)}: ${n}`)};
  $("#iAdd").onclick=async()=>{const obs=$("#iO").value.trim(),res=$("#iR").value.trim(),pd=$("#iD").value,pt=$("#iPT").value;
   if(curT=="Anotação"&&!obs)return toast("Escreva a anotação antes de registrar",1);
   await save();await addInter(r,{tipo:curT,resultado:res,obs,passo:pd?pt:"",proxData:pd},curT=="Anotação");
-  if(curT!="Anotação"&&r.seq)await seqStepDone(r);if(pd){r.proxData=pd;r.proxTipo=pt;r.proxFeita=false}await DB.put("empresas",r);await load();openLead(id);toast("Registrado"+(pd?` · próximo passo em ${brd(pd)}`:""))};
- const ld=$("#lDone");if(ld)ld.onclick=async()=>{r.proxFeita=true;r.proxConcluidaEm=today();if(r.seq){const nx=await seqStepDone(r);if(nx){r.proxData=addDays(today(),nx.d);r.proxTipo=nx.t;r.proxFeita=false}}await DB.put("empresas",r);await addInter(r,{tipo:"Outro",obs:"Próxima ação concluída: "+(r.proxTipo||"")},true);await load();openLead(id);toast("Ação marcada como feita. Agende o próximo passo.")};
+  if(curT!="Anotação"&&r.seq)await seqStepDone(r);if(pd){r.proxData=pd;r.proxTipo=pt;r.proxFeita=false}await DB.put("empresas",r);await soft([r]);openLead(id);toast("Registrado"+(pd?` · próximo passo em ${brd(pd)}`:""))};
+ const ld=$("#lDone");if(ld)ld.onclick=async()=>{r.proxFeita=true;r.proxConcluidaEm=today();if(r.seq){const nx=await seqStepDone(r);if(nx){r.proxData=addDays(today(),nx.d);r.proxTipo=nx.t;r.proxFeita=false}}await DB.put("empresas",r);await addInter(r,{tipo:"Outro",obs:"Próxima ação concluída: "+(r.proxTipo||"")},true);await soft([r]);openLead(id);toast("Ação marcada como feita. Agende o próximo passo.")};
  $("#lExp").onclick=()=>download(`ficha_${r.id}.json`,JSON.stringify({empresa:{...r,_orig:undefined,_k:undefined},historico:h},null,1),"application/json")}
 
 /* --- Sugestões por região --- */
@@ -1270,7 +1321,7 @@ function renderSug(){const B=sugBase(),g=new Map();
   ${top.length>1?`<div class="sg-f" style="margin-top:0"><span style="font-size:12px;color:var(--cz)">Cidades:</span><button type="button" class="chip ${sgCity?"":"on"}" data-sgc="">Todas</button>${top.map(([c,n])=>`<button type="button" class="chip ${sgCity==c?"on":""}" data-sgc="${esc(c)}">${esc(c)} · ${n}</button>`).join("")}</div>`:""}
   <div class="sg-list">${rows.slice(0,100).map(r=>{const pr=priOf(r.SCORE);return`<div class="sg-row" data-ao="${esc(r.id)}"><div style="min-width:0"><b>${esc(nmL(r))}</b><small>${esc(r.MUNICIPIO)} · ${esc(r.SETOR||"")}${r.PORTE_DESCRICAO?" · "+esc(r.PORTE_DESCRICAO):""}${dig(telOf(r)).length>=8?"":" · sem telefone"}</small>${(r.tags||[]).length||certNames(r).length?`<div class="ktg">${certPills(r)}${tagsHtml(r,false,3)}</div>`:""}</div><span class="bd" style="background:${PRC[pr]}1f;color:${PRC[pr]}">${r.SCORE} ${pr}</span><div class="sg-a">${kbBtn(r)}<a class="g" href="${gUrl(gQuery(r))}" target="_blank" rel="noopener noreferrer">Google</a></div></div>`}).join("")||'<div class="ag-empty">Nenhuma empresa com esses filtros.</div>'}${rows.length>100?`<div class="ld-empty" style="padding:12px">Mostrando as 100 de maior prioridade de ${rows.length}. O modo prospecção percorre todas.</div>`:""}</div>`}
 function sgPz(){if(!sgRows.length)return toast("Nenhuma empresa nesta região com esses filtros.",1);pzStart(sgRows,`Sugestões · ${regNameK(sgSel)}${sgCity?" · "+sgCity:""}`)}
-async function sgTopKb(){const a=sgRows.slice(0,10);if(!a.length)return;a.forEach(r=>r.kb=true);await DB.putMany("empresas",a);await load();renderSug();toast(`${a.length} empresas enviadas ao Kanban de prospecção`)}
+async function sgTopKb(){const a=sgRows.slice(0,10);if(!a.length)return;a.forEach(r=>r.kb=true);await DB.putMany("empresas",a);await soft(a);renderSug();toast(`${a.length} empresas enviadas ao Kanban de prospecção`)}
 
 /* --- Agenda de retornos --- */
 let agP="pend",agTp="",agRg="",agA="",agB="";
@@ -1380,7 +1431,7 @@ function v6Init(){
   const rows=S.rows.filter(r=>S.sel.has(r.id)),[k,a]=[v.slice(0,v.indexOf(":")),v.slice(v.indexOf(":")+1)],lab=k=="c1"?"Marcar que tem "+(CERTS.find(c=>c.k==a)||{}).n:k=="kb"?(a=="1"?"Enviar ao Kanban":"Tirar do Kanban"):(k=="t+"?"Adicionar a etiqueta “"+a+"”":"Tirar a etiqueta “"+a+"”");
   if(!confirm(`${lab}: ${rows.length} lead(s)?`))return;
   rows.forEach(r=>{if(k=="c1"){r.cert={...(r.cert||{}),[a]:1};return}if(k=="kb"){if(a=="1")r.kb=true;else delete r.kb}else{const s=new Set(r.tags||[]);k=="t+"?s.add(a):s.delete(a);if(s.size)r.tags=[...s];else delete r.tags}});
-  await DB.putMany("empresas",rows);S.sel.clear();await load();toast(`${lab}: ${rows.length} lead(s)`)};
+  await DB.putMany("empresas",rows);S.sel.clear();await soft(rows);toast(`${lab}: ${rows.length} lead(s)`)};
  navBadge()}
 
 /* ============ v7: ideias do HubSpot (sequências, negócios, contatos, metas, nova empresa) ============ */
@@ -1476,8 +1527,8 @@ function bindV7(r,D){const id=r.id,C=D.querySelector("#ldCont");
   if(k.ctp){const a=[...(r.contatos||[])],nw=a[+k.ctp],old=CK.some(x=>r[x])?ctOf(r):null;a.splice(+k.ctp,1);if(old)a.unshift(old);ctSetP(r,nw);if(a.length)r.contatos=a;else delete r.contatos;await DB.put("empresas",r);C.innerHTML=contBox(r);rerenderSoon();toast("Contato principal alterado")}});
  const V=D.querySelector("#dV"),F=D.querySelector("#dF"),dsave=async()=>{const v=brNum(V.value);if(v>0)r.valor=v;else delete r.valor;if(F.value)r.prevFech=F.value;else delete r.prevFech;await DB.put("empresas",r);V.value=r.valor?(+r.valor).toLocaleString("pt-BR"):"";D.querySelector("#dInfo").innerHTML=dealInfo(r);rerenderSoon()};
  V.addEventListener("change",dsave);F.addEventListener("change",dsave);
- const sg=D.querySelector("#seqGo");if(sg)sg.onclick=async()=>{const sid=D.querySelector("#seqSel").value;if(r.proxData&&!r.proxFeita&&!confirm(`A próxima ação atual (${r.proxTipo||"retorno"} em ${brd(r.proxData)}) será trocada pelo 1º passo da sequência. Continuar?`))return;await seqStart(r,sid);await load();openLead(id)};
- const ss=D.querySelector("#seqStop");if(ss)ss.onclick=async()=>{if(!confirm("Encerrar a sequência deste lead? A próxima ação já agendada continua na agenda."))return;await seqStop(r,"encerrada por você");await DB.put("empresas",r);await load();openLead(id);toast("Sequência encerrada")}}
+ const sg=D.querySelector("#seqGo");if(sg)sg.onclick=async()=>{const sid=D.querySelector("#seqSel").value;if(r.proxData&&!r.proxFeita&&!confirm(`A próxima ação atual (${r.proxTipo||"retorno"} em ${brd(r.proxData)}) será trocada pelo 1º passo da sequência. Continuar?`))return;await seqStart(r,sid);await soft([r]);openLead(id)};
+ const ss=D.querySelector("#seqStop");if(ss)ss.onclick=async()=>{if(!confirm("Encerrar a sequência deste lead? A próxima ação já agendada continua na agenda."))return;await seqStop(r,"encerrada por você");await DB.put("empresas",r);await soft([r]);openLead(id);toast("Sequência encerrada")}}
 function seqNote(r,t){const n=$("#seqN");if(!n)return;if(r.seq&&t!="Anotação"){n.innerHTML=seqNoteHtml(r);n.hidden=false}else n.hidden=true}
 
 /* --- Metas da semana --- */
@@ -1517,7 +1568,7 @@ async function newSave(){const v=i=>($(i).value||"").trim(),err=m=>{const e=$("#
   MUNICIPIO:norm(ci),UF:uf,DDD_1:te.length>=10?te.slice(0,2):"",TELEFONE_1:te.length>=10?te.slice(2):te,CORREIO_ELETRONICO:v("#nEm").toLowerCase(),ATIVIDADE_PRINCIPAL_TEXTO:v("#nAt"),CNAE_FISCAL_PRINCIPAL:dig(v("#nCnae")),
   PORTE_DESCRICAO:v("#nPo"),CAPITAL_SOCIAL:brNum(v("#nCa")),SITUACAO_CADASTRAL:"",STATUS:v("#nSt")||"Novo",origem:v("#nOr")||"Cadastro manual"};
  if(v("#nCo"))r.contato=v("#nCo");if(v("#nCg"))r.cargo=v("#nCg");if(v("#nWa"))r.whats=v("#nWa");if($("#nKb").checked)r.kb=true;
- await DB.put("empresas",r);await sysNote(r,"Empresa cadastrada manualmente"+(r.origem?" · origem: "+r.origem:""));$("#newDlg").close();await load();openLead(id);toast("Empresa cadastrada")}
+ await DB.put("empresas",r);await sysNote(r,"Empresa cadastrada manualmente"+(r.origem?" · origem: "+r.origem:""));$("#newDlg").close();await soft([r]);fillSelects();openLead(id);toast("Empresa cadastrada")}
 
 /* --- Seletores, filtros e inicialização --- */
 function fillV7Selects(){const fs=$("#fSeq");if(fs){const v=fs.value;fs.innerHTML='<option value="">Sequência</option><option value="em">Em alguma sequência</option>'+seqDefs().map(s=>`<option value="${esc(s.id)}">${esc(s.n)}</option>`).join("")+'<option value="fora">Fora de sequência</option>';fs.value=v}
@@ -1542,7 +1593,7 @@ function v7Init(){
   const rows=S.rows.filter(r=>S.sel.has(r.id)),ok=rows.filter(r=>!r.seq&&!SEQ_STOP.includes(r.STATUS)),skip=rows.length-ok.length;
   if(!ok.length)return toast("Os leads marcados já estão em sequência ou fora da fase de prospecção.",1);
   if(!confirm(`Iniciar a sequência “${t.n}” em ${ok.length} lead(s)?${skip?` (${skip} serão ignorados: já estão em sequência ou fora da prospecção)`:""}\nO 1º passo (${t.s[0].t}) entra na agenda de cada um.`))return;
-  for(const r of ok)await seqStart(r,sid,true);S.sel.clear();await load();toast(`Sequência “${t.n}” iniciada em ${ok.length} lead(s)`)};
+  for(const r of ok)await seqStart(r,sid,true);S.sel.clear();await soft(ok);toast(`Sequência “${t.n}” iniciada em ${ok.length} lead(s)`)};
  CMDS.push(["Cadastrar nova empresa",()=>newOpen()],["Editar sequências",()=>seqEdOpen()],["Editar metas da semana",()=>goalOpen()],["Ver metas da semana",()=>go("dash")]);
  renderGoals()}
 
@@ -1782,5 +1833,5 @@ function cnInit(){
  document.addEventListener("keydown",e=>{if(e.key=="Escape"&&!$("#cnBox").hidden)cnClose()});
  document.addEventListener("pointerdown",e=>{const bx=$("#cnBox");if(!bx.hidden&&!bx.contains(e.target)&&!e.target.closest("#bCnae"))cnClose()});
  addEventListener("resize",()=>{if(!$("#cnBox").hidden)cnPlace()});cnSync()}
-(async()=>{await DB.open();await loadGeo();await loadTpl();bind();cnInit();carInit();scInit();pzInit();cmdInit();v6Init();v7Init();setView(lsGet("lpView")||(innerWidth<1100?"cards":"tab"));$("#fcard").classList.add("closed");await load()})();
+(async()=>{await DB.open();try{const c=(await DB.all("configuracoes")).find(x=>x.k=="lastBackup");if(c)S.cfgLastBk=c.v}catch(e){}askPersist();$("#tbBk").onclick=()=>{go("dados");backup()};setInterval(bkCheck,10*60e3);await loadGeo();await loadTpl();bind();cnInit();carInit();scInit();pzInit();cmdInit();v6Init();v7Init();setView(lsGet("lpView")||(innerWidth<1100?"cards":"tab"));$("#fcard").classList.add("closed");await load()})();
 </script></body></html>
