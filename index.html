@@ -517,14 +517,14 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 </script>
 </head><body>
 <nav><h1><b class="lg">L</b><span>Lucas Prospecção</span></h1><button id="navK" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar</span></button><button data-p="dash" class="on" title="Dashboard"><svg viewBox="0 0 24 24"><rect x=3 y=3 width=7 height=7 /><rect x=14 y=3 width=7 height=7 /><rect x=14 y=14 width=7 height=7 /><rect x=3 y=14 width=7 height=7 /></svg><span>Painel</span></button><button data-p="leads" title="Leads"><svg viewBox="0 0 24 24"><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx=9 cy=7 r=4 /><path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/></svg><span>Leads</span></button><button data-p="sugestoes" title="Sugestões por região"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><polygon points='16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8'/></svg><span>Sugestões</span></button><button data-p="agenda" title="Agenda de retornos"><svg viewBox="0 0 24 24"><rect x=3 y=4 width=18 height=18 rx=2 /><path d='M16 2v4M8 2v4M3 10h18'/></svg><span>Agenda</span><b class="nbd" id="agBd" hidden></b></button><button data-p="mapa" title="Mapa"><svg viewBox="0 0 24 24"><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx=12 cy=10 r=3 /></svg><span>Mapa</span></button><button data-p="dados" title="Dados e sincronização"><svg viewBox="0 0 24 24"><ellipse cx=12 cy=5 rx=9 ry=3 /><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg><span>Dados</span></button><button id="navT" class="nt" title="Recolher menu"><svg viewBox="0 0 24 24"><polyline points='15 18 9 12 15 6'/></svg><span>Recolher</span></button></nav>
-<main><div id="topbar"><b id="tbTitle">Painel</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.2.0</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha">＋ <span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">▶ Prospectar</button></div>
-<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >⚙ Personalizar</button><span class="net"></span><em class="ver">v8.2.0</em></header><div id="goals"></div><div id="relat"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
+<main><div id="topbar"><b id="tbTitle">Painel</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.2.1</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha">＋ <span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">▶ Prospectar</button></div>
+<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >⚙ Personalizar</button><span class="net"></span><em class="ver">v8.2.1</em></header><div id="goals"></div><div id="relat"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
 
 <div id="cnBox" class="cnbox" hidden><div class="cnh"><b>Filtrar por CNAE</b><button class="g" id="cnX" type="button" aria-label="Fechar">✕</button></div>
 <input id="cnQ" placeholder="Buscar código ou atividade (ex.: 1052 ou queijo)" autocomplete="off">
 <div class="cnbar"><button class="g" id="cnAll" type="button">Marcar os listados</button><button class="g" id="cnNone" type="button">Limpar seleção</button><label><input type="checkbox" id="cnOnlySel"> só marcados</label><span id="cnInfo"></span></div>
 <div id="cnList"></div><div class="cnft"><button class="b" id="cnOk" type="button">Concluir</button></div></div>
-<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">▦ Cartões</button><button id="vTab" class="on">▤ Tabela</button><button id="vKan">▥ Kanban</button></div><span class="net"></span><em class="ver">v8.2.0</em></header>
+<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">▦ Cartões</button><button id="vTab" class="on">▤ Tabela</button><button id="vKan">▥ Kanban</button></div><span class="net"></span><em class="ver">v8.2.1</em></header>
 <div class="card fl" id="fcard">
 <input id="q" placeholder="Buscar empresa, cidade, CNPJ… ( / )" style="flex:1;min-width:160px"><button class="g keep" id="bFilt" type="button" title="Mostrar ou esconder os demais filtros">Mais filtros <span id="fCount" class="bd" style="background:var(--az);display:none"></span></button>
 <select class="pri" id="fUF"><option value="">UF</option></select><select class="pri" id="fCid"><option value="">Cidade</option></select>
@@ -548,14 +548,14 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 <div class="fl" id="pgr" style="margin-top:8px"><button class="g" id="pv">‹</button><span id="pn"></span><button class="g" id="nx">›</button></div>
 </section>
 
-<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.2.0</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
+<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.2.1</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
 <div class="fl" id="carOpts" hidden><div class="seg" id="carVis" style="margin:0"><button type="button" data-cvis="heat">Mapa de calor</button><button type="button" data-cvis="circ">Círculos</button></div><label class="chip gapc"><input type="checkbox" id="carGap"> mostrar áreas sem atendimento</label><span style="color:var(--cz);font-size:13px">Considerar:</span><span id="carChips" class="fl" style="gap:6px"></span>
 <label class="chip"><input type="checkbox" id="carInt"> quem tem contato/visita registrado</label>
 <select id="carMet"><option value="n">Tamanho = nº de clientes</option><option value="p">Tamanho = % dos leads da cidade</option></select></div></div>
 <div id="map"></div><div class="card" id="carPanel" hidden></div></section>
-<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><span class="net"></span><em class="ver">v8.2.0</em></header><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section>
-<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bIcs" type="button" title="Baixa os retornos agendados para importar no Google Agenda ou Outlook">📅 Exportar para o calendário</button><button class="g" id="bNotif" type="button">🔔 Lembretes</button><button class="g" id="bSeq" type="button">⟳ Sequências</button><button class="b" id="bPzHoje" type="button">▶ Fazer os retornos de hoje</button><span class="net"></span><em class="ver">v8.2.0</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
-<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.2.0</em></header>
+<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><span class="net"></span><em class="ver">v8.2.1</em></header><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section>
+<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bIcs" type="button" title="Baixa os retornos agendados para importar no Google Agenda ou Outlook">📅 Exportar para o calendário</button><button class="g" id="bNotif" type="button">🔔 Lembretes</button><button class="g" id="bSeq" type="button">⟳ Sequências</button><button class="b" id="bPzHoje" type="button">▶ Fazer os retornos de hoje</button><span class="net"></span><em class="ver">v8.2.1</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
+<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.2.1</em></header>
 <div class="card" id="syncCard"><h3 style="margin-top:0">Sincronizar tablet e computador</h3>
 <p>Trabalhe offline nos dois aparelhos. Quando quiser juntar o que cada um anotou: gere o arquivo de sincronização em um aparelho, leve ao outro (WhatsApp, e-mail, Drive, cabo USB ou Bluetooth) e aplique lá. Repita no sentido contrário para os dois ficarem iguais. Nada é apagado: se o mesmo campo foi editado nos dois, vale a edição mais recente.</p>
 <div class="fl"><label>Nome deste aparelho <input id="devName" placeholder="Ex.: Tablet" size="14"></label><label><input type="checkbox" id="syFull"> incluir toda a base de empresas (arquivo grande)</label></div>
@@ -924,54 +924,58 @@ function bindAI(r){const nm=nmL(r),loc=`${r.MUNICIPIO} ${r.UF}`;
  $("#aiP").onchange=()=>{const p=$("#aiP").value;try{localStorage.setItem("aiProv",p)}catch(e){}$("#aiCfgB").innerHTML=aiCfgHtml(p);bindAICfg();$("#aiSt").textContent=aiSt();toast("A pesquisa com IA vai usar "+AI_P[p].nome)};
  bindAICfg();
  $("#aiRun").onclick=()=>runAI(r);
- /* v8.2: "Usar" preenche um novo contato (os campos de contato saíram de "Detalhes" na v7) */
- $("#aiOut").addEventListener("click",e=>{const b=e.target.closest("[data-ap]");if(!b)return;const ap=b.dataset.ap;
-  if(ap=="site"){const f=document.querySelector('#lf [name="site"]');if(f){f.value=b.dataset.v;f.dispatchEvent(new Event("change",{bubbles:true}))}return toast("Site preenchido e salvo")}
+ /* "Usar" preenche um novo contato na lista de Contatos */
+ $("#aiOut").addEventListener("click",e=>{const b=e.target.closest('[data-ap="contato"]');if(!b)return;
   const C=document.querySelector("#ldCont");if(!C)return;
   if(C.querySelector('.ct-f:not([data-key="new"])'))return toast("Salve ou cancele o contato que está editando antes de usar a sugestão",1);
   let cf=C.querySelector('.ct-f[data-key="new"]');if(!cf){const nb=C.querySelector("[data-ctn]");if(nb)nb.click();cf=C.querySelector('.ct-f[data-key="new"]')}
-  if(!cf)return;const set=(k,v)=>{const i=cf.querySelector(`[data-f="${k}"]`);if(i&&v)i.value=v};
-  if(ap=="pessoa"){set("nome",b.dataset.n);set("cargo",b.dataset.c)}else set({telPers:"tel",whats:"whats",emailPers:"email",linkedin:"linkedin"}[ap],b.dataset.v);
+  if(!cf)return;const k=b.dataset,set=(f,v)=>{const i=cf.querySelector(`[data-f="${f}"]`);if(i)i.value=v||""};
+  set("nome",k.ain);set("cargo",k.aic);set("depto",k.aia);set("tel",k.ait);set("email",k.aie);set("linkedin",k.ail);
   cf.scrollIntoView({block:"nearest"});toast("Preenchido no novo contato. Clique em “Salvar contato”.")})}
 const AI_SYS="Você é um assistente de pesquisa comercial B2B. Responda sempre em português do Brasil e somente com JSON válido.";
 async function aiAnthropic(prompt){const msgs=[{role:"user",content:prompt}];let j,n=0;
  do{const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"content-type":"application/json","x-api-key":aiKey("anthropic"),"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
-   body:JSON.stringify({model:aiModel("anthropic"),max_tokens:2000,system:AI_SYS,tools:[{type:"web_search_20250305",name:"web_search",max_uses:5,user_location:{type:"approximate",country:"BR"}}],messages:msgs})});
+   body:JSON.stringify({model:aiModel("anthropic"),max_tokens:2000,system:AI_SYS,tools:[{type:"web_search_20250305",name:"web_search",max_uses:8,user_location:{type:"approximate",country:"BR"}}],messages:msgs})});
   j=await res.json();if(!res.ok)throw new Error((j.error&&j.error.message)||("HTTP "+res.status));
   if(j.stop_reason=="pause_turn"){msgs.push({role:"assistant",content:j.content})}n++}
  while(j.stop_reason=="pause_turn"&&n<4);
- return{txt:(j.content||[]).filter(b=>b.type=="text").map(b=>b.text).join("\n"),fontes:[]}}
+ /* v8.2.1: com a pesquisa na web a resposta vem em vários blocos de texto (um por citação), às vezes no meio de um valor do JSON: juntar sem quebra de linha */
+ const B=(j.content||[]).filter(b=>b.type=="text");
+ return{txt:B.map(b=>b.text).join(""),fontes:B.flatMap(b=>(b.citations||[]).map(c=>c&&c.url).filter(Boolean))}}
 async function aiGemini(prompt){const res=await fetch("https://generativelanguage.googleapis.com/v1beta/interactions",{method:"POST",headers:{"content-type":"application/json","x-goog-api-key":aiKey("gemini")},
   body:JSON.stringify({model:aiModel("gemini"),system_instruction:AI_SYS,input:prompt,tools:[{type:"google_search"}],store:false})});
  const j=await res.json().catch(()=>({}));if(!res.ok)throw new Error((j.error&&j.error.message)||("HTTP "+res.status));
  if(j.status&&j.status!="completed")throw new Error(`A Gemini não terminou a pesquisa (${j.status}). Tente de novo.`);
  const B=(j.steps||[]).filter(s=>s&&s.type=="model_output").flatMap(s=>s.content||[]).filter(b=>b&&b.type=="text");
- return{txt:B.map(b=>b.text).join("\n"),fontes:B.flatMap(b=>(b.annotations||[]).filter(a=>a&&a.type=="url_citation"&&a.url).map(a=>a.url))}}
+ return{txt:B.map(b=>b.text).join(""),fontes:B.flatMap(b=>(b.annotations||[]).filter(a=>a&&a.type=="url_citation"&&a.url).map(a=>a.url))}}
 async function runAI(r){const out=$("#aiOut"),p=aiProv();if(!aiKey(p)){out.innerHTML=`<p class="late">Cadastre sua chave de API da ${AI_P[p].nome} em “Configurar IA” abaixo.</p>`;$(".aiCfg").open=true;return}
  out.innerHTML='<div class="ld"><i></i> Pesquisando na internet… pode levar de 10 a 60 segundos.</div>';
- const prompt=`Pesquise na internet os contatos comerciais ATUAIS desta empresa brasileira e responda SOMENTE com um objeto JSON, sem texto fora dele.
+ const prompt=`Pesquise na internet CONTATOS DE PESSOAS desta empresa brasileira nas áreas de qualidade, microbiologia, higienização (higienistas, limpeza e sanitização industrial) e compras. Responda SOMENTE com um objeto JSON, sem texto fora dele.
 Empresa: ${r.RAZAO_SOCIAL}
 Nome fantasia: ${r.NOME_FANTASIA||"n/d"}
 CNPJ: ${maskCnpj(r.CNPJ_COMPLETO)}
 Atividade: ${r.ATIVIDADE_PRINCIPAL_TEXTO||"n/d"}
 Endereço: ${[r.LOGRADOURO,r.NUMERO,r.BAIRRO,r.MUNICIPIO,r.UF].filter(Boolean).join(", ")}
-Telefone na base oficial: ${r.TELEFONE_1?r.DDD_1+" "+r.TELEFONE_1:"n/d"}  E-mail na base oficial: ${r.CORREIO_ELETRONICO||"n/d"}
-Procure: site oficial, telefone comercial, WhatsApp comercial, e-mail comercial, página da empresa no LinkedIn e até 3 responsáveis das áreas de qualidade, compras, produção ou diretoria.
-Regras: use apenas informações públicas e profissionais; não invente nada; confirme que é a mesma empresa (mesma cidade ou CNPJ); use null quando não achar; não inclua dados pessoais fora do contexto profissional.
-Formato: {"site":null,"telefone":null,"whatsapp":null,"email":null,"linkedin":null,"decisores":[{"nome":"","cargo":"","fonte":""}],"confianca":"alta|média|baixa","observacoes":"","fontes":["https://..."]}`;
+Para cada pessoa traga só: nome, cargo, área, telefone direto ou do setor, e-mail e perfil do LinkedIn. Se não achar a pessoa mas achar telefone ou e-mail direto de uma dessas áreas (ex.: compras@...), traga com nome "Setor de <área>".
+Regras: só informações públicas e profissionais; não invente nada; confirme que é a mesma empresa (mesma cidade ou CNPJ) e que a pessoa ainda trabalha lá; telefone e e-mail só de fontes recentes (últimos 2 anos), e nunca o telefone genérico da recepção ou da Receita Federal; use null no campo que não achar; descarte quem não tiver telefone, e-mail nem LinkedIn; no máximo 8 contatos.
+Formato: {"contatos":[{"nome":"","cargo":"","area":"Qualidade|Microbiologia|Higienização|Compras","telefone":null,"email":null,"linkedin":null,"fonte":"https://...","ano_fonte":""}]}`;
  try{const a=p=="gemini"?await aiGemini(prompt):await aiAnthropic(prompt),m=a.txt.match(/\{[\s\S]*\}/);
   if(!m)throw new Error("A IA não devolveu dados estruturados. Tente de novo.");
-  const d=JSON.parse(m[0]);d.fontes=[...new Set([...(Array.isArray(d.fontes)?d.fontes:[]),...a.fontes])];
+  let d;try{d=JSON.parse(m[0])}catch(e){d=JSON.parse(m[0].replace(/[\u0000-\u001f]+/g," "))}d.fontes=[...new Set([...(Array.isArray(d.fontes)?d.fontes:[]),...a.fontes])];
   renderAI(d)}
  catch(e){out.innerHTML=`<p class="late">Erro: ${esc(e.message)}</p><small>Se for erro de chave ou saldo, confira em ${AI_P[p].site}. Se for erro de rede, tente abrir o arquivo por um servidor local.</small>`}}
-function renderAI(d){const F=[["site","Site","site"],["telefone","Telefone","telPers"],["whatsapp","WhatsApp","whats"],["email","E-mail","emailPers"],["linkedin","LinkedIn","linkedin"]];
- let h=`<div style="margin-top:8px"><small>Sugestões da IA. Confira nas fontes antes de usar. Confiança: <b>${esc(d.confianca||"n/d")}</b></small>`,n=0;
- F.forEach(([k,lab,f])=>{const v=d[k];if(v&&String(v).trim()&&!(k=="email"&&!validMail(String(v)))){n++;h+=`<div class="aiRow"><span><b>${lab}:</b> ${esc(v)}</span><button type="button" class="g" data-ap="${f}" data-v="${esc(v)}">Usar</button></div>`}});
- (Array.isArray(d.decisores)?d.decisores:[]).filter(x=>x&&x.nome).slice(0,5).forEach(x=>{n++;h+=`<div class="aiRow"><span><b>${esc(x.nome)}</b>, ${esc(x.cargo||"")} <small>(${esc(x.fonte||"")})</small></span><button type="button" class="g" data-ap="pessoa" data-n="${esc(x.nome)}" data-c="${esc(x.cargo||"")}">Usar</button></div>`});
- if(!n)h+="<p>Nada confiável foi encontrado para esta empresa.</p>";
- if(d.observacoes)h+=`<p>${esc(d.observacoes)}</p>`;
+/* v8.2.1: só contatos de qualidade, microbiologia, higienização e compras, com telefone, e-mail e LinkedIn */
+function renderAI(d){const L=(Array.isArray(d.contatos)?d.contatos:[]).filter(x=>x&&typeof x=="object").map(x=>{const t=v=>v==null?"":String(v).trim();
+  return{nome:t(x.nome),cargo:t(x.cargo),area:t(x.area),tel:t(x.telefone),email:validMail(t(x.email))?t(x.email):"",linkedin:/^https?:\/\/([a-z]+\.)?linkedin\.com\//i.test(t(x.linkedin))?t(x.linkedin):"",fonte:/^https?:\/\//.test(t(x.fonte))?t(x.fonte):"",ano:t(x.ano_fonte)}})
+  .filter(c=>c.nome&&(c.tel||c.email||c.linkedin)).slice(0,8);
+ let h=`<div style="margin-top:8px"><small>Sugestões da IA. Confira na fonte antes de ligar ou escrever.</small>`;
+ L.forEach(c=>{h+=`<div class="aiRow"><span><b>${esc(c.nome)}</b>${c.cargo?", "+esc(c.cargo):""}${c.area?` <small>(${esc(c.area)})</small>`:""}
+  ${c.tel?`<br>📞 ${esc(c.tel)}`:""}${c.email?`<br>✉ ${esc(c.email)}`:""}${c.linkedin?`<br><a target="_blank" rel="noopener noreferrer" href="${esc(c.linkedin)}">LinkedIn</a>`:""}
+  ${c.fonte?`<br><small><a target="_blank" rel="noopener noreferrer" href="${esc(c.fonte)}">fonte</a>${c.ano?" · "+esc(c.ano):""}</small>`:""}</span>
+  <button type="button" class="g" style="flex-shrink:0" data-ap="contato" data-ain="${esc(c.nome)}" data-aic="${esc(c.cargo)}" data-aia="${esc(c.area)}" data-ait="${esc(c.tel)}" data-aie="${esc(c.email)}" data-ail="${esc(c.linkedin)}">Usar</button></div>`});
+ if(!L.length)h+="<p>Nenhum contato dessas áreas com telefone, e-mail ou LinkedIn foi encontrado.</p>";
  const src=(Array.isArray(d.fontes)?d.fontes:[]).filter(u=>/^https?:\/\//.test(u)).slice(0,8);
- if(src.length)h+="<small>Fontes:</small>"+src.map(u=>`<div><a target="_blank" rel="noopener noreferrer" href="${esc(u)}">${esc(u)}</a></div>`).join("");
+ if(src.length)h+=`<details><summary><small>Todas as fontes (${src.length})</small></summary>`+src.map(u=>`<div><a target="_blank" rel="noopener noreferrer" href="${esc(u)}">${esc(u)}</a></div>`).join("")+"</details>";
  $("#aiOut").innerHTML=h+"</div>"}
 function updNet(){const L=window.LIBST||{ok:{}},miss=["xlsx","leaflet","mc"].filter(k=>!L.ok[k]),on=navigator.onLine!==false;let t,c;
  if(miss.length){t=on?"Baixando recursos offline… toque para tentar de novo":"Sem internet: conecte-se uma vez para liberar o modo offline";c="#c0392b"}else{t=on?"Online · pronto para offline":"Offline · tudo pronto";c=on?"#1e8449":"#b9770e"}
