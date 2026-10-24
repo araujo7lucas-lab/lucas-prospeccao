@@ -1191,11 +1191,15 @@ const scList=(t,sep)=>String(t||"").split(sep||/[,;\n]+/).map(x=>x.trim()).filte
 function scoreCalc(r,C){C=C||scoreCfg();const cap=r.CAPITAL_SOCIAL||0,st=r.STATUS,P=[];let s=0;const add=(l,p)=>{if(p){P.push([l,p]);s+=p}};
  const sp=r.SETOR in C.setor?C.setor[r.SETOR]:(ALVO(r.SETOR)?30:0);
  if(sp)add(ALVO(r.SETOR)?"Setor de produção de alimentos ou bebidas ("+r.SETOR+")":"Setor: "+r.SETOR,sp);
- const ci=cap>=1e7?0:cap>=1e6?1:cap>=5e5?2:cap>=1e5?3:4;
- add(["Capital social a partir de R$ 10 mi","Capital social de R$ 1 mi a R$ 10 mi","Capital social de R$ 500 mil a R$ 1 mi","Capital social de R$ 100 mil a R$ 500 mil","Capital social abaixo de R$ 100 mil"][ci],C.cap[ci]);
+ const pn=norm(r.PORTE_DESCRICAO||""),pk=pn?(/MICRO/.test(pn)?"micro":/PEQUENO/.test(pn)?"pequeno":"demais"):"";
+ let ci=cap>=1e7?0:cap>=1e6?1:cap>=5e5?2:cap>=1e5?3:4;
+ /* v8.3.1: capital social zerado ou baixo é comum em empresa grande; o porte (pelo faturamento) define a faixa mínima */
+ const cm={demais:1,pequeno:3}[pk];
+ if(cm!=null&&ci>cm){ci=cm;add("Capital social abaixo do esperado para o porte: conta como "+["a partir de R$ 10 mi","R$ 1 mi a R$ 10 mi","R$ 500 mil a R$ 1 mi","R$ 100 mil a R$ 500 mil"][ci],C.cap[ci])}
+ else add(["Capital social a partir de R$ 10 mi","Capital social de R$ 1 mi a R$ 10 mi","Capital social de R$ 500 mil a R$ 1 mi","Capital social de R$ 100 mil a R$ 500 mil","Capital social abaixo de R$ 100 mil"][ci],C.cap[ci]);
  if(validMail(String(r.CORREIO_ELETRONICO||""))||validMail(String(r.emailPers||"")))add("Tem e-mail válido",C.email);
  if(r.TELEFONE_1||r.telPers||r.whats)add("Tem telefone",C.tel);
- const pn=norm(r.PORTE_DESCRICAO||"");if(pn){const k=/MICRO/.test(pn)?"micro":/PEQUENO/.test(pn)?"pequeno":"demais";add("Porte: "+r.PORTE_DESCRICAO,C.porte[k])}
+ if(pk)add("Porte: "+r.PORTE_DESCRICAO,C.porte[pk]);
  if(C.ufPts&&scList(C.ufs,/[,;\s]+/).map(x=>x.toUpperCase()).includes(norm(r.UF)))add("Estado prioritário ("+r.UF+")",C.ufPts);
  if(C.cidPts&&scList(C.cidades).map(norm).includes(norm(r.MUNICIPIO)))add("Cidade prioritária ("+r.MUNICIPIO+")",C.cidPts);
  if(C.cnaePts){const d=String(r.CNAE_FISCAL_PRINCIPAL||"").replace(/\D/g,"").padStart(7,"0");if(String(r.CNAE_FISCAL_PRINCIPAL||"").replace(/\D/g,"")&&scList(C.cnaes,/[,;\s]+/).map(x=>x.replace(/\D/g,"")).filter(Boolean).some(x=>d.startsWith(x)))add("CNAE prioritário ("+r.CNAE_FISCAL_PRINCIPAL+")",C.cnaePts)}
