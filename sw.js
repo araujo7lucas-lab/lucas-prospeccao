@@ -1,4 +1,4 @@
-const CACHE="lp-v8.4.0";
+const CACHE="lp-v8.5.0";
 const SHELL=["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png",
  "./vendor/leaflet.js","./vendor/leaflet.css","./vendor/leaflet.markercluster.js","./vendor/MarkerCluster.css","./vendor/MarkerCluster.Default.css","./vendor/xlsx.full.min.js"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>Promise.all(SHELL.map(u=>c.add(u).catch(()=>{})))).then(()=>self.skipWaiting()))});
