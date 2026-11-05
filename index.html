@@ -352,6 +352,7 @@ td .tg{margin-right:4px}.lc-t,.ktg,.pztg{display:flex;flex-wrap:wrap;gap:4px;mar
 .sg-h{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}.sg-h h3{margin:0;font-size:20px;letter-spacing:-.01em}.sg-h p{margin:4px 0 0;color:var(--cz)}
 .sg-f{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:14px 0 8px}
 .sg-list{margin-top:6px}
+.pf-i{flex-direction:column;gap:2px}
 .sg-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:10px 6px;border-top:1px solid #f0f1f4;cursor:pointer;border-radius:6px;content-visibility:auto;contain-intrinsic-size:auto 60px}
 .sg-row:hover{background:#f8faf9}.sg-row b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sg-row small{color:var(--cz);font-size:12px}
 .sg-a{display:flex;gap:6px;align-items:center}
@@ -578,6 +579,7 @@ dialog::backdrop{background:rgba(24,24,27,.35);backdrop-filter:blur(2px)}
  #fcard.closed>.pri{display:none}#fcard #q{flex:1 1 0!important;min-width:0!important}#fcard:not(.closed) #q{flex:1 1 100%!important}
 }
 @media(pointer:coarse){button.b,button.g,a.g,details.colm summary,select,input:not([type=checkbox]):not([type=radio]):not([type=file]){min-height:44px}.lc-a .g,.lc-a a.g,.lc-a .stSel{min-height:40px}}
+@media(max-width:900px){nav button,nav.min button{min-width:0;padding-left:0;padding-right:0}nav button span,nav.min button span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
 </style><script>
 /* ===== Carregador de bibliotecas com cache local =====
    Na primeira abertura COM internet, baixa SheetJS (Excel), Leaflet (mapa) e MarkerCluster e guarda no aparelho (IndexedDB).
@@ -606,15 +608,15 @@ dialog::backdrop{background:rgba(24,24,27,.35);backdrop-filter:blur(2px)}
 })();
 </script>
 </head><body>
-<nav><h1><b class="lg">L</b><span>Lucas Prospecção</span></h1><button id="navK" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar</span></button><button data-p="dash" class="on" title="Dashboard"><svg viewBox="0 0 24 24"><rect x=3 y=3 width=7 height=7 /><rect x=14 y=3 width=7 height=7 /><rect x=14 y=14 width=7 height=7 /><rect x=3 y=14 width=7 height=7 /></svg><span>Painel</span></button><button data-p="leads" title="Leads"><svg viewBox="0 0 24 24"><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx=9 cy=7 r=4 /><path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/></svg><span>Leads</span></button><button data-p="sugestoes" title="Sugestões por região"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><polygon points='16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8'/></svg><span>Sugestões</span></button><button data-p="agenda" title="Agenda de retornos"><svg viewBox="0 0 24 24"><rect x=3 y=4 width=18 height=18 rx=2 /><path d='M16 2v4M8 2v4M3 10h18'/></svg><span>Agenda</span><b class="nbd" id="agBd" hidden></b></button><button data-p="mapa" title="Mapa"><svg viewBox="0 0 24 24"><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx=12 cy=10 r=3 /></svg><span>Mapa</span></button><button data-p="dados" title="Dados e sincronização"><svg viewBox="0 0 24 24"><ellipse cx=12 cy=5 rx=9 ry=3 /><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg><span>Dados</span></button><button id="navT" class="nt" title="Recolher menu"><svg viewBox="0 0 24 24"><polyline points='15 18 9 12 15 6'/></svg><span>Recolher</span></button></nav>
-<main><div id="topbar"><b id="tbTitle">Painel</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.8.0</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">Prospectar</button></div>
-<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >Personalizar</button><span class="net"></span><em class="ver">v8.8.0</em></header><div id="goals"></div><div id="relat"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
+<nav><h1><b class="lg">L</b><span>Lucas Prospecção</span></h1><button id="navK" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar</span></button><button data-p="dash" class="on" title="Dashboard"><svg viewBox="0 0 24 24"><rect x=3 y=3 width=7 height=7 /><rect x=14 y=3 width=7 height=7 /><rect x=14 y=14 width=7 height=7 /><rect x=3 y=14 width=7 height=7 /></svg><span>Painel</span></button><button data-p="leads" title="Leads"><svg viewBox="0 0 24 24"><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx=9 cy=7 r=4 /><path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/></svg><span>Leads</span></button><button data-p="sugestoes" title="Sugestões por região"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><polygon points='16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8'/></svg><span>Sugestões</span></button><button data-p="perfis" title="Perfis para priorizar"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><circle cx=12 cy=12 r=5 /><circle cx=12 cy=12 r=1 /></svg><span>Perfis</span></button><button data-p="agenda" title="Agenda de retornos"><svg viewBox="0 0 24 24"><rect x=3 y=4 width=18 height=18 rx=2 /><path d='M16 2v4M8 2v4M3 10h18'/></svg><span>Agenda</span><b class="nbd" id="agBd" hidden></b></button><button data-p="mapa" title="Mapa"><svg viewBox="0 0 24 24"><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx=12 cy=10 r=3 /></svg><span>Mapa</span></button><button data-p="dados" title="Dados e sincronização"><svg viewBox="0 0 24 24"><ellipse cx=12 cy=5 rx=9 ry=3 /><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg><span>Dados</span></button><button id="navT" class="nt" title="Recolher menu"><svg viewBox="0 0 24 24"><polyline points='15 18 9 12 15 6'/></svg><span>Recolher</span></button></nav>
+<main><div id="topbar"><b id="tbTitle">Painel</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.9.0</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">Prospectar</button></div>
+<section id="dash" class="pg on"><header class="ph"><div><h2>Visão geral</h2><p>Resumo da sua carteira de prospecção</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >Personalizar</button><span class="net"></span><em class="ver">v8.9.0</em></header><div id="goals"></div><div id="relat"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
 
 <div id="cnBox" class="cnbox" hidden><div class="cnh"><b>Filtrar por CNAE</b><button class="g" id="cnX" type="button" aria-label="Fechar">✕</button></div>
 <input id="cnQ" placeholder="Buscar código ou atividade (ex.: 1052 ou queijo)" autocomplete="off">
 <div class="cnbar"><button class="g" id="cnAll" type="button">Marcar os listados</button><button class="g" id="cnNone" type="button">Limpar seleção</button><label><input type="checkbox" id="cnOnlySel"> só marcados</label><span id="cnInfo"></span></div>
 <div id="cnList"></div><div class="cnft"><button class="b" id="cnOk" type="button">Concluir</button></div></div>
-<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">Cartões</button><button id="vTab" class="on">Tabela</button><button id="vKan">Kanban</button></div><span class="net"></span><em class="ver">v8.8.0</em></header>
+<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">Cartões</button><button id="vTab" class="on">Tabela</button><button id="vKan">Kanban</button></div><span class="net"></span><em class="ver">v8.9.0</em></header>
 <div class="card fl" id="fcard">
 <input id="q" placeholder="Buscar empresa, cidade, CNPJ… ( / )" style="flex:1;min-width:160px"><button class="g keep" id="bFilt" type="button" title="Mostrar ou esconder os demais filtros">Mais filtros <span id="fCount" class="bd" style="background:var(--az);display:none"></span></button>
 <select class="pri" id="fUF"><option value="">UF</option></select><select class="pri" id="fCid"><option value="">Cidade</option></select>
@@ -638,14 +640,14 @@ dialog::backdrop{background:rgba(24,24,27,.35);backdrop-filter:blur(2px)}
 <div class="fl" id="pgr" style="margin-top:8px"><button class="g" id="pv">‹</button><span id="pn"></span><button class="g" id="nx">›</button></div>
 </section>
 
-<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.8.0</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g pri" id="bMapClr" hidden title="Limpa os filtros da tela Leads e mostra todas as empresas no mapa">Limpar filtros</button><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
+<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.9.0</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g pri" id="bMapClr" hidden title="Limpa os filtros da tela Leads e mostra todas as empresas no mapa">Limpar filtros</button><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
 <div class="fl" id="carOpts" hidden><div class="seg" id="carVis" style="margin:0"><button type="button" data-cvis="heat">Mapa de calor</button><button type="button" data-cvis="circ">Círculos</button></div><label class="chip gapc"><input type="checkbox" id="carGap"> mostrar áreas sem atendimento</label><span style="color:var(--cz);font-size:13px">Considerar:</span><span id="carChips" class="fl" style="gap:6px"></span>
 <label class="chip"><input type="checkbox" id="carInt"> quem tem contato/visita registrado</label>
 <select id="carMet"><option value="n">Tamanho = nº de clientes</option><option value="p">Tamanho = % dos leads da cidade</option></select></div></div>
 <div id="map"></div><div class="card" id="carPanel" hidden></div></section>
-<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><span class="net"></span><em class="ver">v8.8.0</em></header><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section>
-<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bIcs" type="button" title="Baixa os retornos agendados para importar no Google Agenda ou Outlook">Exportar calendário</button><button class="g" id="bNotif" type="button">Lembretes</button><button class="g" id="bSeq" type="button">Sequências</button><button class="b" id="bPzHoje" type="button">Fazer retornos de hoje</button><span class="net"></span><em class="ver">v8.8.0</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
-<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.8.0</em></header>
+<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><span class="net"></span><em class="ver">v8.9.0</em></header><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section><section id="perfis" class="pg"><header class="ph"><div><h2>Perfis para priorizar</h2><p>Compara as empresas ainda não abordadas com as que você já contatou, visitou ou atendeu</p></div><span class="net"></span><em class="ver">v8.9.0</em></header><div class="sg"><aside class="sg-l" id="pfL"></aside><div class="sg-r" id="pfR"></div></div></section>
+<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bIcs" type="button" title="Baixa os retornos agendados para importar no Google Agenda ou Outlook">Exportar calendário</button><button class="g" id="bNotif" type="button">Lembretes</button><button class="g" id="bSeq" type="button">Sequências</button><button class="b" id="bPzHoje" type="button">Fazer retornos de hoje</button><span class="net"></span><em class="ver">v8.9.0</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
+<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.9.0</em></header>
 <div class="card" id="syncCard"><h3 style="margin-top:0">Sincronizar tablet e computador</h3>
 <p>Trabalhe offline nos dois aparelhos. Quando quiser juntar o que cada um anotou: gere o arquivo de sincronização em um aparelho, leve ao outro (WhatsApp, e-mail, Drive, cabo USB ou Bluetooth) e aplique lá. Repita no sentido contrário para os dois ficarem iguais. Nada é apagado: se o mesmo campo foi editado nos dois, vale a edição mais recente.</p>
 <div class="fl"><label>Nome deste aparelho <input id="devName" placeholder="Ex.: Tablet" size="14"></label><label><input type="checkbox" id="syFull"> incluir toda a base de empresas (arquivo grande)</label></div>
@@ -712,7 +714,7 @@ const S={rows:[],all:[],inter:[],byId:new Map(),F:{},tab:"all",page:0,per:50,sor
 const CUSTOM=["contato","cargo","depto","telPers","whats","emailPers","linkedin","site","decisor","interesse","potencial","produtos","concorrente","necessidade","obs","resp","origem","primeiroContato","ultimaInteracao","proxData","proxTipo","STATUS","proxFeita","proxConcluidaEm","kb","tags","cert","contatos","valor","prevFech","seq","arq","motivoPerda","proposta"];
 async function loadScoreCfg(){try{const c=(await DB.all("configuracoes")).find(x=>x.k=="score");if(c&&c.v){scSet(c.v);try{localStorage.setItem("lpScore",JSON.stringify(c.v))}catch(x){}}else _sc=null}catch(x){}}
 function pickRows(){S.rows=S.showArq?S.all.filter(r=>r.arq):S.all.filter(r=>!r.arq)}
-function derive(r){r._k=norm([r.RAZAO_SOCIAL,r.NOME_FANTASIA,r.CNPJ_COMPLETO,r.MUNICIPIO,r.ATIVIDADE_PRINCIPAL_TEXTO,r.contato,...(r.contatos||[]).map(c=>c.nome)].join(" "));r.SETOR=setorOf(r);r.SCORE=scoreOf(r)}
+function derive(r){r._af=null;r._k=norm([r.RAZAO_SOCIAL,r.NOME_FANTASIA,r.CNPJ_COMPLETO,r.MUNICIPIO,r.ATIVIDADE_PRINCIPAL_TEXTO,r.contato,...(r.contatos||[]).map(c=>c.nome)].join(" "));r.SETOR=setorOf(r);r.SCORE=scoreOf(r)}
 function indexInter(){const iv=new Map();S.inter.forEach(i=>{(iv.get(i.id)||iv.set(i.id,[]).get(i.id)).push(i)});S.iv=iv}
 async function load(){await loadScoreCfg();await loadTags();await loadV7Cfg();S.all=await DB.all("empresas");S.inter=await DB.all("interacoes");S.byId=new Map(S.all.map(r=>[r.id,r]));pickRows();_cp=cliBuild(S.all);S.all.forEach(r=>{derive(r);if(!r._b){r._b=snap(r);if(!r._ts)r._ts={}}});await seqSweep();
  indexInter();fillSelects();refresh();bkCheck()}
@@ -752,15 +754,15 @@ function baseMatch(r,F){return(!F.q||r._k.includes(F.q))&&(!F.uf||r.UF==F.uf)&&(
 const hasT=(r,l)=>(S.iv.get(r.id)||[]).some(i=>l.includes(i.tipo));
 const TABS=[["all","Todos os leads",r=>1],["novo","Novos leads",r=>r.STATUS=="Novo"],["lead","Leads",r=>r.STATUS=="Lead"],["cont","Contactadas",r=>hasT(r,CONTATO)],["vis","Visitadas",r=>hasT(r,["Visita presencial"])],["aten","Atendidas",r=>hasT(r,ATEND)],
  ["nint","Não interessadas",r=>r.STATUS=="Não interessada"],["neg","Em negociação",r=>r.STATUS=="Em negociação"],["fup","Follow-up pendente",r=>r.STATUS=="Follow-up pendente"],["prox","Próximas ações",r=>r.proxData&&!r.proxFeita],["sc","Sem contato cadastrado",r=>!r.contato&&!r.telPers&&!r.emailPers]];
-function refresh(){cliSync();queueMicrotask(navBadge);S.F=readF();fcnt(S.F);const base=S.rows.filter(r=>baseMatch(r,S.F));
+function refresh(){cliSync();afSync();queueMicrotask(navBadge);S.F=readF();fcnt(S.F);const base=S.rows.filter(r=>baseMatch(r,S.F));
  $("#tabs").innerHTML=TABS.map(([k,n,f])=>`<button data-t="${k}" class="${S.tab==k?"on":""}">${n} (${base.filter(f).length})</button>`).join("");
  const tf=TABS.find(t=>t[0]==S.tab)[2];const{k,d}=S.sort;S.filtered=base.filter(tf).sort((a,b)=>{const x=a[k]??"",y=b[k]??"";return((typeof x=="number"?x-y:String(x).localeCompare(String(y),"pt"))||(k=="SCORE"?(a.SIM||0)-(b.SIM||0):0))*d});
  const mx=Math.max(0,Math.ceil(S.filtered.length/S.per)-1);S.page=Math.min(S.page,mx);S.base=base;renderTable();if(S.view=="kan")renderKan();if(S.view=="cards")renderCards();if(curPage()=="dash")renderDash();if($("#mapa").classList.contains("on"))renderMap();$("#mapTag").innerHTML=S.F.cid?`<span class="bd" style="background:var(--az)">Filtro: ${esc(S.F.cid)}/${esc(S.F.uf)}</span><button class="g" id="bUnmap">Limpar filtro do mapa</button>`:""}
-const COLS=[["RAZAO_SOCIAL","Razão social"],["SCORE","Prioridade"],["TAGS","Etiquetas"],["CERT","Certificações"],["NOME_FANTASIA","Fantasia"],["CNPJ_COMPLETO","CNPJ"],["MUNICIPIO","Cidade"],["UF","UF"],["SETOR","Setor"],["CNAE_FISCAL_PRINCIPAL","CNAE"],["ATIVIDADE_PRINCIPAL_TEXTO","Atividade"],["CAPITAL_SOCIAL","Capital"],["PORTE_DESCRICAO","Porte"],["TELEFONE_1","Telefone"],["CORREIO_ELETRONICO","E-mail"],["STATUS","Status"],["ultimaInteracao","Últ. interação"],["valor","Valor estimado"],["prevFech","Prev. fechamento"],["proxData","Próx. ação"]];
+const COLS=[["RAZAO_SOCIAL","Razão social"],["SCORE","Prioridade"],["AFIN","Afinidade"],["TAGS","Etiquetas"],["CERT","Certificações"],["NOME_FANTASIA","Fantasia"],["CNPJ_COMPLETO","CNPJ"],["MUNICIPIO","Cidade"],["UF","UF"],["SETOR","Setor"],["CNAE_FISCAL_PRINCIPAL","CNAE"],["ATIVIDADE_PRINCIPAL_TEXTO","Atividade"],["CAPITAL_SOCIAL","Capital"],["PORTE_DESCRICAO","Porte"],["TELEFONE_1","Telefone"],["CORREIO_ELETRONICO","E-mail"],["STATUS","Status"],["ultimaInteracao","Últ. interação"],["valor","Valor estimado"],["prevFech","Prev. fechamento"],["proxData","Próx. ação"]];
 function renderTable(){$("#th").innerHTML=`<tr><th><input type="checkbox" id="selAll"></th>`+VC().map(([k,n])=>`<th data-s="${k}">${n}${S.sort.k==k?(S.sort.d>0?" ▲":" ▼"):""}</th>`).join("")+"<th>Ações</th></tr>";
  const pg=S.filtered.slice(S.page*S.per,(S.page+1)*S.per);
  $("#tb").innerHTML=pg.length?pg.map(r=>`<tr data-open="${esc(r.id)}"><td><input type="checkbox" class="sel" data-i="${esc(r.id)}" ${S.sel.has(r.id)?"checked":""}></td>`+VC().map(([k])=>{let v=r[k]??"";
-  if(k=="TAGS")return`<td>${tagsHtml(r,false,3)}</td>`;if(k=="valor")return`<td>${v?brlC(+v):""}</td>`;if(k=="prevFech")return`<td>${brd(v)}</td>`;if(k=="CERT")return`<td>${certPills(r)}</td>`;if(k=="SCORE")return`<td title="${esc(scoreTip(r))}"><span class="bd" style="background:${PRC[priOf(v)]}1f;color:${PRC[priOf(v)]}">${v} ${priOf(v)}</span></td>`;if(k=="CAPITAL_SOCIAL")v=brl(v);else if(k=="CNPJ_COMPLETO")v=maskCnpj(v)+(r.TIPO?` <small>(${r.TIPO})</small>`:"");else if(k=="STATUS")return`<td><select class="stSel" data-i="${esc(r.id)}" style="${stSty(v)}">${STATUS.map(x=>`<option ${x==v?"selected":""}>${x}</option>`).join("")}</select></td>`;
+  if(k=="TAGS")return`<td>${tagsHtml(r,false,3)}</td>`;if(k=="valor")return`<td>${v?brlC(+v):""}</td>`;if(k=="prevFech")return`<td>${brd(v)}</td>`;if(k=="CERT")return`<td>${certPills(r)}</td>`;if(k=="AFIN")return`<td title="${esc(afTip(r))}">${afBd(r)}</td>`;if(k=="SCORE")return`<td title="${esc(scoreTip(r))}"><span class="bd" style="background:${PRC[priOf(v)]}1f;color:${PRC[priOf(v)]}">${v} ${priOf(v)}</span></td>`;if(k=="CAPITAL_SOCIAL")v=brl(v);else if(k=="CNPJ_COMPLETO")v=maskCnpj(v)+(r.TIPO?` <small>(${r.TIPO})</small>`:"");else if(k=="STATUS")return`<td><select class="stSel" data-i="${esc(r.id)}" style="${stSty(v)}">${STATUS.map(x=>`<option ${x==v?"selected":""}>${x}</option>`).join("")}</select></td>`;
   else if(k=="proxData"&&v&&!r.proxFeita&&v<today())return`<td class="late">${brd(v)}</td>`;else v=esc(k=="proxData"||k=="ultimaInteracao"?brd(v):v);return`<td title="${v}">${v}</td>`}).join("")+
   `<td><button class="g" data-a="v" data-i="${esc(r.id)}" title="Ver/editar">Abrir</button> <button class="g" data-a="g" data-i="${esc(r.id)}" title="Buscar contatos no Google">Google</button> ${r.TELEFONE_1?`<button class="g" data-a="w" data-i="${esc(r.id)}" title="WhatsApp">WA</button>`:""} ${r.CORREIO_ELETRONICO?`<button class="g" data-a="m" data-i="${esc(r.id)}" title="E-mail">@</button>`:""}</td></tr>`).join("")
   :`<tr><td colspan="${VC().length+2}" style="padding:30px;text-align:center;color:var(--cz)">${S.rows.length?"Nenhum lead com esses filtros.":"Nenhum dado. Importe uma planilha na tela “Dados”."}</td></tr>`;
@@ -1243,6 +1245,56 @@ function routeUrl(list){const l=list.slice(0,10).map(addrOf);if(!l.length)return
 const tplRender=(txt,v)=>String(txt).replace(/\{(\w+)\}/g,(m,k)=>v[k]??m);
 const titleCase=s=>String(s||"").toLowerCase().replace(/(^|[\s\-\/(])([a-zà-ú])/g,(m,a,b)=>a+b.toUpperCase()).replace(/ (De|Da|Do|Das|Dos|E) /g,m=>m.toLowerCase());
 function waPhone(r){let d=dig(r.whats||r.telPers||((r.DDD_1||"")+(r.TELEFONE_1||"")));if(d.length==10||d.length==11)d="55"+d;return d.length>=12?d:""}
+/* v8.9.0: Afinidade. Aprende com as empresas já trabalhadas (contatadas, visitadas, atendidas, clientes) quais características
+   aparecem nelas mais do que na base inteira e dá uma nota de 0 a 100 para cada empresa. Tudo é calculado no aparelho.
+   Peso por status: quem avançou mais ensina mais; Não interessada e Sem resposta contam contra. */
+const AF_W={"Cliente ativo":4,"Em negociação":3,"Atendida":3,"Visitada":2,"Follow-up pendente":2,"Contactada":1,"Lead":1,"Sem resposta":-0.5,"Não interessada":-1};
+const AF_FAM=[["set","Setor",1],["cg","Grupo de CNAE",0.8],["cn","CNAE",0.6],["po","Porte",0.8],["fx","Capital social",0.7],["uf","Estado",0.5],["mu","Cidade",0.5],["ce","Certificação",0.6],["tp","Matriz ou filial",0.3]];
+const AF_FW=Object.fromEntries(AF_FAM.map(f=>[f[0],f[2]])),AF_FN=Object.fromEntries(AF_FAM.map(f=>[f[0],f[1]]));
+const AF_MIN=3,AF_K=4,AF_MINW=5;
+const afPorte=r=>{const p=norm(r.PORTE_DESCRICAO||"");return!p?"":/MICRO/.test(p)?"Micro":/PEQUENO/.test(p)?"Pequeno":"Médio ou grande"};
+const afCap=r=>{const c=+r.CAPITAL_SOCIAL||0;return c<=0?"":c<1e5?"Até R$ 100 mil":c<5e5?"R$ 100 a 500 mil":c<1e6?"R$ 500 mil a 1 mi":c<1e7?"R$ 1 a 10 mi":"Acima de R$ 10 mi"};
+function afFeat(r){const o={},k=cnae7(r);if(r.SETOR)o.set=r.SETOR;if(k){o.cg=k.slice(0,4);o.cn=k}
+ const p=afPorte(r);if(p)o.po=p;const c=afCap(r);if(c)o.fx=c;if(r.UF)o.uf=String(r.UF).toUpperCase();if(r.MUNICIPIO)o.mu=norm(r.MUNICIPIO)+"/"+String(r.UF||"").toUpperCase();
+ if(r.cert&&Object.values(r.cert).some(v=>v===1))o.ce="Com certificação ou selo";if(r.TIPO)o.tp=r.TIPO;return o}
+function afLabel(f,v,r){if(f=="cg")return"CNAE "+v.slice(0,2)+"."+v.slice(2);if(f=="cn")return"CNAE "+(r&&r.CNAE_FISCAL_PRINCIPAL||v)+(r&&r.ATIVIDADE_PRINCIPAL_TEXTO?" ("+String(r.ATIVIDADE_PRINCIPAL_TEXTO).slice(0,60)+")":"");if(f=="mu")return v.split("/")[0].toLowerCase().replace(/(^|\s)\S/g,m=>m.toUpperCase())+"/"+v.split("/")[1];return v}
+/* peso de uma empresa como exemplo: pelo status; Novo com contato registrado conta como Contactada */
+function afWeight(r,iv){const w=AF_W[r.STATUS];if(w!==undefined)return w;if(iv&&(iv.get(r.id)||[]).some(i=>i.tipo&&i.tipo!="Mudança de status"&&i.tipo!="Outro"&&i.tipo!="Anotação"))return 1;return null}
+function afSig(all,iv){const a=[];for(const r of all||[]){const w=afWeight(r,iv);if(w!==null)a.push(r.id+":"+w)}return(all||[]).length+"|"+a.sort().join(",")}
+function afBuild(all,iv){all=all||[];const F={},W=[];let P=0,Nn=0;
+ for(const f of AF_FAM)F[f[0]]={n:0,m:new Map()};
+ for(const r of all){const ft=afFeat(r),w=afWeight(r,iv);r._af=ft;if(w!==null){W.push({r,w});if(w>0)P+=w;else Nn++}
+  for(const f in ft){const G=F[f];G.n++;let e=G.m.get(ft[f]);if(!e){e={b:0,pos:0,neg:0,np:0,nn:0};G.m.set(ft[f],e)}e.b++;if(w>0){e.pos+=w;e.np++}else if(w<0){e.neg-=w;e.nn++}}}
+ /* P de cada família: soma dos pesos positivos de quem tem a característica preenchida */
+ const PF={};for(const f in F){let s=0;for(const e of F[f].m.values())s+=e.pos;PF[f]=s}
+ for(const f in F){const G=F[f];for(const e of G.m.values()){e.w=0;e.lift=1;if(!PF[f]||e.np<AF_MIN&&e.nn<AF_MIN)continue;
+  const bs=e.b/G.n,ps=(e.pos+AF_K*bs)/(PF[f]+AF_K);let lift=ps/bs;
+  if(e.neg)lift*=(e.pos+1)/(e.pos+e.neg+1);
+  e.lift=lift;e.w=Math.max(-1,Math.min(2,Math.log(lift)))*AF_FW[f]}}
+ const m={sig:afSig(all,iv),F,W,P,Nn,ok:W.filter(x=>x.w>0).length>=AF_MINW,max:1};
+ if(m.ok){const raws=[];for(const r of all){const v=afRaw(r,m);if(v>0)raws.push(v)}raws.sort((a,b)=>a-b);m.max=raws.length?raws[Math.floor(raws.length*0.999)]||raws[raws.length-1]:1}
+ return m}
+function afRaw(r,m){const ft=r._af||(r._af=afFeat(r));let s=0;for(const f in ft){const e=m.F[f].m.get(ft[f]);if(e)s+=e.w}return s}
+function afScore(r,m){if(!m||!m.ok)return 0;return Math.max(0,Math.min(100,Math.round(100*afRaw(r,m)/(m.max||1))))}
+/* fatores que mais pesam na nota de uma empresa, do maior para o menor */
+function afFactors(r,m){const ft=r._af||afFeat(r),o=[];if(!m||!m.ok)return o;
+ for(const f in ft){const e=m.F[f].m.get(ft[f]);if(e&&Math.abs(e.w)>=0.05)o.push({f,v:ft[f],w:e.w,lift:e.lift,np:e.np,nn:e.nn,label:AF_FN[f]+": "+afLabel(f,ft[f],r)})}
+ return o.sort((a,b)=>b.w-a.w)}
+/* as empresas trabalhadas mais parecidas: soma do quanto cada característica em comum é rara na base */
+function afNear(r,m,k){const ft=r._af||afFeat(r),o=[];if(!m)return o;
+ for(const x of m.W){if(x.r===r||x.r.id===r.id)continue;const g=x.r._af||afFeat(x.r);let s=0;const sh=[];
+  for(const f in ft)if(g[f]!==undefined&&g[f]===ft[f]){const G=m.F[f],e=G.m.get(ft[f]);s+=AF_FW[f]*Math.log(G.n/(e?e.b:1)+1);sh.push(f)}
+  if(sh.length>=2)o.push({r:x.r,w:x.w,s:s+x.w*0.05,sh})}
+ return o.sort((a,b)=>b.s-a.s).slice(0,k||3)}
+/* perfis: setor + porte + estado. Conta trabalhadas, avançadas, perdidas e quantas ainda faltam abordar */
+const AF_AV=["Visitada","Atendida","Em negociação","Follow-up pendente","Cliente ativo"],AF_NEG=["Não interessada","Sem resposta"];
+const afSegKey=r=>[r.SETOR||"Sem setor",afPorte(r)||"Porte não informado",String(r.UF||"").toUpperCase()||"—"].join(" · ");
+function afSegs(all,m,pend,iv){const g=new Map();let P=0,N=0;
+ for(const r of all){const k=afSegKey(r);let s=g.get(k);if(!s){s={k,b:0,t:0,pos:0,av:0,ng:0,pend:0,sum:0};g.set(k,s)}s.b++;N++;
+  const w=afWeight(r,iv);if(w!==null){s.t++;if(w>0){s.pos+=w;P+=w}if(AF_AV.includes(r.STATUS))s.av++;if(AF_NEG.includes(r.STATUS))s.ng++}
+  if(pend(r)){s.pend++;s.sum+=r.AFIN||0}}
+ const L=[];for(const s of g.values()){if(s.t<2||!s.pend)continue;const bs=s.b/N;s.lift=((s.pos+AF_K*bs)/(P+AF_K))/bs*(s.ng?(s.pos+1)/(s.pos+s.ng+1):1);s.med=Math.round(s.sum/s.pend);L.push(s)}
+ return L.sort((a,b)=>b.lift-a.lift||b.pend-a.pend)}
 /*PURE-END*/
 const minhaEmpresa=()=>{try{return localStorage.getItem("minhaEmpresa")||"Hygiena do Brasil"}catch(e){return"Hygiena do Brasil"}};
 const meuNome=()=>{try{return localStorage.getItem("meuNome")||""}catch(e){return""}};
@@ -1411,7 +1463,7 @@ function renderKan(){const P=kbBoard!="a",cols=P?KB_P:KB_A,by={},B=S.base||[];co
   (a.length>60?`<div class="more">+${a.length-60} (use os filtros)</div>`:"")+`</div></div>`}).join("")+`</div>`}
 
 /* --- Atualização leve depois de mudar um lead --- */
-const rerenderSoon=deb(()=>{refresh();const p=curPage();if(p=="agenda")renderAgenda();if(p=="sugestoes")renderSug()},60);
+const rerenderSoon=deb(()=>{refresh();const p=curPage();if(p=="agenda")renderAgenda();if(p=="sugestoes")renderSug();if(p=="perfis")renderPerfis()},60);
 function afterLeadChange(r){if($("#dlg").open&&S.cur==r.id){const e=$("#ldTags");if(e)e.innerHTML=certPills(r)+tagsHtml(r,true);const c=$("#ldCert");if(c)c.innerHTML=certBox(r)}
  ["ldKb","pzKb"].forEach(id=>{const b=document.getElementById(id);if(b&&b.dataset.kbt==r.id)b.outerHTML=kbBtn(r,id)});
  const p=$("#tagPop");if(p&&!p.hidden&&p.dataset.id==r.id)$$("#tagPop [data-tpn]").forEach(c=>c.checked=(r.tags||[]).includes(c.dataset.tpn));
@@ -1433,6 +1485,7 @@ function openLead(id,tipo){const r=S.byId.get(id);if(!r)return;S.cur=id;S.pendFo
  <div class="ld-b"><aside class="ld-side">
   <section class="ld-c" id="ldCont">${contBox(r)}</section><section class="ld-c" id="ldDeal">${dealBox(r)}</section>
   <section class="ld-c"><h4>Prioridade</h4><span class="bd" style="background:${PRC[pr]}1f;color:${PRC[pr]}">${r.SCORE} · ${pr}</span><details class="why"><summary>Por que ${pr.toLowerCase()}?</summary>${scoreWhy(r)}</details></section>
+  <section class="ld-c" id="ldAf">${afBox(r)}</section>
   <section class="ld-c" id="ldCert">${certBox(r)}</section>
   <section class="ld-c"><h4>Empresa</h4><dl class="ld-dl">
    <dt>CNPJ</dt><dd>${maskCnpj(r.CNPJ_COMPLETO)}${r.TIPO?" · "+esc(r.TIPO):""}${un>1?` · ${un} unidades`:""}</dd>
@@ -1498,6 +1551,47 @@ function renderSug(){const B=sugBase(),g=new Map();
   <div class="sg-list">${rows.map(r=>{const pr=priOf(r.SCORE);return`<div class="sg-row" data-ao="${esc(r.id)}"><div style="min-width:0"><b>${esc(nmL(r))}</b><small>${esc(r.MUNICIPIO)} · ${esc(r.SETOR||"")}${r.PORTE_DESCRICAO?" · "+esc(r.PORTE_DESCRICAO):""}${dig(telOf(r)).length>=8?"":" · sem telefone"}</small>${(r.tags||[]).length||certNames(r).length?`<div class="ktg">${certPills(r)}${tagsHtml(r,false,3)}</div>`:""}</div><span class="bd" style="background:${PRC[pr]}1f;color:${PRC[pr]}">${r.SCORE} ${pr}</span><div class="sg-a">${kbBtn(r)}<a class="g" href="${gUrl(gQuery(r))}" target="_blank" rel="noopener noreferrer">Google</a></div></div>`}).join("")||'<div class="ag-empty">Nenhuma empresa com esses filtros.</div>'}</div>`}
 function sgPz(){if(!sgRows.length)return toast("Nenhuma empresa nesta região com esses filtros.",1);pzStart(sgRows,`Sugestões · ${regNameK(sgSel)}${sgCity?" · "+sgCity:""}`)}
 async function sgTopKb(){const a=sgRows.slice(0,10);if(!a.length)return;a.forEach(r=>r.kb=true);await DB.putMany("empresas",a);await soft(a);renderSug();toast(`${a.length} empresas enviadas ao Kanban de prospecção`)}
+/* ============ v8.9.0: Afinidade e tela Perfis para priorizar ============ */
+let _af=null;
+function afSync(){if(!S.all)return false;const sig=afSig(S.all,S.iv);if(_af&&_af.sig==sig)return false;_af=afBuild(S.all,S.iv);S.all.forEach(r=>r.AFIN=afScore(r,_af));return true}
+const afOk=()=>!!(_af&&_af.ok);
+const afCor=v=>v>=70?"#0f7b5f":v>=40?"#2b7de9":"#7b858f";
+const afBd=r=>{const v=r.AFIN||0;return afOk()?`<span class="bd" style="background:${afCor(v)}1f;color:${afCor(v)}" title="Afinidade com as empresas já trabalhadas">${v}</span>`:'<span class="bd" style="color:var(--cz)">—</span>'};
+const afLiftTxt=l=>l>=1?l.toLocaleString("pt-BR",{maximumFractionDigits:1})+"x mais comum nas trabalhadas":"menos comum nas trabalhadas";
+const afPend=r=>(r.STATUS||"Novo")=="Novo"&&!r.kb&&!((S.iv&&S.iv.get(r.id))||[]).some(i=>i.tipo!="Mudança de status");
+const AF_POUCO=`Ainda há poucas empresas trabalhadas para comparar. Quando pelo menos ${AF_MINW} estiverem como Lead, Contactada, Visitada, Atendida, Em negociação ou Cliente ativo, a Afinidade começa a funcionar.`;
+function afTip(r){if(!afOk())return AF_POUCO;const F=afFactors(r,_af).filter(x=>x.w>0).slice(0,4);return`Afinidade ${r.AFIN||0} de 100 com as empresas que você já trabalhou`+(F.length?"\n"+F.map(x=>"+ "+x.label+" ("+afLiftTxt(x.lift)+")").join("\n"):"")}
+function afNearHtml(r,k){const N=afNear(r,_af,k||3);if(!N.length)return"";return N.map(x=>`<a role="button" tabindex="0" style="cursor:pointer;color:var(--az)" data-ao="${esc(x.r.id)}" title="${esc("Em comum: "+x.sh.map(f=>AF_FN[f].toLowerCase()).join(", "))}">${esc(nmL(x.r))}</a> <small style="color:${COR[x.r.STATUS]||"var(--cz)"}">(${esc(x.r.STATUS||"Novo")})</small>`).join(", ")}
+function afBox(r){if(!afOk())return`<h4>Afinidade</h4><p style="font-size:13px;color:var(--cz);margin:4px 0 0">${AF_POUCO}</p>`;
+ const F=afFactors(r,_af),near=afNearHtml(r,3),av=_af.W.filter(x=>AF_AV.includes(x.r.STATUS)).length;
+ return`<h4>Afinidade</h4>${afBd(r)} <small style="color:var(--cz)">de 100 com as empresas que você já trabalhou</small>${near?`<div style="margin-top:6px;font-size:13px">Parecida com: ${near}</div>`:""}
+ <details class="why"><summary>Por que essa nota?</summary><ul style="margin:6px 0 0;padding-left:18px">${F.map(x=>`<li>${x.w>0?"+":"−"} ${esc(x.label)} · ${esc(afLiftTxt(x.lift))}${x.np?` (${x.np} trabalhada${x.np>1?"s":""})`:""}${x.nn?` · ${x.nn} não interessada${x.nn>1?"s":""} ou sem resposta`:""}</li>`).join("")||"<li>Nenhuma característica em comum com as trabalhadas</li>"}</ul>
+ <div style="margin-top:6px;color:var(--cz);font-size:12px">Compara com ${_af.W.length} empresas já trabalhadas (${av} visitadas, atendidas ou mais adiante). Quem avançou mais pesa mais; Não interessada e Sem resposta pesam contra. Não é uma previsão de venda.</div><button type="button" class="g" data-go="perfis" style="margin-top:8px">Ver perfis para priorizar</button></details>`}
+let pfSel=(()=>{try{return localStorage.getItem("lpPf")||""}catch(x){return""}})(),pfTel=false,pfRows=[],pfAlvo=(()=>{try{return localStorage.getItem("lpPfAlvo")!="0"}catch(x){return true}})();
+function afComum(){const o=[];for(const f of["set","po","fx","uf","cg","ce"]){const G=_af.F[f];const L=[...G.m.entries()].filter(([v,e])=>e.np>=AF_MIN&&e.b>=20&&e.lift>=1.2&&(!pfAlvo||(f=="set"?ALVO(v):f=="cg"?/^1[01]/.test(v):true))).sort((a,b)=>b[1].w-a[1].w).slice(0,f=="ce"?1:3);
+  L.forEach(([v,e])=>o.push(`<span class="chip" title="${esc(e.np+" trabalhadas de "+e.b.toLocaleString("pt-BR")+" na base")}">${esc(AF_FN[f]+": "+afLabel(f,v))} · <b>${e.lift.toLocaleString("pt-BR",{maximumFractionDigits:1})}x</b></span>`))}
+ return o.join("")}
+function pfRow(r){const pr=priOf(r.SCORE),near=afNearHtml(r,2);return`<div class="sg-row" data-ao="${esc(r.id)}"><div style="min-width:0"><b>${esc(nmL(r))}</b><small>${esc(r.MUNICIPIO||"")}/${esc(r.UF||"")} · ${esc(r.SETOR||"")}${r.PORTE_DESCRICAO?" · "+esc(r.PORTE_DESCRICAO):""}${dig(telOf(r)).length>=8?"":" · sem telefone"}</small>${near?`<div style="font-size:12px;margin-top:2px;color:var(--cz)">Parecida com: ${near}</div>`:""}</div><span style="display:flex;gap:6px;align-items:center" title="${esc(afTip(r))}">${afBd(r)}<span class="bd" style="background:${PRC[pr]}1f;color:${PRC[pr]}" title="Prioridade">${pr}</span></span><div class="sg-a">${kbBtn(r)}<a class="g" href="${gUrl(gQuery(r))}" target="_blank" rel="noopener noreferrer">Google</a></div></div>`}
+function renderPerfis(){afSync();
+ if(!afOk()){$("#pfL").innerHTML="";$("#pfR").innerHTML=`<div class="ag-empty">${AF_POUCO}</div>`;pfRows=[];return}
+ const pend=r=>afPend(r)&&(!pfAlvo||ALVO(r.SETOR)),segs=afSegs(S.rows,_af,pend,S.iv).filter(s=>!pfAlvo||ALVO(s.k.split(" · ")[0])).slice(0,40);if(pfSel&&!segs.some(s=>s.k==pfSel))pfSel="";
+ $("#pfL").innerHTML=`<button type="button" class="sg-i ${pfSel?"":"on"}" data-pf=""><span>Maiores afinidades</span><small>todas</small></button><div class="sg-uf">Perfis que mais avançaram</div>`+
+  (segs.map(s=>`<button type="button" class="sg-i pf-i ${s.k==pfSel?"on":""}" data-pf="${esc(s.k)}" title="${esc(`${s.t} trabalhadas · ${s.av} visitadas ou mais adiante · ${s.ng} perdidas · ${s.pend} ainda não abordadas`)}"><span>${esc(s.k)}</span><small>${s.av?`<b>${s.av} avanç.</b> · `:""}${s.t} trab. · ${s.pend} faltam</small></button>`).join("")||'<div class="ld-empty" style="padding:12px">Nenhum perfil com 2 ou mais empresas trabalhadas e outras ainda não abordadas.</div>');
+ let rows=S.rows.filter(pend);const seg=pfSel?segs.find(s=>s.k==pfSel):null;
+ if(seg)rows=rows.filter(r=>afSegKey(r)==pfSel);if(pfTel)rows=rows.filter(r=>dig(telOf(r)).length>=8);
+ rows=rows.sort((a,b)=>(b.AFIN||0)-(a.AFIN||0)||(b.SCORE||0)-(a.SCORE||0));const tot=rows.length;rows=rows.slice(0,seg?300:150);pfRows=rows;
+ const W=seg?_af.W.filter(x=>afSegKey(x.r)==pfSel).sort((a,b)=>b.w-a.w):[];
+ $("#pfR").innerHTML=`<div class="sg-h"><div><h3>${esc(seg?seg.k:"Maiores afinidades")}</h3><p>${seg?`${seg.t} trabalhada(s) neste perfil, ${seg.av} visitada(s) ou mais adiante, ${seg.ng} perdida(s). ${tot.toLocaleString("pt-BR")} ainda não abordada(s).`:`As empresas ainda não abordadas mais parecidas com as ${_af.W.length} que você já trabalhou.${tot>rows.length?` Mostrando as ${rows.length} primeiras de ${tot.toLocaleString("pt-BR")}.`:""}`}</p></div>
+  <div class="fl"><button type="button" class="b" data-pfpz ${rows.length?"":"disabled"}>▶ Prospectar esta lista</button></div></div>
+  ${seg?(W.length?`<div class="sg-f"><span style="font-size:12px;color:var(--cz)">Já trabalhadas:</span>${W.slice(0,12).map(x=>`<button type="button" class="chip" data-ao="${esc(x.r.id)}">${esc(nmL(x.r))} · <span style="color:${COR[x.r.STATUS]||"inherit"}">${esc(x.r.STATUS||"Novo")}</span></button>`).join("")}</div>`:""):`<div class="sg-f"><span style="font-size:12px;color:var(--cz)">O que as trabalhadas têm em comum:</span>${afComum()||'<span style="font-size:12px;color:var(--cz)">nada se destaca ainda</span>'}</div>`}
+  <div class="sg-f" style="margin-top:0"><label class="chip ${pfAlvo?"on":""}" title="Esconde laboratórios, órgãos públicos, comércio, food service e outros fora da produção de alimentos e bebidas"><input type="checkbox" data-pfalvo ${pfAlvo?"checked":""} hidden>Só indústrias de alimentos e bebidas</label><label class="chip ${pfTel?"on":""}"><input type="checkbox" data-pftel ${pfTel?"checked":""} hidden>Só com telefone</label><span style="font-size:12px;color:var(--cz)">Afinidade de 0 a 100: quanto a empresa se parece com as que você já contatou, visitou ou atendeu. Não é previsão de venda.</span></div>
+  <div class="sg-list">${rows.map(pfRow).join("")||'<div class="ag-empty">Nenhuma empresa com esses filtros.</div>'}</div>`}
+function pfPz(){if(!pfRows.length)return toast("Nenhuma empresa nesta lista.",1);pzStart(pfRows,"Perfis · "+(pfSel||"maiores afinidades"))}
+function bindPerfis(){const L=$("#pfL"),R=$("#pfR");if(!L||!R)return;
+ L.addEventListener("click",e=>{const b=e.target.closest("[data-pf]");if(!b)return;pfSel=b.dataset.pf;try{localStorage.setItem("lpPf",pfSel)}catch(x){}renderPerfis();R.scrollTop=0});
+ R.addEventListener("click",e=>{if(e.target.closest("[data-pfpz]"))pfPz()});
+ R.addEventListener("change",e=>{if(e.target.dataset.pftel!==undefined){pfTel=e.target.checked;renderPerfis()}if(e.target.dataset.pfalvo!==undefined){pfAlvo=e.target.checked;try{localStorage.setItem("lpPfAlvo",pfAlvo?"1":"0")}catch(x){}renderPerfis()}})}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-go]");if(b){e.preventDefault();if($("#dlg")&&$("#dlg").open)$("#dlg").close();go(b.dataset.go)}});
 
 /* --- Agenda de retornos --- */
 let agP="pend",agTp="",agRg="",agA="",agB="";
@@ -1560,10 +1654,10 @@ function agMenuOpen(btn,id){const m=$("#agMenu");m.dataset.id=id;m.innerHTML=[["
 function fillV6Selects(){const ft=$("#fTag");if(ft){const v=ft.value;ft.innerHTML='<option value="">Etiqueta</option>'+tagAll().map(n=>`<option>${esc(n)}</option>`).join("");ft.value=v}
  const fr=$("#fReg");if(fr){const v=fr.value,c=new Map();S.rows.forEach(r=>{const k=regKey(r);c.set(k,(c.get(k)||0)+1)});fr.innerHTML='<option value="">Região</option>'+[...c].sort((a,b)=>a[0].localeCompare(b[0])).map(([k,n])=>`<option value="${esc(k)}">${esc(regNameK(k))} (${esc(k.split("|")[0])}) · ${n}</option>`).join("");fr.value=v}
  const ba=$("#bulkAct");if(ba){const T=tagAll();ba.innerHTML='<option value="">Ações em massa…</option><option value="kb:1">Enviar ao Kanban</option><option value="kb:0">Tirar do Kanban</option><optgroup label="Certificação: marcar que tem">'+CERTS.map(c=>`<option value="c1:${c.k}">${c.n}</option>`).join("")+'</optgroup>'+(T.length?`<optgroup label="Adicionar etiqueta">${T.map(n=>`<option value="t+:${esc(n)}">${esc(n)}</option>`).join("")}</optgroup><optgroup label="Tirar etiqueta">${T.map(n=>`<option value="t-:${esc(n)}">${esc(n)}</option>`).join("")}</optgroup>`:"")}}
-function tbPz(){const p=curPage();if(p=="agenda")return pzHoje();if(p=="sugestoes")return sgPz();pzFromLeads()}
+function tbPz(){const p=curPage();if(p=="agenda")return pzHoje();if(p=="sugestoes")return sgPz();if(p=="perfis")return pfPz();pzFromLeads()}
 function v6Init(){
- const T={dash:"Painel",leads:"Leads",sugestoes:"Sugestões por região",agenda:"Agenda",mapa:"Mapa",dados:"Dados e sincronização"};
- const go0=go;go=p=>{go0(p);$("#tbTitle").textContent=T[p]||"";tagPopClose();if(p=="sugestoes")renderSug();if(p=="agenda")renderAgenda()};
+ const T={dash:"Painel",leads:"Leads",sugestoes:"Sugestões por região",perfis:"Perfis para priorizar",agenda:"Agenda",mapa:"Mapa",dados:"Dados e sincronização"};
+ const go0=go;go=p=>{go0(p);$("#tbTitle").textContent=T[p]||"";tagPopClose();if(p=="sugestoes")renderSug();if(p=="perfis")renderPerfis();if(p=="agenda")renderAgenda()};
  $("#tbSearch").onclick=cmdOpen;$("#tbPz").onclick=tbPz;$("#bPzHoje").onclick=pzHoje;
  $("#tb").addEventListener("click",e=>{if(e.target.closest("input,select,button,a,label,.tg"))return;const tr=e.target.closest("tr[data-open]");if(tr)openLead(tr.dataset.open)});
  document.addEventListener("click",async e=>{const t=e.target.closest("[data-kbt],[data-kbx],[data-kb],[data-tagadd],[data-tagx],[data-tagf],[data-ao],[data-agp],[data-agtp],[data-agdone],[data-agre],[data-agsch],[data-sg],[data-sgp],[data-sgc],[data-sgpz],[data-sgkb],[data-cert],[data-certv],[data-certf]");if(!t)return;
@@ -1592,6 +1686,7 @@ function v6Init(){
   if(D.sgkb!==undefined)return sgTopKb()},true);
  $("#sgR").addEventListener("change",e=>{if(e.target.dataset.sgtel!==undefined){sgTel=e.target.checked;renderSug()}});
  $("#sgR").addEventListener("click",e=>{if(e.target.closest("button,a,input,label"))return;const r=e.target.closest(".sg-row");if(r)openLead(r.dataset.ao)});
+ bindPerfis();
  $("#agF").addEventListener("change",e=>{if(e.target.id=="agRg"){agRg=e.target.value;renderAgenda()}if(e.target.id=="agA"){agA=e.target.value;renderAgenda()}if(e.target.id=="agB"){agB=e.target.value;renderAgenda()}});
  $("#agMenu").addEventListener("click",e=>{const b=e.target.closest("[data-agm]");if(!b)return;const m=$("#agMenu"),d=b.dataset.agm=="x"?$("#agMD").value:addDays(today(),+b.dataset.agm);m.hidden=true;agResched(m.dataset.id,d)});
  const P=$("#tagPop");
@@ -1833,7 +1928,7 @@ async function pzUndo(){const u=PZ.undo;if(!u||PZ.busy)return;PZ.busy=1;
 function pzInit(){const d=$("#pz");
  d.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)return;if(t.dataset.pz)return pzOutcome(t.dataset.pz);
   switch(t.id){case"pzX":case"pzX2":d.close();break;case"pzPrev":if(PZ.i>0){PZ.i=Math.min(PZ.i,PZ.q.length)-1;pzRender()}break;case"pzSkip":PZ.i++;pzRender();break;case"pzUndo":pzUndo();break;case"pzOpen":openLead(PZ.q[PZ.i]);break}});
- d.addEventListener("close",()=>{refresh();const p=curPage();if(p=="agenda")renderAgenda();if(p=="sugestoes")renderSug()});
+ d.addEventListener("close",()=>{refresh();const p=curPage();if(p=="agenda")renderAgenda();if(p=="sugestoes")renderSug();if(p=="perfis")renderPerfis()});
  $("#dlg").addEventListener("close",()=>{if(d.open)pzRender()});
  document.addEventListener("keydown",e=>{if(!d.open||$("#dlg").open)return;const tg=e.target.tagName;
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()=="z"&&PZ.undo&&!/INPUT|TEXTAREA/.test(tg)){e.preventDefault();return pzUndo()}
@@ -1843,7 +1938,7 @@ function pzInit(){const d=$("#pz");
   else if(e.key.toLowerCase()=="g"){const a=$("#pzG");if(a)a.click()}});
  }
 /* ============ Busca rápida e comandos (Ctrl+K) ============ */
-const CMDS=[["Ir para o painel",()=>go("dash")],["Ir para leads",()=>go("leads")],["Ir para o mapa",()=>go("mapa")],["Ver o mapa da minha carteira",()=>{const c=carCfg();c.m="car";carSave(c);carUI();go("mapa")}],["Ir para sugestões por região",()=>go("sugestoes")],["Ir para a agenda de retornos",()=>go("agenda")],["Ver o Kanban de prospecção",()=>{kbBoard="p";go("leads");setView("kan")}],["Ver o Kanban de andamento",()=>{kbBoard="a";go("leads");setView("kan")}],["Ir para dados e sincronização",()=>go("dados")],
+const CMDS=[["Ir para o painel",()=>go("dash")],["Ir para leads",()=>go("leads")],["Ir para o mapa",()=>go("mapa")],["Ver o mapa da minha carteira",()=>{const c=carCfg();c.m="car";carSave(c);carUI();go("mapa")}],["Ir para sugestões por região",()=>go("sugestoes")],["Ir para perfis para priorizar (afinidade com quem já trabalhei)",()=>go("perfis")],["Ir para a agenda de retornos",()=>go("agenda")],["Ver o Kanban de prospecção",()=>{kbBoard="p";go("leads");setView("kan")}],["Ver o Kanban de andamento",()=>{kbBoard="a";go("leads");setView("kan")}],["Ir para dados e sincronização",()=>go("dados")],
  ["Modo prospecção com os leads filtrados",()=>pzFromLeads()],["Prospectar sugeridos (prioridades ainda não abordadas)",()=>pzSug()],["Prospectar ações de hoje e atrasadas",()=>pzHoje()],["Critérios de prioridade",()=>scOpen()],["Escolher vários CNAEs",()=>{go("leads");setTimeout(cnOpen,50)}],["Exportar backup",()=>backup()]];
 let cmdItems=[],cmdIx=0;
 function cmdOpen(){const d=$("#cmdk");if(!d.open)d.showModal();$("#cmdQ").value="";cmdRender();$("#cmdQ").focus()}
