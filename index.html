@@ -708,7 +708,7 @@ dialog::backdrop{background:rgba(24,24,27,.35);backdrop-filter:blur(2px)}
 .aiCfgH{display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;padding:16px 0 8px;z-index:1}.aiCfgH h3{margin:0;font-size:18px}
 #aiCfgDlg .aiCfgP{padding:14px;border:1px solid var(--bd);border-radius:12px;margin-bottom:10px}
 .aiCfgT{display:flex;justify-content:space-between;align-items:center;gap:8px}.aiCfgU{font-size:12px;color:var(--cz);margin:2px 0 10px}
-.aiCfgF{display:flex;gap:6px;flex-wrap:wrap}.aiCfgF input{flex:1 1 180px;min-width:0}.aiCfgF select{flex:0 1 auto}
+.aiCfgF{display:flex;gap:6px;flex-wrap:wrap}.aiTestR{display:block;font-size:12px;margin-top:6px;color:var(--cz)}.aiTestR:empty{display:none}.aiTestR.ok{color:#166534}.aiTestR.bad{color:#b42318}.aiCfgF input{flex:1 1 180px;min-width:0}.aiCfgF select{flex:0 1 auto}
 .aiCfgI{margin-top:8px;font-size:12px;color:var(--cz)}.aiCfgI summary{cursor:pointer}.aiCfgI p{margin:6px 0 0}
 .aiPriv{font-size:12px;color:var(--cz);margin:6px 2px 0}
 @media(max-width:600px){.aiHead{flex-wrap:wrap}.aiGo{flex:1}.aiSrch{order:3;flex-basis:100%;margin-top:2px}.aiSeg button{font-size:12px}.aiCard{flex-wrap:wrap}.aiUse{margin-left:52px}.aiDate{width:52px}}
@@ -765,15 +765,15 @@ dialog::backdrop{background:rgba(24,24,27,.35);backdrop-filter:blur(2px)}
 </script>
 </head><body>
 <nav><h1><b class="lg">L</b><span>Lucas Prospecção</span></h1><button id="navK" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar</span></button><button data-p="hoje" class="on" title="O que fazer hoje"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><path d='M12 7v5l3 2'/></svg><span>Hoje</span></button><button data-p="leads" title="Leads"><svg viewBox="0 0 24 24"><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx=9 cy=7 r=4 /><path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/></svg><span>Leads</span></button><button data-p="sugestoes" title="Sugestões por região"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><polygon points='16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8'/></svg><span>Sugestões</span></button><button data-p="territorio" title="Áreas onde você tem pouca presença"><svg viewBox="0 0 24 24"><path d='M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z'/><path d='M9 3v15M15 6v15'/></svg><span>Território</span></button><button data-p="perfis" title="Perfis para priorizar"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><circle cx=12 cy=12 r=5 /><circle cx=12 cy=12 r=1 /></svg><span>Perfis</span></button><button data-p="agenda" title="Agenda de retornos"><svg viewBox="0 0 24 24"><rect x=3 y=4 width=18 height=18 rx=2 /><path d='M16 2v4M8 2v4M3 10h18'/></svg><span>Agenda</span><b class="nbd" id="agBd" hidden></b></button><button data-p="mapa" title="Mapa"><svg viewBox="0 0 24 24"><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx=12 cy=10 r=3 /></svg><span>Mapa</span></button><button data-p="dash" title="Relatórios e indicadores"><svg viewBox="0 0 24 24"><path d='M3 3v18h18'/><path d='M7 15l4-4 3 3 5-6'/></svg><span>Relatórios</span></button><button data-p="dados" title="Dados e sincronização"><svg viewBox="0 0 24 24"><ellipse cx=12 cy=5 rx=9 ry=3 /><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg><span>Dados</span></button><button id="navMore" type="button" title="Mais telas"><svg viewBox="0 0 24 24"><circle cx=5 cy=12 r=1.5 /><circle cx=12 cy=12 r=1.5 /><circle cx=19 cy=12 r=1.5 /></svg><span>Mais</span></button><button id="navT" class="nt" title="Recolher menu"><svg viewBox="0 0 24 24"><polyline points='15 18 9 12 15 6'/></svg><span>Recolher</span></button></nav>
-<main><div id="topbar"><b id="tbTitle">Hoje</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.16.4</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">Prospectar</button></div>
+<main><div id="topbar"><b id="tbTitle">Hoje</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.16.5</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">Prospectar</button></div>
 <section id="hoje" class="pg on"><header class="ph"><div><h2 id="hoHi">Hoje</h2><p id="hoSub"></p></div><button class="b" id="bHoPz" type="button" title="Abre a fila com os retornos de hoje e os atrasados">Fazer retornos de hoje</button></header><div class="ho-k" id="hoK"></div><div class="ho-g"><div class="card ho-a"><div class="ho-h"><b>Próximas ações</b><button type="button" class="g sm" data-go="agenda">Ver agenda</button></div><div id="hoA"></div></div><div class="ho-s"><div class="card ho-p"><div class="ho-h"><div><b>Ligar primeiro</b><small>Prioridade alta, ainda sem contato</small></div><button type="button" class="g sm" data-go="leads">Ver leads</button></div><div id="hoP"></div></div><div id="goals"></div></div></div></section>
-<section id="dash" class="pg"><header class="ph"><div><h2>Relatórios</h2><p>Indicadores e gráficos da sua carteira</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >Personalizar</button><span class="net"></span><em class="ver">v8.16.4</em></header><div id="relat"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
+<section id="dash" class="pg"><header class="ph"><div><h2>Relatórios</h2><p>Indicadores e gráficos da sua carteira</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >Personalizar</button><span class="net"></span><em class="ver">v8.16.5</em></header><div id="relat"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
 
 <div id="cnBox" class="cnbox" hidden><div class="cnh"><b>Filtrar por CNAE</b><button class="g" id="cnX" type="button" aria-label="Fechar">✕</button></div>
 <input id="cnQ" placeholder="Buscar código ou atividade (ex.: 1052 ou queijo)" autocomplete="off">
 <div class="cnbar"><button class="g" id="cnAll" type="button">Marcar os listados</button><button class="g" id="cnNone" type="button">Limpar seleção</button><label><input type="checkbox" id="cnOnlySel"> só marcados</label><span id="cnInfo"></span></div>
 <div id="cnList"></div><div class="cnft"><button class="b" id="cnOk" type="button">Concluir</button></div></div>
-<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">Cartões</button><button id="vTab" class="on">Tabela</button><button id="vKan">Kanban</button></div><span class="net"></span><em class="ver">v8.16.4</em></header>
+<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">Cartões</button><button id="vTab" class="on">Tabela</button><button id="vKan">Kanban</button></div><span class="net"></span><em class="ver">v8.16.5</em></header>
 <div class="card fl" id="fcard">
 <input id="q" placeholder="Buscar empresa, cidade, CNPJ… ( / )" style="flex:1;min-width:160px"><button class="g keep" id="bFilt" type="button" title="Mostrar ou esconder os demais filtros">Filtros <span id="fCount" class="bd" style="background:var(--az);display:none"></span></button>
 <select class="pri" id="fUF"><option value="">UF</option></select><select id="fCid"><option value="">Cidade</option></select>
@@ -797,14 +797,14 @@ dialog::backdrop{background:rgba(24,24,27,.35);backdrop-filter:blur(2px)}
 <div class="fl" id="pgr" style="margin-top:8px"><button class="g" id="pv">‹</button><span id="pn"></span><button class="g" id="nx">›</button></div>
 </section>
 
-<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.16.4</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g pri" id="bMapClr" hidden title="Limpa os filtros da tela Leads e mostra todas as empresas no mapa">Limpar filtros</button><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
+<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.16.5</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g pri" id="bMapClr" hidden title="Limpa os filtros da tela Leads e mostra todas as empresas no mapa">Limpar filtros</button><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
 <div class="fl" id="carOpts" hidden><div class="seg" id="carVis" style="margin:0"><button type="button" data-cvis="heat">Mapa de calor</button><button type="button" data-cvis="circ">Círculos</button></div><label class="chip gapc"><input type="checkbox" id="carGap"> mostrar áreas sem atendimento</label><span style="color:var(--cz);font-size:13px">Considerar:</span><span id="carChips" class="fl" style="gap:6px"></span>
 <label class="chip"><input type="checkbox" id="carInt"> quem tem contato/visita registrado</label>
 <select id="carMet"><option value="n">Tamanho = nº de clientes</option><option value="p">Tamanho = % dos leads da cidade</option></select></div></div>
 <div id="map"></div><div class="card" id="carPanel" hidden></div></section>
-<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><button class="g" id="sgMapBtn" type="button" title="Mostra as regiões num mapa para escolher clicando">Escolher no mapa</button><span class="net"></span><em class="ver">v8.16.4</em></header><div class="card sg-mapbox" id="sgMapBox" hidden><div id="sgMap"></div><div class="sg-mapnote" id="sgMapNote"></div></div><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section><section id="territorio" class="pg"><header class="ph"><div><h2>Território</h2></div></header><div class="tr-intro" id="trIntro"></div><div class="sg"><aside class="sg-l" id="trL"></aside><div class="sg-r" id="trR"></div></div></section><section id="perfis" class="pg"><header class="ph"><div><h2>Perfis para priorizar</h2><p>Compara as empresas ainda não abordadas com as que você já contatou, visitou ou atendeu</p></div><span class="net"></span><em class="ver">v8.16.4</em></header><div class="sg"><aside class="sg-l" id="pfL"></aside><div class="sg-r" id="pfR"></div></div></section>
-<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bIcs" type="button" title="Baixa os retornos agendados para importar no Google Agenda ou Outlook">Exportar calendário</button><button class="g" id="bNotif" type="button">Lembretes</button><button class="g" id="bSeq" type="button">Sequências</button><button class="b" id="bPzHoje" type="button">Fazer retornos de hoje</button><span class="net"></span><em class="ver">v8.16.4</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
-<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.16.4</em></header>
+<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><button class="g" id="sgMapBtn" type="button" title="Mostra as regiões num mapa para escolher clicando">Escolher no mapa</button><span class="net"></span><em class="ver">v8.16.5</em></header><div class="card sg-mapbox" id="sgMapBox" hidden><div id="sgMap"></div><div class="sg-mapnote" id="sgMapNote"></div></div><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section><section id="territorio" class="pg"><header class="ph"><div><h2>Território</h2></div></header><div class="tr-intro" id="trIntro"></div><div class="sg"><aside class="sg-l" id="trL"></aside><div class="sg-r" id="trR"></div></div></section><section id="perfis" class="pg"><header class="ph"><div><h2>Perfis para priorizar</h2><p>Compara as empresas ainda não abordadas com as que você já contatou, visitou ou atendeu</p></div><span class="net"></span><em class="ver">v8.16.5</em></header><div class="sg"><aside class="sg-l" id="pfL"></aside><div class="sg-r" id="pfR"></div></div></section>
+<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bIcs" type="button" title="Baixa os retornos agendados para importar no Google Agenda ou Outlook">Exportar calendário</button><button class="g" id="bNotif" type="button">Lembretes</button><button class="g" id="bSeq" type="button">Sequências</button><button class="b" id="bPzHoje" type="button">Fazer retornos de hoje</button><span class="net"></span><em class="ver">v8.16.5</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
+<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.16.5</em></header>
 <div class="card" id="syncCard"><h3 style="margin-top:0">Sincronizar tablet e computador</h3>
 <p>Trabalhe offline nos dois aparelhos. Quando quiser juntar o que cada um anotou: gere o arquivo de sincronização em um aparelho, leve ao outro (WhatsApp, e-mail, Drive, cabo USB ou Bluetooth) e aplique lá. Repita no sentido contrário para os dois ficarem iguais. Nada é apagado: se o mesmo campo foi editado nos dois, vale a edição mais recente.</p>
 <div class="fl"><label>Nome deste aparelho <input id="devName" placeholder="Ex.: Tablet" size="14"></label><label><input type="checkbox" id="syFull"> incluir toda a base de empresas (arquivo grande)</label></div>
@@ -1153,52 +1153,60 @@ const AI_P={anthropic:{nome:"Anthropic (Claude)",uso:"Notícias de qualidade e i
   info:"A API da Gemini é cobrada à parte (crie a chave em aistudio.google.com). Para pesquisar no Google ela precisa do faturamento ativo: as primeiras 5.000 pesquisas do mês são grátis e o texto processado é cobrado. Vale restringir a chave à “Generative Language API”."},
  deepseek:{nome:"DeepSeek",uso:"Padrão de e-mail (opcional; sem ela a Gemini faz essa parte)",para:"à DeepSeek",kk:"aiKeyD",mk:"aiModelD",def:"deepseek-chat",ph:"sk-…",site:"platform.deepseek.com",
   models:[["deepseek-chat","DeepSeek Chat (recomendado)"],["deepseek-reasoner","DeepSeek Reasoner"]],
-  info:"A API da DeepSeek é cobrada à parte (crie a chave em platform.deepseek.com). Ela recebe só os nomes das pessoas encontradas, os e-mails públicos e o domínio do site, nunca CNPJ ou telefone. Os dados são processados na China."}};
+  info:"A API da DeepSeek é cobrada à parte (crie a chave em platform.deepseek.com). Ela recebe só nomes (da empresa e das pessoas encontradas), a cidade, os e-mails públicos, o domínio do site e, em Pessoas com o Serper, os resultados do Google; nunca CNPJ ou telefone. Os dados são processados na China."},
+ serper:{nome:"Serper.dev (Google)",da:"do Serper",uso:"Pessoas da Qualidade: busca direto no Google",para:"ao Serper",kk:"aiKeyS",mk:"aiModelS",def:"br",ph:"serper.dev → API Key",site:"serper.dev",test:1,
+  models:[["br","Google Brasil"]],
+  info:"O Serper não é uma IA: ele traz os resultados do Google (título, trecho e link de cada perfil) e a IA marcada em Pessoas (DeepSeek, Gemini ou Claude) lê esses resultados. Cada pesquisa de Pessoas gasta de 10 a 18 consultas. A conta nova vem com 2.500 consultas grátis; depois são pacotes pré-pagos (confira os preços em serper.dev). Ao Serper vão só os nomes da empresa, a cidade e os termos da busca."}};
 const aiKey=p=>aiLs(AI_P[p].kk,"");
 const aiModel=p=>{const P=AI_P[p],m=aiLs(P.mk,P.def);return P.models.some(x=>x[0]==m)?m:P.def};
 /* v8.16.0: cada tarefa aceita uma ou mais IAs (caixinhas) e cada IA tem interruptor ligada/standby */
-const AI_NM={anthropic:"Claude",gemini:"Gemini",deepseek:"DeepSeek"};
-const AI_ON_DEF={anthropic:"0",gemini:"1",deepseek:"1"};
+const AI_NM={anthropic:"Claude",gemini:"Gemini",deepseek:"DeepSeek",serper:"Serper"};
+const AI_ON_DEF={anthropic:"0",gemini:"1",deepseek:"1",serper:"1"};
 const aiOn=p=>aiLs("aiOn_"+p,AI_ON_DEF[p])=="1";
 const AI_ORD=["gemini","anthropic","deepseek"];
 /* só Gemini e Claude pesquisam na internet; o DeepSeek só analisa texto */
 const AI_BUSCA=new Set(["gemini","anthropic"]);
-const AI_TASKS={pes:{nome:"Pessoas da Qualidade",busca:1,def:["gemini"]},
+const AI_TASKS={pes:{nome:"Pessoas da Qualidade",busca:1,def:["gemini"],ps:[...AI_ORD,"serper"]},
  mail:{nome:"E-mail e telefones (busca)",busca:1,def:["gemini"]},
  pad:{nome:"Padrão de e-mail",busca:0,def:["deepseek"]},
  news:{nome:"Notícias",busca:1,def:["gemini","deepseek"]}};
+/* v8.16.5: quem pode ser marcado em cada tarefa (o Serper só em Pessoas) */
+const aiPs=k=>AI_TASKS[k].ps||AI_ORD;
 /* lê a seleção; na primeira vez converte a escolha antiga (v8.15.0) */
 const aiSel=k=>{const T=AI_TASKS[k];let v=null;try{const j=localStorage.getItem("aiSel_"+k);if(j!=null)v=JSON.parse(j)}catch(e){}
  if(!Array.isArray(v)){const o=aiLs("aiTask_"+k,"");v=!o?T.def:o=="off"?[]:o.split("+")}
- return AI_ORD.filter(p=>v.includes(p))};
-const aiSetSel=(k,L)=>{try{localStorage.setItem("aiSel_"+k,JSON.stringify(AI_ORD.filter(p=>L.includes(p))))}catch(e){}};
+ return aiPs(k).filter(p=>v.includes(p))};
+const aiSetSel=(k,L)=>{try{localStorage.setItem("aiSel_"+k,JSON.stringify(aiPs(k).filter(p=>L.includes(p))))}catch(e){}};
 const aiTaskOff=k=>!aiSel(k).length;
 /* motivo de não poder usar uma IA agora (ou "" se pode) */
-const aiWhy=p=>!aiOn(p)?`${AI_NM[p]} está em standby`:!aiKey(p)?`falta a chave da ${AI_P[p].nome}`:"";
+const aiWhy=p=>!aiOn(p)?`${AI_NM[p]} está em standby`:!aiKey(p)?`falta a chave ${AI_P[p].da||"da "+AI_P[p].nome}`:"";
 const aiOk=p=>!aiWhy(p);
 const aiNms=L=>L.map(p=>AI_NM[p]).join(" + ");
 /* quem busca, quem revisa e por que não dá para rodar */
 function aiPlan(k){const S=aiSel(k),T=AI_TASKS[k],ok=S.filter(aiOk),bad=S.filter(p=>!aiOk(p)).map(aiWhy);
  if(!T.busca)return{run:ok,rev:null,bad,why:S.length&&!ok.length?bad.join("; "):""};
- const run=ok.filter(p=>AI_BUSCA.has(p)),rev=run.length&&ok.includes("deepseek")?"deepseek":null;
- const why=run.length?"":S.some(p=>AI_BUSCA.has(p))?bad.join("; "):"o DeepSeek não pesquisa na internet: marque também a Gemini ou o Claude";
- return{run,rev,bad,why}}
+ /* v8.16.5: o Serper só busca; quem lê os resultados dele é a primeira IA marcada (DeepSeek, depois Gemini, depois Claude) */
+ const run=ok.filter(p=>AI_BUSCA.has(p)),srp=ok.includes("serper"),ler=srp?["deepseek","gemini","anthropic"].find(p=>ok.includes(p))||null:null,rev=run.length&&ok.includes("deepseek")?"deepseek":null;
+ const why=run.length||ler?"":srp?(bad.length?bad.join("; "):"o Serper só busca no Google: marque também uma IA (DeepSeek, Gemini ou Claude) para ler os resultados")
+  :S.some(p=>AI_BUSCA.has(p)||p=="serper")?bad.join("; "):`o DeepSeek não pesquisa na internet: marque também a Gemini${aiPs(k).includes("serper")?", o Claude ou o Serper":" ou o Claude"}`;
+ return{run,rev,bad,why,srp:srp&&!!ler,ler}}
+const aiPlanNms=P=>aiNms([...new Set([...P.run,...(P.srp?["serper"]:[]),...(P.ler?[P.ler]:[]),...(P.rev?[P.rev]:[])])]);
 const aiSt=()=>{const used=new Set(Object.keys(AI_TASKS).flatMap(aiSel));
- return Object.keys(AI_NM).map(p=>{const on=aiOn(p),key=!!aiKey(p),st=!on?"standby":!key?"sem chave":used.has(p)?"ativa":"sem tarefa";
+ return Object.keys(AI_NM).filter(p=>p!="serper"||aiKey(p)||used.has(p)).map(p=>{const on=aiOn(p),key=!!aiKey(p),st=!on?"standby":!key?"sem chave":used.has(p)?"ativa":"sem tarefa";
   return`<span class="aiK ${on&&key&&used.has(p)?"on":on&&!key?"warn":""}" data-aicfg title="${AI_NM[p]}: ${st}">${AI_NM[p]}${st!="ativa"?` · ${st}`:""}</span>`}).join("")}
 function aiCfgHtml(p){const P=AI_P[p],has=!!aiKey(p),m=aiModel(p),on=aiOn(p);return`<section class="aiCfgP ${on?"":"aiOff"}">
   <div class="aiCfgT"><b>${P.nome}</b><label class="aiSw" title="${on?"Ligada":"Em standby"}"><input type="checkbox" role="switch" data-aion="${p}" ${on?"checked":""}><i></i><span>${on?"Ligada":"Standby"}</span></label></div>
   <div class="aiCfgU">${(tk=>tk.length?"Faz: "+tk.join(", "):"Sem tarefa no momento")(Object.keys(AI_TASKS).filter(k=>aiSel(k).includes(p)).map(k=>AI_TASKS[k].nome))} · <span class="aiPill ${has?"ok":""}">${has?"chave salva":"sem chave"}</span></div>
   <div class="aiCfgF"><input data-aik="${p}" type="password" placeholder="${has?"Cole outra chave para trocar":`Cole sua chave (${P.ph})`}" autocomplete="off">
-  <select data-aim="${p}" aria-label="Modelo">${P.models.map(([v,t])=>`<option value="${v}" ${v==m?"selected":""}>${t}</option>`).join("")}</select>
-  <button type="button" class="b sm" data-aisave="${p}">Salvar</button></div>
+  ${P.models.length>1?`<select data-aim="${p}" aria-label="Modelo">${P.models.map(([v,t])=>`<option value="${v}" ${v==m?"selected":""}>${t}</option>`).join("")}</select>`:`<input type="hidden" data-aim="${p}" value="${m}">`}
+  <button type="button" class="b sm" data-aisave="${p}">Salvar</button>${P.test?`<button type="button" class="g sm" data-aitest="${p}" title="Faz uma consulta de teste (gasta 1 crédito)">Testar</button>`:""}</div>${P.test?`<small class="aiTestR" data-aitestr="${p}" aria-live="polite"></small>`:""}
   <details class="aiCfgI"><summary>Custo e privacidade</summary><p>${P.info}</p></details>
   ${has?`<button type="button" class="aiLink" data-aidel="${p}">Remover chave</button>`:""}</section>`}
-function aiTasksHtml(){return`<section class="aiTk"><h4>Quem faz cada tarefa</h4><p class="aiTkH">Marque uma ou mais IAs. Com mais de uma, os resultados são somados sem repetir. O DeepSeek não pesquisa na internet: marcado junto da Gemini ou do Claude, ele revisa o que elas acharem.</p>`
+function aiTasksHtml(){return`<section class="aiTk"><h4>Quem faz cada tarefa</h4><p class="aiTkH">Marque uma ou mais IAs. Com mais de uma, os resultados são somados sem repetir. O DeepSeek não pesquisa na internet: marcado junto da Gemini ou do Claude, ele revisa o que elas acharem. Em Pessoas, o Serper busca direto no Google e uma IA marcada lê os resultados.</p>`
  +Object.entries(AI_TASKS).map(([k,T])=>{const S=aiSel(k),P=aiPlan(k);
-  const msg=!S.length?["aiTkOff","Desligada. Marque ao menos uma IA para esta tarefa rodar."]:P.why?["aiTkW",`⚠ ${P.why}. Esta tarefa não vai rodar assim.`]:P.bad.length?["aiTkW",`⚠ ${P.bad.join("; ")}. Vai rodar só com ${aiNms([...P.run,...(P.rev?[P.rev]:[])])}.`]:null;
-  return`<div class="aiTkR"><span class="aiTkN">${T.nome}</span><div class="aiTkO" role="group" aria-label="${T.nome}">${AI_ORD.map(p=>{const on=S.includes(p),dim=!aiOn(p),rv=T.busca&&!AI_BUSCA.has(p);
-   return`<label class="aiCk ${on?"on":""} ${dim?"dim":""}" title="${dim?`${AI_NM[p]} está em standby`:rv?"Não pesquisa na internet: revisa o que a outra IA achar":""}"><input type="checkbox" data-aisel="${k}" data-p="${p}" ${on?"checked":""}><i></i>${AI_NM[p]}${rv?" <small>revisa</small>":""}</label>`}).join("")}</div>
+  const msg=!S.length?["aiTkOff","Desligada. Marque ao menos uma IA para esta tarefa rodar."]:P.why?["aiTkW",`⚠ ${P.why}. Esta tarefa não vai rodar assim.`]:P.bad.length?["aiTkW",`⚠ ${P.bad.join("; ")}. Vai rodar só com ${aiPlanNms(P)}.`]:null;
+  return`<div class="aiTkR"><span class="aiTkN">${T.nome}</span><div class="aiTkO" role="group" aria-label="${T.nome}">${aiPs(k).map(p=>{const on=S.includes(p),dim=!aiOn(p),sp=p=="serper",rv=T.busca&&!AI_BUSCA.has(p)&&!sp;
+   return`<label class="aiCk ${on?"on":""} ${dim?"dim":""}" title="${dim?`${AI_NM[p]} está em standby`:sp?"Busca direto no Google; a IA marcada lê os resultados":rv?`Não pesquisa na internet: revisa o que a outra IA achar${aiPs(k).includes("serper")?" e lê os resultados do Serper":""}`:""}"><input type="checkbox" data-aisel="${k}" data-p="${p}" ${on?"checked":""}><i></i>${AI_NM[p]}${rv?" <small>revisa</small>":sp?" <small>Google</small>":""}</label>`}).join("")}</div>
    ${msg?`<small class="${msg[0]}">${msg[1]}</small>`:""}</div>`}).join("")+`</section>`}
 const aiCfgBody=()=>aiTasksHtml()+`<h4 class="aiCfgS">Inteligências</h4>`+Object.keys(AI_P).map(aiCfgHtml).join("");
 /* v8.14.1: aba Inteligência redesenhada. Configuração em janela própria (engrenagem), resultados em cartões e filtro de busca */
@@ -1219,15 +1227,15 @@ function bindAICfg(){const B=$("#aiCfgB");if(!B)return;
  B.onchange=e=>{const sk=e.target.dataset.aisel;
   if(sk){const q=e.target.dataset.p,S=aiSel(sk).filter(x=>x!=q);if(e.target.checked)S.push(q);aiSetSel(sk,S);B.innerHTML=aiCfgBody();aiApplyTabs();const f=B.querySelector(`[data-aisel="${sk}"][data-p="${q}"]`);if(f)f.focus();return}
   const p=e.target.dataset.aion;if(!p)return;try{localStorage.setItem("aiOn_"+p,e.target.checked?"1":"0")}catch(x){}toast(`${AI_NM[p]} ${e.target.checked?"ligada":"em standby"}`);B.innerHTML=aiCfgBody();aiApplyTabs()};
- B.onclick=e=>{const t=e.target.closest("button")||e.target,sv=t.dataset.aisave,dl=t.dataset.aidel;
-  if(sv){const k=B.querySelector(`[data-aik="${sv}"]`).value.trim();try{if(k)localStorage.setItem(AI_P[sv].kk,k);localStorage.setItem(AI_P[sv].mk,B.querySelector(`[data-aim="${sv}"]`).value)}catch(x){}toast(`Configuração da ${AI_P[sv].nome} salva`)}
+ B.onclick=e=>{const t=e.target.closest("button")||e.target,sv=t.dataset.aisave,dl=t.dataset.aidel;if(t.dataset.aitest){aiTestar(t.dataset.aitest,B);return}
+  if(sv){const k=B.querySelector(`[data-aik="${sv}"]`).value.trim();try{if(k)localStorage.setItem(AI_P[sv].kk,k);localStorage.setItem(AI_P[sv].mk,B.querySelector(`[data-aim="${sv}"]`).value)}catch(x){}toast(`Configuração ${AI_P[sv].da||"da "+AI_P[sv].nome} salva${sv=="serper"&&k&&aiSerperAuto()?". Marquei o Serper na busca de Pessoas":""}`)}
   else if(dl){try{localStorage.removeItem(AI_P[dl].kk)}catch(x){}toast("Chave removida")}else return;
   B.innerHTML=aiCfgBody();aiApplyTabs()}}
 /* janela própria de configuração, por cima da ficha */
 function aiCfgOpen(){let d=$("#aiCfgDlg");if(!d){d=document.createElement("dialog");d.id="aiCfgDlg";document.body.appendChild(d)}
  d.innerHTML=`<div class="aiCfgH"><h3>Configurar IA</h3><button type="button" class="g ld-x" data-aicx aria-label="Fechar">✕</button></div>
  <div id="aiCfgB">${aiCfgBody()}</div>
- <p class="aiPriv">As chaves ficam só neste navegador e não entram no backup. Ao pesquisar, o nome, o CNPJ e a cidade da empresa vão ao Google e à Anthropic; à DeepSeek vão só nomes e o domínio do site. Use só para contato profissional e apague os dados de quem pedir.</p>`;
+ <p class="aiPriv">As chaves ficam só neste navegador e não entram no backup. Ao pesquisar, o nome, o CNPJ e a cidade da empresa vão ao Google e à Anthropic; ao Serper vão só os nomes da empresa e a cidade; à DeepSeek vão nomes, a cidade, o domínio do site e, com o Serper, os resultados do Google. Use só para contato profissional e apague os dados de quem pedir.</p>`;
  bindAICfg();d.querySelector("[data-aicx]").onclick=()=>d.close();d.onclick=e=>{if(e.target===d)d.close()};d.onclose=()=>aiApplyTabs();d.showModal()}
 function aiTab(k){$$("#aiBox [data-ait]").forEach(b=>b.classList.toggle("on",b.dataset.ait==k));$$("#aiOut [data-aip]").forEach(d=>d.hidden=d.dataset.aip!=k)}
 /* filtro de busca nos resultados */
@@ -1275,7 +1283,7 @@ async function aiFetch(nome,url,opt){const c=new AbortController(),tm=setTimeout
  finally{clearTimeout(tm)}}
 /* v8.14.1: mostra o texto de erro que a API devolve (a Google manda o erro dentro de uma lista) */
 async function aiHttpErr(res){const raw=await res.text().catch(()=>"");let j=null;try{j=JSON.parse(raw)}catch(e){}
- const e=Array.isArray(j)?(j[0]||{}).error:(j&&j.error);const m=(e&&(e.message||e.status))||(typeof e=="string"?e:"")||raw.replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim().slice(0,300);
+ const e=Array.isArray(j)?(j[0]||{}).error:(j&&(j.error||j.message));const m=(e&&(e.message||e.status))||(typeof e=="string"?e:"")||raw.replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim().slice(0,300);
  const x=new Error(`HTTP ${res.status}${m?": "+m:""}`);x.status=res.status;return x}
 /* v8.14.1: Gemini primeiro pela API generateContent (a mais estável); se falhar, tenta a Interactions API */
 async function aiGemini(prompt,search=true){let e1;try{return await aiGeminiGC(prompt,search)}catch(e){e1=e}
@@ -1293,8 +1301,8 @@ async function aiGeminiIA(prompt,search=true){const body={model:aiModel("gemini"
  if(j.status&&j.status!="completed")throw new Error(`A Gemini não terminou a pesquisa (${j.status}). Tente de novo.`);
  const B=(j.steps||[]).filter(s=>s&&s.type=="model_output").flatMap(s=>s.content||[]).filter(b=>b&&b.type=="text");
  return{txt:B.map(b=>b.text).join(""),fontes:B.flatMap(b=>(b.annotations||[]).filter(a=>a&&a.type=="url_citation"&&a.url).map(a=>a.url))}}
-async function aiDeepSeek(prompt){const res=await aiFetch("O DeepSeek","https://api.deepseek.com/chat/completions",{method:"POST",headers:{"content-type":"application/json","authorization":"Bearer "+aiKey("deepseek")},
-  body:JSON.stringify({model:aiModel("deepseek"),messages:[{role:"system",content:AI_SYS},{role:"user",content:prompt}],response_format:{type:"json_object"},max_tokens:1500})});
+async function aiDeepSeek(prompt,mx){const res=await aiFetch("O DeepSeek","https://api.deepseek.com/chat/completions",{method:"POST",headers:{"content-type":"application/json","authorization":"Bearer "+aiKey("deepseek")},
+  body:JSON.stringify({model:aiModel("deepseek"),messages:[{role:"system",content:AI_SYS},{role:"user",content:prompt}],response_format:{type:"json_object"},max_tokens:mx||1500})});
  if(!res.ok)throw await aiHttpErr(res);const j=await res.json();
  return{txt:(((j.choices||[])[0]||{}).message||{}).content||"",fontes:[]}}
 /* extrai o objeto JSON do texto da IA */
@@ -1308,6 +1316,11 @@ Nome fantasia: ${r.NOME_FANTASIA||"n/d"}
 CNPJ: ${maskCnpj(r.CNPJ_COMPLETO)}
 Atividade: ${r.ATIVIDADE_PRINCIPAL_TEXTO||"n/d"}
 Endereço: ${[r.LOGRADOURO,r.NUMERO,r.BAIRRO,r.MUNICIPIO,r.UF].filter(Boolean).join(", ")}`;
+/* sem CNPJ e sem endereço: para a IA que só lê (DeepSeek) */
+const aiEmpresaC=r=>`Empresa: ${r.RAZAO_SOCIAL}
+Nome fantasia: ${r.NOME_FANTASIA||"n/d"}
+Atividade: ${r.ATIVIDADE_PRINCIPAL_TEXTO||"n/d"}
+Cidade: ${r.MUNICIPIO}/${r.UF}`;
 /* domínio próprio da empresa (ignora provedores gratuitos) */
 const AI_FREE=/^(gmail|googlemail|hotmail|outlook|live|msn|yahoo|ymail|bol|uol|terra|ig|globo|globomail|icloud|me|zipmail|r7|oi|aol|protonmail|proton)\./i;
 function aiDom(s){s=aiT(s).toLowerCase();if(!s)return"";if(s.includes("@"))s=s.split("@").pop();
@@ -1322,7 +1335,7 @@ async function aiMX(d){const tries=[`https://cloudflare-dns.com/dns-query?name=$
  return{ok:null,prov:"",hosts:[]}}
 const aiNoAcc=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 /* chama uma IA (search=false para só analisar texto) */
-async function aiAsk(p,prompt,search=true){if(p=="anthropic")return aiAnthropic(prompt,search?8:0);if(p=="deepseek")return aiDeepSeek(prompt);return aiGemini(prompt,search)}
+async function aiAsk(p,prompt,search=true,mx){if(p=="anthropic")return aiAnthropic(prompt,search?8:0);if(p=="deepseek")return aiDeepSeek(prompt,mx);return aiGemini(prompt,search)}
 /* v8.16.0: várias IAs ao mesmo tempo. Basta uma responder; as falhas viram aviso. pg mostra o andamento na tela */
 async function aiAskM(ps,prompt,search,pg){const R=await Promise.allSettled(ps.map(p=>{pg&&pg.set(p,"busca");
   return aiAsk(p,prompt,search).then(a=>{const d=aiJSON(a);pg&&pg.set(p,"ok");return{p,d}},e=>{pg&&pg.set(p,"err");throw e})}));
@@ -1367,15 +1380,15 @@ const aiNomes=r=>{const tc=x=>x.toLowerCase().replace(/(^|\s)\S/g,c=>c.toUpperCa
  if(!lugar)L.push("Grupo "+c);
  const seen=new Set();return L.map(tc).filter(n=>{const k=aiNoAcc(n);if(seen.has(k))return false;seen.add(k);return true}).slice(0,6)};
 /* v8.16.3: antes de buscar, descobre se a empresa foi comprada ou mudou de marca (ex.: Frutarom virou IFF). Uma vez por lead */
-function aiIdent(r,p,pg){const s=aiS(r);if(s.identErr&&Date.now()-s.identErr>120000){s.ident=null;s.identErr=0}
- if(!s.ident)s.ident=(async()=>{try{const d=aiJSON(await Promise.race([new Promise((_,no)=>setTimeout(()=>no(new Error("o passo do nome atual demorou")),Math.min(45000,AI_TMO))),aiAsk(p,`Descubra como esta empresa brasileira (e esta unidade, em ${r.MUNICIPIO}/${r.UF}) é conhecida HOJE. Verifique no Google se ela foi comprada, incorporada, se fundiu ou mudou de marca, e qual é o grupo controlador. Veja também como os funcionários desta unidade escrevem o nome da empresa no LinkedIn. Responda SOMENTE com um objeto JSON.
-${aiEmpresa(r)}
+function aiIdent(r,p,pg,pk){pk=pk||p;const s=aiS(r);if(s.identErr&&Date.now()-s.identErr>120000){s.ident=null;s.identErr=0}
+ if(!s.ident)s.ident=(async()=>{try{const d=aiJSON(await Promise.race([new Promise((_,no)=>setTimeout(()=>no(new Error("o passo do nome atual demorou")),Math.min(45000,AI_TMO))),(AI_BUSCA.has(p)?aiAsk:aiIdentSerper.bind(null,r))(p,`Descubra como esta empresa brasileira (e esta unidade, em ${r.MUNICIPIO}/${r.UF}) é conhecida HOJE. Verifique no Google se ela foi comprada, incorporada, se fundiu ou mudou de marca, e qual é o grupo controlador. Veja também como os funcionários desta unidade escrevem o nome da empresa no LinkedIn. Responda SOMENTE com um objeto JSON.
+${AI_BUSCA.has(p)?aiEmpresa(r):aiEmpresaC(r)}
 Regras: não invente nada; se nada mudou, "mudou":false e "nomes" só com os nomes usados no LinkedIn; nomes curtos como aparecem (ex.: "IFF", "Frigorífico Saudali"), no máximo 4.
 Formato: {"mudou":false,"nome_atual":null,"controladora":null,"motivo":"uma frase, ex.: comprada pela IFF em 2018","nomes":[]}`,true)]));
    const L=[aiT(d.nome_atual),aiT(d.controladora),...(Array.isArray(d.nomes)?d.nomes:[]).map(aiT)].filter(x=>x&&x.length>=2&&x.length<=40);
    const v={mudou:d.mudou===true,atual:aiT(d.nome_atual),grupo:aiT(d.controladora),motivo:aiT(d.motivo),nomes:[...new Set(L)].slice(0,5)};s.identD=v;return v}
   catch(e){s.identErr=Date.now();return{nomes:[],err:e.message}}})();
- const pr=s.ident;if(pg&&!s.identD){pg.set(p,"nome");pr.then(()=>pg.set(p,"busca"))}return pr}
+ const pr=s.ident;if(pg&&!s.identD){pg.set(pk,"nome");pr.then(()=>pg.set(pk,"busca"))}return pr}
 /* todos os nomes: os do cadastro e os achados no passo acima, sem repetir */
 const aiNomesAll=r=>{const id=(AI_MEM.get(r.id)||{}).identD,L=[...aiNomes(r),...((id&&id.nomes)||[])],seen=new Set();
  return L.filter(n=>{const k=aiNoAcc(n);if(seen.has(k))return false;seen.add(k);return true}).slice(0,8)};
@@ -1450,22 +1463,119 @@ const aiPesList=(d,r)=>(Array.isArray(d.pessoas)?d.pessoas:[]).filter(x=>x&&type
   empAtual:aiT(x.empresa_atual),periodo:aiT(x.periodo).slice(0,40),evid:aiT(x.evidencia).slice(0,200),saiu:x.saiu===true||/descart|saiu|ex-/.test(aiNoAcc(aiT(x.status))),
   linkedin:(u=>/^https?:\/\/([a-z]+\.)?linkedin\.com\//i.test(u)?u:/^([a-z]+\.)?linkedin\.com\//i.test(u)?"https://"+u:"")(aiT(x.linkedin)),fonte:aiUrl(x.fonte),duvida:aiNoAcc(aiT(x.status))=="duvida"?(aiT(x.duvida)||"Confira se a pessoa ainda está na empresa e na área de qualidade"):""}))
   .filter(p=>p.nome&&p.nome.split(/\s+/).length>=2&&(p.linkedin||p.fonte)).map(p=>(p.desc=aiPesCheck(r,p),p));
-async function aiPessoas(r,pg){const P=aiPlan("pes"),id=await aiIdent(r,P.run[0],pg),
-  R=await aiAskJobs(P.run.flatMap(p=>Object.keys(AI_FOCOS).map(f=>({p,foco:f,rot:f=="gestao"?"liderança":f=="tecnico"?"analistas":"operacional",prompt:aiPesPrompt(r,f)}))),pg),errs=[...R.errs];
- let L=aiMerge(R.ok.map(({p,d})=>({p,items:aiPesList(d,r)})),x=>[x.linkedin&&"li:"+aiKeyUrl(x.linkedin).replace(/^.*linkedin\.com\//,""),"n:"+aiKeyTxt(x.nome)]),rv=null;
+/* ---------- v8.16.5: Serper.dev (resultados do Google por API). Ele só busca; uma IA marcada em Pessoas lê os resultados ---------- */
+const aiCid=r=>String(r.MUNICIPIO||"").toLowerCase().replace(/(^|\s)\S/g,c=>c.toUpperCase());
+async function aiSerperQ(q,page,key){let res;
+ try{res=await aiFetch("O Serper","https://google.serper.dev/search",{method:"POST",headers:{"content-type":"application/json","x-api-key":key||aiKey("serper")},body:JSON.stringify(Object.assign({q,gl:"br",hl:"pt-br"},page>1?{page}:{}))})}
+ catch(e){if(e.timeout)throw e;throw new Error("o navegador não conseguiu falar com o Serper (confira a internet; se continuar, o navegador está bloqueando a chamada)")}
+ if(!res.ok){const e=await aiHttpErr(res);if(res.status==401||res.status==403)e.message+=" (chave do Serper inválida ou sem permissão)";else if(/credit/i.test(e.message))e.message+=" (acabaram os créditos do Serper)";throw e}
+ const j=await res.json();return Array.isArray(j.organic)?j.organic:[]}
+/* consultas curtas (o Google corta depois de 32 palavras): um grupo de cargos por consulta */
+const AI_SQ=[N=>`site:linkedin.com/in (${N}) qualidade`,
+ N=>`site:linkedin.com/in (${N}) (gerente OR coordenador OR coordenadora OR supervisor OR supervisora OR líder) qualidade`,
+ N=>`site:linkedin.com/in (${N}) (analista OR técnico OR técnica OR assistente) (qualidade OR laboratório)`,
+ N=>`site:linkedin.com/in (${N}) (laboratório OR microbiologia OR microbiologista OR "físico-químico" OR químico OR química)`,
+ N=>`site:linkedin.com/in (${N}) (higienização OR higienista OR sanitização OR BPF OR "segurança dos alimentos")`,
+ N=>`site:linkedin.com/in (${N}) (auxiliar OR inspetor OR inspetora OR monitor OR monitora OR estagiário) (qualidade OR laboratório)`,
+ N=>`site:linkedin.com/in (${N}) ("food safety" OR quality OR QA OR QC OR "garantia da qualidade" OR "controle de qualidade")`,
+ N=>`site:linkedin.com/in (${N}) ("responsável técnico" OR "médico veterinário" OR "médica veterinária" OR SIF OR "P&D" OR regulatórios)`,
+ N=>`site:linkedin.com/posts (${N}) (qualidade OR auditoria OR FSSC OR BRCGS OR "segurança dos alimentos")`];
+function aiSerperQs(r){const B=aiNomes(r),id=(AI_MEM.get(r.id)||{}).identD,nv=id?(id.nomes||[]).filter(n=>!B.some(m=>aiNoAcc(m)==aiNoAcc(n))):[],or=L=>L.map(n=>`"${n}"`).join(" OR "),Q=[];
+ const g1=or(B.slice(0,3));AI_SQ.forEach(f=>Q.push({q:f(g1)}));Q.push({q:AI_SQ[0](g1),page:2});
+ if(B.length>3){const g2=or(B.slice(3,6));[0,2,4].forEach(i=>Q.push({q:AI_SQ[i](g2)}))}
+ /* empresa com nome novo (Frutarom → IFF): nome novo + cidade da unidade */
+ if(nv.length){const g3=or(nv.slice(0,4)),c=`"${aiCid(r)}"`,q=`site:linkedin.com/in (${g3}) ${c} (qualidade OR quality OR "food safety" OR laboratório OR higienização OR QA OR QC)`;
+  Q.push({q},{q,page:2},{q:`site:linkedin.com/in (${g3}) ${c} (analista OR técnico OR técnica OR auxiliar OR coordenador OR supervisor OR gerente)`})}
+ return Q}
+/* link do perfil: /in/nome; num post, o perfil de quem publicou */
+const aiLiPerfil=u=>{let m=/linkedin\.com\/in\/([^/?#]+)/i.exec(u);if(!m)m=/linkedin\.com\/posts\/([^_/?#]+)_/i.exec(u);return m?`https://www.linkedin.com/in/${m[1]}`:""};
+const aiSerperPrompt=(r,L)=>{const id=(AI_MEM.get(r.id)||{}).identD;return`Abaixo estão resultados do Google (título, trecho e link) de buscas no LinkedIn por pessoas da área de QUALIDADE (ou laboratório, SIF, higienização) desta empresa brasileira. Leia os resultados e liste as PESSOAS desta empresa que aparecem neles. Você NÃO pesquisa: use só o texto abaixo. Responda SOMENTE com um objeto JSON.
+${aiEmpresaC(r)}
+Nomes da empresa no LinkedIn: ${aiNomesAll(r).join(" | ")}
+${id&&id.mudou?`ATENÇÃO: ${id.motivo||`hoje a empresa é ${id.atual||id.grupo}`}. Quem tem o nome novo (${(id.nomes||[]).join(", ")||id.atual}) como empresa atual CONTA.
+`:""}Interessa a unidade de ${r.MUNICIPIO}/${r.UF} e região; quem é de outra unidade do grupo vai como "duvida", com o motivo. NÃO descarte por cidade.
+Cargos que CONTAM (cargo atual nesta empresa ou grupo), em qualquer nível: ${AI_CARGOS.gestao}; ${AI_CARGOS.tecnico}; ${AI_CARGOS.operacional}. Títulos em inglês também contam (Quality, QA, QC, Food Safety, Lab, Microbiologist, Sanitation, Regulatory, R&D).
+NÃO traga: comercial, vendas, trader, exportação, compras, logística, finanças, RH, TI, manutenção e produção sem relação com qualidade; fiscais do governo (MAPA); páginas de empresa; homônimos de outras empresas.
+Como ler: o título de um perfil costuma ser "Nome - Cargo - Empresa | LinkedIn" ou "Nome – Empresa | LinkedIn"; no trecho, "Experiência:" mostra a empresa ATUAL e "Localidade:" a cidade. O título (headline) sozinho não prova onde a pessoa trabalha. Se "Experiência:" mostra outra empresa, ou se o período nesta empresa tem data de saída (ex.: "2016 - 2023"), a pessoa saiu: traga com "status":"saiu" e "empresa_atual" preenchida. Um post (linkedin.com/posts) é de quem publicou: traga só se for uma pessoa e o texto mostrar que ela trabalha nesta empresa.
+"status":"confirmado" só quando o texto mostra o vínculo atual com esta empresa ou grupo; "duvida" quando não dá para confirmar, com o motivo em "duvida".
+Resultados:
+${L.map(x=>`[${x.id}] ${x.tx} · ${x.link}`).join("\n")}
+Regras: não invente nada; "id" é o número do resultado; nome como aparece no resultado; cargo curto (até 6 palavras); "evidencia" é um trecho literal curto (até 120 caracteres) do resultado que liga a pessoa a esta empresa; "periodo" só se aparecer no texto.
+Formato: {"pessoas":[{"id":1,"nome":"","cargo":"","empresa_atual":null,"periodo":null,"evidencia":null,"cidade":"","status":"confirmado|duvida|saiu","duvida":null}]}`};
+async function aiSerperPes(r,P,pg,errs){const Q=aiSerperQs(r),n=Q.length,res=Array(n).fill(null);let fim=0,bad=0,last="";
+ pg.lbl=pg.lbl||{};const upd=()=>{pg.lbl.serper=`${fim} de ${n} consultas`;pg.set("serper","busca")};upd();
+ const um=async k=>{try{res[k]=await aiSerperQ(Q[k].q,Q[k].page)}catch(e){bad++;last=e.message;res[k]=[];if(!k)throw e}finally{fim++;upd()}};
+ /* a primeira consulta vai sozinha: se a chave ou os créditos falham, não gasta as outras */
+ try{await um(0)}catch(e){pg.set("serper","err");throw new Error(`Serper falhou (${e.message})`)}
+ let i=1;await Promise.all(Array.from({length:Math.min(5,n-1)},async()=>{while(i<n)await um(i++)}));
+ if(bad)errs.push(`Serper: ${bad} de ${n} consultas falharam (${last})`);
+ /* junta os resultados por perfil; o mesmo perfil em várias consultas soma os trechos */
+ const NS=aiNomesAll(r),M=new Map();
+ res.forEach(L=>(L||[]).forEach(o=>{const link=aiT(o&&o.link);if(!/linkedin\.com\/(in|posts|pub)\//i.test(link))return;
+  const li=aiLiPerfil(link),k=aiKeyUrl(li||link),at=o.attributes&&typeof o.attributes=="object"?Object.entries(o.attributes).map(([a,b])=>`${a}: ${b}`).join(" · "):"";
+  const sn=aiT(o.snippet),x=M.get(k);
+  if(x){if(sn&&!x.tx.includes(sn))x.tx=(x.tx+" · "+sn).slice(0,700);return}
+  M.set(k,{li,link,tx:[aiT(o.title),sn,at,aiT(o.date)].filter(Boolean).join(" · ").slice(0,700)})}));
+ const tem=x=>{const s=aiNoAcc(x.tx);return aiEhEmp(r,x.tx)||NS.some(m=>s.includes(aiNoAcc(m)))};
+ let L=[...M.values()];L=[...L.filter(tem),...L.filter(x=>!tem(x))].slice(0,60);
+ const out={items:[],nq:n-bad,lidos:L.length};if(!L.length){pg.set("serper","ok");return out}
+ /* a IA lê em partes de 20 resultados, ao mesmo tempo (resposta menor e mais rápida) */
+ L.forEach((x,i)=>x.id=i+1);const parts=[];for(let j=0;j<L.length;j+=20)parts.push(L.slice(j,j+20));let lidos=0;
+ const upl=()=>{pg.lbl.serper=`${AI_NM[P.ler]}: ${lidos} de ${parts.length} ${parts.length==1?"parte":"partes"}`;pg.set("serper",lidos<parts.length?"le":"ok")};upl();
+ const R=await Promise.allSettled(parts.map(ch=>aiAsk(P.ler,aiSerperPrompt(r,ch),false,6000).then(aiJSON).finally(()=>{lidos++;upl()})));
+ const ruins=R.filter(x=>x.status=="rejected"),msg=x=>(x.reason&&x.reason.message)||x.reason;
+ if(ruins.length==R.length){pg.set("serper","err");throw new Error(`${AI_NM[P.ler]} não conseguiu ler os resultados do Serper (${msg(ruins[0])})`)}
+ if(ruins.length)errs.push(`${AI_NM[P.ler]} não leu ${ruins.length} de ${R.length} partes do Serper (${msg(ruins[0])})`);
+ const by=new Map(L.map(x=>[x.id,x])),pes=[];
+ R.forEach(x=>{if(x.status!="fulfilled")return;(Array.isArray(x.value.pessoas)?x.value.pessoas:[]).forEach(p=>{const o=p&&by.get(+p.id),pn=aiNoAcc(aiT(p&&p.nome)).split(/\s+/)[0];
+  /* nome que não está no resultado seria invenção: fica de fora. O link vem do resultado, nunca da IA */
+  if(!o||pn.length<2||!aiNoAcc(o.tx).includes(pn))return;pes.push(Object.assign({},p,{linkedin:o.li,fonte:/linkedin\.com\/in\//i.test(o.link)?"":o.link}))})});
+ out.items=aiPesList({pessoas:pes},r);return out}
+/* nome atual da empresa pelos resultados do Serper (quando nenhuma IA marcada pesquisa) */
+async function aiIdentSerper(r,p,prompt){const B=aiNomes(r).filter(n=>!/^Grupo /.test(n)),b=B.slice().sort((x,y)=>x.split(" ").length-y.split(" ").length)[0]||nmL(r),w=b.split(" ")[0],c=aiCid(r);
+ /* "Frutarom Essencias" → "Frutarom": a notícia da compra quase nunca usa o nome completo */
+ const R=await Promise.allSettled([`${w.length>=4&&!AI_GEN.has(aiNoAcc(w))?w:b} ${c} (adquirida OR comprada OR incorporada OR aquisição OR fusão OR "nova marca")`,`"${b}" "${c}"`].map(q=>aiSerperQ(q)));
+ const L=R.flatMap(x=>x.status=="fulfilled"?x.value:[]).slice(0,16);
+ if(!L.length){const f=R.find(x=>x.status=="rejected");throw f?f.reason:new Error("o Serper não trouxe resultados sobre a empresa")}
+ return aiAsk(p,`${prompt}
+Você NÃO pesquisa: use só estes resultados do Google (título · trecho · link):
+${L.map((o,i)=>`[${i+1}] ${aiT(o.title)} · ${aiT(o.snippet)} · ${aiT(o.link)}`).join("\n")}`,false)}
+/* ao salvar a chave pela primeira vez, marca o Serper em Pessoas (se você desmarcar depois, fica desmarcado) */
+const aiSerperAuto=()=>{if(aiLs("aiSerperAuto","")||aiSel("pes").includes("serper"))return false;aiSetSel("pes",[...aiSel("pes"),"serper"]);try{localStorage.setItem("aiSerperAuto","1")}catch(e){}return true};
+/* botão Testar: uma consulta real (1 crédito); se a chave digitada funciona, já fica salva */
+async function aiTestar(p,B){const inp=B.querySelector(`[data-aik="${p}"]`),k=aiT(inp&&inp.value),key=k||aiKey(p),btn=B.querySelector(`[data-aitest="${p}"]`);
+ const say=(m,c)=>{const o=B.querySelector(`[data-aitestr="${p}"]`);if(o){o.textContent=m;o.className="aiTestR "+(c||"")}};
+ if(!key)return say("Cole a chave primeiro e clique em Testar.","bad");
+ say("Testando…");if(btn)btn.disabled=true;
+ try{const L=await aiSerperQ("site:linkedin.com/in qualidade alimentos",1,key);let m=`Funcionando: o Google respondeu com ${L.length} resultados (gastou 1 consulta).`;
+  if(k){try{localStorage.setItem(AI_P[p].kk,k)}catch(x){}m+=" Chave salva."}
+  if(aiSerperAuto())m+=" Marquei o Serper na busca de Pessoas.";
+  if(!aiOn(p))m+=" Ele está em standby: ligue o interruptor para usar.";
+  B.innerHTML=aiCfgBody();aiApplyTabs();say(m,"ok")}
+ catch(e){if(btn)btn.disabled=false;say(`Não funcionou: ${e.message}`,"bad")}}
+const AI_PELO={gemini:"pela Gemini",anthropic:"pelo Claude",deepseek:"pelo DeepSeek"};
+const aiViaP=(R,S,P,rv,errs)=>[`Busca: ${[R&&R.ok.length?`${aiNms([...new Set(R.ok.map(x=>x.p))])} (${R.ok.length} buscas)`:"",S?`Serper (${S.nq} consultas no Google, lidas ${AI_PELO[P.ler]||""})`:""].filter(Boolean).join(" + ")}`,rv?`Revisão: ${AI_NM[rv]}`:"",...errs].filter(Boolean).join(" · ");
+async function aiPessoas(r,pg){const P=aiPlan("pes"),id=await aiIdent(r,P.run[0]||P.ler,pg,P.run[0]||"serper"),errs=[];
+ /* v8.16.5: as IAs que pesquisam e o Serper rodam juntos; basta um dar certo */
+ const[R,S]=await Promise.all([P.run.length?aiAskJobs(P.run.flatMap(p=>Object.keys(AI_FOCOS).map(f=>({p,foco:f,rot:f=="gestao"?"liderança":f=="tecnico"?"analistas":"operacional",prompt:aiPesPrompt(r,f)}))),pg).catch(e=>{errs.push(e.message);return null}):null,
+  P.srp?aiSerperPes(r,P,pg,errs).catch(e=>{errs.push(e.message);return null}):null]);
+ if(!R&&!S)throw new Error(errs.join(" | ")||"Nenhuma busca rodou.");if(R)errs.unshift(...R.errs);
+ let L=aiMerge([...(R?R.ok.map(({p,d})=>({p,items:aiPesList(d,r)})):[]),...(S?[{p:"serper",items:S.items}]:[])],x=>[x.linkedin&&"li:"+aiKeyUrl(x.linkedin).replace(/^.*linkedin\.com\//,""),"n:"+aiKeyTxt(x.nome)]),rv=null;
  const achados=L.length,fora=L.filter(x=>x.desc);L=L.filter(x=>!x.desc);
- if(P.rev&&L.length){L.forEach((x,i)=>x.id=i+1);
+ /* o que veio do Serper já foi lido por uma IA; a revisão do DeepSeek fica para o que as outras IAs acharam */
+ const LR=L.filter(x=>!x.src.includes("serper"));
+ if(P.rev&&LR.length){L.forEach(x=>x.id=0);LR.forEach((x,i)=>x.id=i+1);
   const d=await aiRev(P.rev,`Revise a lista de pessoas abaixo, achadas em perfis públicos, para quem vende soluções para a área de QUALIDADE da empresa ${aiNomeBusca(r)} (${r.MUNICIPIO}/${r.UF}). Responda SOMENTE com um objeto JSON.
 Nomes da empresa: ${aiNomesAll(r).join(" | ")}
 Pessoas:
-${L.map(x=>`[${x.id}] ${x.nome} · ${x.cargo||"cargo n/d"}${x.cidade?" · "+x.cidade:""} · empresa atual: ${x.empAtual||"n/d"} · período: ${x.periodo||"n/d"} · evidência: ${x.evid||"nenhuma"}${x.duvida?` (dúvida: ${x.duvida})`:""}`).join("\n")}
+${LR.map(x=>`[${x.id}] ${x.nome} · ${x.cargo||"cargo n/d"}${x.cidade?" · "+x.cidade:""} · empresa atual: ${x.empAtual||"n/d"} · período: ${x.periodo||"n/d"} · evidência: ${x.evid||"nenhuma"}${x.duvida?` (dúvida: ${x.duvida})`:""}`).join("\n")}
 Cargos que interessam (usam kits de microbiologia, micotoxinas, luminômetro e alergênicos), em qualquer nível: ${AI_CARGOS.gestao}; ${AI_CARGOS.tecnico}; ${AI_CARGOS.operacional}.
 Regras: "descartar" quem claramente NÃO está nesses cargos (comercial, vendas, trader, exportação, compras, finanças, RH, TI, logística, manutenção, fiscal do governo), quem tem data de saída nesta empresa ou quem está hoje em outra empresa; o título do perfil sozinho não prova vínculo atual; "duvida" quando cargo ou empresa não estão claros, com o motivo; "confirmado" quando batem. Use só o que está na lista; não invente nada.
 Formato: {"pessoas":[{"id":1,"status":"confirmado|duvida|descartar","duvida":null}]}`,pg,errs);
   if(d){rv=P.rev;const by=new Map((Array.isArray(d.pessoas)?d.pessoas:[]).filter(x=>x&&x.id!=null).map(x=>[+x.id,x]));
    L=L.filter(x=>{const v=by.get(x.id);if(!v)return true;const st=aiNoAcc(aiT(v.status));if(st=="descartar"){x.desc=aiT(v.duvida)||`${AI_NM[P.rev]}: não é da qualidade ou não está na empresa`;fora.push(x);return false}if(st=="duvida"&&!x.duvida)x.duvida=aiT(v.duvida)||"Confira o cargo e a empresa atual no perfil";return true})}}
  L.sort((a,b)=>(a.duvida?1:0)-(b.duvida?1:0)||b.src.length-a.src.length);
- return{pessoas:L.slice(0,30),fora:fora.slice(0,30),achados,nomes:aiNomesAll(r),ident:id&&id.mudou?id:null,site:R.ok.map(x=>aiUrl(x.d.site)||aiT(x.d.site)).find(Boolean)||"",fontes:R.fontes,via:aiVia(R.ok,rv,errs)}}
+ return{pessoas:L.slice(0,30),fora:fora.slice(0,30),achados,nomes:aiNomesAll(r),ident:id&&id.mudou?id:null,site:(R?R.ok:[]).map(x=>aiUrl(x.d.site)||aiT(x.d.site)).find(Boolean)||"",fontes:R?R.fontes:[],via:aiViaP(R,S,P,rv,errs)}}
 /* ---------- parte 2: domínio, MX, e-mails públicos, padrão e telefones ---------- */
 async function aiMail(r,s,pg){const pes=(s.pes&&s.pes.data&&s.pes.data.pessoas)||[];
  let dom=aiDom(r.site)||aiDom(s.pes&&s.pes.data&&s.pes.data.site)||"",domOrig=dom?"site":"";
@@ -1572,9 +1682,9 @@ async function aiPart(r,k,show){const s=aiS(r);if(s[k]&&s[k].run)return s[k].run
  me.run=run;s[k]=me;aiRender(r,k);return run}
 /* botão Parar: libera a aba na hora, sem esperar a IA */
 function aiStop(r,k){const s=aiS(r);if(!s[k]||!s[k].run)return;s[k]={err:"Pesquisa interrompida por você."};aiRender(r,k);if(k=="pes"&&s.mail&&s.mail.pg&&s.mail.pg.wait){s.mail={err:"Pesquisa interrompida: ela esperava a aba Pessoas."};aiRender(r,"mail")}}
-const AI_PST={nome:"descobrindo o nome atual",busca:"buscando",revisa:"revisando",ok:"pronto",err:"falhou"};
+const AI_PST={nome:"descobrindo o nome atual",busca:"buscando",le:"lendo os resultados",revisa:"revisando",ok:"pronto",err:"falhou"};
 function aiProgHtml(pg){if(pg.wait)return"Esperando a aba Pessoas terminar…";const sec=Math.round((Date.now()-pg.t0)/1000),lb=pg.lbl||{};
- return Object.entries(pg.st).map(([p,v])=>`<span class="aiPg ${v}">${AI_NM[p]}: ${AI_PST[v]||v}${lb[p]&&v=="busca"?` · ${lb[p]}`:""}</span>`).join("")+`<span class="aiPgT">${sec} s${sec>40?" · pode levar até 90 s":""}</span>`}
+ return Object.entries(pg.st).map(([p,v])=>`<span class="aiPg ${v}">${AI_NM[p]}: ${AI_PST[v]||v}${lb[p]&&(v=="busca"||v=="le")?` · ${lb[p]}`:""}</span>`).join("")+`<span class="aiPgT">${sec} s${sec>40?" · pode levar até 90 s":""}</span>`}
 function aiProgUpd(r,k){const s=aiS(r)[k],el=$(`#aiOut [data-aip="${k}"] [data-aiprog]`);if(el&&s&&s.pg)el.innerHTML=aiProgHtml(s.pg)}
 async function runAI(r){const ks=["pes","mail","news"].filter(k=>!aiTaskOff(k));if(!ks.length){aiCfgOpen();return toast("Todas as tarefas estão desligadas em Configurar IA",1)}
  const s=aiS(r);ks.forEach(k=>{if(s[k]&&!s[k].run)delete s[k]});aiTab(ks[0]);
@@ -1590,7 +1700,7 @@ const aiFontes=L=>{const src=(L||[]).slice(0,10);return src.length?`<details cla
 const aiQ=(...a)=>esc(aiNoAcc(a.filter(Boolean).join(" ")));
 const aiIni=n=>esc(n.split(/\s+/).filter(w=>w.length>2||/^[A-ZÀ-Ú]/.test(w)).slice(0,2).map(w=>w[0]).join("").toUpperCase()||"?");
 /* selo quando mais de uma IA achou o mesmo item */
-const aiSrcB=x=>x&&x.src&&x.src.length>1?` <span class="aiMulti" title="Achado por ${aiNms(x.src)}">${x.src.length} IAs</span>`:"";
+const aiSrcB=x=>x&&x.src&&x.src.length>1?` <span class="aiMulti" title="Achado por ${aiNms(x.src)}">${x.src.length} ${x.src.includes("serper")?"fontes":"IAs"}</span>`:"";
 const aiConfB=(c,t)=>`<span class="aiConf aiC-${c}">${t||({media:"média"}[c]||c)}</span>`;
 const AI_MES=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const aiData=d=>{const m=/^(\d{4})-(\d{2})/.exec(d||"");return m?`${AI_MES[+m[2]-1]||""} ${m[1]}`:esc(d||"")};
@@ -1599,8 +1709,8 @@ const AI_MSG={pes:["Procurando pessoas da Qualidade no LinkedIn…","Encontra qu
  mail:["Procurando site, e-mails publicados e o padrão de e-mail…","Descobre o domínio, confere se ele recebe e-mail e deduz o e-mail provável das pessoas encontradas."],
  news:["Lendo notícias dos últimos 24 meses…","Certificações, problemas de qualidade e investimentos dos últimos 24 meses, com um gancho para a abordagem."]};
 const aiSk=n=>`<div class="aiSkW">${Array.from({length:n},()=>'<div class="aiSk"><i></i><div><b></b><b></b></div></div>').join("")}</div>`;
-function aiErrHtml(k,msg){const m=String(msg||""),stop=/interrompida/.test(m),tmo=/não respondeu em/.test(m),key=!tmo&&/API key|API_KEY|chave/i.test(m),bill=/billing|faturamento|quota|429|credit|saldo|balance/i.test(m);
- return`<div class="aiErr"><b>${stop?"Pesquisa parada":"Não foi possível pesquisar"}</b><span>${stop?"Clique em Tentar de novo quando quiser.":tmo?"A IA demorou demais e a busca foi cortada. Costuma ser lentidão momentânea do serviço: tente de novo.":key?"A chave parece inválida ou sem permissão para esta API.":bill?"Parece limite de uso ou faturamento da conta.":"O serviço recusou o pedido. O motivo que ele devolveu está abaixo."}</span>
+function aiErrHtml(k,msg){const m=String(msg||""),stop=/interrompida/.test(m),tmo=/não respondeu em/.test(m),net=/navegador não conseguiu|Failed to fetch|NetworkError|Load failed/i.test(m),key=!tmo&&!net&&/API key|API_KEY|chave|unauthori/i.test(m),bill=/billing|faturamento|quota|429|credit|saldo|balance/i.test(m);
+ return`<div class="aiErr"><b>${stop?"Pesquisa parada":"Não foi possível pesquisar"}</b><span>${stop?"Clique em Tentar de novo quando quiser.":tmo?"A IA demorou demais e a busca foi cortada. Costuma ser lentidão momentânea do serviço: tente de novo.":net?"Não deu para falar com o serviço. Confira a internet e tente de novo.":key?"A chave parece inválida ou sem permissão para esta API.":bill?"Parece limite de uso ou faturamento da conta.":"O serviço recusou o pedido. O motivo que ele devolveu está abaixo."}</span>
   <code>${esc(m)}</code><div class="aiErrA"><button type="button" class="b sm" data-aigo="${k}">Tentar de novo</button><button type="button" class="g sm" data-aicfg>Configurar IA</button></div></div>`}
 function aiRenderAll(r){AI_T.forEach(([k])=>aiRender(r,k))}
 function aiRender(r,k){const box=$(`#aiOut [data-aip="${k}"]`);if(!box||$("#aiBox").dataset.lead!=String(r.id))return;
