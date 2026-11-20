@@ -708,7 +708,7 @@ dialog::backdrop{background:rgba(24,24,27,.35);backdrop-filter:blur(2px)}
 .aiCfgH{display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;padding:16px 0 8px;z-index:1}.aiCfgH h3{margin:0;font-size:18px}
 #aiCfgDlg .aiCfgP{padding:14px;border:1px solid var(--bd);border-radius:12px;margin-bottom:10px}
 .aiCfgT{display:flex;justify-content:space-between;align-items:center;gap:8px}.aiCfgU{font-size:12px;color:var(--cz);margin:2px 0 10px}
-.aiCfgF{display:flex;gap:6px;flex-wrap:wrap}.aiTestR{display:block;font-size:12px;margin-top:6px;color:var(--cz)}.aiTestR:empty{display:none}.aiTestR.ok{color:#166534}.aiTestR.bad{color:#b42318}.aiCfgF input{flex:1 1 180px;min-width:0}.aiCfgF select{flex:0 1 auto}
+.aiCfgF{display:flex;gap:6px;flex-wrap:wrap}.aiVer{display:inline-block;font-family:system-ui,sans-serif;font-size:11px;font-weight:600;padding:1px 8px;border-radius:999px;margin-left:6px;white-space:nowrap;vertical-align:middle}.aiVer.v-ok{background:#e8f5ec;color:#166534}.aiVer.v-bad{background:#fde8e8;color:#b42318}.aiVer.v-warn{background:#fff7e6;color:#7a4d00}.aiVer.v-mut{background:#f1f2f4;color:#555}.aiPadX{margin-top:8px;font-size:12.5px}.aiPadX p{margin:2px 0}.aiPadX button{margin-top:6px}.aiVerAll{margin-left:10px;font-size:12px;text-transform:none;letter-spacing:0}.aiTestR{display:block;font-size:12px;margin-top:6px;color:var(--cz)}.aiTestR:empty{display:none}.aiTestR.ok{color:#166534}.aiTestR.bad{color:#b42318}.aiCfgF input{flex:1 1 180px;min-width:0}.aiCfgF select{flex:0 1 auto}
 .aiCfgI{margin-top:8px;font-size:12px;color:var(--cz)}.aiCfgI summary{cursor:pointer}.aiCfgI p{margin:6px 0 0}
 .aiPriv{font-size:12px;color:var(--cz);margin:6px 2px 0}
 @media(max-width:600px){.aiHead{flex-wrap:wrap}.aiGo{flex:1}.aiSrch{order:3;flex-basis:100%;margin-top:2px}.aiSeg button{font-size:12px}.aiCard{flex-wrap:wrap}.aiUse{margin-left:52px}.aiDate{width:52px}}
@@ -765,15 +765,15 @@ dialog::backdrop{background:rgba(24,24,27,.35);backdrop-filter:blur(2px)}
 </script>
 </head><body>
 <nav><h1><b class="lg">L</b><span>Lucas Prospecção</span></h1><button id="navK" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar</span></button><button data-p="hoje" class="on" title="O que fazer hoje"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><path d='M12 7v5l3 2'/></svg><span>Hoje</span></button><button data-p="leads" title="Leads"><svg viewBox="0 0 24 24"><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx=9 cy=7 r=4 /><path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/></svg><span>Leads</span></button><button data-p="sugestoes" title="Sugestões por região"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><polygon points='16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8'/></svg><span>Sugestões</span></button><button data-p="territorio" title="Áreas onde você tem pouca presença"><svg viewBox="0 0 24 24"><path d='M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z'/><path d='M9 3v15M15 6v15'/></svg><span>Território</span></button><button data-p="perfis" title="Perfis para priorizar"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><circle cx=12 cy=12 r=5 /><circle cx=12 cy=12 r=1 /></svg><span>Perfis</span></button><button data-p="agenda" title="Agenda de retornos"><svg viewBox="0 0 24 24"><rect x=3 y=4 width=18 height=18 rx=2 /><path d='M16 2v4M8 2v4M3 10h18'/></svg><span>Agenda</span><b class="nbd" id="agBd" hidden></b></button><button data-p="mapa" title="Mapa"><svg viewBox="0 0 24 24"><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx=12 cy=10 r=3 /></svg><span>Mapa</span></button><button data-p="dash" title="Relatórios e indicadores"><svg viewBox="0 0 24 24"><path d='M3 3v18h18'/><path d='M7 15l4-4 3 3 5-6'/></svg><span>Relatórios</span></button><button data-p="dados" title="Dados e sincronização"><svg viewBox="0 0 24 24"><ellipse cx=12 cy=5 rx=9 ry=3 /><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg><span>Dados</span></button><button id="navMore" type="button" title="Mais telas"><svg viewBox="0 0 24 24"><circle cx=5 cy=12 r=1.5 /><circle cx=12 cy=12 r=1.5 /><circle cx=19 cy=12 r=1.5 /></svg><span>Mais</span></button><button id="navT" class="nt" title="Recolher menu"><svg viewBox="0 0 24 24"><polyline points='15 18 9 12 15 6'/></svg><span>Recolher</span></button></nav>
-<main><div id="topbar"><b id="tbTitle">Hoje</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.16.5</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">Prospectar</button></div>
+<main><div id="topbar"><b id="tbTitle">Hoje</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.16.6</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">Prospectar</button></div>
 <section id="hoje" class="pg on"><header class="ph"><div><h2 id="hoHi">Hoje</h2><p id="hoSub"></p></div><button class="b" id="bHoPz" type="button" title="Abre a fila com os retornos de hoje e os atrasados">Fazer retornos de hoje</button></header><div class="ho-k" id="hoK"></div><div class="ho-g"><div class="card ho-a"><div class="ho-h"><b>Próximas ações</b><button type="button" class="g sm" data-go="agenda">Ver agenda</button></div><div id="hoA"></div></div><div class="ho-s"><div class="card ho-p"><div class="ho-h"><div><b>Ligar primeiro</b><small>Prioridade alta, ainda sem contato</small></div><button type="button" class="g sm" data-go="leads">Ver leads</button></div><div id="hoP"></div></div><div id="goals"></div></div></div></section>
-<section id="dash" class="pg"><header class="ph"><div><h2>Relatórios</h2><p>Indicadores e gráficos da sua carteira</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >Personalizar</button><span class="net"></span><em class="ver">v8.16.5</em></header><div id="relat"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
+<section id="dash" class="pg"><header class="ph"><div><h2>Relatórios</h2><p>Indicadores e gráficos da sua carteira</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >Personalizar</button><span class="net"></span><em class="ver">v8.16.6</em></header><div id="relat"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
 
 <div id="cnBox" class="cnbox" hidden><div class="cnh"><b>Filtrar por CNAE</b><button class="g" id="cnX" type="button" aria-label="Fechar">✕</button></div>
 <input id="cnQ" placeholder="Buscar código ou atividade (ex.: 1052 ou queijo)" autocomplete="off">
 <div class="cnbar"><button class="g" id="cnAll" type="button">Marcar os listados</button><button class="g" id="cnNone" type="button">Limpar seleção</button><label><input type="checkbox" id="cnOnlySel"> só marcados</label><span id="cnInfo"></span></div>
 <div id="cnList"></div><div class="cnft"><button class="b" id="cnOk" type="button">Concluir</button></div></div>
-<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">Cartões</button><button id="vTab" class="on">Tabela</button><button id="vKan">Kanban</button></div><span class="net"></span><em class="ver">v8.16.5</em></header>
+<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">Cartões</button><button id="vTab" class="on">Tabela</button><button id="vKan">Kanban</button></div><span class="net"></span><em class="ver">v8.16.6</em></header>
 <div class="card fl" id="fcard">
 <input id="q" placeholder="Buscar empresa, cidade, CNPJ… ( / )" style="flex:1;min-width:160px"><button class="g keep" id="bFilt" type="button" title="Mostrar ou esconder os demais filtros">Filtros <span id="fCount" class="bd" style="background:var(--az);display:none"></span></button>
 <select class="pri" id="fUF"><option value="">UF</option></select><select id="fCid"><option value="">Cidade</option></select>
@@ -797,14 +797,14 @@ dialog::backdrop{background:rgba(24,24,27,.35);backdrop-filter:blur(2px)}
 <div class="fl" id="pgr" style="margin-top:8px"><button class="g" id="pv">‹</button><span id="pn"></span><button class="g" id="nx">›</button></div>
 </section>
 
-<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.16.5</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g pri" id="bMapClr" hidden title="Limpa os filtros da tela Leads e mostra todas as empresas no mapa">Limpar filtros</button><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
+<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.16.6</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g pri" id="bMapClr" hidden title="Limpa os filtros da tela Leads e mostra todas as empresas no mapa">Limpar filtros</button><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
 <div class="fl" id="carOpts" hidden><div class="seg" id="carVis" style="margin:0"><button type="button" data-cvis="heat">Mapa de calor</button><button type="button" data-cvis="circ">Círculos</button></div><label class="chip gapc"><input type="checkbox" id="carGap"> mostrar áreas sem atendimento</label><span style="color:var(--cz);font-size:13px">Considerar:</span><span id="carChips" class="fl" style="gap:6px"></span>
 <label class="chip"><input type="checkbox" id="carInt"> quem tem contato/visita registrado</label>
 <select id="carMet"><option value="n">Tamanho = nº de clientes</option><option value="p">Tamanho = % dos leads da cidade</option></select></div></div>
 <div id="map"></div><div class="card" id="carPanel" hidden></div></section>
-<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><button class="g" id="sgMapBtn" type="button" title="Mostra as regiões num mapa para escolher clicando">Escolher no mapa</button><span class="net"></span><em class="ver">v8.16.5</em></header><div class="card sg-mapbox" id="sgMapBox" hidden><div id="sgMap"></div><div class="sg-mapnote" id="sgMapNote"></div></div><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section><section id="territorio" class="pg"><header class="ph"><div><h2>Território</h2></div></header><div class="tr-intro" id="trIntro"></div><div class="sg"><aside class="sg-l" id="trL"></aside><div class="sg-r" id="trR"></div></div></section><section id="perfis" class="pg"><header class="ph"><div><h2>Perfis para priorizar</h2><p>Compara as empresas ainda não abordadas com as que você já contatou, visitou ou atendeu</p></div><span class="net"></span><em class="ver">v8.16.5</em></header><div class="sg"><aside class="sg-l" id="pfL"></aside><div class="sg-r" id="pfR"></div></div></section>
-<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bIcs" type="button" title="Baixa os retornos agendados para importar no Google Agenda ou Outlook">Exportar calendário</button><button class="g" id="bNotif" type="button">Lembretes</button><button class="g" id="bSeq" type="button">Sequências</button><button class="b" id="bPzHoje" type="button">Fazer retornos de hoje</button><span class="net"></span><em class="ver">v8.16.5</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
-<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.16.5</em></header>
+<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><button class="g" id="sgMapBtn" type="button" title="Mostra as regiões num mapa para escolher clicando">Escolher no mapa</button><span class="net"></span><em class="ver">v8.16.6</em></header><div class="card sg-mapbox" id="sgMapBox" hidden><div id="sgMap"></div><div class="sg-mapnote" id="sgMapNote"></div></div><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section><section id="territorio" class="pg"><header class="ph"><div><h2>Território</h2></div></header><div class="tr-intro" id="trIntro"></div><div class="sg"><aside class="sg-l" id="trL"></aside><div class="sg-r" id="trR"></div></div></section><section id="perfis" class="pg"><header class="ph"><div><h2>Perfis para priorizar</h2><p>Compara as empresas ainda não abordadas com as que você já contatou, visitou ou atendeu</p></div><span class="net"></span><em class="ver">v8.16.6</em></header><div class="sg"><aside class="sg-l" id="pfL"></aside><div class="sg-r" id="pfR"></div></div></section>
+<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bIcs" type="button" title="Baixa os retornos agendados para importar no Google Agenda ou Outlook">Exportar calendário</button><button class="g" id="bNotif" type="button">Lembretes</button><button class="g" id="bSeq" type="button">Sequências</button><button class="b" id="bPzHoje" type="button">Fazer retornos de hoje</button><span class="net"></span><em class="ver">v8.16.6</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
+<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.16.6</em></header>
 <div class="card" id="syncCard"><h3 style="margin-top:0">Sincronizar tablet e computador</h3>
 <p>Trabalhe offline nos dois aparelhos. Quando quiser juntar o que cada um anotou: gere o arquivo de sincronização em um aparelho, leve ao outro (WhatsApp, e-mail, Drive, cabo USB ou Bluetooth) e aplique lá. Repita no sentido contrário para os dois ficarem iguais. Nada é apagado: se o mesmo campo foi editado nos dois, vale a edição mais recente.</p>
 <div class="fl"><label>Nome deste aparelho <input id="devName" placeholder="Ex.: Tablet" size="14"></label><label><input type="checkbox" id="syFull"> incluir toda a base de empresas (arquivo grande)</label></div>
@@ -1156,12 +1156,15 @@ const AI_P={anthropic:{nome:"Anthropic (Claude)",uso:"Notícias de qualidade e i
   info:"A API da DeepSeek é cobrada à parte (crie a chave em platform.deepseek.com). Ela recebe só nomes (da empresa e das pessoas encontradas), a cidade, os e-mails públicos, o domínio do site e, em Pessoas com o Serper, os resultados do Google; nunca CNPJ ou telefone. Os dados são processados na China."},
  serper:{nome:"Serper.dev (Google)",da:"do Serper",uso:"Pessoas da Qualidade: busca direto no Google",para:"ao Serper",kk:"aiKeyS",mk:"aiModelS",def:"br",ph:"serper.dev → API Key",site:"serper.dev",test:1,
   models:[["br","Google Brasil"]],
-  info:"O Serper não é uma IA: ele traz os resultados do Google (título, trecho e link de cada perfil) e a IA marcada em Pessoas (DeepSeek, Gemini ou Claude) lê esses resultados. Cada pesquisa de Pessoas gasta de 10 a 18 consultas. A conta nova vem com 2.500 consultas grátis; depois são pacotes pré-pagos (confira os preços em serper.dev). Ao Serper vão só os nomes da empresa, a cidade e os termos da busca."}};
+  info:"O Serper não é uma IA: ele traz os resultados do Google (título, trecho e link de cada perfil) e a IA marcada em Pessoas (DeepSeek, Gemini ou Claude) lê esses resultados. Cada pesquisa de Pessoas gasta de 10 a 18 consultas. A conta nova vem com 2.500 consultas grátis; depois são pacotes pré-pagos (confira os preços em serper.dev). Ao Serper vão só os nomes da empresa, a cidade e os termos da busca."},
+ hunter:{nome:"Hunter.io (verificação de e-mail)",da:"do Hunter",faz:"verificar e-mails (botões Verificar e Descobrir o padrão)",uso:"Verificar e-mails",para:"ao Hunter",kk:"aiKeyH",mk:"aiModelH",def:"v2",ph:"hunter.io → API key",site:"hunter.io",test:1,
+  models:[["v2","Email Verifier"]],
+  info:"O Hunter não é uma IA: ele confere com o servidor de e-mail se o endereço existe, sem mandar mensagem. Só roda quando você clica em Verificar. Cada verificação gasta meio crédito e a busca do padrão do domínio gasta 1. O plano grátis dá 50 créditos por mês (cerca de 100 verificações). Ao Hunter vão só os e-mails que você manda verificar e o domínio da empresa."}};
 const aiKey=p=>aiLs(AI_P[p].kk,"");
 const aiModel=p=>{const P=AI_P[p],m=aiLs(P.mk,P.def);return P.models.some(x=>x[0]==m)?m:P.def};
 /* v8.16.0: cada tarefa aceita uma ou mais IAs (caixinhas) e cada IA tem interruptor ligada/standby */
-const AI_NM={anthropic:"Claude",gemini:"Gemini",deepseek:"DeepSeek",serper:"Serper"};
-const AI_ON_DEF={anthropic:"0",gemini:"1",deepseek:"1",serper:"1"};
+const AI_NM={anthropic:"Claude",gemini:"Gemini",deepseek:"DeepSeek",serper:"Serper",hunter:"Hunter"};
+const AI_ON_DEF={anthropic:"0",gemini:"1",deepseek:"1",serper:"1",hunter:"1"};
 const aiOn=p=>aiLs("aiOn_"+p,AI_ON_DEF[p])=="1";
 const AI_ORD=["gemini","anthropic","deepseek"];
 /* só Gemini e Claude pesquisam na internet; o DeepSeek só analisa texto */
@@ -1191,12 +1194,12 @@ function aiPlan(k){const S=aiSel(k),T=AI_TASKS[k],ok=S.filter(aiOk),bad=S.filter
   :S.some(p=>AI_BUSCA.has(p)||p=="serper")?bad.join("; "):`o DeepSeek não pesquisa na internet: marque também a Gemini${aiPs(k).includes("serper")?", o Claude ou o Serper":" ou o Claude"}`;
  return{run,rev,bad,why,srp:srp&&!!ler,ler}}
 const aiPlanNms=P=>aiNms([...new Set([...P.run,...(P.srp?["serper"]:[]),...(P.ler?[P.ler]:[]),...(P.rev?[P.rev]:[])])]);
-const aiSt=()=>{const used=new Set(Object.keys(AI_TASKS).flatMap(aiSel));
- return Object.keys(AI_NM).filter(p=>p!="serper"||aiKey(p)||used.has(p)).map(p=>{const on=aiOn(p),key=!!aiKey(p),st=!on?"standby":!key?"sem chave":used.has(p)?"ativa":"sem tarefa";
+const aiSt=()=>{const used=new Set([...Object.keys(AI_TASKS).flatMap(aiSel),"hunter"]);
+ return Object.keys(AI_NM).filter(p=>!AI_P[p].test||aiKey(p)||(p!="hunter"&&used.has(p))).map(p=>{const on=aiOn(p),key=!!aiKey(p),st=!on?"standby":!key?"sem chave":used.has(p)?"ativa":"sem tarefa";
   return`<span class="aiK ${on&&key&&used.has(p)?"on":on&&!key?"warn":""}" data-aicfg title="${AI_NM[p]}: ${st}">${AI_NM[p]}${st!="ativa"?` · ${st}`:""}</span>`}).join("")}
 function aiCfgHtml(p){const P=AI_P[p],has=!!aiKey(p),m=aiModel(p),on=aiOn(p);return`<section class="aiCfgP ${on?"":"aiOff"}">
   <div class="aiCfgT"><b>${P.nome}</b><label class="aiSw" title="${on?"Ligada":"Em standby"}"><input type="checkbox" role="switch" data-aion="${p}" ${on?"checked":""}><i></i><span>${on?"Ligada":"Standby"}</span></label></div>
-  <div class="aiCfgU">${(tk=>tk.length?"Faz: "+tk.join(", "):"Sem tarefa no momento")(Object.keys(AI_TASKS).filter(k=>aiSel(k).includes(p)).map(k=>AI_TASKS[k].nome))} · <span class="aiPill ${has?"ok":""}">${has?"chave salva":"sem chave"}</span></div>
+  <div class="aiCfgU">${P.faz?"Faz: "+P.faz:(tk=>tk.length?"Faz: "+tk.join(", "):"Sem tarefa no momento")(Object.keys(AI_TASKS).filter(k=>aiSel(k).includes(p)).map(k=>AI_TASKS[k].nome))} · <span class="aiPill ${has?"ok":""}">${has?"chave salva":"sem chave"}</span></div>
   <div class="aiCfgF"><input data-aik="${p}" type="password" placeholder="${has?"Cole outra chave para trocar":`Cole sua chave (${P.ph})`}" autocomplete="off">
   ${P.models.length>1?`<select data-aim="${p}" aria-label="Modelo">${P.models.map(([v,t])=>`<option value="${v}" ${v==m?"selected":""}>${t}</option>`).join("")}</select>`:`<input type="hidden" data-aim="${p}" value="${m}">`}
   <button type="button" class="b sm" data-aisave="${p}">Salvar</button>${P.test?`<button type="button" class="g sm" data-aitest="${p}" title="Faz uma consulta de teste (gasta 1 crédito)">Testar</button>`:""}</div>${P.test?`<small class="aiTestR" data-aitestr="${p}" aria-live="polite"></small>`:""}
@@ -1235,7 +1238,7 @@ function bindAICfg(){const B=$("#aiCfgB");if(!B)return;
 function aiCfgOpen(){let d=$("#aiCfgDlg");if(!d){d=document.createElement("dialog");d.id="aiCfgDlg";document.body.appendChild(d)}
  d.innerHTML=`<div class="aiCfgH"><h3>Configurar IA</h3><button type="button" class="g ld-x" data-aicx aria-label="Fechar">✕</button></div>
  <div id="aiCfgB">${aiCfgBody()}</div>
- <p class="aiPriv">As chaves ficam só neste navegador e não entram no backup. Ao pesquisar, o nome, o CNPJ e a cidade da empresa vão ao Google e à Anthropic; ao Serper vão só os nomes da empresa e a cidade; à DeepSeek vão nomes, a cidade, o domínio do site e, com o Serper, os resultados do Google. Use só para contato profissional e apague os dados de quem pedir.</p>`;
+ <p class="aiPriv">As chaves ficam só neste navegador e não entram no backup. Ao pesquisar, o nome, o CNPJ e a cidade da empresa vão ao Google e à Anthropic; ao Hunter vão só os e-mails que você manda verificar; ao Serper vão só os nomes da empresa e a cidade; à DeepSeek vão nomes, a cidade, o domínio do site e, com o Serper, os resultados do Google. Use só para contato profissional e apague os dados de quem pedir.</p>`;
  bindAICfg();d.querySelector("[data-aicx]").onclick=()=>d.close();d.onclick=e=>{if(e.target===d)d.close()};d.onclose=()=>aiApplyTabs();d.showModal()}
 function aiTab(k){$$("#aiBox [data-ait]").forEach(b=>b.classList.toggle("on",b.dataset.ait==k));$$("#aiOut [data-aip]").forEach(d=>d.hidden=d.dataset.aip!=k)}
 /* filtro de busca nos resultados */
@@ -1255,7 +1258,8 @@ function bindAI(r){const nm=nmL(r),loc=`${r.MUNICIPIO} ${r.UF}`;
  $("#aiBox .aiSeg").onclick=e=>{const b=e.target.closest("[data-ait]");if(b)aiTab(b.dataset.ait)};
  aiRenderAll(r);aiApplyTabs();
  /* botões dentro dos resultados: rodar uma parte, copiar, abrir a configuração ou "Usar" (preenche um novo contato na lista de Contatos) */
- $("#aiOut").addEventListener("click",e=>{const st=e.target.closest("[data-aistop]");if(st){aiStop(r,st.dataset.aistop);return}const g=e.target.closest("[data-aigo]");if(g){const s=aiS(r);if(s[g.dataset.aigo]&&!s[g.dataset.aigo].run)delete s[g.dataset.aigo];aiPart(r,g.dataset.aigo,true);return}
+ $("#aiOut").addEventListener("click",e=>{const vb=e.target.closest("[data-aiver]");if(vb){aiVerOne(r,vb.dataset.aiver);return}if(e.target.closest("[data-aiverall]")){aiVerAll(r);return}if(e.target.closest("[data-aipadx]")){aiPadDesc(r);return}
+  const st=e.target.closest("[data-aistop]");if(st){aiStop(r,st.dataset.aistop);return}const g=e.target.closest("[data-aigo]");if(g){const s=aiS(r);if(s[g.dataset.aigo]&&!s[g.dataset.aigo].run)delete s[g.dataset.aigo];aiPart(r,g.dataset.aigo,true);return}
   if(e.target.closest("[data-aicfg]")){aiCfgOpen();return}
   const cp=e.target.closest("[data-aicopy]");if(cp){copyTxt(cp.dataset.aicopy);toast("Copiado");return}
   const b=e.target.closest('[data-ap="contato"]');if(!b)return;
@@ -1283,7 +1287,7 @@ async function aiFetch(nome,url,opt){const c=new AbortController(),tm=setTimeout
  finally{clearTimeout(tm)}}
 /* v8.14.1: mostra o texto de erro que a API devolve (a Google manda o erro dentro de uma lista) */
 async function aiHttpErr(res){const raw=await res.text().catch(()=>"");let j=null;try{j=JSON.parse(raw)}catch(e){}
- const e=Array.isArray(j)?(j[0]||{}).error:(j&&(j.error||j.message));const m=(e&&(e.message||e.status))||(typeof e=="string"?e:"")||raw.replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim().slice(0,300);
+ const e=Array.isArray(j)?(j[0]||{}).error:(j&&(j.error||j.message||(Array.isArray(j.errors)&&j.errors[0])));const m=(e&&(e.message||e.details||e.status))||(typeof e=="string"?e:"")||raw.replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim().slice(0,300);
  const x=new Error(`HTTP ${res.status}${m?": "+m:""}`);x.status=res.status;return x}
 /* v8.14.1: Gemini primeiro pela API generateContent (a mais estável); se falhar, tenta a Interactions API */
 async function aiGemini(prompt,search=true){let e1;try{return await aiGeminiGC(prompt,search)}catch(e){e1=e}
@@ -1547,9 +1551,11 @@ async function aiTestar(p,B){const inp=B.querySelector(`[data-aik="${p}"]`),k=ai
  const say=(m,c)=>{const o=B.querySelector(`[data-aitestr="${p}"]`);if(o){o.textContent=m;o.className="aiTestR "+(c||"")}};
  if(!key)return say("Cole a chave primeiro e clique em Testar.","bad");
  say("Testando…");if(btn)btn.disabled=true;
- try{const L=await aiSerperQ("site:linkedin.com/in qualidade alimentos",1,key);let m=`Funcionando: o Google respondeu com ${L.length} resultados (gastou 1 consulta).`;
+ try{let m;if(p=="hunter"){const a=await aiHunter("account",{},key),q=a.requests||{},c=q.credits||q.verifications||{};
+   m=`Funcionando: plano ${a.plan_name||"?"}${c.available!=null?`, ${c.used||0} de ${c.available} créditos usados neste mês`:""}. O teste não gasta crédito.`}
+  else{const L=await aiSerperQ("site:linkedin.com/in qualidade alimentos",1,key);m=`Funcionando: o Google respondeu com ${L.length} resultados (gastou 1 consulta).`}
   if(k){try{localStorage.setItem(AI_P[p].kk,k)}catch(x){}m+=" Chave salva."}
-  if(aiSerperAuto())m+=" Marquei o Serper na busca de Pessoas.";
+  if(p=="serper"&&aiSerperAuto())m+=" Marquei o Serper na busca de Pessoas.";
   if(!aiOn(p))m+=" Ele está em standby: ligue o interruptor para usar.";
   B.innerHTML=aiCfgBody();aiApplyTabs();say(m,"ok")}
  catch(e){if(btn)btn.disabled=false;say(`Não funcionou: ${e.message}`,"bad")}}
@@ -1576,6 +1582,71 @@ Formato: {"pessoas":[{"id":1,"status":"confirmado|duvida|descartar","duvida":nul
    L=L.filter(x=>{const v=by.get(x.id);if(!v)return true;const st=aiNoAcc(aiT(v.status));if(st=="descartar"){x.desc=aiT(v.duvida)||`${AI_NM[P.rev]}: não é da qualidade ou não está na empresa`;fora.push(x);return false}if(st=="duvida"&&!x.duvida)x.duvida=aiT(v.duvida)||"Confira o cargo e a empresa atual no perfil";return true})}}
  L.sort((a,b)=>(a.duvida?1:0)-(b.duvida?1:0)||b.src.length-a.src.length);
  return{pessoas:L.slice(0,30),fora:fora.slice(0,30),achados,nomes:aiNomesAll(r),ident:id&&id.mudou?id:null,site:(R?R.ok:[]).map(x=>aiUrl(x.d.site)||aiT(x.d.site)).find(Boolean)||"",fontes:R?R.fontes:[],via:aiViaP(R,S,P,rv,errs)}}
+/* v8.16.6: padrão de e-mail como modelo. A IA só escolhe o modelo e o app monta os e-mails
+   (antes a IA escrevia o nome do padrão e a lista separados, e eles não batiam: "nome.sobrenome" com "eduardogo@") */
+const AI_PADS=["{first}.{last}","{first}{last}","{first}_{last}","{f}{last}","{f}.{last}","{first}","{first}{l}","{first}.{l}","{first}.{last1}","{first}{l2}","{first}{ini}","{last}.{first}","{last}{f}"];
+const AI_PART=new Set(["de","da","do","das","dos","e","di","del"]);
+const aiNomeP=n=>aiNoAcc(aiT(n)).replace(/[^a-z\s]/g," ").split(/\s+/).filter(w=>w&&!AI_PART.has(w));
+function aiPadGen(t,nome){const w=aiNomeP(nome);if(!w.length)return"";const fi=w[0],la=w.length>1?w[w.length-1]:"";
+ if(/\{(last|l|l2|ini|last1)\}/.test(t)&&!la)return"";
+ return t.replace(/\{first\}/g,fi).replace(/\{f\}/g,fi[0]).replace(/\{last1\}/g,w[1]).replace(/\{last\}/g,la).replace(/\{l2\}/g,la.slice(0,2)).replace(/\{ini\}/g,w.slice(1).map(x=>x[0]).join("")).replace(/\{l\}/g,la[0])}
+const aiPadLbl=t=>aiT(t).replace(/\{first\}/g,"nome").replace(/\{last1\}/g,"segundonome").replace(/\{last\}/g,"sobrenome").replace(/\{f\}/g,"n").replace(/\{l2\}/g," + 2 letras do sobrenome").replace(/\{ini\}/g," + iniciais dos sobrenomes").replace(/\{l\}/g," + inicial do sobrenome");
+const AI_PAD_OLD={"nome.sobrenome":"{first}.{last}","nomesobrenome":"{first}{last}","nome_sobrenome":"{first}_{last}","nsobrenome":"{f}{last}","n.sobrenome":"{f}.{last}","nome":"{first}","nome.ultimosobrenome":"{first}.{last}","sobrenome.nome":"{last}.{first}"};
+const aiPadNorm=v=>{const s=aiNoAcc(aiT(v)).replace(/\s/g,"");return AI_PADS.includes(s)?s:AI_PAD_OLD[s]||""};
+/* e-mail público com dono (ex.: joao.silva@ de João Silva) mostra o padrão sem precisar de IA */
+function aiPadInfer(emails){for(const e of emails){if(!e.dono||aiNomeP(e.dono).length<2)continue;const u=e.email.split("@")[0];const t=AI_PADS.find(x=>aiPadGen(x,e.dono)==u);if(t)return{t,email:e.email,dono:e.dono}}return null}
+const aiPadMk=(t,pes,dom,o)=>({padrao:t,base:o.base||"",confianca:o.confianca||"baixa",motivo:o.motivo||"",alt:o.alt||[],
+ emails:pes.map(p=>({nome:p.nome,local:aiPadGen(t,p.nome)})).filter(x=>x.local).map(x=>({nome:x.nome,email:x.local+"@"+dom,confianca:o.confianca||"baixa"}))});
+/* ---------- v8.16.6: verificação de e-mail pelo Hunter (só quando você clica) ---------- */
+async function aiHunter(path,q,key){let res;
+ try{res=await aiFetch("O Hunter",`https://api.hunter.io/v2/${path}?${new URLSearchParams(Object.assign({},q,{api_key:key||aiKey("hunter")}))}`,{method:"GET"})}
+ catch(e){if(e.timeout)throw e;throw new Error("o navegador não conseguiu falar com o Hunter (confira a internet; se continuar, o navegador está bloqueando a chamada)")}
+ if(res.status==202)return{pend:1};
+ if(!res.ok){const e=await aiHttpErr(res);if(res.status==401)e.message+=" (chave do Hunter inválida)";else if(res.status==429||/quota|credit|limit|exceed/i.test(e.message))e.message+=" (acabaram os créditos do Hunter ou passou do limite)";throw e}
+ const j=await res.json();return j.data||{}}
+/* o Hunter às vezes responde "ainda verificando" (202): tenta de novo até 2 vezes */
+async function aiHunterVer(email){for(let i=0;i<3;i++){const d=await aiHunter("email-verifier",{email});
+  if(!d.pend)return{st:d.status||({deliverable:"valid",undeliverable:"invalid",risky:"accept_all"}[d.result])||"unknown",sc:d.score!=null?d.score:null};
+  await new Promise(r=>setTimeout(r,+aiLs("aiVerWait","")||4000))}return{st:"unknown"}}
+const AI_VST={valid:["ok","válido"],invalid:["bad","inválido"],accept_all:["warn","catch-all"],unknown:["mut","desconhecido"],webmail:["mut","webmail"],disposable:["bad","descartável"],run:["mut","verificando…"]};
+const AI_VER_RUN=new Set();
+const aiVerGet=()=>{try{return JSON.parse(localStorage.getItem("aiVer")||"{}")||{}}catch(e){return{}}};
+/* resultado guardado neste navegador por 90 dias: não gasta crédito de novo */
+const aiVerOf=e=>{e=String(e||"").toLowerCase();if(AI_VER_RUN.has(e))return{st:"run"};const v=aiVerGet()[e];return v&&Date.now()-v.t<90*864e5?v:null};
+function aiVerSet(e,v){const m=aiVerGet();m[String(e).toLowerCase()]=Object.assign({},v,{t:Date.now()});const k=Object.keys(m);if(k.length>500)k.sort((a,b)=>m[a].t-m[b].t).slice(0,k.length-500).forEach(x=>delete m[x]);try{localStorage.setItem("aiVer",JSON.stringify(m))}catch(x){}}
+const aiVerB=e=>{const v=aiVerOf(e);if(!v)return"";const s=AI_VST[v.st]||AI_VST.unknown;
+ return` <span class="aiVer v-${s[0]}" title="${v.st=="accept_all"?"O servidor aceita qualquer endereço: não dá para confirmar se este existe":v.st=="run"?"":`Verificado pelo Hunter${v.sc!=null?` (pontuação ${v.sc})`:""}`}">${v.st=="valid"?"✓ ":v.st=="invalid"?"✕ ":""}${s[1]}</span>`};
+const aiVerBtn=e=>{const v=aiVerOf(e);return v&&v.st!="unknown"?"":`<button type="button" class="g sm" data-aiver="${esc(String(e).toLowerCase())}" title="Confere no Hunter se este endereço existe (gasta meio crédito)">Verificar</button>`};
+const aiVerFalta=L=>[...new Set(L.map(x=>x.email.toLowerCase()))].filter(e=>{const v=aiVerOf(e);return!v||v.st=="unknown"});
+const aiVerAllBtn=L=>{const n=aiVerFalta(L).length;return n>1?`<button type="button" class="aiLink aiVerAll" data-aiverall title="Gasta cerca de ${Math.ceil(n/2)} créditos do Hunter">Verificar todos (${n})</button>`:""};
+const aiHunterOk=()=>{const w=aiWhy("hunter");if(w){toast(`Para verificar: ${w}. Cole a chave em Configurar IA.`,1);aiCfgOpen();return false}return true};
+const aiVerDraw=r=>{aiRender(r,"mail");aiRender(r,"pes")};
+async function aiVerOne(r,e){if(!aiHunterOk())return;AI_VER_RUN.add(e);aiVerDraw(r);
+ try{aiVerSet(e,await aiHunterVer(e))}catch(x){toast(`Não deu para verificar: ${x.message}`,1)}finally{AI_VER_RUN.delete(e);aiVerDraw(r)}}
+async function aiVerAll(r){const d=((aiS(r).mail||{}).data)||{};if(!d.pad||!aiHunterOk())return;const L=aiVerFalta(d.pad.emails);L.forEach(e=>AI_VER_RUN.add(e));aiVerDraw(r);
+ let i=0,bad=null;await Promise.all([0,1,2].map(async()=>{while(i<L.length&&!bad){const e=L[i++];try{aiVerSet(e,await aiHunterVer(e))}catch(x){bad=x}finally{AI_VER_RUN.delete(e);aiRender(r,"mail")}}}));
+ L.forEach(e=>AI_VER_RUN.delete(e));aiVerDraw(r);if(bad)toast(`Parou de verificar: ${bad.message}`,1)}
+/* descobrir o padrão: 1) o Hunter já conhece o padrão de muitos domínios; 2) se não, testa as variações com uma pessoa */
+async function aiPadDesc(r){const s=aiS(r).mail,d=s&&s.data;if(!d||!d.dom||!aiHunterOk())return;const pes=((aiS(r).pes||{}).data||{}).pessoas||[];
+ const L=[];d.padx={run:1,linhas:L};aiRender(r,"mail");let t="",hk=false;
+ try{
+  try{const h=await aiHunter("domain-search",{domain:d.dom,limit:10}),pt=aiT(h.pattern).toLowerCase();
+   if(pt&&/^[a-z0-9._{}-]+$/.test(pt)&&/\{(first|last|f|l)\}/.test(pt))t=pt;
+   hk=!!t;L.push(t?`O Hunter conhece o padrão deste domínio: ${aiPadLbl(t)}@${d.dom}`:"O Hunter ainda não conhece o padrão deste domínio.")}
+  catch(x){if(/inválida|bloqueando|créditos/.test(x.message))throw x;L.push(`A busca do domínio no Hunter falhou (${x.message}).`)}
+  aiRender(r,"mail");
+  if(!t){const p=pes.find(x=>aiNomeP(x.nome).length>=2);
+   if(!p)L.push("Não há pessoa com nome e sobrenome na aba Pessoas para testar as variações.");
+   else{const ord=[...new Set([aiPadNorm(d.pad&&d.pad.padrao),"{first}.{last}","{f}{last}","{first}{l2}","{first}"].filter(Boolean))].slice(0,4);
+    L.push(`Testando variações com ${p.nome}:`);
+    for(const c of ord){const u=aiPadGen(c,p.nome);if(!u)continue;const e=u+"@"+d.dom;let v=aiVerOf(e);if(!v||v.st=="unknown"){AI_VER_RUN.add(e);aiRender(r,"mail");try{v=await aiHunterVer(e)}finally{AI_VER_RUN.delete(e)}aiVerSet(e,v)}
+     L.push(`${e}: ${(AI_VST[v.st]||AI_VST.unknown)[1]}`);aiRender(r,"mail");
+     if(v.st=="accept_all"){L.push("Este servidor aceita qualquer endereço (catch-all): verificar não mostra qual variação é a certa.");break}
+     if(v.st=="valid"){t=c;break}}
+    if(!t&&!L.some(x=>/catch-all/.test(x)))L.push("Nenhuma variação foi confirmada.")}}
+  if(t){const o=d.pad;d.pad=aiPadMk(t,pes,d.dom,{confianca:"alta",motivo:hk?"Padrão conhecido pelo Hunter para este domínio.":"Confirmado pelo Hunter: a variação acima existe.",alt:o&&o.padrao&&aiPadNorm(o.padrao)!=t?[{padrao:o.padrao,por:"leitura anterior da IA"}]:[]});d.via="Hunter"}}
+ catch(x){L.push(`Parou: ${x.message}`)}
+ d.padx.run=0;aiVerDraw(r)}
 /* ---------- parte 2: domínio, MX, e-mails públicos, padrão e telefones ---------- */
 async function aiMail(r,s,pg){const pes=(s.pes&&s.pes.data&&s.pes.data.pessoas)||[];
  let dom=aiDom(r.site)||aiDom(s.pes&&s.pes.data&&s.pes.data.site)||"",domOrig=dom?"site":"";
@@ -1604,28 +1675,27 @@ Formato: {"emails_descartar":[],"telefones_descartar":[]}`,pg,errs);
  const mx=dom?await aiMX(dom):{ok:null,prov:"",hosts:[]};
  let pad=null,via="";
  if(dom&&pes.length&&mx.ok!==false){
-  const prompt=`Deduza o PADRÃO de e-mail corporativo do domínio "${dom}" e monte o e-mail provável de cada pessoa. Responda SOMENTE com um objeto JSON.
+  const ex=aiPadInfer(emails);
+  if(ex){pad=aiPadMk(ex.t,pes,dom,{base:ex.email,confianca:"alta",motivo:`Confirmado pelo e-mail público ${ex.email} (${ex.dono}).`});via="e-mail público do domínio"}
+  else{const prompt=`Deduza o PADRÃO de e-mail corporativo do domínio "${dom}". Responda SOMENTE com um objeto JSON.
 Servidor de e-mail do domínio: ${mx.prov||"desconhecido"}.
 E-mails públicos encontrados no domínio (com o dono, quando conhecido):
 ${emails.length?emails.map(e=>`- ${e.email}${e.dono?` (dono: ${e.dono})`:""}${e.setor?` [${e.setor}]`:""}`).join("\n"):"- nenhum"}
-Pessoas:
-${pes.map(p=>`- ${p.nome}`).join("\n")}
-Regras: use os e-mails de pessoas acima para descobrir o padrão (ex.: nome.sobrenome, nsobrenome, nome, nome_sobrenome, nome.ultimosobrenome); e-mails de setor (qualidade@, sac@) não mostram padrão. Sem exemplos de pessoas, use o padrão mais comum no Brasil para esse servidor e marque confiança "baixa". Sem acentos, cedilha nem espaços; ignore "de", "da", "dos". Não invente dados das pessoas.
-Formato: {"padrao":"nome.sobrenome","exemplo_base":"e-mail público que confirma o padrão, ou null","confianca":"alta|media|baixa","motivo":"uma frase","emails":[{"nome":"","email":"","confianca":"alta|media|baixa"}]}`;
+Algumas pessoas da empresa (para ver como são os nomes):
+${pes.slice(0,8).map(p=>`- ${p.nome}`).join("\n")}
+Escolha o padrão SOMENTE desta lista e copie o código exatamente (ao lado, o exemplo para "João Pedro da Silva Souza"):
+${AI_PADS.map(x=>`- ${x} → ${aiPadGen(x,"João Pedro da Silva Souza")}`).join("\n")}
+Regras: use os e-mails de pessoas acima para descobrir o padrão; e-mails de setor (qualidade@, sac@) não mostram padrão. Sem exemplos de pessoas, escolha o padrão mais comum no Brasil para esse servidor e marque confiança "baixa". Não invente nada.
+Formato: {"padrao":"{first}.{last}","exemplo_base":"e-mail público que confirma o padrão, ou null","confianca":"alta|media|baixa","motivo":"uma frase"}`;
   const PP=aiPlan("pad"),cf=v=>["alta","media","baixa"].includes(aiNoAcc(aiT(v)))?aiNoAcc(aiT(v)):"baixa",up=c=>c=="baixa"?"media":"alta";
   if(!PP.run.length)via=aiTaskOff("pad")?"Padrão de e-mail desligado em Configurar IA":`Padrão de e-mail não rodou: ${PP.why}`;
   else{let RP=null;try{RP=await aiAskM(PP.run,prompt,false,pg)}catch(e){via=`Padrão de e-mail falhou (${e.message})`}
-   if(RP){const V=RP.ok.map(({p,d})=>({p,d,k:aiKeyTxt(d.padrao)})).filter(x=>x.k),G=new Map();V.forEach(x=>{if(!G.has(x.k))G.set(x.k,[]);G.get(x.k).push(x)});
+   if(RP){const V=RP.ok.map(({p,d})=>({p,d,k:aiPadNorm(d.padrao)})).filter(x=>x.k),G=new Map();V.forEach(x=>{if(!G.has(x.k))G.set(x.k,[]);G.get(x.k).push(x)});
     const grp=[...G.values()].sort((a,b)=>b.length-a.length),win=grp[0];
     if(win){const d=win[0].d,all=V.length>1&&grp.length==1;
-     const L=win.flatMap(x=>(Array.isArray(x.d.emails)?x.d.emails:[]).filter(e=>e&&validMail(aiT(e.email))).map(e=>{const[u,h]=aiT(e.email).split("@");return{nome:aiT(e.nome),email:aiNoAcc(u).replace(/[^a-z0-9._-]/g,"")+"@"+h.toLowerCase(),confianca:cf(e.confianca)}}))
-      .filter(x=>x.email.endsWith("@"+dom));
-     const E=[];L.forEach(x=>{const o=E.find(y=>y.email==x.email);if(o)o.n++;else E.push({...x,n:1})});
-     pad={padrao:aiT(d.padrao),base:aiT(d.exemplo_base),confianca:all?up(cf(d.confianca)):cf(d.confianca),motivo:aiT(d.motivo),
-      emails:E.map(x=>({nome:x.nome,email:x.email,confianca:x.n>1?up(x.confianca):x.confianca})).filter((x,i,a)=>a.findIndex(y=>aiKeyTxt(y.nome)==aiKeyTxt(x.nome))==i),
-      alt:grp.slice(1).map(g=>({padrao:aiT(g[0].d.padrao),por:aiNms(g.map(x=>x.p))}))};
+     pad=aiPadMk(win[0].k,pes,dom,{base:aiT(d.exemplo_base),confianca:all?up(cf(d.confianca)):cf(d.confianca),motivo:aiT(d.motivo),alt:grp.slice(1).map(g=>({padrao:g[0].k,por:aiNms(g.map(x=>x.p))}))});
      via=aiNms(win.map(x=>x.p))+(V.length>1?(all?" (as IAs concordaram)":" (as IAs discordaram; veja a outra leitura)"):"")+(RP.errs.length?" · "+RP.errs.join(" · "):"")}
-    else via="As IAs não devolveram um padrão"}}}
+    else via="As IAs não devolveram um padrão da lista"}}}}
  return{dom,domOrig,mx,emails,tels,pad,via,viaB:aiVia(R.ok,rv,errs),fontes:R.fontes}}
 /* ---------- parte 3: notícias ---------- */
 const aiNewsPrompt=r=>`Hoje é ${new Date().toISOString().slice(0,10)}. Pesquise na internet NOTÍCIAS DOS ÚLTIMOS 24 MESES sobre esta empresa brasileira que sejam relevantes para quem vende soluções para a área de QUALIDADE. Responda SOMENTE com um objeto JSON, sem texto fora dele.
@@ -1712,6 +1782,8 @@ const aiSk=n=>`<div class="aiSkW">${Array.from({length:n},()=>'<div class="aiSk"
 function aiErrHtml(k,msg){const m=String(msg||""),stop=/interrompida/.test(m),tmo=/não respondeu em/.test(m),net=/navegador não conseguiu|Failed to fetch|NetworkError|Load failed/i.test(m),key=!tmo&&!net&&/API key|API_KEY|chave|unauthori/i.test(m),bill=/billing|faturamento|quota|429|credit|saldo|balance/i.test(m);
  return`<div class="aiErr"><b>${stop?"Pesquisa parada":"Não foi possível pesquisar"}</b><span>${stop?"Clique em Tentar de novo quando quiser.":tmo?"A IA demorou demais e a busca foi cortada. Costuma ser lentidão momentânea do serviço: tente de novo.":net?"Não deu para falar com o serviço. Confira a internet e tente de novo.":key?"A chave parece inválida ou sem permissão para esta API.":bill?"Parece limite de uso ou faturamento da conta.":"O serviço recusou o pedido. O motivo que ele devolveu está abaixo."}</span>
   <code>${esc(m)}</code><div class="aiErrA"><button type="button" class="b sm" data-aigo="${k}">Tentar de novo</button><button type="button" class="g sm" data-aicfg>Configurar IA</button></div></div>`}
+/* bloco "Descobrir o padrão" (Hunter) */
+const aiPadXHtml=d=>`<div class="aiPadX">${d.padx?d.padx.linhas.map(x=>`<p>${esc(x)}</p>`).join("")+(d.padx.run?"<p>Testando…</p>":""):""}${d.padx&&d.padx.run?"":`<button type="button" class="g sm" data-aipadx title="Usa o Hunter: 1 crédito para o padrão do domínio e meio crédito por variação testada">${d.padx?"Descobrir de novo":"Descobrir o padrão com o Hunter"}</button>`}</div>`;
 function aiRenderAll(r){AI_T.forEach(([k])=>aiRender(r,k))}
 function aiRender(r,k){const box=$(`#aiOut [data-aip="${k}"]`);if(!box||$("#aiBox").dataset.lead!=String(r.id))return;
  const s=aiS(r)[k],cnt=$(`#aiBox [data-aic="${k}"]`),setC=(t,c)=>{if(cnt){cnt.textContent=t;cnt.className=c||""}};
@@ -1722,7 +1794,7 @@ function aiRender(r,k){const box=$(`#aiOut [data-aip="${k}"]`);if(!box||$("#aiBo
  if(k=="pes"){setC(d.pessoas.length||"0");
   h+=d.pessoas.map(p=>{const pm=s2mail(r,p.nome);return`<div class="aiCard" data-q="${aiQ(p.nome,p.cargo,p.cidade,pm&&pm.email,p.duvida&&"confira",AI_NIV[aiNivel(p.cargo)])}"><div class="aiAv">${aiIni(p.nome)}</div>
    <div class="aiB"><b class="aiN">${esc(p.nome)}<span class="aiNiv n-${aiNivel(p.cargo)}">${AI_NIV[aiNivel(p.cargo)]}</span>${aiSrcB(p)}${p.duvida?` <span class="aiConf aiC-media" title="${esc(p.duvida)}">confira</span>`:""}</b><span class="aiSub">${esc(p.cargo||"Qualidade")}${p.periodo?" · "+esc(p.periodo):""}${p.cidade?" · "+esc(p.cidade):""}</span>${p.duvida?`<span class="aiDuv">⚠ ${esc(p.duvida)}</span>`:""}
-   <div class="aiChips">${p.linkedin?aiA(p.linkedin,"in LinkedIn","aiChip aiLi"):""}${pm?`<button type="button" class="aiChip" data-aicopy="${esc(pm.email)}" title="Copiar e-mail">✉ ${esc(pm.email)}</button>${aiConfB(pm.confianca,"provável")}`:""}${p.fonte&&p.fonte!=p.linkedin?aiA(p.fonte,"fonte","aiChip aiMut"):""}</div></div>
+   <div class="aiChips">${p.linkedin?aiA(p.linkedin,"in LinkedIn","aiChip aiLi"):""}${pm?`<button type="button" class="aiChip" data-aicopy="${esc(pm.email)}" title="Copiar e-mail">✉ ${esc(pm.email)}</button>${aiVerOf(pm.email)?aiVerB(pm.email):aiConfB(pm.confianca,"provável")}`:""}${p.fonte&&p.fonte!=p.linkedin?aiA(p.fonte,"fonte","aiChip aiMut"):""}</div></div>
    <button type="button" class="g sm aiUse" data-ap="contato" data-ain="${esc(p.nome)}" data-aic="${esc(p.cargo)}" data-aia="Qualidade" data-ait="" data-aie="${esc(pm?pm.email:"")}" ${pm?'data-aiprov="1"':""} data-ail="${esc(p.linkedin)}">+ Contato</button></div>`}).join("");
   if(!d.pessoas.length)h=`<div class="aiEmpty"><p>Nenhum perfil público da Qualidade foi encontrado. Tente o atalho “LinkedIn” abaixo ou ligue para a fábrica e peça o setor.</p>${(d.nomes||[]).length?`<p class="aiSub">Nomes procurados: ${d.nomes.map(esc).join(" · ")}</p>`:""}</div>`;
   else h=`<p class="aiHint">${d.achados!=null?`A busca achou <b>${d.achados}</b> ${d.achados==1?"perfil":"perfis"}: <b>${d.pessoas.length}</b> na lista${(d.fora||[]).length?` e ${d.fora.length} fora da lista`:""}. `:""}Confira o perfil antes de abordar: a pessoa pode ter saído da empresa.</p>`+h;
@@ -1733,12 +1805,12 @@ function aiRender(r,k){const box=$(`#aiOut [data-aip="${k}"]`);if(!box||$("#aiBo
   const mx=d.mx.ok===true?`<span class="aiPill ok">recebe e-mail${d.mx.prov?" · "+esc(d.mx.prov):""}</span>`:d.mx.ok===false?`<span class="aiPill bad">não recebe e-mail</span>`:`<span class="aiPill">não conferido</span>`;
   if(d.viaB)h+=`<p class="aiHint aiVia">${esc(d.viaB)}</p>`;
   h+=d.dom?`<div class="aiDom"><div><small>Domínio</small><b>${esc(d.dom)}</b><span class="aiSub">${esc(d.domOrig)}</span></div>${mx}</div>`:`<div class="aiEmpty"><p>Não achei o site oficial da empresa, então não dá para deduzir e-mails. Cadastre o site no lead e pesquise de novo.</p></div>`;
-  if(d.pad){h+=`<div class="aiHero"><small>Padrão provável ${aiConfB(d.pad.confianca,"confiança "+({media:"média"}[d.pad.confianca]||d.pad.confianca))}</small><code>${esc(d.pad.padrao||"?")}@${esc(d.dom)}</code>${d.pad.motivo?`<p>${esc(d.pad.motivo)}</p>`:""}${(d.pad.alt||[]).map(a=>`<p class="aiAlt">Outra leitura: <code>${esc(a.padrao)}@${esc(d.dom)}</code> (${esc(a.por)})</p>`).join("")}<span class="aiSub">Por ${esc(d.via)}. E-mail deduzido não é confirmado: teste poucos por vez para não cair no spam.</span></div>`;
-   if(d.pad.emails.length)h+=`<div class="aiGrp"><h5>E-mails prováveis</h5>`+d.pad.emails.map(e=>`<div class="aiRowX" data-q="${aiQ(e.nome,e.email)}"><div class="aiB"><b>${esc(e.nome)}</b><span class="aiMono">${esc(e.email)}</span></div>${aiConfB(e.confianca)}<button type="button" class="g sm" data-aicopy="${esc(e.email)}">Copiar</button></div>`).join("")+"</div>"}
+  if(d.pad){h+=`<div class="aiHero"><small>Padrão provável ${aiConfB(d.pad.confianca,"confiança "+({media:"média"}[d.pad.confianca]||d.pad.confianca))}</small><code>${esc(aiPadLbl(d.pad.padrao)||"?")}@${esc(d.dom)}</code>${d.pad.emails[0]?`<p class="aiAlt">Ex.: ${esc(d.pad.emails[0].nome)} → <code>${esc(d.pad.emails[0].email)}</code></p>`:""}${d.pad.motivo?`<p>${esc(d.pad.motivo)}</p>`:""}${(d.pad.alt||[]).map(a=>`<p class="aiAlt">Outra leitura: <code>${esc(aiPadLbl(a.padrao))}@${esc(d.dom)}</code> (${esc(a.por)})</p>`).join("")}${aiPadXHtml(d)}<span class="aiSub">Por ${esc(d.via)}. ${d.via=="Hunter"?"Os outros e-mails seguem o mesmo padrão; use Verificar para conferir cada um.":"E-mail deduzido não é confirmado: use Verificar antes de mandar."}</span></div>`;
+   if(d.pad.emails.length)h+=`<div class="aiGrp"><h5>E-mails prováveis${aiVerAllBtn(d.pad.emails)}</h5>`+d.pad.emails.map(e=>`<div class="aiRowX" data-q="${aiQ(e.nome,e.email)}"><div class="aiB"><b>${esc(e.nome)}</b><span class="aiMono">${esc(e.email)}${aiVerB(e.email)}</span></div>${aiConfB(e.confianca)}${aiVerBtn(e.email)}<button type="button" class="g sm" data-aicopy="${esc(e.email)}">Copiar</button></div>`).join("")+"</div>"}
   else if(d.dom&&!((aiS(r).pes||{}).data||{pessoas:[]}).pessoas.length)h+=`<p class="aiHint">Sem pessoas na aba “Pessoas”, não há para quem deduzir o e-mail.</p>`;
-  else if(d.via)h+=`<p class="aiHint">${esc(d.via)}.</p>`;
-  if(d.emails.length)h+=`<div class="aiGrp"><h5>E-mails publicados</h5>`+d.emails.map(e=>`<div class="aiRowX" data-q="${aiQ(e.email,e.dono,e.setor)}"><div class="aiB"><span class="aiMono">${esc(e.email)}${aiSrcB(e)}</span><span class="aiSub">${[e.dono,e.setor].filter(Boolean).map(esc).join(" · ")}${e.fonte?` · ${aiA(e.fonte,"fonte")}`:""}</span></div>
-   <button type="button" class="g sm" data-aicopy="${esc(e.email)}">Copiar</button><button type="button" class="g sm" data-ap="contato" data-ain="${esc(e.dono||("Setor "+(e.setor||"")).trim())}" data-aic="" data-aia="${esc(e.setor)}" data-ait="" data-aie="${esc(e.email)}" data-ail="">+ Contato</button></div>`).join("")+"</div>";
+  else if(d.via)h+=`<p class="aiHint">${esc(d.via)}.</p>${d.dom?aiPadXHtml(d):""}`;
+  if(d.emails.length)h+=`<div class="aiGrp"><h5>E-mails publicados</h5>`+d.emails.map(e=>`<div class="aiRowX" data-q="${aiQ(e.email,e.dono,e.setor)}"><div class="aiB"><span class="aiMono">${esc(e.email)}${aiSrcB(e)}${aiVerB(e.email)}</span><span class="aiSub">${[e.dono,e.setor].filter(Boolean).map(esc).join(" · ")}${e.fonte?` · ${aiA(e.fonte,"fonte")}`:""}</span></div>
+   ${aiVerBtn(e.email)}<button type="button" class="g sm" data-aicopy="${esc(e.email)}">Copiar</button><button type="button" class="g sm" data-ap="contato" data-ain="${esc(e.dono||("Setor "+(e.setor||"")).trim())}" data-aic="" data-aia="${esc(e.setor)}" data-ait="" data-aie="${esc(e.email)}" data-ail="">+ Contato</button></div>`).join("")+"</div>";
   const crm=[...new Set([[r.DDD_1,r.TELEFONE_1],[r.DDD_2,r.TELEFONE_2]].map(([a,b])=>dig((a||"")+(b||""))).filter(t=>t.length>=10))];
   const fmt=t=>t.replace(/^(\d{2})(\d+)(\d{4})$/,"($1) $2-$3");
   h+=`<div class="aiGrp"><h5>Telefones</h5>`+crm.map(t=>`<div class="aiRowX" data-q="${aiQ(t,"cnpj")}"><div class="aiB"><a class="aiTel" href="tel:+55${t}">${esc(fmt(t))}</a><span class="aiSub">Cadastro do CNPJ</span></div></div>`).join("")
