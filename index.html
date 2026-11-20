@@ -1157,14 +1157,17 @@ const AI_P={anthropic:{nome:"Anthropic (Claude)",uso:"Notícias de qualidade e i
  serper:{nome:"Serper.dev (Google)",da:"do Serper",uso:"Pessoas da Qualidade: busca direto no Google",para:"ao Serper",kk:"aiKeyS",mk:"aiModelS",def:"br",ph:"serper.dev → API Key",site:"serper.dev",test:1,
   models:[["br","Google Brasil"]],
   info:"O Serper não é uma IA: ele traz os resultados do Google (título, trecho e link de cada perfil) e a IA marcada em Pessoas (DeepSeek, Gemini ou Claude) lê esses resultados. Cada pesquisa de Pessoas gasta de 10 a 18 consultas. A conta nova vem com 2.500 consultas grátis; depois são pacotes pré-pagos (confira os preços em serper.dev). Ao Serper vão só os nomes da empresa, a cidade e os termos da busca."},
- hunter:{nome:"Hunter.io (verificação de e-mail)",da:"do Hunter",faz:"verificar e-mails (botões Verificar e Descobrir o padrão)",uso:"Verificar e-mails",para:"ao Hunter",kk:"aiKeyH",mk:"aiModelH",def:"v2",ph:"hunter.io → API key",site:"hunter.io",test:1,
+ reoon:{nome:"Reoon (verificação de e-mail)",da:"do Reoon",faz:"verificar e-mails (botões Verificar, Verificar todos e Descobrir o padrão)",uso:"Verificar e-mails",para:"ao Reoon",kk:"aiKeyR",mk:"aiModelR",def:"power",ph:"reoon.com → API key",site:"emailverifier.reoon.com",test:1,
+  models:[["power","Completo (confere a caixa)"]],
+  info:"O Reoon não é uma IA: ele confere com o servidor de e-mail se o endereço existe, sem mandar mensagem. Só roda quando você clica em Verificar. A conta grátis dá 20 verificações por dia (até 600 por mês) e resultado desconhecido não é cobrado; depois são pacotes baratos (confira os preços no site). Ao Reoon vão só os e-mails que você manda verificar."},
+ hunter:{nome:"Hunter.io (opcional)",da:"do Hunter",faz:"opcional: em Descobrir o padrão, pergunta o padrão do domínio (sem o Reoon, também verifica)",uso:"Verificar e-mails",para:"ao Hunter",kk:"aiKeyH",mk:"aiModelH",def:"v2",ph:"hunter.io → API key",site:"hunter.io",test:1,
   models:[["v2","Email Verifier"]],
-  info:"O Hunter não é uma IA: ele confere com o servidor de e-mail se o endereço existe, sem mandar mensagem. Só roda quando você clica em Verificar. Cada verificação gasta meio crédito e a busca do padrão do domínio gasta 1. O plano grátis dá 50 créditos por mês (cerca de 100 verificações). Ao Hunter vão só os e-mails que você manda verificar e o domínio da empresa."}};
+  info:"Opcional. Com o Reoon ligado, o Hunter só entra em “Descobrir o padrão”: ele já conhece o padrão de e-mail de muitos domínios (1 crédito por busca). Sem o Reoon, ele também verifica (meio crédito por e-mail). O plano grátis dá 50 créditos por mês. Ao Hunter vão só os e-mails que você manda verificar e o domínio da empresa."}};
 const aiKey=p=>aiLs(AI_P[p].kk,"");
 const aiModel=p=>{const P=AI_P[p],m=aiLs(P.mk,P.def);return P.models.some(x=>x[0]==m)?m:P.def};
 /* v8.16.0: cada tarefa aceita uma ou mais IAs (caixinhas) e cada IA tem interruptor ligada/standby */
-const AI_NM={anthropic:"Claude",gemini:"Gemini",deepseek:"DeepSeek",serper:"Serper",hunter:"Hunter"};
-const AI_ON_DEF={anthropic:"0",gemini:"1",deepseek:"1",serper:"1",hunter:"1"};
+const AI_NM={anthropic:"Claude",gemini:"Gemini",deepseek:"DeepSeek",serper:"Serper",reoon:"Reoon",hunter:"Hunter"};
+const AI_ON_DEF={anthropic:"0",gemini:"1",deepseek:"1",serper:"1",reoon:"1",hunter:"1"};
 const aiOn=p=>aiLs("aiOn_"+p,AI_ON_DEF[p])=="1";
 const AI_ORD=["gemini","anthropic","deepseek"];
 /* só Gemini e Claude pesquisam na internet; o DeepSeek só analisa texto */
@@ -1194,8 +1197,8 @@ function aiPlan(k){const S=aiSel(k),T=AI_TASKS[k],ok=S.filter(aiOk),bad=S.filter
   :S.some(p=>AI_BUSCA.has(p)||p=="serper")?bad.join("; "):`o DeepSeek não pesquisa na internet: marque também a Gemini${aiPs(k).includes("serper")?", o Claude ou o Serper":" ou o Claude"}`;
  return{run,rev,bad,why,srp:srp&&!!ler,ler}}
 const aiPlanNms=P=>aiNms([...new Set([...P.run,...(P.srp?["serper"]:[]),...(P.ler?[P.ler]:[]),...(P.rev?[P.rev]:[])])]);
-const aiSt=()=>{const used=new Set([...Object.keys(AI_TASKS).flatMap(aiSel),"hunter"]);
- return Object.keys(AI_NM).filter(p=>!AI_P[p].test||aiKey(p)||(p!="hunter"&&used.has(p))).map(p=>{const on=aiOn(p),key=!!aiKey(p),st=!on?"standby":!key?"sem chave":used.has(p)?"ativa":"sem tarefa";
+const aiSt=()=>{const used=new Set([...Object.keys(AI_TASKS).flatMap(aiSel),"reoon","hunter"]);
+ return Object.keys(AI_NM).filter(p=>!AI_P[p].test||aiKey(p)||(!AI_P[p].faz&&used.has(p))).map(p=>{const on=aiOn(p),key=!!aiKey(p),st=!on?"standby":!key?"sem chave":used.has(p)?"ativa":"sem tarefa";
   return`<span class="aiK ${on&&key&&used.has(p)?"on":on&&!key?"warn":""}" data-aicfg title="${AI_NM[p]}: ${st}">${AI_NM[p]}${st!="ativa"?` · ${st}`:""}</span>`}).join("")}
 function aiCfgHtml(p){const P=AI_P[p],has=!!aiKey(p),m=aiModel(p),on=aiOn(p);return`<section class="aiCfgP ${on?"":"aiOff"}">
   <div class="aiCfgT"><b>${P.nome}</b><label class="aiSw" title="${on?"Ligada":"Em standby"}"><input type="checkbox" role="switch" data-aion="${p}" ${on?"checked":""}><i></i><span>${on?"Ligada":"Standby"}</span></label></div>
@@ -1238,7 +1241,7 @@ function bindAICfg(){const B=$("#aiCfgB");if(!B)return;
 function aiCfgOpen(){let d=$("#aiCfgDlg");if(!d){d=document.createElement("dialog");d.id="aiCfgDlg";document.body.appendChild(d)}
  d.innerHTML=`<div class="aiCfgH"><h3>Configurar IA</h3><button type="button" class="g ld-x" data-aicx aria-label="Fechar">✕</button></div>
  <div id="aiCfgB">${aiCfgBody()}</div>
- <p class="aiPriv">As chaves ficam só neste navegador e não entram no backup. Ao pesquisar, o nome, o CNPJ e a cidade da empresa vão ao Google e à Anthropic; ao Hunter vão só os e-mails que você manda verificar; ao Serper vão só os nomes da empresa e a cidade; à DeepSeek vão nomes, a cidade, o domínio do site e, com o Serper, os resultados do Google. Use só para contato profissional e apague os dados de quem pedir.</p>`;
+ <p class="aiPriv">As chaves ficam só neste navegador e não entram no backup. Ao pesquisar, o nome, o CNPJ e a cidade da empresa vão ao Google e à Anthropic; ao Reoon (e ao Hunter, se usar) vão só os e-mails que você manda verificar e o domínio; ao Serper vão só os nomes da empresa e a cidade; à DeepSeek vão nomes, a cidade, o domínio do site e, com o Serper, os resultados do Google. Use só para contato profissional e apague os dados de quem pedir.</p>`;
  bindAICfg();d.querySelector("[data-aicx]").onclick=()=>d.close();d.onclick=e=>{if(e.target===d)d.close()};d.onclose=()=>aiApplyTabs();d.showModal()}
 function aiTab(k){$$("#aiBox [data-ait]").forEach(b=>b.classList.toggle("on",b.dataset.ait==k));$$("#aiOut [data-aip]").forEach(d=>d.hidden=d.dataset.aip!=k)}
 /* filtro de busca nos resultados */
@@ -1551,7 +1554,8 @@ async function aiTestar(p,B){const inp=B.querySelector(`[data-aik="${p}"]`),k=ai
  const say=(m,c)=>{const o=B.querySelector(`[data-aitestr="${p}"]`);if(o){o.textContent=m;o.className="aiTestR "+(c||"")}};
  if(!key)return say("Cole a chave primeiro e clique em Testar.","bad");
  say("Testando…");if(btn)btn.disabled=true;
- try{let m;if(p=="hunter"){const a=await aiHunter("account",{},key),q=a.requests||{},c=q.credits||q.verifications||{};
+ try{let m;if(p=="reoon"){const a=await aiReoon("check-account-balance/",{},key);m=`Funcionando: ${a.remaining_daily_credits!=null?a.remaining_daily_credits:"?"} verificações grátis restantes hoje${a.remaining_instant_credits?` e ${a.remaining_instant_credits} compradas`:""}. O teste não gasta crédito.`}
+  else if(p=="hunter"){const a=await aiHunter("account",{},key),q=a.requests||{},c=q.credits||q.verifications||{};
    m=`Funcionando: plano ${a.plan_name||"?"}${c.available!=null?`, ${c.used||0} de ${c.available} créditos usados neste mês`:""}. O teste não gasta crédito.`}
   else{const L=await aiSerperQ("site:linkedin.com/in qualidade alimentos",1,key);m=`Funcionando: o Google respondeu com ${L.length} resultados (gastou 1 consulta).`}
   if(k){try{localStorage.setItem(AI_P[p].kk,k)}catch(x){}m+=" Chave salva."}
@@ -1595,7 +1599,7 @@ const AI_PAD_OLD={"nome.sobrenome":"{first}.{last}","nomesobrenome":"{first}{las
 const aiPadNorm=v=>{const s=aiNoAcc(aiT(v)).replace(/\s/g,"");return AI_PADS.includes(s)?s:AI_PAD_OLD[s]||""};
 /* e-mail público com dono (ex.: joao.silva@ de João Silva) mostra o padrão sem precisar de IA */
 function aiPadInfer(emails){for(const e of emails){if(!e.dono||aiNomeP(e.dono).length<2)continue;const u=e.email.split("@")[0];const t=AI_PADS.find(x=>aiPadGen(x,e.dono)==u);if(t)return{t,email:e.email,dono:e.dono}}return null}
-const aiPadMk=(t,pes,dom,o)=>({padrao:t,base:o.base||"",confianca:o.confianca||"baixa",motivo:o.motivo||"",alt:o.alt||[],
+const aiPadMk=(t,pes,dom,o)=>({padrao:t,ver:!!o.ver,base:o.base||"",confianca:o.confianca||"baixa",motivo:o.motivo||"",alt:o.alt||[],
  emails:pes.map(p=>({nome:p.nome,local:aiPadGen(t,p.nome)})).filter(x=>x.local).map(x=>({nome:x.nome,email:x.local+"@"+dom,confianca:o.confianca||"baixa"}))});
 /* ---------- v8.16.6: verificação de e-mail pelo Hunter (só quando você clica) ---------- */
 async function aiHunter(path,q,key){let res;
@@ -1604,33 +1608,47 @@ async function aiHunter(path,q,key){let res;
  if(res.status==202)return{pend:1};
  if(!res.ok){const e=await aiHttpErr(res);if(res.status==401)e.message+=" (chave do Hunter inválida)";else if(res.status==429||/quota|credit|limit|exceed/i.test(e.message))e.message+=" (acabaram os créditos do Hunter ou passou do limite)";throw e}
  const j=await res.json();return j.data||{}}
+/* v8.16.6: Reoon (verificação principal, modo completo: confere a caixa no servidor) */
+async function aiReoon(path,q,key){let res;
+ try{res=await aiFetch("O Reoon",`https://emailverifier.reoon.com/api/v1/${path}?${new URLSearchParams(Object.assign({},q,{key:key||aiKey("reoon")}))}`,{method:"GET"})}
+ catch(e){if(e.timeout)throw e;throw new Error("o navegador não conseguiu falar com o Reoon (confira a internet; se continuar, o navegador está bloqueando a chamada)")}
+ const raw=await res.text();let j=null;try{j=JSON.parse(raw)}catch(e){}
+ if(!res.ok||!j||j.status=="error"){const m=aiT(j&&(j.reason||j.message||j.detail||j.error))||raw.replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim().slice(0,200);
+  const x=new Error(`${res.ok?"":`HTTP ${res.status}: `}${m||"resposta inválida"}`);
+  if(res.status==401||res.status==403||/api key|invalid key|chave/i.test(m))x.message+=" (confira a chave do Reoon)";else if(/credit|balance|saldo|limit/i.test(m))x.message+=" (acabaram os créditos do Reoon)";throw x}
+ return j}
+const AI_REOON={safe:"valid",valid:"valid",invalid:"invalid",disabled:"invalid",catch_all:"accept_all",disposable:"disposable",role_account:"role",inbox_full:"full",spamtrap:"spamtrap",unknown:"unknown"};
+async function aiReoonVer(email){const j=await aiReoon("verify",{email,mode:"power"});return{st:AI_REOON[aiNoAcc(aiT(j.status))]||"unknown",sc:j.overall_score!=null?j.overall_score:null,by:"reoon"}}
+/* quem verifica: o Reoon; sem ele, o Hunter */
+const aiVerP=()=>aiOk("reoon")?"reoon":aiOk("hunter")?"hunter":null;
+const aiVerMail=m=>aiVerP()=="reoon"?aiReoonVer(m):aiHunterVer(m);
 /* o Hunter às vezes responde "ainda verificando" (202): tenta de novo até 2 vezes */
 async function aiHunterVer(email){for(let i=0;i<3;i++){const d=await aiHunter("email-verifier",{email});
-  if(!d.pend)return{st:d.status||({deliverable:"valid",undeliverable:"invalid",risky:"accept_all"}[d.result])||"unknown",sc:d.score!=null?d.score:null};
+  if(!d.pend)return{st:d.status||({deliverable:"valid",undeliverable:"invalid",risky:"accept_all"}[d.result])||"unknown",sc:d.score!=null?d.score:null,by:"hunter"};
   await new Promise(r=>setTimeout(r,+aiLs("aiVerWait","")||4000))}return{st:"unknown"}}
-const AI_VST={valid:["ok","válido"],invalid:["bad","inválido"],accept_all:["warn","catch-all"],unknown:["mut","desconhecido"],webmail:["mut","webmail"],disposable:["bad","descartável"],run:["mut","verificando…"]};
+const AI_VST={role:["ok","e-mail de setor"],full:["warn","caixa cheia"],spamtrap:["bad","armadilha de spam"],valid:["ok","válido"],invalid:["bad","inválido"],accept_all:["warn","catch-all"],unknown:["mut","desconhecido"],webmail:["mut","webmail"],disposable:["bad","descartável"],run:["mut","verificando…"]};
 const AI_VER_RUN=new Set();
 const aiVerGet=()=>{try{return JSON.parse(localStorage.getItem("aiVer")||"{}")||{}}catch(e){return{}}};
 /* resultado guardado neste navegador por 90 dias: não gasta crédito de novo */
 const aiVerOf=e=>{e=String(e||"").toLowerCase();if(AI_VER_RUN.has(e))return{st:"run"};const v=aiVerGet()[e];return v&&Date.now()-v.t<90*864e5?v:null};
 function aiVerSet(e,v){const m=aiVerGet();m[String(e).toLowerCase()]=Object.assign({},v,{t:Date.now()});const k=Object.keys(m);if(k.length>500)k.sort((a,b)=>m[a].t-m[b].t).slice(0,k.length-500).forEach(x=>delete m[x]);try{localStorage.setItem("aiVer",JSON.stringify(m))}catch(x){}}
 const aiVerB=e=>{const v=aiVerOf(e);if(!v)return"";const s=AI_VST[v.st]||AI_VST.unknown;
- return` <span class="aiVer v-${s[0]}" title="${v.st=="accept_all"?"O servidor aceita qualquer endereço: não dá para confirmar se este existe":v.st=="run"?"":`Verificado pelo Hunter${v.sc!=null?` (pontuação ${v.sc})`:""}`}">${v.st=="valid"?"✓ ":v.st=="invalid"?"✕ ":""}${s[1]}</span>`};
-const aiVerBtn=e=>{const v=aiVerOf(e);return v&&v.st!="unknown"?"":`<button type="button" class="g sm" data-aiver="${esc(String(e).toLowerCase())}" title="Confere no Hunter se este endereço existe (gasta meio crédito)">Verificar</button>`};
+ return` <span class="aiVer v-${s[0]}" title="${v.st=="accept_all"?"O servidor aceita qualquer endereço: não dá para confirmar se este existe":v.st=="run"?"":`Verificado pelo ${v.by=="hunter"?"Hunter":"Reoon"}${v.sc!=null?` (pontuação ${v.sc})`:""}`}">${v.st=="valid"?"✓ ":v.st=="invalid"?"✕ ":""}${s[1]}</span>`};
+const aiVerBtn=e=>{const v=aiVerOf(e);return v&&v.st!="unknown"?"":`<button type="button" class="g sm" data-aiver="${esc(String(e).toLowerCase())}" title="Confere se este endereço existe (Reoon: 1 crédito; resultado desconhecido não é cobrado)">Verificar</button>`};
 const aiVerFalta=L=>[...new Set(L.map(x=>x.email.toLowerCase()))].filter(e=>{const v=aiVerOf(e);return!v||v.st=="unknown"});
-const aiVerAllBtn=L=>{const n=aiVerFalta(L).length;return n>1?`<button type="button" class="aiLink aiVerAll" data-aiverall title="Gasta cerca de ${Math.ceil(n/2)} créditos do Hunter">Verificar todos (${n})</button>`:""};
-const aiHunterOk=()=>{const w=aiWhy("hunter");if(w){toast(`Para verificar: ${w}. Cole a chave em Configurar IA.`,1);aiCfgOpen();return false}return true};
+const aiVerAllBtn=L=>{const n=aiVerFalta(L).length;return n>1?`<button type="button" class="aiLink aiVerAll" data-aiverall title="Gasta até ${n} créditos do Reoon">Verificar todos (${n})</button>`:""};
+const aiHunterOk=()=>{if(aiVerP())return true;toast(`Para verificar, cole a chave do Reoon em Configurar IA${aiWhy("reoon")&&aiKey("reoon")?` (${aiWhy("reoon")})`:""}.`,1);aiCfgOpen();return false};
 const aiVerDraw=r=>{aiRender(r,"mail");aiRender(r,"pes")};
 async function aiVerOne(r,e){if(!aiHunterOk())return;AI_VER_RUN.add(e);aiVerDraw(r);
- try{aiVerSet(e,await aiHunterVer(e))}catch(x){toast(`Não deu para verificar: ${x.message}`,1)}finally{AI_VER_RUN.delete(e);aiVerDraw(r)}}
+ try{aiVerSet(e,await aiVerMail(e))}catch(x){toast(`Não deu para verificar: ${x.message}`,1)}finally{AI_VER_RUN.delete(e);aiVerDraw(r)}}
 async function aiVerAll(r){const d=((aiS(r).mail||{}).data)||{};if(!d.pad||!aiHunterOk())return;const L=aiVerFalta(d.pad.emails);L.forEach(e=>AI_VER_RUN.add(e));aiVerDraw(r);
- let i=0,bad=null;await Promise.all([0,1,2].map(async()=>{while(i<L.length&&!bad){const e=L[i++];try{aiVerSet(e,await aiHunterVer(e))}catch(x){bad=x}finally{AI_VER_RUN.delete(e);aiRender(r,"mail")}}}));
+ let i=0,bad=null;await Promise.all([0,1,2].map(async()=>{while(i<L.length&&!bad){const e=L[i++];try{aiVerSet(e,await aiVerMail(e))}catch(x){bad=x}finally{AI_VER_RUN.delete(e);aiRender(r,"mail")}}}));
  L.forEach(e=>AI_VER_RUN.delete(e));aiVerDraw(r);if(bad)toast(`Parou de verificar: ${bad.message}`,1)}
 /* descobrir o padrão: 1) o Hunter já conhece o padrão de muitos domínios; 2) se não, testa as variações com uma pessoa */
 async function aiPadDesc(r){const s=aiS(r).mail,d=s&&s.data;if(!d||!d.dom||!aiHunterOk())return;const pes=((aiS(r).pes||{}).data||{}).pessoas||[];
  const L=[];d.padx={run:1,linhas:L};aiRender(r,"mail");let t="",hk=false;
  try{
-  try{const h=await aiHunter("domain-search",{domain:d.dom,limit:10}),pt=aiT(h.pattern).toLowerCase();
+  if(aiOk("hunter"))try{const h=await aiHunter("domain-search",{domain:d.dom,limit:10}),pt=aiT(h.pattern).toLowerCase();
    if(pt&&/^[a-z0-9._{}-]+$/.test(pt)&&/\{(first|last|f|l)\}/.test(pt))t=pt;
    hk=!!t;L.push(t?`O Hunter conhece o padrão deste domínio: ${aiPadLbl(t)}@${d.dom}`:"O Hunter ainda não conhece o padrão deste domínio.")}
   catch(x){if(/inválida|bloqueando|créditos/.test(x.message))throw x;L.push(`A busca do domínio no Hunter falhou (${x.message}).`)}
@@ -1639,12 +1657,12 @@ async function aiPadDesc(r){const s=aiS(r).mail,d=s&&s.data;if(!d||!d.dom||!aiHu
    if(!p)L.push("Não há pessoa com nome e sobrenome na aba Pessoas para testar as variações.");
    else{const ord=[...new Set([aiPadNorm(d.pad&&d.pad.padrao),"{first}.{last}","{f}{last}","{first}{l2}","{first}"].filter(Boolean))].slice(0,4);
     L.push(`Testando variações com ${p.nome}:`);
-    for(const c of ord){const u=aiPadGen(c,p.nome);if(!u)continue;const e=u+"@"+d.dom;let v=aiVerOf(e);if(!v||v.st=="unknown"){AI_VER_RUN.add(e);aiRender(r,"mail");try{v=await aiHunterVer(e)}finally{AI_VER_RUN.delete(e)}aiVerSet(e,v)}
+    for(const c of ord){const u=aiPadGen(c,p.nome);if(!u)continue;const e=u+"@"+d.dom;let v=aiVerOf(e);if(!v||v.st=="unknown"){AI_VER_RUN.add(e);aiRender(r,"mail");try{v=await aiVerMail(e)}finally{AI_VER_RUN.delete(e)}aiVerSet(e,v)}
      L.push(`${e}: ${(AI_VST[v.st]||AI_VST.unknown)[1]}`);aiRender(r,"mail");
      if(v.st=="accept_all"){L.push("Este servidor aceita qualquer endereço (catch-all): verificar não mostra qual variação é a certa.");break}
      if(v.st=="valid"){t=c;break}}
     if(!t&&!L.some(x=>/catch-all/.test(x)))L.push("Nenhuma variação foi confirmada.")}}
-  if(t){const o=d.pad;d.pad=aiPadMk(t,pes,d.dom,{confianca:"alta",motivo:hk?"Padrão conhecido pelo Hunter para este domínio.":"Confirmado pelo Hunter: a variação acima existe.",alt:o&&o.padrao&&aiPadNorm(o.padrao)!=t?[{padrao:o.padrao,por:"leitura anterior da IA"}]:[]});d.via="Hunter"}}
+  if(t){const o=d.pad;d.pad=aiPadMk(t,pes,d.dom,{confianca:"alta",ver:1,motivo:hk?"Padrão conhecido pelo Hunter para este domínio.":`Confirmado pelo ${AI_NM[aiVerP()]}: a variação acima existe.`,alt:o&&o.padrao&&aiPadNorm(o.padrao)!=t?[{padrao:o.padrao,por:"leitura anterior da IA"}]:[]});d.via=hk?"Hunter":AI_NM[aiVerP()]}}
  catch(x){L.push(`Parou: ${x.message}`)}
  d.padx.run=0;aiVerDraw(r)}
 /* ---------- parte 2: domínio, MX, e-mails públicos, padrão e telefones ---------- */
@@ -1783,7 +1801,7 @@ function aiErrHtml(k,msg){const m=String(msg||""),stop=/interrompida/.test(m),tm
  return`<div class="aiErr"><b>${stop?"Pesquisa parada":"Não foi possível pesquisar"}</b><span>${stop?"Clique em Tentar de novo quando quiser.":tmo?"A IA demorou demais e a busca foi cortada. Costuma ser lentidão momentânea do serviço: tente de novo.":net?"Não deu para falar com o serviço. Confira a internet e tente de novo.":key?"A chave parece inválida ou sem permissão para esta API.":bill?"Parece limite de uso ou faturamento da conta.":"O serviço recusou o pedido. O motivo que ele devolveu está abaixo."}</span>
   <code>${esc(m)}</code><div class="aiErrA"><button type="button" class="b sm" data-aigo="${k}">Tentar de novo</button><button type="button" class="g sm" data-aicfg>Configurar IA</button></div></div>`}
 /* bloco "Descobrir o padrão" (Hunter) */
-const aiPadXHtml=d=>`<div class="aiPadX">${d.padx?d.padx.linhas.map(x=>`<p>${esc(x)}</p>`).join("")+(d.padx.run?"<p>Testando…</p>":""):""}${d.padx&&d.padx.run?"":`<button type="button" class="g sm" data-aipadx title="Usa o Hunter: 1 crédito para o padrão do domínio e meio crédito por variação testada">${d.padx?"Descobrir de novo":"Descobrir o padrão com o Hunter"}</button>`}</div>`;
+const aiPadXHtml=d=>`<div class="aiPadX">${d.padx?d.padx.linhas.map(x=>`<p>${esc(x)}</p>`).join("")+(d.padx.run?"<p>Testando…</p>":""):""}${d.padx&&d.padx.run?"":`<button type="button" class="g sm" data-aipadx title="Testa até 4 variações com o Reoon (1 crédito cada) e, se você tiver a chave do Hunter, pergunta antes o padrão do domínio a ele">${d.padx?"Descobrir de novo":"Descobrir o padrão"}</button>`}</div>`;
 function aiRenderAll(r){AI_T.forEach(([k])=>aiRender(r,k))}
 function aiRender(r,k){const box=$(`#aiOut [data-aip="${k}"]`);if(!box||$("#aiBox").dataset.lead!=String(r.id))return;
  const s=aiS(r)[k],cnt=$(`#aiBox [data-aic="${k}"]`),setC=(t,c)=>{if(cnt){cnt.textContent=t;cnt.className=c||""}};
@@ -1805,7 +1823,7 @@ function aiRender(r,k){const box=$(`#aiOut [data-aip="${k}"]`);if(!box||$("#aiBo
   const mx=d.mx.ok===true?`<span class="aiPill ok">recebe e-mail${d.mx.prov?" · "+esc(d.mx.prov):""}</span>`:d.mx.ok===false?`<span class="aiPill bad">não recebe e-mail</span>`:`<span class="aiPill">não conferido</span>`;
   if(d.viaB)h+=`<p class="aiHint aiVia">${esc(d.viaB)}</p>`;
   h+=d.dom?`<div class="aiDom"><div><small>Domínio</small><b>${esc(d.dom)}</b><span class="aiSub">${esc(d.domOrig)}</span></div>${mx}</div>`:`<div class="aiEmpty"><p>Não achei o site oficial da empresa, então não dá para deduzir e-mails. Cadastre o site no lead e pesquise de novo.</p></div>`;
-  if(d.pad){h+=`<div class="aiHero"><small>Padrão provável ${aiConfB(d.pad.confianca,"confiança "+({media:"média"}[d.pad.confianca]||d.pad.confianca))}</small><code>${esc(aiPadLbl(d.pad.padrao)||"?")}@${esc(d.dom)}</code>${d.pad.emails[0]?`<p class="aiAlt">Ex.: ${esc(d.pad.emails[0].nome)} → <code>${esc(d.pad.emails[0].email)}</code></p>`:""}${d.pad.motivo?`<p>${esc(d.pad.motivo)}</p>`:""}${(d.pad.alt||[]).map(a=>`<p class="aiAlt">Outra leitura: <code>${esc(aiPadLbl(a.padrao))}@${esc(d.dom)}</code> (${esc(a.por)})</p>`).join("")}${aiPadXHtml(d)}<span class="aiSub">Por ${esc(d.via)}. ${d.via=="Hunter"?"Os outros e-mails seguem o mesmo padrão; use Verificar para conferir cada um.":"E-mail deduzido não é confirmado: use Verificar antes de mandar."}</span></div>`;
+  if(d.pad){h+=`<div class="aiHero"><small>Padrão provável ${aiConfB(d.pad.confianca,"confiança "+({media:"média"}[d.pad.confianca]||d.pad.confianca))}</small><code>${esc(aiPadLbl(d.pad.padrao)||"?")}@${esc(d.dom)}</code>${d.pad.emails[0]?`<p class="aiAlt">Ex.: ${esc(d.pad.emails[0].nome)} → <code>${esc(d.pad.emails[0].email)}</code></p>`:""}${d.pad.motivo?`<p>${esc(d.pad.motivo)}</p>`:""}${(d.pad.alt||[]).map(a=>`<p class="aiAlt">Outra leitura: <code>${esc(aiPadLbl(a.padrao))}@${esc(d.dom)}</code> (${esc(a.por)})</p>`).join("")}${aiPadXHtml(d)}<span class="aiSub">Por ${esc(d.via)}. ${d.pad.ver?"Os outros e-mails seguem o mesmo padrão; use Verificar para conferir cada um.":"E-mail deduzido não é confirmado: use Verificar antes de mandar."}</span></div>`;
    if(d.pad.emails.length)h+=`<div class="aiGrp"><h5>E-mails prováveis${aiVerAllBtn(d.pad.emails)}</h5>`+d.pad.emails.map(e=>`<div class="aiRowX" data-q="${aiQ(e.nome,e.email)}"><div class="aiB"><b>${esc(e.nome)}</b><span class="aiMono">${esc(e.email)}${aiVerB(e.email)}</span></div>${aiConfB(e.confianca)}${aiVerBtn(e.email)}<button type="button" class="g sm" data-aicopy="${esc(e.email)}">Copiar</button></div>`).join("")+"</div>"}
   else if(d.dom&&!((aiS(r).pes||{}).data||{pessoas:[]}).pessoas.length)h+=`<p class="aiHint">Sem pessoas na aba “Pessoas”, não há para quem deduzir o e-mail.</p>`;
   else if(d.via)h+=`<p class="aiHint">${esc(d.via)}.</p>${d.dom?aiPadXHtml(d):""}`;
