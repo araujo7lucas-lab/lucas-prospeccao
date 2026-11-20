@@ -730,7 +730,7 @@ dialog::backdrop{background:rgba(24,24,27,.35);backdrop-filter:blur(2px)}
 .aiCk.on i::after{content:"";width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
 .aiCk.dim{opacity:.55}.aiCk input:focus-visible+i{outline:2px solid var(--az);outline-offset:2px}.aiCk small{font-weight:400;color:var(--cz)}
 .aiMulti{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;background:#e6efff;color:#1d4fd7;vertical-align:middle;margin-left:4px}
-.aiVia{color:var(--cz);font-size:12px}
+.aiVia{color:var(--cz);font-size:12px}.aiAka{background:#fff7e6;border:1px solid #fde3b0;color:#7a4d00;border-radius:10px;padding:8px 10px;font-size:12.5px}
 .aiNiv{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;margin-left:6px;vertical-align:middle;background:#f1f2f4;color:var(--cz)}.aiNiv.n-gestao{background:#f3e8ff;color:#6b21a8}.aiNiv.n-tecnico{background:#e0f2fe;color:#075985}.aiNiv.n-operacional{background:#ecfccb;color:#3f6212}
 .aiFora{margin-top:10px;font-size:13px;color:var(--cz)}.aiFora summary{cursor:pointer;font-size:12px}.aiFora div{padding:6px 0;border-top:1px solid #f0f1f3}.aiFora div:first-of-type{border-top:0}.aiFora .aiSub{display:block}.aiAlt{font-size:12px;color:#8a5a00;margin:4px 0 0}.aiHero .aiAlt code{display:inline;font-size:12px;font-weight:600;margin:0}
 .aiProg{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;margin:-4px 0 10px;min-height:20px}
@@ -765,15 +765,15 @@ dialog::backdrop{background:rgba(24,24,27,.35);backdrop-filter:blur(2px)}
 </script>
 </head><body>
 <nav><h1><b class="lg">L</b><span>Lucas Prospecção</span></h1><button id="navK" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar</span></button><button data-p="hoje" class="on" title="O que fazer hoje"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><path d='M12 7v5l3 2'/></svg><span>Hoje</span></button><button data-p="leads" title="Leads"><svg viewBox="0 0 24 24"><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx=9 cy=7 r=4 /><path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'/></svg><span>Leads</span></button><button data-p="sugestoes" title="Sugestões por região"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><polygon points='16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8'/></svg><span>Sugestões</span></button><button data-p="territorio" title="Áreas onde você tem pouca presença"><svg viewBox="0 0 24 24"><path d='M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z'/><path d='M9 3v15M15 6v15'/></svg><span>Território</span></button><button data-p="perfis" title="Perfis para priorizar"><svg viewBox="0 0 24 24"><circle cx=12 cy=12 r=9 /><circle cx=12 cy=12 r=5 /><circle cx=12 cy=12 r=1 /></svg><span>Perfis</span></button><button data-p="agenda" title="Agenda de retornos"><svg viewBox="0 0 24 24"><rect x=3 y=4 width=18 height=18 rx=2 /><path d='M16 2v4M8 2v4M3 10h18'/></svg><span>Agenda</span><b class="nbd" id="agBd" hidden></b></button><button data-p="mapa" title="Mapa"><svg viewBox="0 0 24 24"><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx=12 cy=10 r=3 /></svg><span>Mapa</span></button><button data-p="dash" title="Relatórios e indicadores"><svg viewBox="0 0 24 24"><path d='M3 3v18h18'/><path d='M7 15l4-4 3 3 5-6'/></svg><span>Relatórios</span></button><button data-p="dados" title="Dados e sincronização"><svg viewBox="0 0 24 24"><ellipse cx=12 cy=5 rx=9 ry=3 /><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg><span>Dados</span></button><button id="navMore" type="button" title="Mais telas"><svg viewBox="0 0 24 24"><circle cx=5 cy=12 r=1.5 /><circle cx=12 cy=12 r=1.5 /><circle cx=19 cy=12 r=1.5 /></svg><span>Mais</span></button><button id="navT" class="nt" title="Recolher menu"><svg viewBox="0 0 24 24"><polyline points='15 18 9 12 15 6'/></svg><span>Recolher</span></button></nav>
-<main><div id="topbar"><b id="tbTitle">Hoje</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.16.2</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">Prospectar</button></div>
+<main><div id="topbar"><b id="tbTitle">Hoje</b><button id="tbSearch" type="button" title="Buscar e comandos (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx=11 cy=11 r=7 /><path d='M21 21l-4.3-4.3'/></svg><span>Buscar empresas, cidades, CNPJ ou ações…</span><kbd>Ctrl K</kbd></button><span style="flex:1"></span><button type="button" id="tbBk" title="Fazer backup agora"></button><span class="net"></span><em class="ver">v8.16.3</em><button class="g" id="tbNew" type="button" title="Cadastrar uma empresa que não está na planilha"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Nova empresa</span></button><button class="b" id="tbPz" type="button" title="Abre a fila de prospecção da tela atual">Prospectar</button></div>
 <section id="hoje" class="pg on"><header class="ph"><div><h2 id="hoHi">Hoje</h2><p id="hoSub"></p></div><button class="b" id="bHoPz" type="button" title="Abre a fila com os retornos de hoje e os atrasados">Fazer retornos de hoje</button></header><div class="ho-k" id="hoK"></div><div class="ho-g"><div class="card ho-a"><div class="ho-h"><b>Próximas ações</b><button type="button" class="g sm" data-go="agenda">Ver agenda</button></div><div id="hoA"></div></div><div class="ho-s"><div class="card ho-p"><div class="ho-h"><div><b>Ligar primeiro</b><small>Prioridade alta, ainda sem contato</small></div><button type="button" class="g sm" data-go="leads">Ver leads</button></div><div id="hoP"></div></div><div id="goals"></div></div></div></section>
-<section id="dash" class="pg"><header class="ph"><div><h2>Relatórios</h2><p>Indicadores e gráficos da sua carteira</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >Personalizar</button><span class="net"></span><em class="ver">v8.16.2</em></header><div id="relat"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
+<section id="dash" class="pg"><header class="ph"><div><h2>Relatórios</h2><p>Indicadores e gráficos da sua carteira</p></div><button class="g" id="bDcfg" title="Escolher os indicadores e gráficos exibidos" >Personalizar</button><span class="net"></span><em class="ver">v8.16.3</em></header><div id="relat"></div><div class="kpis" id="kpis"></div><div class="gr" id="charts" style="margin-top:12px"></div></section>
 
 <div id="cnBox" class="cnbox" hidden><div class="cnh"><b>Filtrar por CNAE</b><button class="g" id="cnX" type="button" aria-label="Fechar">✕</button></div>
 <input id="cnQ" placeholder="Buscar código ou atividade (ex.: 1052 ou queijo)" autocomplete="off">
 <div class="cnbar"><button class="g" id="cnAll" type="button">Marcar os listados</button><button class="g" id="cnNone" type="button">Limpar seleção</button><label><input type="checkbox" id="cnOnlySel"> só marcados</label><span id="cnInfo"></span></div>
 <div id="cnList"></div><div class="cnft"><button class="b" id="cnOk" type="button">Concluir</button></div></div>
-<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">Cartões</button><button id="vTab" class="on">Tabela</button><button id="vKan">Kanban</button></div><span class="net"></span><em class="ver">v8.16.2</em></header>
+<section id="leads" class="pg"><header class="ph"><div><h2>Leads</h2><p>Filtre, acompanhe em tabela ou arraste no quadro Kanban</p></div><div class="seg"><button id="vCards">Cartões</button><button id="vTab" class="on">Tabela</button><button id="vKan">Kanban</button></div><span class="net"></span><em class="ver">v8.16.3</em></header>
 <div class="card fl" id="fcard">
 <input id="q" placeholder="Buscar empresa, cidade, CNPJ… ( / )" style="flex:1;min-width:160px"><button class="g keep" id="bFilt" type="button" title="Mostrar ou esconder os demais filtros">Filtros <span id="fCount" class="bd" style="background:var(--az);display:none"></span></button>
 <select class="pri" id="fUF"><option value="">UF</option></select><select id="fCid"><option value="">Cidade</option></select>
@@ -797,14 +797,14 @@ dialog::backdrop{background:rgba(24,24,27,.35);backdrop-filter:blur(2px)}
 <div class="fl" id="pgr" style="margin-top:8px"><button class="g" id="pv">‹</button><span id="pn"></span><button class="g" id="nx">›</button></div>
 </section>
 
-<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.16.2</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g pri" id="bMapClr" hidden title="Limpa os filtros da tela Leads e mostra todas as empresas no mapa">Limpar filtros</button><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
+<section id="mapa" class="pg"><header class="ph"><div><h2>Mapa</h2><p>Onde estão seus leads. Clique em uma cidade para filtrar</p></div><span class="net"></span><em class="ver">v8.16.3</em></header><div class="card fl"><span id="mapInfo" style="flex:1"></span><button class="g pri" id="bMapClr" hidden title="Limpa os filtros da tela Leads e mostra todas as empresas no mapa">Limpar filtros</button><button class="g" id="bGeo" title="Busca as coordenadas das cidades sem localização exata">Localizar cidades com precisão</button></div><div class="card fl" id="mapMode"><div class="seg"><button id="mmAll" class="on">Todos os leads</button><button id="mmCar">Minha carteira</button></div>
 <div class="fl" id="carOpts" hidden><div class="seg" id="carVis" style="margin:0"><button type="button" data-cvis="heat">Mapa de calor</button><button type="button" data-cvis="circ">Círculos</button></div><label class="chip gapc"><input type="checkbox" id="carGap"> mostrar áreas sem atendimento</label><span style="color:var(--cz);font-size:13px">Considerar:</span><span id="carChips" class="fl" style="gap:6px"></span>
 <label class="chip"><input type="checkbox" id="carInt"> quem tem contato/visita registrado</label>
 <select id="carMet"><option value="n">Tamanho = nº de clientes</option><option value="p">Tamanho = % dos leads da cidade</option></select></div></div>
 <div id="map"></div><div class="card" id="carPanel" hidden></div></section>
-<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><button class="g" id="sgMapBtn" type="button" title="Mostra as regiões num mapa para escolher clicando">Escolher no mapa</button><span class="net"></span><em class="ver">v8.16.2</em></header><div class="card sg-mapbox" id="sgMapBox" hidden><div id="sgMap"></div><div class="sg-mapnote" id="sgMapNote"></div></div><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section><section id="territorio" class="pg"><header class="ph"><div><h2>Território</h2></div></header><div class="tr-intro" id="trIntro"></div><div class="sg"><aside class="sg-l" id="trL"></aside><div class="sg-r" id="trR"></div></div></section><section id="perfis" class="pg"><header class="ph"><div><h2>Perfis para priorizar</h2><p>Compara as empresas ainda não abordadas com as que você já contatou, visitou ou atendeu</p></div><span class="net"></span><em class="ver">v8.16.2</em></header><div class="sg"><aside class="sg-l" id="pfL"></aside><div class="sg-r" id="pfR"></div></div></section>
-<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bIcs" type="button" title="Baixa os retornos agendados para importar no Google Agenda ou Outlook">Exportar calendário</button><button class="g" id="bNotif" type="button">Lembretes</button><button class="g" id="bSeq" type="button">Sequências</button><button class="b" id="bPzHoje" type="button">Fazer retornos de hoje</button><span class="net"></span><em class="ver">v8.16.2</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
-<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.16.2</em></header>
+<section id="sugestoes" class="pg"><header class="ph"><div><h2>Sugestões</h2></div><button class="g" id="sgMapBtn" type="button" title="Mostra as regiões num mapa para escolher clicando">Escolher no mapa</button><span class="net"></span><em class="ver">v8.16.3</em></header><div class="card sg-mapbox" id="sgMapBox" hidden><div id="sgMap"></div><div class="sg-mapnote" id="sgMapNote"></div></div><div class="sg"><aside class="sg-l" id="sgL"></aside><div class="sg-r" id="sgR"></div></div></section><section id="territorio" class="pg"><header class="ph"><div><h2>Território</h2></div></header><div class="tr-intro" id="trIntro"></div><div class="sg"><aside class="sg-l" id="trL"></aside><div class="sg-r" id="trR"></div></div></section><section id="perfis" class="pg"><header class="ph"><div><h2>Perfis para priorizar</h2><p>Compara as empresas ainda não abordadas com as que você já contatou, visitou ou atendeu</p></div><span class="net"></span><em class="ver">v8.16.3</em></header><div class="sg"><aside class="sg-l" id="pfL"></aside><div class="sg-r" id="pfR"></div></div></section>
+<section id="agenda" class="pg"><header class="ph"><div><h2>Agenda</h2></div><button class="g" id="bIcs" type="button" title="Baixa os retornos agendados para importar no Google Agenda ou Outlook">Exportar calendário</button><button class="g" id="bNotif" type="button">Lembretes</button><button class="g" id="bSeq" type="button">Sequências</button><button class="b" id="bPzHoje" type="button">Fazer retornos de hoje</button><span class="net"></span><em class="ver">v8.16.3</em></header><div id="agW" class="agw"></div><div class="card ag"><div class="ag-tabs" id="agT"></div><div class="ag-f" id="agF"></div><div id="agL"></div></div></section>
+<section id="dados" class="pg"><header class="ph"><div><h2>Dados e sincronização</h2><p>Planilhas, backup e junção dos dados entre aparelhos</p></div><span class="net"></span><em class="ver">v8.16.3</em></header>
 <div class="card" id="syncCard"><h3 style="margin-top:0">Sincronizar tablet e computador</h3>
 <p>Trabalhe offline nos dois aparelhos. Quando quiser juntar o que cada um anotou: gere o arquivo de sincronização em um aparelho, leve ao outro (WhatsApp, e-mail, Drive, cabo USB ou Bluetooth) e aplique lá. Repita no sentido contrário para os dois ficarem iguais. Nada é apagado: se o mesmo campo foi editado nos dois, vale a edição mais recente.</p>
 <div class="fl"><label>Nome deste aparelho <input id="devName" placeholder="Ex.: Tablet" size="14"></label><label><input type="checkbox" id="syFull"> incluir toda a base de empresas (arquivo grande)</label></div>
@@ -1238,7 +1238,7 @@ function aiFilter(){const q=aiNoAcc(($("#aiQ")||{}).value||"").trim();$$("#aiOut
 function bindAI(r){const nm=nmL(r),loc=`${r.MUNICIPIO} ${r.UF}`;
  $("#gq1").onclick=()=>openW(gUrl(`"${nm}" ${loc} telefone contato`));
  $("#gq2").onclick=()=>openW(gUrl(`"${r.RAZAO_SOCIAL}" ${loc} site oficial`));
- $("#gq3").onclick=()=>openW(gUrl(`site:linkedin.com/in (${aiNomes(r).map(n=>`"${n}"`).join(" OR ")}) (qualidade OR "controle de qualidade" OR "garantia da qualidade" OR "segurança dos alimentos" OR laboratório OR microbiologia OR higienização OR sanitização OR "médico veterinário" OR SIF) -trader -trading -CFO`));
+ $("#gq3").onclick=()=>openW(gUrl(`site:linkedin.com/in (${aiNomesAll(r).map(n=>`"${n}"`).join(" OR ")}) (qualidade OR "controle de qualidade" OR "garantia da qualidade" OR "segurança dos alimentos" OR laboratório OR microbiologia OR higienização OR sanitização OR "médico veterinário" OR SIF) -trader -trading -CFO`));
  $("#gq4").onclick=()=>openW("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(`${nm} ${r.LOGRADOURO||""} ${loc}`));
  $("#aiRun").onclick=()=>runAI(r);
  $("#aiCfgBtn").onclick=aiCfgOpen;
@@ -1347,7 +1347,7 @@ const aiSetor=r=>{const a=aiNoAcc(aiT(r.ATIVIDADE_PRINCIPAL_TEXTO)),c=aiT(r.CNAE
  return/^101/.test(c)||/frigor|abate/.test(a)?"Frigorífico":/^105/.test(c)||/latic|leite/.test(a)?"Laticínios":""};
 const aiNomes=r=>{const tc=x=>x.toLowerCase().replace(/(^|\s)\S/g,c=>c.toUpperCase()),cl=(x,re)=>x.replace(re," ").replace(/\s{2,}/g," ").trim();
  const limpa=x=>cl(String(x||""),/\s*[-–,.]?\s*\b(LTDA|LIMITADA|S\/?\.?A\.?|EIRELI|ME|EPP|MEI)\b\.?/gi);
- const core=x=>cl(cl(x,/\b(IND(USTRIA|ÚSTRIA)?|COM(ERCIO|ÉRCIO)?|E|DE|DO|DA|DOS|DAS)\b\.?/gi),/\b(ALIMENTOS|ALIMENTICIOS|ALIMENTÍCIOS|FRIGORIFICO|FRIGORÍFICO|LATICINIOS|LATICÍNIOS|INDUSTRIAL|GRUPO)\b/gi);
+ const core=x=>cl(cl(x,/\b(IND(USTRIA|ÚSTRIA)?|COM(ERCIO|ÉRCIO)?|E|DE|DO|DA|DOS|DAS)\b\.?/gi),/\b(ALIMENTOS|ALIMENTICIOS|ALIMENTÍCIOS|FRIGORIFICO|FRIGORÍFICO|LATICINIOS|LATICÍNIOS|INDUSTRIAL|GRUPO|BRASIL)\b/gi);
  const fan=limpa(r.NOME_FANTASIA),raz=limpa(r.RAZAO_SOCIAL),base=fan||raz||nmL(r),c=core(base)||base,um=c.split(" ").length==1;
  const L=[base];
  if(!um||(c.length>=4&&!AI_GEN.has(aiNoAcc(c))))L.push(c);
@@ -1355,29 +1355,46 @@ const aiNomes=r=>{const tc=x=>x.toLowerCase().replace(/(^|\s)\S/g,c=>c.toUpperCa
  if(fan&&raz&&raz.split(" ").length<=6&&aiNoAcc(raz)!=aiNoAcc(fan))L.push(raz);
  L.push("Grupo "+c);
  return[...new Set(L.map(tc))].slice(0,6)};
+/* v8.16.3: antes de buscar, descobre se a empresa foi comprada ou mudou de marca (ex.: Frutarom virou IFF). Uma vez por lead */
+function aiIdent(r,p,pg){const s=aiS(r);if(s.identErr&&Date.now()-s.identErr>120000){s.ident=null;s.identErr=0}
+ if(!s.ident)s.ident=(async()=>{try{const d=aiJSON(await Promise.race([new Promise((_,no)=>setTimeout(()=>no(new Error("o passo do nome atual demorou")),Math.min(45000,AI_TMO))),aiAsk(p,`Descubra como esta empresa brasileira (e esta unidade, em ${r.MUNICIPIO}/${r.UF}) é conhecida HOJE. Verifique no Google se ela foi comprada, incorporada, se fundiu ou mudou de marca, e qual é o grupo controlador. Veja também como os funcionários desta unidade escrevem o nome da empresa no LinkedIn. Responda SOMENTE com um objeto JSON.
+${aiEmpresa(r)}
+Regras: não invente nada; se nada mudou, "mudou":false e "nomes" só com os nomes usados no LinkedIn; nomes curtos como aparecem (ex.: "IFF", "Frigorífico Saudali"), no máximo 4.
+Formato: {"mudou":false,"nome_atual":null,"controladora":null,"motivo":"uma frase, ex.: comprada pela IFF em 2018","nomes":[]}`,true)]));
+   const L=[aiT(d.nome_atual),aiT(d.controladora),...(Array.isArray(d.nomes)?d.nomes:[]).map(aiT)].filter(x=>x&&x.length>=2&&x.length<=40);
+   const v={mudou:d.mudou===true,atual:aiT(d.nome_atual),grupo:aiT(d.controladora),motivo:aiT(d.motivo),nomes:[...new Set(L)].slice(0,5)};s.identD=v;return v}
+  catch(e){s.identErr=Date.now();return{nomes:[],err:e.message}}})();
+ const pr=s.ident;if(pg&&!s.identD){pg.set(p,"nome");pr.then(()=>pg.set(p,"busca"))}return pr}
+/* todos os nomes: os do cadastro e os achados no passo acima, sem repetir */
+const aiNomesAll=r=>{const id=(AI_MEM.get(r.id)||{}).identD,L=[...aiNomes(r),...((id&&id.nomes)||[])],seen=new Set();
+ return L.filter(n=>{const k=aiNoAcc(n);if(seen.has(k))return false;seen.add(k);return true}).slice(0,8)};
 /* ---------- parte 1: pessoas da Qualidade (Gemini + Google) ---------- */
 /* v8.16.1: cargos que usam ou compram kits de microbiologia, micotoxinas, luminômetro (ATP) e alergênicos, por nível */
 const AI_CARGOS={
  gestao:"gerente de qualidade / garantia da qualidade / controle de qualidade / segurança de alimentos / laboratório; coordenador(a) de qualidade, de laboratório, de microbiologia, de segurança de alimentos, de higienização; coordenador técnico; supervisor(a) de qualidade, de laboratório, de higienização ou sanitização; líder de qualidade, de laboratório ou de higienização; especialista em qualidade ou food safety; responsável técnico (RT); diretor de qualidade",
  tecnico:"analista de qualidade, de controle de qualidade, de garantia da qualidade; analista de laboratório, de microbiologia, físico-químico; microbiologista; analista de segurança de alimentos, BPF, APPCC/HACCP, FSSC/BRC; analista de higienização ou sanitização; analista de recebimento ou matéria-prima; analista de validação; analista de pesquisa e desenvolvimento (P&D) ou de assuntos regulatórios (alergênicos e rotulagem); técnico de laboratório, de qualidade, em alimentos ou em química; químico(a); engenheiro(a) de alimentos da qualidade; médico(a) veterinário(a) da indústria; auditor(a) interno(a) de qualidade",
  operacional:"auxiliar ou assistente de qualidade e de laboratório; inspetor(a) de qualidade; monitor(a) de qualidade ou de BPF; higienista; auxiliar, encarregado(a) ou líder de higienização e sanitização; classificador(a) ou amostrador(a) de grãos e matéria-prima; agente de inspeção"};
-const aiNivel=c=>{const s=aiNoAcc(aiT(c));return/gerente|coorden|supervis|lider|encarregad|especialista|diretor|head|responsavel tecnic|\brt\b|manager|chefe/.test(s)?"gestao":/auxiliar|assistente|monitor|inspetor|higienista|ajudante|operador|amostrador|classificador|agente|estagiari|aprendiz/.test(s)?"operacional":"tecnico"};
+const aiNivel=c=>{const s=aiNoAcc(aiT(c));return/gerente|coorden|supervis|lider|leader|\blead\b|encarregad|especialista|diretor|head|responsavel tecnic|\brt\b|manager|chefe/.test(s)?"gestao":/auxiliar|assistente|monitor|inspetor|higienista|ajudante|operador|amostrador|classificador|agente|estagiari|aprendiz/.test(s)?"operacional":"tecnico"};
 const AI_NIV={gestao:"Gestão",tecnico:"Técnico",operacional:"Operacional"};
-const aiPesPrompt=r=>{const NS=aiNomes(r),q=NS.map(n=>`"${n}"`).join(" OR ");return `Pesquise no Google perfis PÚBLICOS do LinkedIn (site:linkedin.com/in) e outras fontes públicas profissionais de PESSOAS que trabalham HOJE na área de QUALIDADE (ou no laboratório / SIF) desta empresa brasileira. Faça VÁRIAS buscas diferentes antes de responder. Responda SOMENTE com um objeto JSON, sem texto fora dele.
+const aiPesPrompt=r=>{const NS=aiNomesAll(r),q=NS.map(n=>`"${n}"`).join(" OR "),id=(AI_MEM.get(r.id)||{}).identD,nv=id?id.nomes.filter(n=>!aiNomes(r).some(m=>aiNoAcc(m)==aiNoAcc(n))):[];return `Pesquise no Google perfis PÚBLICOS do LinkedIn (site:linkedin.com/in) e outras fontes públicas profissionais de PESSOAS que trabalham HOJE na área de QUALIDADE (ou no laboratório / SIF) desta empresa brasileira. Faça VÁRIAS buscas diferentes antes de responder. Responda SOMENTE com um objeto JSON, sem texto fora dele.
 ${aiEmpresa(r)}
 No LinkedIn a empresa aparece com nomes diferentes (nome curto, com "Frigorífico"/"Laticínios" na frente, como grupo ou pela razão social); procure por todos: ${NS.join(" | ")}.
+${id&&id.mudou?`ATENÇÃO: ${id.motivo||`hoje a empresa é ${id.atual||id.grupo}`}. Os funcionários costumam usar o nome novo no LinkedIn (${nv.join(", ")||id.atual}); quem tem o nome novo como empresa atual CONTA.
+`:""}Se a empresa tem várias fábricas, interessa a unidade de ${r.MUNICIPIO}/${r.UF} e região; quem é de outra unidade vai como "duvida", com o motivo.
 Faça estas buscas (e variações):
-1) site:linkedin.com/in (${q}) qualidade
+1) site:linkedin.com/in (${q}) (qualidade OR quality OR "food safety")
 2) site:linkedin.com/in (${q}) ("controle de qualidade" OR "garantia da qualidade" OR SGQ OR "segurança dos alimentos" OR "segurança de alimentos" OR BPF)
 3) site:linkedin.com/in (${q}) (laboratório OR "coordenador técnico" OR "técnico de laboratório" OR microbiologia OR "médico veterinário" OR SIF OR "inspeção")
 3b) site:linkedin.com/in (${q}) (higienização OR sanitização OR higienista OR "monitor de BPF" OR micotoxinas OR "recebimento de matéria-prima" OR classificador OR alergênicos OR "food safety" OR "pesquisa e desenvolvimento" OR "P&D" OR regulatórios)
 4) site:linkedin.com/in (${q}) (líder OR coordenador OR coordenadora OR supervisor OR supervisora OR gerente OR analista) qualidade
-5) site:linkedin.com/posts (${q}) (qualidade OR auditoria OR FSSC OR BRCGS OR "segurança dos alimentos"): quem publica sobre auditorias e a qualidade da empresa costuma trabalhar lá hoje; confira o perfil da pessoa
+${nv.length?`4b) site:linkedin.com/in (${nv.map(n=>`"${n}"`).join(" OR ")}) "${String(r.MUNICIPIO||"").toLowerCase().replace(/(^|\s)\S/g,c=>c.toUpperCase())}" (qualidade OR quality OR "food safety" OR microbiologia OR laboratório OR higienização OR QA OR QC)
+`:""}5) site:linkedin.com/posts (${q}) (qualidade OR auditoria OR FSSC OR BRCGS OR "segurança dos alimentos"): quem publica sobre auditorias e a qualidade da empresa costuma trabalhar lá hoje; confira o perfil da pessoa
 A pessoa pode morar em outra cidade da região (${r.UF||""}): NÃO descarte por cidade.
 Quem interessa: quem usa ou decide a compra de kits de microbiologia, testes de micotoxinas, luminômetro (ATP, verificação de higienização) e testes de alergênicos. O nome do cargo muda muito de empresa para empresa; CONTAM (cargo atual nesta empresa ou grupo), em qualquer nível:
 - Gestão: ${AI_CARGOS.gestao}.
 - Técnico: ${AI_CARGOS.tecnico}.
 - Operacional: ${AI_CARGOS.operacional}.
+- Títulos em inglês também contam: Quality (Manager, Supervisor, Analyst, Specialist), QA, QC, Food Safety (Leader, Site Leader, Specialist), Lab Analyst, Microbiologist, Sanitation, Regulatory Affairs, R&D.
 DESCARTE: comercial, vendas, trader/trading, exportação, compras, logística, finanças, CFO, controladoria, RH, TI, manutenção e produção sem relação com qualidade, laboratório ou higienização; fiscais do governo (fiscal federal agropecuário do MAPA não é funcionário da empresa); homônimos de outras empresas.
 MUITO IMPORTANTE, EX-FUNCIONÁRIOS: só interessa quem trabalha nesta empresa HOJE.
 - O título do perfil (headline, ex.: "Gerente de Garantia da Qualidade | Food Safety") NÃO prova onde a pessoa trabalha: ele não diz a empresa e muitas vezes é antigo.
@@ -1390,30 +1407,35 @@ Regras: só informações públicas e profissionais; não invente nada; não tra
 Formato: {"site":null,"pessoas":[{"nome":"","cargo":"","empresa_atual":null,"periodo":null,"evidencia":null,"linkedin":"https://www.linkedin.com/in/...","cidade":"","fonte":"https://...","status":"confirmado|duvida","duvida":null}]}`};
 /* v8.16.1: o próprio app confere se a pessoa ainda está na empresa (não depende só da IA) */
 const AI_GEN=new Set("ltda limitada sa eireli epp me mei grupo industria industrias industrial industriais ind comercio comercial com alimentos alimenticios alimenticia alimenticias frigorifico frigorificos laticinios carnes produtos servicos brasil brasileira nacional minas gerais cooperativa agroindustrial do da de dos das e the and".split(" "));
-const aiEmpTok=r=>[...new Set([r.NOME_FANTASIA,r.RAZAO_SOCIAL].map(s=>aiNoAcc(aiT(s))).join(" ").split(/[^a-z0-9]+/).filter(w=>w.length>=4&&!AI_GEN.has(w)))];
+const aiEmpTok=r=>{const id=(AI_MEM.get(r.id)||{}).identD,tk=(L,n)=>L.map(s=>aiNoAcc(aiT(s))).join(" ").split(/[^a-z0-9]+/).filter(w=>w.length>=n&&!AI_GEN.has(w));
+ return[...new Set([...tk([r.NOME_FANTASIA,r.RAZAO_SOCIAL],4),...(id?tk([id.atual,id.grupo,...id.nomes],3):[])])]};
 const aiEhEmp=(r,s)=>{const w=new Set(aiNoAcc(aiT(s)).split(/[^a-z0-9]+/));return aiEmpTok(r).some(x=>w.has(x))};
 /* período com data de saída: "jul 2016 - abr 2023", "2016 a 2023" (e não "2021 - o momento") */
 const aiSaiu=per=>{const s=aiNoAcc(aiT(per));if(!s||/atual|momento|present|hoje|now|current|desde/.test(s))return false;
  const pt=s.split(/\s*[-–—]\s*|\s+ate\s+|\s+a\s+|\s+to\s+/);return pt.length>=2&&/\b(19|20)\d{2}\b/.test(pt[pt.length-1])};
 /* cargo claramente de outra área (e sem qualidade, laboratório ou higienização no nome) */
-const aiOutraArea=c=>{const s=aiNoAcc(aiT(c));return!/qualidade|laborat|microbio|higien|sanitiz|bpf|appcc|haccp|food safety|seguranca d[oe]s? alimento|pesquisa|p&d|regulat|veterin|sif|tecnic|quimic|engenh/.test(s)
- &&/\brh\b|recursos humanos|recrutamento|departamento pessoal|comercial|vendas|vendedor|trader|trading|exporta|compras|comprador|suprimentos|logistic|financ|contab|controlador|fiscal\b|marketing|\bti\b|tecnologia da informacao|juridic|manutencao/.test(s)};
+const aiOutraArea=c=>{const s=aiNoAcc(aiT(c));return!/qualidade|quality|\bqa\b|\bqc\b|\blab\b|sanitation|regulatory|r&d|laborat|microbio|higien|sanitiz|bpf|appcc|haccp|food safety|seguranca d[oe]s? alimento|pesquisa|p&d|regulat|veterin|sif|tecnic|quimic|engenh/.test(s)
+ &&/\brh\b|recursos humanos|recrutamento|departamento pessoal|comercial|vendas|vendedor|trader|trading|exporta|compras|comprador|suprimentos|logistic|financ|contab|controlador|fiscal\b|marketing|\bti\b|tecnologia da informacao|juridic|manutencao|sales|account|commercial|procurement|purchasing|finance|\bhr\b|human resources|supply chain/.test(s)};
 function aiPesCheck(r,x){if(aiOutraArea(x.cargo))return`Outra área: ${x.cargo}`;const fim=x.saiu||aiSaiu(x.periodo),aqui=!!x.empAtual&&aiEhEmp(r,x.empAtual);
  if(x.empAtual&&!aqui){if(!aiEhEmp(r,x.evid+" "+x.cargo))return`Hoje está em outra empresa: ${x.empAtual}`;x.duvida=`A fonte cita esta empresa, mas a empresa atual parece ser ${x.empAtual}: confira`;return""}
  if(fim&&!aqui)return`Saiu da empresa${x.periodo?` (${x.periodo})`:""}`;
- if(fim)x.duvida="A fonte mostra data de saída, mas também esta empresa como atual: confira no perfil";
+ if(fim){const id=(AI_MEM.get(r.id)||{}).identD;
+  /* empresa que mudou de nome: período encerrado com o nome antigo = saiu antes da mudança */
+  const tk=s=>aiNoAcc(aiT(s)).split(/[^a-z0-9]+/).filter(w=>w.length>=3&&!AI_GEN.has(w)),cid=new Set(tk(r.MUNICIPIO)),nv=new Set(tk([id&&id.atual,id&&id.grupo,...((id&&id.nomes)||[])].join(" ")).filter(w=>!cid.has(w)));
+  if(id&&id.mudou&&!tk(x.empAtual).some(w=>nv.has(w)))return`Saiu da empresa (${x.periodo}), antes de virar ${id.atual||id.grupo}`;
+  x.duvida="A fonte mostra data de saída, mas também esta empresa como atual: confira no perfil"}
  else if(!x.duvida&&(!aqui||!x.evid))x.duvida="Não deu para confirmar que trabalha lá hoje: confira as datas no perfil";
  return""}
 const aiPesList=(d,r)=>(Array.isArray(d.pessoas)?d.pessoas:[]).filter(x=>x&&typeof x=="object").map(x=>({nome:aiT(x.nome),cargo:aiT(x.cargo).split(/[(;|]/)[0].trim().slice(0,60),cidade:aiT(x.cidade),
   empAtual:aiT(x.empresa_atual),periodo:aiT(x.periodo).slice(0,40),evid:aiT(x.evidencia).slice(0,200),saiu:x.saiu===true||/descart|saiu|ex-/.test(aiNoAcc(aiT(x.status))),
   linkedin:(u=>/^https?:\/\/([a-z]+\.)?linkedin\.com\//i.test(u)?u:/^([a-z]+\.)?linkedin\.com\//i.test(u)?"https://"+u:"")(aiT(x.linkedin)),fonte:aiUrl(x.fonte),duvida:aiNoAcc(aiT(x.status))=="duvida"?(aiT(x.duvida)||"Confira se a pessoa ainda está na empresa e na área de qualidade"):""}))
   .filter(p=>p.nome&&p.nome.split(/\s+/).length>=2&&(p.linkedin||p.fonte)).map(p=>(p.desc=aiPesCheck(r,p),p));
-async function aiPessoas(r,pg){const P=aiPlan("pes"),R=await aiAskM(P.run,aiPesPrompt(r),true,pg),errs=[...R.errs];
+async function aiPessoas(r,pg){const P=aiPlan("pes"),id=await aiIdent(r,P.run[0],pg),R=await aiAskM(P.run,aiPesPrompt(r),true,pg),errs=[...R.errs];
  let L=aiMerge(R.ok.map(({p,d})=>({p,items:aiPesList(d,r)})),x=>[x.linkedin&&"li:"+aiKeyUrl(x.linkedin).replace(/^.*linkedin\.com\//,""),"n:"+aiKeyTxt(x.nome)]),rv=null;
  const fora=L.filter(x=>x.desc);L=L.filter(x=>!x.desc);
  if(P.rev&&L.length){L.forEach((x,i)=>x.id=i+1);
   const d=await aiRev(P.rev,`Revise a lista de pessoas abaixo, achadas em perfis públicos, para quem vende soluções para a área de QUALIDADE da empresa ${aiNomeBusca(r)} (${r.MUNICIPIO}/${r.UF}). Responda SOMENTE com um objeto JSON.
-Nomes da empresa: ${aiNomes(r).join(" | ")}
+Nomes da empresa: ${aiNomesAll(r).join(" | ")}
 Pessoas:
 ${L.map(x=>`[${x.id}] ${x.nome} · ${x.cargo||"cargo n/d"}${x.cidade?" · "+x.cidade:""} · empresa atual: ${x.empAtual||"n/d"} · período: ${x.periodo||"n/d"} · evidência: ${x.evid||"nenhuma"}${x.duvida?` (dúvida: ${x.duvida})`:""}`).join("\n")}
 Cargos que interessam (usam kits de microbiologia, micotoxinas, luminômetro e alergênicos), em qualquer nível: ${AI_CARGOS.gestao}; ${AI_CARGOS.tecnico}; ${AI_CARGOS.operacional}.
@@ -1422,7 +1444,7 @@ Formato: {"pessoas":[{"id":1,"status":"confirmado|duvida|descartar","duvida":nul
   if(d){rv=P.rev;const by=new Map((Array.isArray(d.pessoas)?d.pessoas:[]).filter(x=>x&&x.id!=null).map(x=>[+x.id,x]));
    L=L.filter(x=>{const v=by.get(x.id);if(!v)return true;const st=aiNoAcc(aiT(v.status));if(st=="descartar"){x.desc=aiT(v.duvida)||`${AI_NM[P.rev]}: não é da qualidade ou não está na empresa`;fora.push(x);return false}if(st=="duvida"&&!x.duvida)x.duvida=aiT(v.duvida)||"Confira o cargo e a empresa atual no perfil";return true})}}
  L.sort((a,b)=>(a.duvida?1:0)-(b.duvida?1:0)||b.src.length-a.src.length);
- return{pessoas:L.slice(0,15),fora:fora.slice(0,15),nomes:aiNomes(r),site:R.ok.map(x=>aiUrl(x.d.site)||aiT(x.d.site)).find(Boolean)||"",fontes:R.fontes,via:aiVia(R.ok,rv,errs)}}
+ return{pessoas:L.slice(0,15),fora:fora.slice(0,15),nomes:aiNomesAll(r),ident:id&&id.mudou?id:null,site:R.ok.map(x=>aiUrl(x.d.site)||aiT(x.d.site)).find(Boolean)||"",fontes:R.fontes,via:aiVia(R.ok,rv,errs)}}
 /* ---------- parte 2: domínio, MX, e-mails públicos, padrão e telefones ---------- */
 async function aiMail(r,s,pg){const pes=(s.pes&&s.pes.data&&s.pes.data.pessoas)||[];
  let dom=aiDom(r.site)||aiDom(s.pes&&s.pes.data&&s.pes.data.site)||"",domOrig=dom?"site":"";
@@ -1477,21 +1499,21 @@ Formato: {"padrao":"nome.sobrenome","exemplo_base":"e-mail público que confirma
 /* ---------- parte 3: notícias ---------- */
 const aiNewsPrompt=r=>`Hoje é ${new Date().toISOString().slice(0,10)}. Pesquise na internet NOTÍCIAS DOS ÚLTIMOS 24 MESES sobre esta empresa brasileira que sejam relevantes para quem vende soluções para a área de QUALIDADE. Responda SOMENTE com um objeto JSON, sem texto fora dele.
 ${aiEmpresa(r)}
-Nomes usados na imprensa: ${aiNomes(r).join(" | ")}
+Nomes usados na imprensa: ${aiNomesAll(r).join(" | ")}
 Interessa: certificações e auditorias (FSSC 22000, BRCGS, ISO 9001, ISO 17025, SIF, habilitação para exportação); recall, interdição, autuação ou alerta da ANVISA ou do MAPA, contaminação, reclamações graves; investimentos expressivos (ampliação, nova fábrica, nova linha, aquisição, financiamento, BNDES), com o valor quando houver; mudanças na área de qualidade (novo laboratório, contratações, novo gestor).
 Regras: só notícias desta empresa (confirme pelo nome, cidade ou grupo) e não de homônimas; não invente nada; cada notícia com data e link da fonte; ignore vagas de emprego e propaganda; no máximo 6, das mais recentes para as mais antigas.
 Formato: {"noticias":[{"data":"AAAA-MM","titulo":"","resumo":"uma frase","categoria":"Certificação|Problema de qualidade|Investimento|Área de qualidade|Outro","valor":null,"url":"https://..."}],"gancho":"uma frase de abordagem comercial baseada nas notícias, ou null"}`;
 function aiNewsList(d){return(Array.isArray(d.noticias)?d.noticias:[]).filter(x=>x&&typeof x=="object").map(x=>({data:aiT(x.data).slice(0,10),titulo:aiT(x.titulo),resumo:aiT(x.resumo),categoria:aiT(x.categoria),valor:aiT(x.valor),url:aiUrl(x.url)}))
   .filter(n=>n.titulo&&n.url).sort((a,b)=>b.data.localeCompare(a.data)).slice(0,6)}
 const aiNewsKey=x=>["u:"+aiKeyUrl(x.url),"t:"+aiKeyTxt(x.titulo).slice(0,70)];
-async function aiNews(r,pg){const P=aiPlan("news");
+async function aiNews(r,pg){const P=aiPlan("news");await aiIdent(r,P.run[0],pg);
  if(!P.rev){const R=await aiAskM(P.run,aiNewsPrompt(r),true,pg);
   const N=aiMerge(R.ok.map(({p,d})=>({p,items:aiNewsList(d)})),aiNewsKey).sort((a,b)=>b.data.localeCompare(a.data)).slice(0,8);
   return{noticias:N,gancho:R.ok.map(x=>aiT(x.d.gancho)).find(Boolean)||"",fontes:R.fontes,via:aiVia(R.ok,null,R.errs)}}
  /* 1) quem pesquisa só lista o que achou (o DeepSeek não pesquisa na internet) */
  const R=await aiAskM(P.run,`Hoje é ${new Date().toISOString().slice(0,10)}. Pesquise no Google e no Google Notícias TODAS as notícias dos últimos 24 meses sobre esta empresa brasileira. Responda SOMENTE com um objeto JSON, sem texto fora dele.
 ${aiEmpresa(r)}
-Nomes usados na imprensa: ${aiNomes(r).join(" | ")}
+Nomes usados na imprensa: ${aiNomesAll(r).join(" | ")}
 Busque em especial: certificações, auditorias, SIF, exportação, recall, interdição, ANVISA, MAPA, contaminação, investimentos, ampliação, nova fábrica, aquisição, financiamento, qualidade.
 Regras: não invente nada; traga só notícias com link real; para cada uma, um trecho FACTUAL de 2 a 3 frases com o que a notícia diz (sem opinião); inclua o nome do veículo; ignore vagas de emprego; no máximo 12.
 Formato: {"noticias":[{"data":"AAAA-MM","titulo":"","veiculo":"","trecho":"","url":"https://..."}]}`,true,pg),errs=[...R.errs];
@@ -1529,7 +1551,7 @@ async function aiPart(r,k,show){const s=aiS(r);if(s[k]&&s[k].run)return s[k].run
  me.run=run;s[k]=me;aiRender(r,k);return run}
 /* botão Parar: libera a aba na hora, sem esperar a IA */
 function aiStop(r,k){const s=aiS(r);if(!s[k]||!s[k].run)return;s[k]={err:"Pesquisa interrompida por você."};aiRender(r,k);if(k=="pes"&&s.mail&&s.mail.pg&&s.mail.pg.wait){s.mail={err:"Pesquisa interrompida: ela esperava a aba Pessoas."};aiRender(r,"mail")}}
-const AI_PST={busca:"buscando",revisa:"revisando",ok:"pronto",err:"falhou"};
+const AI_PST={nome:"descobrindo o nome atual",busca:"buscando",revisa:"revisando",ok:"pronto",err:"falhou"};
 function aiProgHtml(pg){if(pg.wait)return"Esperando a aba Pessoas terminar…";const sec=Math.round((Date.now()-pg.t0)/1000);
  return Object.entries(pg.st).map(([p,v])=>`<span class="aiPg ${v}">${AI_NM[p]}: ${AI_PST[v]||v}</span>`).join("")+`<span class="aiPgT">${sec} s${sec>40?" · pode levar até 90 s":""}</span>`}
 function aiProgUpd(r,k){const s=aiS(r)[k],el=$(`#aiOut [data-aip="${k}"] [data-aiprog]`);if(el&&s&&s.pg)el.innerHTML=aiProgHtml(s.pg)}
@@ -1574,6 +1596,7 @@ function aiRender(r,k){const box=$(`#aiOut [data-aip="${k}"]`);if(!box||$("#aiBo
   if(!d.pessoas.length)h=`<div class="aiEmpty"><p>Nenhum perfil público da Qualidade foi encontrado. Tente o atalho “LinkedIn” abaixo ou ligue para a fábrica e peça o setor.</p>${(d.nomes||[]).length?`<p class="aiSub">Nomes procurados: ${d.nomes.map(esc).join(" · ")}</p>`:""}</div>`;
   else h=`<p class="aiHint">Perfis públicos achados pelo Google. Confira o perfil antes de abordar: a pessoa pode ter saído da empresa.</p>`+h;
   if(d.via)h=`<p class="aiHint aiVia">${esc(d.via)}</p>`+h;
+  if(d.ident)h=`<p class="aiHint aiAka">🔁 Hoje também conhecida como <b>${esc(d.ident.atual||d.ident.grupo||d.ident.nomes[0]||"")}</b>${d.ident.motivo?`: ${esc(d.ident.motivo)}`:""}. A busca usou os dois nomes.</p>`+h;
   if((d.fora||[]).length)h+=`<details class="aiFora"><summary>Fora da lista (${d.fora.length}): ex-funcionários ou outra área</summary>${d.fora.map(p=>`<div data-q="${aiQ(p.nome,p.desc)}"><b>${esc(p.nome)}</b> · ${esc(p.cargo||"")}<span class="aiSub">${esc(p.desc)}${p.linkedin?` · ${aiA(p.linkedin,"perfil")}`:""}</span></div>`).join("")}</details>`}
  if(k=="mail"){setC(d.pad&&d.pad.emails.length?d.pad.emails.length:(d.tels.length||d.emails.length)?"✓":"0");
   const mx=d.mx.ok===true?`<span class="aiPill ok">recebe e-mail${d.mx.prov?" · "+esc(d.mx.prov):""}</span>`:d.mx.ok===false?`<span class="aiPill bad">não recebe e-mail</span>`:`<span class="aiPill">não conferido</span>`;
