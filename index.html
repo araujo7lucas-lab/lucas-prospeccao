@@ -1645,7 +1645,7 @@ async function aiVerAll(r){const d=((aiS(r).mail||{}).data)||{};if(!d.pad||!aiHu
  let i=0,bad=null;await Promise.all([0,1,2].map(async()=>{while(i<L.length&&!bad){const e=L[i++];try{aiVerSet(e,await aiVerMail(e))}catch(x){bad=x}finally{AI_VER_RUN.delete(e);aiRender(r,"mail")}}}));
  L.forEach(e=>AI_VER_RUN.delete(e));aiVerDraw(r);if(bad)toast(`Parou de verificar: ${bad.message}`,1)}
 /* descobrir o padrão: 1) o Hunter já conhece o padrão de muitos domínios; 2) se não, testa as variações com uma pessoa */
-/* v8.16.7: busca ativa do padrão. 1) e-mails reais do domínio no Google (Serper) e de quem são; 2) Hunter; 3) testes de variações no verificador, com limite */
+/* v8.16.7: busca ativa do padrão. 1) formato dos e-mails já publicados; 2) Hunter (se tiver a chave); 3) testes de variações no Reoon, com limite */
 const AI_PAPEL=/^(contato|contatos|comercial|vendas|venda|sac|rh|financeiro|compras|compra|qualidade|nfe|nf|fiscal|contabilidade|contabil|adm|administrativo|administracao|atendimento|faleconosco|fale|marketing|suporte|recepcao|diretoria|cobranca|logistica|expedicao|faturamento|juridico|ti|info|informacoes|ouvidoria|pedidos|exportacao|export|importacao|laboratorio|producao|portaria|noreply|naoresponda|webmaster|admin|geral|empresa|loja|site|email|mail|secretaria|cadastro|curriculo|curriculos|trabalheconosco|vagas|dpo|privacidade|lgpd|engenharia|manutencao|almoxarifado|tesouraria|contasapagar|contasareceber|ceo|presidencia)$/;
 const aiPapel=u=>AI_PAPEL.test(u.replace(/[._-]/g,""))||/\d/.test(u);
 /* formato do e-mail, quando não se sabe de quem é: joao.silva → nome.sobrenome; jsilva → nsobrenome ou nome */
@@ -1655,25 +1655,12 @@ function aiPadVotos(locais){const v={},add=(k,n)=>v[k]=(v[k]||0)+n;
   else if(/^[a-z]+_[a-z]+$/.test(u))add("{first}_{last}",2);
   else if(/^[a-z]{3,}$/.test(u)){add("{f}{last}",1);add("{first}",1);add("{first}{l2}",0.5)}});
  return Object.keys(v).sort((a,b)=>v[b]-v[a])}
-async function aiMailsWeb(dom){const re=new RegExp(`[a-z0-9._%+-]+@${dom.replace(/\./g,"\\.")}`,"gi"),out=new Map();
- const R=await Promise.allSettled([`"@${dom}"`,`"@${dom}" filetype:pdf`].map(q=>aiSerperQ(q)));
- R.forEach(x=>{if(x.status!="fulfilled")return;x.value.forEach(o=>{const tx=[o.title,o.snippet,o.link].map(aiT).join(" · ");
-  (tx.match(re)||[]).forEach(e=>{e=e.toLowerCase().replace(/^[._%+-]+/,"");if(!out.has(e))out.set(e,{email:e,fonte:aiUrl(o.link),tx})})})});
- const er=R.find(x=>x.status=="rejected");if(er&&R.every(x=>x.status=="rejected"))throw er.reason;return out.size?[...out.values()]:[]}
 async function aiPadDesc(r){const s=aiS(r).mail,d=s&&s.data;if(!d||!d.dom)return;
- if(!aiOk("serper")&&!aiVerP()&&!aiOk("hunter")){aiHunterOk();return}
+ if(!aiVerP()&&!aiOk("hunter")){aiHunterOk();return}
  const pes=((aiS(r).pes||{}).data||{}).pessoas||[],L=[];d.padx={run:1,linhas:L};aiRender(r,"mail");let t="",como="",fonte="",votos=[];
  try{
-  /* 1) e-mails reais do domínio no Google */
-  if(aiOk("serper")){let W=[];try{W=await aiMailsWeb(d.dom)}catch(x){L.push(`A busca no Google falhou (${x.message}).`)}
-   const pess=W.filter(x=>!aiPapel(x.email.split("@")[0]));
-   if(W.length||!L.length)L.push(W.length?`O Google mostrou ${W.length} e-mail(s) @${d.dom}${pess.length?`; de pessoa: ${pess.slice(0,4).map(x=>x.email).join(", ")}`:" (só de setor)"}.`:`O Google não mostrou e-mails @${d.dom}.`);
-   W.forEach(x=>{if(!d.emails.some(e=>e.email==x.email))d.emails.push({email:x.email,dono:"",setor:aiPapel(x.email.split("@")[0])?"setor":"",fonte:x.fonte,src:["serper"]})});
-   /* de quem é o e-mail: pessoas da aba Pessoas ou nome que aparece junto no resultado */
-   for(const x of pess){const u=x.email.split("@")[0],cand=[...pes.map(p=>p.nome),...(x.tx.match(/[A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:d[aeo]s?\s+)?[A-ZÀ-Ú][a-zà-ú]+){1,3}/g)||[])];
-    for(const n of cand){if(aiNomeP(n).length<2)continue;const k=AI_PADS.find(z=>aiPadGen(z,n)==u);if(k){t=k;como=`${x.email} é de ${n}`;fonte="Google";break}}if(t)break}
-   if(t)L.push(`Padrão encontrado: ${como}.`);
-   votos=aiPadVotos(pess.map(x=>x.email.split("@")[0]));aiRender(r,"mail")}
+  /* 1) formato dos e-mails já publicados deste domínio (sem dono): dá a ordem dos testes */
+  votos=aiPadVotos((d.emails||[]).filter(e=>!e.dono&&e.email.endsWith("@"+d.dom)).map(e=>e.email.split("@")[0]).filter(u=>u!=d.dom.split(".")[0]));
   /* 2) o Hunter já conhece o padrão de muitos domínios */
   if(!t&&aiOk("hunter"))try{const h=await aiHunter("domain-search",{domain:d.dom,limit:10}),pt=aiT(h.pattern).toLowerCase();
    if(pt&&/^[a-z0-9._{}-]+$/.test(pt)&&/\{(first|last|f|l)\}/.test(pt)){t=pt;como="o Hunter conhece o padrão deste domínio";fonte="Hunter"}
@@ -1831,8 +1818,8 @@ function aiErrHtml(k,msg){const m=String(msg||""),stop=/interrompida/.test(m),tm
  return`<div class="aiErr"><b>${stop?"Pesquisa parada":"Não foi possível pesquisar"}</b><span>${stop?"Clique em Tentar de novo quando quiser.":tmo?"A IA demorou demais e a busca foi cortada. Costuma ser lentidão momentânea do serviço: tente de novo.":net?"Não deu para falar com o serviço. Confira a internet e tente de novo.":key?"A chave parece inválida ou sem permissão para esta API.":bill?"Parece limite de uso ou faturamento da conta.":"O serviço recusou o pedido. O motivo que ele devolveu está abaixo."}</span>
   <code>${esc(m)}</code><div class="aiErrA"><button type="button" class="b sm" data-aigo="${k}">Tentar de novo</button><button type="button" class="g sm" data-aicfg>Configurar IA</button></div></div>`}
 /* bloco "Descobrir o padrão" (Hunter) */
-const aiPadCusto=()=>{const v=aiVerP(),c=[aiOk("serper")?"2 consultas do Serper":"",aiOk("hunter")?"1 crédito do Hunter":"",v?`até 6 verificações do ${AI_NM[v]}`:""].filter(Boolean);return c.length?"Gasta "+c.join(", "):"Cole a chave do Reoon (e, se quiser, a do Serper) em Configurar IA"};
-const aiPadXHtml=d=>`<div class="aiPadX">${d.padx?d.padx.linhas.map(x=>`<p>${esc(x)}</p>`).join("")+(d.padx.run?"<p>Procurando…</p>":""):""}${d.padx&&d.padx.run?"":`<button type="button" class="g sm" data-aipadx>${d.padx?"Descobrir de novo":"Descobrir o padrão"}</button><small class="aiSub">${esc(aiPadCusto())}. Procura e-mails reais do domínio no Google, pergunta ao Hunter e testa variações com até 2 pessoas.</small>`}</div>`;
+const aiPadCusto=()=>{const v=aiVerP(),c=[aiOk("hunter")?"1 crédito do Hunter":"",v?`até 6 verificações do ${AI_NM[v]}`:""].filter(Boolean);return c.length?"Gasta "+c.join(", "):"Cole a chave do Reoon em Configurar IA"};
+const aiPadXHtml=d=>`<div class="aiPadX">${d.padx?d.padx.linhas.map(x=>`<p>${esc(x)}</p>`).join("")+(d.padx.run?"<p>Procurando…</p>":""):""}${d.padx&&d.padx.run?"":`<button type="button" class="g sm" data-aipadx>${d.padx?"Descobrir de novo":"Descobrir o padrão"}</button><small class="aiSub">${esc(aiPadCusto())}. Testa variações do e-mail com até 2 pessoas da aba Pessoas e para no primeiro válido.</small>`}</div>`;
 function aiRenderAll(r){AI_T.forEach(([k])=>aiRender(r,k))}
 function aiRender(r,k){const box=$(`#aiOut [data-aip="${k}"]`);if(!box||$("#aiBox").dataset.lead!=String(r.id))return;
  const s=aiS(r)[k],cnt=$(`#aiBox [data-aic="${k}"]`),setC=(t,c)=>{if(cnt){cnt.textContent=t;cnt.className=c||""}};
